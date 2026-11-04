@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>6.1 场景四 受控行动智能体 · 通用 AI Coding 教材</title>
+<title>6.1 受控行动智能体 · 通用 AI Coding 教材</title>
 <meta name="description" content="工具调用、干跑预演闸与轨迹评测">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/aicoding/assets/global.css">
@@ -26,8 +26,11 @@
 
 <div class="layout layout-3">
   <nav class="sidenav" data-pagefind-ignore>
-    <div class="nav-cap">教材正文</div>
-    <details class="nav-group">
+    <details class="m-nav" open>
+      <summary>章节目录 · 7 章 21 单元</summary>
+      <div class="m-body">
+        <div class="nav-cap">教材正文</div>
+        <details class="nav-group">
 <summary><span class="chap-no">第 1 章</span>认知与工具</summary>
 <ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
 </details><details class="nav-group">
@@ -44,19 +47,21 @@
 <ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
 </details><details class="nav-group" open>
 <summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
-<ul class="nav-list"><li class="nav-item c1 active"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+<ul class="nav-list"><li class="nav-item c1 active"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>实现生产数据飞轮</a></li></ul>
 </details><details class="nav-group">
 <summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
 <ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
 </details>
-    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+        <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+      </div>
+    </details>
   </nav>
   <main class="content">
     <div class="crumb">
       <span><a href="/aicoding/units/5-5/">← 5.5 方法沉淀</a></span>
-      <span><a href="/aicoding/units/6-2/">6.2 Day-2 生产数据飞轮 →</a></span>
+      <span><a href="/aicoding/units/6-2/">6.2 实现生产数据飞轮 →</a></span>
     </div>
-    <h1>6.1　场景四 受控行动智能体</h1>
+    <h1>6.1　受控行动智能体</h1>
     <p class="lede">工具调用、干跑预演闸与轨迹评测</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）<strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过</strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:6.1"><p class="goal-cap">本节学习目标</p>
@@ -694,7 +699,7 @@
 </article>
     <div class="pager">
       <a href="/aicoding/units/5-5/">← 5.5 方法沉淀</a>
-      <a href="/aicoding/units/6-2/">6.2 Day-2 生产数据飞轮 →</a>
+      <a href="/aicoding/units/6-2/">6.2 实现生产数据飞轮 →</a>
     </div>
   </main>
   <aside class="toc" data-pagefind-ignore>
@@ -703,6 +708,9 @@
   </aside>
 </div>
 <script>
+if (window.matchMedia('(max-width:900px)').matches) {
+  var mn = document.querySelector('.m-nav'); if (mn) mn.removeAttribute('open');
+}
 document.querySelectorAll('.prose pre').forEach(function(p){
   var w=document.createElement('div'); w.className='code-wrap';
   p.parentNode.insertBefore(w,p); w.appendChild(p);

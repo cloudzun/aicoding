@@ -25,6 +25,9 @@
 </header>
 <div class="home"><h1 class="page-h1">打印视图</h1><p class="page-lede">按章分卷，浏览器打印时每个单元自动分页。</p><ul class="print-list"><li><a href="/aicoding/print/ch-1/">第 1 章 认知与工具</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-2/">第 2 章 规划与施工</a><span class="muted">（2 单元）</span></li><li><a href="/aicoding/print/ch-3/">第 3 章 审查与上下文治理</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-4/">第 4 章 发布排障与复盘</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-5/">第 5 章 从工具到方法</a><span class="muted">（5 单元）</span></li><li><a href="/aicoding/print/ch-6/">第 6 章 受控行动与生产飞轮</a><span class="muted">（2 单元）</span></li><li><a href="/aicoding/print/ch-7/">第 7 章 运营商内网与三日演练</a><span class="muted">（3 单元）</span></li></ul></div>
 <script>
+if (window.matchMedia('(max-width:900px)').matches) {
+  var mn = document.querySelector('.m-nav'); if (mn) mn.removeAttribute('open');
+}
 document.querySelectorAll('.prose pre').forEach(function(p){
   var w=document.createElement('div'); w.className='code-wrap';
   p.parentNode.insertBefore(w,p); w.appendChild(p);

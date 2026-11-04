@@ -26,8 +26,11 @@
 
 <div class="layout layout-3">
   <nav class="sidenav" data-pagefind-ignore>
-    <div class="nav-cap">教材正文</div>
-    <details class="nav-group">
+    <details class="m-nav" open>
+      <summary>章节目录 · 7 章 21 单元</summary>
+      <div class="m-body">
+        <div class="nav-cap">教材正文</div>
+        <details class="nav-group">
 <summary><span class="chap-no">第 1 章</span>认知与工具</summary>
 <ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
 </details><details class="nav-group">
@@ -44,16 +47,18 @@
 <ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
 </details><details class="nav-group">
 <summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
-<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>实现生产数据飞轮</a></li></ul>
 </details><details class="nav-group" open>
 <summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
 <ul class="nav-list"><li class="nav-item c2 active"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
 </details>
-    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+        <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+      </div>
+    </details>
   </nav>
   <main class="content">
     <div class="crumb">
-      <span><a href="/aicoding/units/6-2/">← 6.2 Day-2 生产数据飞轮</a></span>
+      <span><a href="/aicoding/units/6-2/">← 6.2 实现生产数据飞轮</a></span>
       <span><a href="/aicoding/units/7-2/">7.2 迈向自智网络 L4 →</a></span>
     </div>
     <h1>7.1　运营商内网研发安全红线</h1>
@@ -400,7 +405,7 @@
 </ol>
 </article>
     <div class="pager">
-      <a href="/aicoding/units/6-2/">← 6.2 Day-2 生产数据飞轮</a>
+      <a href="/aicoding/units/6-2/">← 6.2 实现生产数据飞轮</a>
       <a href="/aicoding/units/7-2/">7.2 迈向自智网络 L4 →</a>
     </div>
   </main>
@@ -410,6 +415,9 @@
   </aside>
 </div>
 <script>
+if (window.matchMedia('(max-width:900px)').matches) {
+  var mn = document.querySelector('.m-nav'); if (mn) mn.removeAttribute('open');
+}
 document.querySelectorAll('.prose pre').forEach(function(p){
   var w=document.createElement('div'); w.className='code-wrap';
   p.parentNode.insertBefore(w,p); w.appendChild(p);

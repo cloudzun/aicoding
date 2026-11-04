@@ -2834,6 +2834,9 @@
     </section>
 </div>
 <script>
+if (window.matchMedia('(max-width:900px)').matches) {
+  var mn = document.querySelector('.m-nav'); if (mn) mn.removeAttribute('open');
+}
 document.querySelectorAll('.prose pre').forEach(function(p){
   var w=document.createElement('div'); w.className='code-wrap';
   p.parentNode.insertBefore(w,p); w.appendChild(p);

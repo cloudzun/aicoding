@@ -146,8 +146,51 @@
   .layout-3{grid-template-columns:240px minmax(0,1fr)}
   .toc{display:none}
 }
+/* 移动端：侧栏折叠、字号与间距收敛 */
+.m-nav>summary{display:none}
+.m-nav>.m-body{display:block}
 @media (max-width:900px){
-  .layout-3{grid-template-columns:1fr}
+  .layout-3{grid-template-columns:1fr;padding:16px 14px 70px;gap:14px}
   .guide-row{grid-template-columns:1fr;gap:2px}
   .chaps{grid-template-columns:1fr}
+  .m-nav>summary{display:block;cursor:pointer;list-style:none;padding:11px 14px;
+    border:1px solid var(--line);border-radius:10px;background:var(--bg-elev);
+    font-weight:700;font-size:14.5px;box-shadow:var(--shadow-sm)}
+  .m-nav>summary::-webkit-details-marker{display:none}
+  .m-nav>summary::after{content:"▾";float:right;color:var(--muted);font-weight:400}
+  .m-nav[open]>summary{margin-bottom:10px}
+  .m-nav[open]>summary::after{content:"▴"}
+  .content>h1{font-size:22px;line-height:1.35}
+  .lede{font-size:13.5px}
+  .crumb{flex-wrap:wrap;gap:2px 10px;font-size:12.5px}
+  .pager{flex-direction:column;gap:6px;font-size:14px}
+  .prose table{font-size:12.5px}
+  .prose h2{font-size:17px;margin:28px 0 10px}
+  .prose h3{font-size:15.5px}
+  .guide-row{padding:10px 13px;font-size:13.5px}
+  .alert,.concl{font-size:13.5px}
+  .prose .fig figcaption{font-size:12px}
+  /* 手机窄屏下图为可读性保留原尺寸，提示可横向滑动 */
+  .fig-scroll{-webkit-overflow-scrolling:touch}
+  .prose .fig figcaption::after{content:" · 可左右滑动";color:var(--muted)}
+  .home{padding:20px 14px 70px}
+  .page-h1{font-size:22px}
+  .topbar{padding:8px 14px;gap:12px}
+  .brand-text strong{font-size:13.5px}
+  .brand-text em{font-size:10.5px}
+  .top-links{gap:12px;font-size:12.5px}
+}
+
+/* 窄屏顶栏：品牌单行省略，链接不换行，打印入口收起 */
+@media (max-width:640px){
+  .topbar{gap:10px;padding:8px 12px}
+  .brand{min-width:0;flex:1 1 auto}
+  .brand-mark{flex:none}
+  .brand-text{min-width:0}
+  .brand-text strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .brand-text em{display:none}
+  .top-links{flex:none;gap:10px;font-size:13px}
+  .top-links a{white-space:nowrap}
+  .top-links a[href$="/print/"]{display:none}
+  .top-links .pill{padding:5px 10px;font-size:12px;border-radius:999px}
 }

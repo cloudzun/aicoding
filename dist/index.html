@@ -56,7 +56,7 @@
 </section>
 <section class="chap c1">
   <div class="chap-head"><span class="chap-no">第 6 章</span><h2>受控行动与生产飞轮</h2><p>受控行动与生产飞轮</p></div>
-  <ul class="unit-list"><li><a href="/aicoding/units/6-1/"><span class="no">6.1</span><span class="t">场景四 受控行动智能体</span><span class="s">工具调用、干跑预演闸与轨迹评测</span></a></li><li><a href="/aicoding/units/6-2/"><span class="no">6.2</span><span class="t">Day-2 生产数据飞轮</span><span class="s">企业级 AI 研发治理</span></a></li></ul>
+  <ul class="unit-list"><li><a href="/aicoding/units/6-1/"><span class="no">6.1</span><span class="t">受控行动智能体</span><span class="s">工具调用、干跑预演闸与轨迹评测</span></a></li><li><a href="/aicoding/units/6-2/"><span class="no">6.2</span><span class="t">实现生产数据飞轮</span><span class="s">企业级 AI 研发治理</span></a></li></ul>
 </section>
 <section class="chap c2">
   <div class="chap-head"><span class="chap-no">第 7 章</span><h2>运营商内网与三日演练</h2><p>行业定制：运营商内网</p></div>
@@ -65,6 +65,9 @@
   <div class="home-foot">配套实验手册（怎么做）：<a href="https://www.cloudzun.com/mingzhou/">www.cloudzun.com/mingzhou/</a></div>
 </div>
 <script>
+if (window.matchMedia('(max-width:900px)').matches) {
+  var mn = document.querySelector('.m-nav'); if (mn) mn.removeAttribute('open');
+}
 document.querySelectorAll('.prose pre').forEach(function(p){
   var w=document.createElement('div'); w.className='code-wrap';
   p.parentNode.insertBefore(w,p); w.appendChild(p);
