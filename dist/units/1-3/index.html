@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.3 AI Coding 三层工具选型 · 通用 AI Coding 教材</title>
+<meta name="description" content="跨工具四大通用交互原语实操">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group" open>
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0 active"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/1-2/">← 1.2 从 Vibe Coding 到规范驱动开发</a></span>
+      <span><a href="/aicoding/units/2-1/">2.1 GStack 规划三环连击 →</a></span>
+    </div>
+    <h1>1.3　AI Coding 三层工具选型</h1>
+    <p class="lede">跨工具四大通用交互原语实操</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第一天上午“认知与工具篇”的收官单元，也是连接 GStack 方法论与具体开发环境的操作总纲。本节将庞杂的 AI 编程生态拆解为“脑子（底层大模型）—手脚（编码智能体）—规矩（运行支撑机制）”三层架构，给出大模型五维评估标尺、跨模型分层路由策略以及主流工具（腾讯云 CodeBuddy、字节跳动 TRAE、OpenCode CLI）的深度对标与六条选型结论；进而提炼出跨工具通用的四大核心交互原语、<code>@</code> 符号精准上下文投喂法则与 Checkpoint 快照回滚机制，最后立下三条不可逾越的高压安全红线。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">技术负责人、架构师、全栈与前后端研发工程师、客户端与命令行工具开发者、研发效能工程师。技术负责人可依据本节完成团队工具链选型与权限规范制定，一线工程师可直接对照本节掌握主力 IDE 的核心交互机制。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 与单元 1.2 学习，本地已安装腾讯云 CodeBuddy 或字节跳动 TRAE（可选装 OpenCode CLI）。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:1.3"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>运用“脑子—手脚—规矩”三层解构模型对 AI 编码过程中的异常现象进行准确归因，结合大模型五维评估标尺配置 GStack“规划审查层（Plan-Review Tier）”与“编码施工层（Implementation Tier）”的跨模型分层路由。</li>
+<li>对比腾讯云 CodeBuddy、字节跳动 TRAE 与 OpenCode CLI 在预测补全、工作模式、设计转代码及规则扩展上的架构差异，结合团队规模与合规要求应用六条工具选型结论。</li>
+<li>根据代码修改的爆炸半径，在 CodeBuddy 与 TRAE 中准确切换四大通用交互原语（契约注释补全与 NES/CUE 预测、局部内联修改 Inline Edit、只读规划模式 Ask/Plan、多文件代理 Craft/Agent 配合 Checkpoint 快照回滚），并运用 <code>@</code> 符号完成最小完备上下文投喂。</li>
+<li>在日常研发与工程配置中严格落实“不硬编码或外发敏感凭据”、“不对破坏性终端操作开启免确认自动执行”、“生产变更必经独立审查与测试门禁”三条高压安全红线。</li>
+</ol>
+<hr>
+<h2 id="h-131-脑子手脚与规矩三层工具解构与底层大模型选型策略">1.3.1 “脑子、手脚与规矩”：三层工具解构与底层大模型选型策略</h2>
+<p>面对市面上层出不穷的大模型与 AI 编程工具，许多研发团队在选型与日常使用时容易陷入两个误区：一是把所有问题都归咎于“这个工具不好用”，分不清究竟是底层模型推理能力不足、编辑器检索范围不对，还是缺少项目规则约束；二是无论做复杂的架构安全评审，还是改一行简单的界面样式，都盲目调用同一个昂贵或廉价的模型。</p>
+<p>要建立科学的选型与排障体系，首先必须将 AI 编程工具链拆解为职责清晰的三个层级。</p>
+<h3 id="h-1-三层工具解构模型与日常故障定界">1. 三层工具解构模型与日常故障定界</h3>
+<p>一套完整的现代 AI 辅助软件工程系统，由<strong>脑子（底层大模型）</strong>、**手脚（编码智能体与开发环境）<strong>和</strong>规矩（运行支撑机制 Harness）**三层协同构成<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
+<figure class="fig" id="fig-1-7"><div class="fig-scroll"><svg id="svg-1-7" width="596" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="395.5" viewBox="0 0 596 395.5" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-1-7{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-1-7 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-1-7 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-1-7 .error-icon{fill:#eceff1;}#svg-1-7 .error-text{fill:#13100e;stroke:#13100e;}#svg-1-7 .edge-thickness-normal{stroke-width:1px;}#svg-1-7 .edge-thickness-thick{stroke-width:3.5px;}#svg-1-7 .edge-pattern-solid{stroke-dasharray:0;}#svg-1-7 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-1-7 .edge-pattern-dashed{stroke-dasharray:3;}#svg-1-7 .edge-pattern-dotted{stroke-dasharray:2;}#svg-1-7 .marker{fill:#607d8b;stroke:#607d8b;}#svg-1-7 .marker.cross{stroke:#607d8b;}#svg-1-7 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-1-7 p{margin:0;}#svg-1-7 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-1-7 .cluster-label text{fill:#13100e;}#svg-1-7 .cluster-label span{color:#13100e;}#svg-1-7 .cluster-label span p{background-color:transparent;}#svg-1-7 .label text,#svg-1-7 span{fill:#17324d;color:#17324d;}#svg-1-7 .node rect,#svg-1-7 .node circle,#svg-1-7 .node ellipse,#svg-1-7 .node polygon,#svg-1-7 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-1-7 .rough-node .label text,#svg-1-7 .node .label text,#svg-1-7 .image-shape .label,#svg-1-7 .icon-shape .label{text-anchor:middle;}#svg-1-7 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-1-7 .rough-node .label,#svg-1-7 .node .label,#svg-1-7 .image-shape .label,#svg-1-7 .icon-shape .label{text-align:center;}#svg-1-7 .node.clickable{cursor:pointer;}#svg-1-7 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-1-7 .arrowheadPath{fill:#0b0b0b;}#svg-1-7 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-1-7 .flowchart-link{stroke:#607d8b;fill:none;}#svg-1-7 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-1-7 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-7 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-7 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-1-7 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-1-7 .cluster text{fill:#13100e;}#svg-1-7 .cluster span{color:#13100e;}#svg-1-7 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-1-7 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-1-7 rect.text{fill:none;stroke-width:0;}#svg-1-7 .icon-shape,#svg-1-7 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-1-7 .icon-shape p,#svg-1-7 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-1-7 .icon-shape .label rect,#svg-1-7 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-7 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-1-7 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-1-7 .node .neo-node{stroke:#1976d2;}#svg-1-7 [data-look="neo"].node rect,#svg-1-7 [data-look="neo"].cluster rect,#svg-1-7 [data-look="neo"].node polygon{stroke:url(#svg-1-7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-7 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-1-7 [data-look="neo"].node path{stroke:url(#svg-1-7-gradient);stroke-width:1px;}#svg-1-7 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-7 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-1-7 [data-look="neo"].node circle{stroke:url(#svg-1-7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-7 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-1-7 [data-look="neo"].icon-shape .icon{fill:url(#svg-1-7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-7 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-1-7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-7 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-1-7 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-1-7 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-1-7 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-1-7 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-1-7 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-1-7 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-1-7 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-1-7 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-1-7 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-1-7 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-1-7 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-1-7 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-1-7 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-1-7 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-1-7 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-1-7_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-7_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-7_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-7_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-1-7_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-7_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-7_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-7_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-7_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-7_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-7_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-1-7_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M298,83L298,85.833C298,88.667,298,94.333,298,99.333C298,104.333,298,108.667,298,110.833L298,113" id="svg-1-7-L_Harness_Agent_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Harness_Agent_0" data-points="W3sieCI6Mjk4LCJ5Ijo4M30seyJ4IjoyOTgsInkiOjEwMH0seyJ4IjoyOTgsInkiOjExN31d" data-look="classic" marker-end="url(#svg-1-7_flowchart-v2-pointEnd)"></path><path d="M298,192L298,194.833C298,197.667,298,203.333,298,208.333C298,213.333,298,217.667,298,219.833L298,222" id="svg-1-7-L_Agent_Model_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Agent_Model_0" data-points="W3sieCI6Mjk4LCJ5IjoxOTJ9LHsieCI6Mjk4LCJ5IjoyMDl9LHsieCI6Mjk4LCJ5IjoyMjZ9XQ==" data-look="classic" marker-end="url(#svg-1-7_flowchart-v2-pointEnd)"></path><path d="M298,301L298,303.833C298,306.667,298,312.333,298,317.333C298,322.333,298,326.667,298,328.833L298,331" id="svg-1-7-L_Model_Codebase_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Model_Codebase_0" data-points="W3sieCI6Mjk4LCJ5IjozMDF9LHsieCI6Mjk4LCJ5IjozMTh9LHsieCI6Mjk4LCJ5IjozMzV9XQ==" data-look="classic" marker-end="url(#svg-1-7_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Harness_Agent_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Agent_Model_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Model_Codebase_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default warm" id="svg-1-7-flowchart-Harness-0" data-look="classic" transform="translate(298, 45.5)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>第3层 规矩 (Harness 运行支撑层): GStack八环技能 · Project Rules · Hooks护栏 · MCP权限沙箱</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-1-7-flowchart-Agent-1" data-look="classic" transform="translate(298, 154.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第2层 手脚 (Coding Agent / IDE层): CodeBuddy · TRAE · OpenCode (负责AST索引 · 文件读写 · 终端执行 · Diff呈现)</p></span></div></foreignObject></g></g><g class="node default green" id="svg-1-7-flowchart-Model-3" data-look="classic" transform="translate(298, 263.5)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>第1层 脑子 (Foundation Model 大模型层): 规划审查高推理模型 + 编码施工高吞吐模型 (负责逻辑推理 · 代码生成 · 视觉理解)</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-1-7-flowchart-Codebase-5" data-look="classic" transform="translate(298, 361.25)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-234.015625" y="-26.25" width="468.03125" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-204.015625, -11.25)"><rect></rect><foreignObject width="408.03125" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>工程交付结果: 结构清晰 · 边界受控 · 测试完备的生产级代码库</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-1-7-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-1-7-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-1-7-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-1-7.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 1-7 ↗</a>：“脑子—手脚—规矩”三层工具协同架构与控制关系</figcaption></figure>
+<p>顺着图 1-7 的三层结构，我们可以清晰界定每一层的核心职责：</p>
+<ul>
+<li><strong>第一层“脑子”：底层大模型（Foundation Model）</strong>。它是纯粹的智力与推理引擎，本身既看不见你的本地硬盘，也不能敲击终端命令。它只负责接收文本或图像输入，完成逻辑推理、架构权衡、代码生成与跨语言语义理解，并输出下一步的文本或工具调用请求。</li>
+<li><strong>第二层“手脚”：编码智能体与集成开发环境（Coding Agent / IDE）</strong>。以腾讯云 CodeBuddy、字节跳动 TRAE、OpenCode CLI、Claude Code 和 Cursor 为代表。它负责将本地代码库解析为抽象语法树（AST）与向量索引，替大模型执行文件读取（<code>Read</code>）、跨文件搜索（<code>Grep/Glob</code>）、代码修改（<code>Edit/Write</code>）、终端命令运行（<code>Bash</code>）与浏览器操控，并在界面上向人类展示红绿差异（Diff）与检查点快照。</li>
+<li><strong>第三层“规矩”：运行支撑机制（Harness 工程层）</strong>。以本课程核心讲授的 GStack 八环工作流、项目规则（<code>.trae/rules/</code>、<code>.codebuddy/rules/</code>、<code>AGENTS.md</code>）、按需技能（<code>SKILL.md</code>）、独立子代理（Subagents）、运行时钩子（Runtime Hooks）及模型上下文协议（MCP）为代表。它负责给“脑子”和“手脚”立规矩：规定当前阶段扮演什么专家角色、允许读写哪些目录、禁止执行哪些高危命令，以及必须达到什么评分与测试覆盖率才能放行。</li>
+</ul>
+<p>分清这三层之后，当日常编码出现翻车现象时，工程师就能在十秒内精准定位病根并开出药方：</p>
+<table>
+<thead>
+<tr>
+<th>现场翻车症状</th>
+<th>真实故障归属层级</th>
+<th>根因诊断</th>
+<th>正确的工程解决动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>症状 1</strong>：处理复杂的多步状态流转与并发死锁预防时，生成的算法逻辑前后矛盾，反复提示仍想不清楚状态边界。</td>
+<td><strong>“脑子”层</strong>（底层大模型推理能力不足）</td>
+<td>当前选用的轻量级模型缺乏长链深度推理（Reasoning）能力，无法推演复杂的多步并发时序。</td>
+<td>将当前会话从轻量编码模型切换至<strong>高推理思考模型</strong>（如 Claude Opus、GPT-5.4 高推理档或 DeepSeek-R1）。</td>
+</tr>
+<tr>
+<td><strong>症状 2</strong>：要求修改某个公共枚举或接口定义，智能体只改了当前打开的 1 个文件，漏掉了其余关联文件中的引用点，或者报“找不到目标文件”。</td>
+<td><strong>“手脚”层</strong>（IDE 索引未就绪或交互模式选错）</td>
+<td>编辑器全仓代码库索引（Codebase Indexing）尚未构建完成，或误用了仅作用于单文件的行内修改模式。</td>
+<td>确认 IDE 索引状态为 100% 就绪，使用 <code>@Codebase</code> / <code>@Symbols</code> 检索引用，或利用 CodeBuddy NES / TRAE CUE 预测跳跃。</td>
+</tr>
+<tr>
+<td><strong>症状 3</strong>：每次生成后端接口，智能体总是使用早已被团队废弃的旧版日志库，且习惯性把数据库查询直接写在路由控制器（Controller）里。</td>
+<td><strong>“规矩”层</strong>（缺少项目级常驻规则与架构约束）</td>
+<td>大模型不知道团队内部的私有分层规范与技术栈选型，只能按公网训练语料的常见写法盲猜。</td>
+<td>在项目根目录配置 <code>AGENTS.md</code> 或 <code>.trae/rules/</code>、<code>.codebuddy/rules/</code>，明确声明三层架构职责与指定日志库。</td>
+</tr>
+<tr>
+<td><strong>症状 4</strong>：让智能体排查一个前端按钮点击报错，它却顺手把后端的数据库迁移脚本和全局路由配置给改坏了。</td>
+<td><strong>“规矩”层 + “手脚”层</strong>（缺少目录写权限沙箱与范围控制）</td>
+<td>在全仓可写的多文件代理模式下未锁定修改边界，任由模型发散。</td>
+<td>开启 GStack <code>/freeze &lt;dir&gt;</code> 目录编辑锁，或改用局部受控内联修改（Inline Edit <code>Ctrl+I</code> / <code>Ctrl+K</code>）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-2-底层大模型脑子的五维评估标尺">2. 底层大模型（“脑子”）的五维评估标尺</h3>
+<p>企业或个人在选配第一层“脑子”时，不能只看公开宣传的综合榜单分数，而应从软件工程实战出发，用<strong>五维评估标尺</strong>进行衡量：</p>
+<ol>
+<li><strong>代码生成质量与跨文件重构准确率</strong>：重点考察模型在强类型语言（如 TypeScript、Java、Go、Rust）与主流脚本语言（如 Python）中，能否一次性生成类型严密、边界异常处理完备的代码，以及在跨多个文件修改接口契约时能否保持上下文一致。</li>
+<li><strong>长上下文有效召回率（大海捞针能力）</strong>：现代模型普遍标称支持 128K 至 1M 词元（Tokens）的上下文窗口。但工程选型关注的是<strong>有效召回率</strong>——当一次性投喂数万字的设计文档、规格说明与十几个源码文件时，模型能否精准遵守藏在文档中间段落的字段校验规则，而不发生“中间段遗忘”。</li>
+<li><strong>深度推理能力与首字响应延迟的平衡</strong>：具备内建思维链（Thinking / Reasoning Effort）的模型，在架构设计、并发竞态分析与疑难排障上表现卓越，但其首字响应往往需要数秒至数十秒；而用于行间代码补全（Tab）与简单内联修改的模型，则要求毫秒级的极速响应。</li>
+<li><strong>原生多模态视觉理解能力</strong>：在全栈研发中，模型需要直接读取 UI 原型草图、Figma 设计稿截图、浏览器实际渲染的页面错位截图（用于 GStack <code>/design-review</code> 视觉走查与 <code>/qa</code> 实机测试），以及白板手绘架构图。强大的视觉定位与还原能力是前端去“AI 模板感（AI Slop）”的关键支撑。</li>
+<li><strong>词元单价、数据隐私与企业合规边界</strong>：区分公网商业 API、云厂商企业级专有云接入（承诺输入代码不用于模型训练）以及企业内网私有化部署。对于涉及核心商业机密、电信金融数据或政企内网的研发任务，<strong>“数据不出域”与合规审计是刚性前提</strong>。</li>
+</ol>
+<hr>
+<h3 id="h-3-gstack-跨模型分层路由策略model-tiering">3. GStack 跨模型分层路由策略（Model Tiering）</h3>
+<p>既然不同模型在“深度推理”与“响应速度/价格”上存在天然取舍，最科学的做法绝不是从头到尾绑死一个模型。GStack 官方工程体系明确提出了<strong>跨模型分层路由策略（Plan-Review Tier vs Implementation Tier）</strong><sup class="cite"><a href="#ref-1">[1]</a></sup>——让最强的“架构大脑”负责运筹帷幄与挑刺把关，让高性价比的“施工快手”负责按图施工：</p>
+<table>
+<thead>
+<tr>
+<th>路由分层</th>
+<th>职责定位与核心价值</th>
+<th>对应的 GStack 环节与 IDE 动作</th>
+<th>推荐选配的模型档位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一档：规划与对抗审查层</strong>（Plan-Review Tier）</td>
+<td><strong>做正确的决策、找隐蔽的漏洞</strong>。调用频次较低（每个功能周期仅数次），但每一次判断都决定后续数千行代码的方向与安全性，对推理深度要求极高。</td>
+<td>第 1 环 <code>/office-hours</code>（痛点重构与前提挑战）、第 2 环 <code>/spec</code>（外部评分门禁）、第 3 环 <code>/autoplan</code>（CEO/Eng 架构与失败表评审）、第 5 环 <code>/review</code> 与 <code>/cso</code>（结构与安全审计）、<code>/investigate</code>（疑难根因定位）。</td>
+<td><strong>高推理旗舰思考模型</strong>：如 Claude Opus 高推理档、GPT-5.4 高推理档、DeepSeek-R1 满血推理版或同级企业专有高阶推理模型。</td>
+</tr>
+<tr>
+<td><strong>第二档：编码施工与快速动作层</strong>（Implementation / Action Tier）</td>
+<td><strong>按锁死契约高速施工、低延迟交互</strong>。由于规格说明（<code>spec.md</code>）与架构图已在第一档锁死，此阶段只需高吞吐、低延迟、高性价比地生成代码、补写单测与执行页面点击。</td>
+<td>第 4 环受控施工（按 Spec 编写业务代码与测试）、日常 <code>Tab / NES / CUE</code> 预测补全、<code>Inline Edit</code> 局部重构、第 6 环 <code>/qa</code> 实机探索测试、第 7 环 <code>/ship</code> 发布流水线（含 <code>/document-release</code> 文档同步动作）、<code>/browse</code> 浏览器自动化巡检。</td>
+<td><strong>高吞吐高性价比主力编码模型</strong>：如 Claude Sonnet、DeepSeek-V3.2、腾讯混元代码大模型（Hunyuan-Code）、Kimi-K2.5、MiniMax-M3 等。</td>
+</tr>
+</tbody></table>
+<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong>工程实践提示：用“两个不同厂商的大脑”做交叉对抗审查</strong><br>在第 2 环 <code>/spec</code> 的外部评分门禁和第 5 环 <code>/review</code> 的对抗挑刺（<code>/codex</code> Challenge 模式）中，如果条件允许，尽量让<strong>规划/审查模型</strong>与<strong>编写代码的模型</strong>来自不同模型家族（例如用 Claude 或 DeepSeek 写代码，调用 GPT/Codex 或另一独立模型做冷读挑刺）。正如医院会诊，“两个训练分布不同的专家看同一个病人”，能打破单一模型的思维盲区，大幅提升高危漏洞的检出率<sup class="cite"><a href="#ref-1">[1]</a></sup>。</p>
+</div>
+<hr>
+<h2 id="h-132-手脚与规矩横向对标codebuddytraeopencode-与六大选型结论">1.3.2 “手脚”与“规矩”横向对标：CodeBuddy、TRAE、OpenCode 与六大选型结论</h2>
+<p>选定底层大模型策略后，我们需要为研发团队配置顺手的第二层“手脚（Coding Agent）”与第三层“规矩（Harness）”。本课程以国内企业广泛采用的<strong>腾讯云 CodeBuddy IDE</strong> 与<strong>字节跳动 TRAE</strong> 作为双主力桌面开发环境，并以开源终端智能体 <strong>OpenCode CLI</strong>（对照 Claude Code / Cursor）作为命令行与远程环境参照。</p>
+<h3 id="h-1-三大主流编码智能体codebuddy-vs-trae-vs-opencode深度对标">1. 三大主流编码智能体（CodeBuddy vs TRAE vs OpenCode）深度对标</h3>
+<p>虽然这三款工具都能调用大模型读写代码，但它们的产品形态、补全引擎、核心工作模式与规则扩展机制各有千秋<sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup><sup class="cite"><a href="#ref-4">[4]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>对标维度</th>
+<th>腾讯云 CodeBuddy</th>
+<th>字节跳动 TRAE</th>
+<th>OpenCode CLI（及 Claude Code / Codex CLI）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>产品形态与生态定位</strong></td>
+<td>独立全流程 AI IDE + VS Code / JetBrains 插件 + 微信开发者工具深度集成 + CodeBuddy CLI。</td>
+<td>原生全功能 AI IDE（整合 TraeCode 与 TraeWork，支持桌面端、Web 端及远程 SSH / WSL 开发）。</td>
+<td>开源终端原生文本界面（TUI）智能体（<code>opencode</code> 命令行，亦提供桌面与插件形态）。</td>
+</tr>
+<tr>
+<td><strong>预测补全引擎</strong></td>
+<td><strong>NES（Next Edit Suggestions）</strong>：不仅续写当前光标，更能跨行预测下一处关联修改点（快捷键 <code>Ctrl+Shift+Enter</code> 跳转采纳）。</td>
+<td><strong>CUE 智能补全引擎</strong>：具备深层上下文感知的多行代码续写与跨行光标编辑位置预测。</td>
+<td>专注于会话与多步任务流，不驻留图形编辑器做行间实时补全。</td>
+</tr>
+<tr>
+<td><strong>核心工作模式划分</strong></td>
+<td><strong><code>Ask</code></strong>（只读问答分析）、<strong><code>Plan</code></strong>（先生成结构化任务清单，人工确认后再执行）、<strong><code>Craft</code></strong>（多文件自主编码与终端工具调用）。</td>
+<td><strong><code>Chat</code></strong>（对话分析）、<strong><code>Built-in Agent</code></strong>（需求分析 → 生成方案 → 跨文件编码 → 运行验证）、<strong><code>SOLO 模式</code></strong>（端到端自主全栈构建）。</td>
+<td>在终端 TUI 界面内直接按 <strong><code>Tab</code> 键</strong>，在 <strong><code>Plan</code>（只读规划）</strong> 与 <strong><code>Build</code>（读写施工）</strong> 两模式间一键切换。</td>
+</tr>
+<tr>
+<td><strong>前端设计稿转代码</strong></td>
+<td>内置 <strong>Add from Figma</strong> 与企业级组件库对接，直接将设计节点转化为符合团队规范的前端组件代码。</td>
+<td>内置 <strong>Figma to Code</strong>、Supabase 后端集成与内置 Web 一键预览面板，所见即所得调试界面。</td>
+<td>配合 GStack <code>/design-shotgun</code> 与 <code>/design-html</code> 命令行管线生成响应式 HTML/CSS 与截图对比。</td>
+</tr>
+<tr>
+<td><strong>上下文可视化与治理</strong></td>
+<td>支持 <code>@</code> 多维上下文引用，Skills 支持设置 <code>context: fork</code> 在独立子上下文运行重度检索任务。</td>
+<td>对话框底部<strong>实时显示上下文窗口占用百分比</strong>，支持自动或手动点击 <strong>Compact（上下文主动压缩）</strong> 清理冗余输出。</td>
+<td>支持终端内 <code>/compact</code> 压缩会话，原生兼容 GStack <code>gstack-context-bill</code> 词元账单审计。</td>
+</tr>
+<tr>
+<td><strong>规则（Rules）与技能（Skills）扩展</strong></td>
+<td><code>.codebuddy/rules/</code> + <code>.codebuddy/skills/&lt;name&gt;/SKILL.md</code>；支持细粒度 <strong><code>allowed-tools</code> 工具白名单</strong>、内联 <code>!</code> 实时命令注入与 Frontmatter Hooks。</td>
+<td><code>.trae/rules/</code>（支持 <strong>4 种激活模式</strong>与 3 层子目录递归，原生兼容 <code>AGENTS.md</code> / <code>CLAUDE.md</code>）+ <code>.trae/skills/</code>（兼容 <code>.agents/skills/</code>）+ <code>.trae/agents/</code> 子代理。</td>
+<td>GStack 官方原生支持，运行 <code>./setup --host opencode</code> 即可将八环技能一键挂载至 <code>~/.config/opencode/skills/gstack-*/</code>。</td>
+</tr>
+<tr>
+<td><strong>最佳工程适用场景</strong></td>
+<td>企业级大中型研发团队标准化治理、细粒度工具权限管控、微服务及微信小程序/企微生态全栈研发。</td>
+<td>快速全栈 Web/SaaS 原型与生产构建、可视化上下文管理、精细化多模式规则与子代理编排。</td>
+<td>远程无图形界面（GUI）Linux 服务器、跳板机运维开发、结合 Git Worktree 开启 10 路并行极客冲刺。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-2-运行支撑机制规矩-harness的七大工程治理手段">2. 运行支撑机制（“规矩” Harness）的七大工程治理手段</h3>
+<p>无论团队选用 CodeBuddy、TRAE 还是 OpenCode，如果只安装裸工具而不配置第三层“规矩（Harness）”，智能体依然会在复杂项目中失控。一套完整的企业级 Harness 工程层包含以下七项治理手段（本节先建立全局选型框架，具体治理机制将在【单元 3.3】深入拆解）：</p>
+<ol>
+<li><strong>分层项目规则（Project Rules &amp; <code>AGENTS.md</code>）</strong>：固化团队技术栈约定、分层架构边界、命名规范与安全红线，充当常驻或按文件后缀（Glob）激活的“工程宪法”。</li>
+<li><strong>跨会话机构记忆（Institutional Memory）</strong>：通过 GStack 第 8 环 <code>/learn</code> 将踩坑经验与项目规律沉淀至 <code>.gstack/learnings.jsonl</code> 或 GBrain 知识库，让智能体越用越懂你的业务，告别“每次新建对话都从零教起”。</li>
+<li><strong>全仓语义索引与代码情报（Codebase Indexing）</strong>：结合 Tree-sitter 抽象语法树（AST）与向量检索，确保智能体在动笔前先摸清现有工具函数与调用链，落实“先查后建（Search Before Building）”。</li>
+<li><strong>模型上下文协议（MCP）标准连接器</strong>：为智能体挂载 Figma、PostgreSQL/MySQL 数据库、GitHub/GitLab 工单及 Playwright 浏览器的标准插头，消除人工复制粘贴外部数据的误差。</li>
+<li><strong>运行时权限沙箱与施工护栏（Safety Guardrails）</strong>：在编码施工与排障阶段开启 <code>/careful</code>（拦截删库、删目录、强推分支等破坏性命令）与 <code>/freeze &lt;dir&gt;</code>（将文件写权限物理锁定在指定目录内）。</li>
+<li><strong>审查新鲜度指纹与出境脱敏（Traceability &amp; Egress Audit）</strong>：通过 GStack <code>gstack-wtree</code> 计算磁盘工作树内容哈希，一旦审查通过后源码被再次改动，原审查凭据立即变为过期（<code>STALE</code>）；外发外部模型前自动触发密钥脱敏。</li>
+<li><strong>持续集成（CI）与验证停止钩子（Verify Gate）</strong>：配置 <code>gstack-verify-gate</code> 停止钩子，在自动化测试未跑通前硬性阻止智能体结束回合，并将覆盖率与回归测试接入企业内网 CI 流水线。</li>
+</ol>
+<hr>
+<h3 id="h-3-面向通用软件研发的六条工具选型落地结论">3. 面向通用软件研发的“六条工具选型落地结论”</h3>
+<p>综合上述三层拆解与工具对标，我们为研发团队提炼出可直接落地的<strong>六条选型结论</strong>：</p>
+<ol>
+<li><strong>结论一（团队标准化 vs 敏捷全栈互补）</strong>：企业推进大团队研发规范化、需要精细管控每个技能可调用的 Shell 命令与文件修改白名单时，优先以 <strong>腾讯云 CodeBuddy</strong> 为主力基准；追求极致的多行预测补全体验、多模式目录规则嵌套与全栈快速构建预览时，优先选用 <strong>字节跳动 TRAE</strong>。两者在底层工程原语上完全相通，鼓励工程师双工具并重掌握。</li>
+<li><strong>结论二（桌面 IDE 与终端 CLI 场景协同）</strong>：日常前后端与业务模块开发使用 <strong>CodeBuddy / TRAE 桌面版</strong>；当需要登录远端 Linux 服务器排障、在容器内开发，或一人同时开启 5～10 个 Git Worktree 分支并行冲刺时，搭配 <strong>OpenCode CLI</strong>（或 CodeBuddy CLI / Claude Code）。</li>
+<li><strong>结论三（大模型坚持“高推理评审 + 高性价比施工”双轨路由）</strong>：不要用单一模型跑全流程。在 GStack 第 1～3 环规划评审与第 5 环安全挑刺时，路由至高推理思考模型；在第 4 环按规格写代码和写单测时，路由至高吞吐、低单价、低延迟的主力编码模型。</li>
+<li><strong>结论四（中小规模与内部系统坚持“够用 + 便宜 + 数据不出域”优先）</strong>：对于企业内部管理后台、日常数据处理脚本与敏感业务模块，优先接入云厂商企业专有云合规模型或内网私有化代码模型，在确保源码与生产配置不出安全域的前提下优化词元成本。</li>
+<li><strong>结论五（沉淀“工具无关 Tool-Agnostic”的开放标准资产）</strong>：切忌把团队的提示词和规范锁死在某一款工具私有的图形界面设置项里。应将核心工程准则写入仓库根目录的 <strong><code>AGENTS.md</code></strong><sup class="cite"><a href="#ref-5">[5]</a></sup>，将设计规范写入 <strong><code>DESIGN.md</code></strong>，将八环工作流封装为标准 <strong><code>SKILL.md</code></strong>。这样无论团队明天切换哪款 IDE 或大模型，全套工程资产都能零成本无缝迁移。</li>
+<li><strong>结论六（永远用“规矩 Harness”兜底“脑子”与“手脚”）</strong>：再聪明的模型和再好用的 IDE，在缺少规格约束与权限护栏时都会写出高危漏洞或越界乱改。选型的终点不是买账号，而是把 GStack 八环门禁与安全护栏配进项目仓库。</li>
+</ol>
+<hr>
+<h2 id="h-133-跨工具四大通用交互原语与-@-精准投喂机制">1.3.3 跨工具四大通用交互原语与 <code>@</code> 精准投喂机制</h2>
+<p>AI 编程工具的界面菜单每个月都在更新，但剥离表层的按钮样式就会发现：无论是 CodeBuddy、TRAE、Cursor 还是 OpenCode，底层都共享着<strong>四大通用交互原语（Interaction Primitives）</strong>。</p>
+<p>这四大原语本质上对应着<strong>四种由小到大的代码修改爆炸半径（Blast Radius）</strong>。优秀的工程师从不把所有需求都一股脑塞进多文件 Agent 聊天框，而是像外科医生选手术刀一样，按任务粒度精准匹配交互原语：</p>
+<figure class="fig" id="fig-1-8"><div class="fig-scroll"><svg id="svg-1-8" width="2361.875" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="496.25" viewBox="0 0 2361.875 496.25" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-1-8{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-1-8 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-1-8 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-1-8 .error-icon{fill:#eceff1;}#svg-1-8 .error-text{fill:#13100e;stroke:#13100e;}#svg-1-8 .edge-thickness-normal{stroke-width:1px;}#svg-1-8 .edge-thickness-thick{stroke-width:3.5px;}#svg-1-8 .edge-pattern-solid{stroke-dasharray:0;}#svg-1-8 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-1-8 .edge-pattern-dashed{stroke-dasharray:3;}#svg-1-8 .edge-pattern-dotted{stroke-dasharray:2;}#svg-1-8 .marker{fill:#607d8b;stroke:#607d8b;}#svg-1-8 .marker.cross{stroke:#607d8b;}#svg-1-8 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-1-8 p{margin:0;}#svg-1-8 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-1-8 .cluster-label text{fill:#13100e;}#svg-1-8 .cluster-label span{color:#13100e;}#svg-1-8 .cluster-label span p{background-color:transparent;}#svg-1-8 .label text,#svg-1-8 span{fill:#17324d;color:#17324d;}#svg-1-8 .node rect,#svg-1-8 .node circle,#svg-1-8 .node ellipse,#svg-1-8 .node polygon,#svg-1-8 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-1-8 .rough-node .label text,#svg-1-8 .node .label text,#svg-1-8 .image-shape .label,#svg-1-8 .icon-shape .label{text-anchor:middle;}#svg-1-8 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-1-8 .rough-node .label,#svg-1-8 .node .label,#svg-1-8 .image-shape .label,#svg-1-8 .icon-shape .label{text-align:center;}#svg-1-8 .node.clickable{cursor:pointer;}#svg-1-8 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-1-8 .arrowheadPath{fill:#0b0b0b;}#svg-1-8 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-1-8 .flowchart-link{stroke:#607d8b;fill:none;}#svg-1-8 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-1-8 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-8 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-8 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-1-8 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-1-8 .cluster text{fill:#13100e;}#svg-1-8 .cluster span{color:#13100e;}#svg-1-8 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-1-8 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-1-8 rect.text{fill:none;stroke-width:0;}#svg-1-8 .icon-shape,#svg-1-8 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-1-8 .icon-shape p,#svg-1-8 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-1-8 .icon-shape .label rect,#svg-1-8 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-1-8 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-1-8 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-1-8 .node .neo-node{stroke:#1976d2;}#svg-1-8 [data-look="neo"].node rect,#svg-1-8 [data-look="neo"].cluster rect,#svg-1-8 [data-look="neo"].node polygon{stroke:url(#svg-1-8-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-8 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-1-8 [data-look="neo"].node path{stroke:url(#svg-1-8-gradient);stroke-width:1px;}#svg-1-8 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-8 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-1-8 [data-look="neo"].node circle{stroke:url(#svg-1-8-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-8 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-1-8 [data-look="neo"].icon-shape .icon{fill:url(#svg-1-8-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-8 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-1-8-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-1-8 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-1-8 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-1-8 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-1-8 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-1-8 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-1-8 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-1-8 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-1-8 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-1-8 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-1-8 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-1-8 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-1-8 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-1-8 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-1-8 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-1-8 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-1-8 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-1-8_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-8_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-8_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-8_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-1-8_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-8_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-8_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-8_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-1-8_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-8_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-1-8_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-1-8_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M1049.412,172.209L922.859,195.133C796.306,218.056,543.2,263.903,416.647,288.993C290.094,314.083,290.094,318.417,290.094,320.583L290.094,322.75" id="svg-1-8-L_Task_Scope1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Task_Scope1_0" data-points="W3sieCI6MTA0OS40MTI0ODMyMjY0NTg4LCJ5IjoxNzIuMjA5MzU4MjI2NDU4OH0seyJ4IjoyOTAuMDkzNzUsInkiOjMwOS43NX0seyJ4IjoyOTAuMDkzNzUsInkiOjMyNi43NX1d" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M1077.416,200.213L1043.519,218.469C1009.621,236.725,941.826,273.238,907.929,293.66C874.031,314.083,874.031,318.417,874.031,320.583L874.031,322.75" id="svg-1-8-L_Task_Scope2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Task_Scope2_0" data-points="W3sieCI6MTA3Ny40MTU5NzExODU1MjQ1LCJ5IjoyMDAuMjEyODQ2MTg1NTI0NTd9LHsieCI6ODc0LjAzMTI1LCJ5IjozMDkuNzV9LHsieCI6ODc0LjAzMTI1LCJ5IjozMjYuNzV9XQ==" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M1262.49,200.213L1296.388,218.469C1330.285,236.725,1398.08,273.238,1431.978,293.66C1465.875,314.083,1465.875,318.417,1465.875,320.583L1465.875,322.75" id="svg-1-8-L_Task_Scope3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Task_Scope3_0" data-points="W3sieCI6MTI2Mi40OTAyNzg4MTQ0NzU1LCJ5IjoyMDAuMjEyODQ2MTg1NTI0NTd9LHsieCI6MTQ2NS44NzUsInkiOjMwOS43NX0seyJ4IjoxNDY1Ljg3NSwieSI6MzI2Ljc1fV0=" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M1290.826,171.877L1420.001,194.856C1549.176,217.835,1807.525,263.792,1936.7,288.938C2065.875,314.083,2065.875,318.417,2065.875,320.583L2065.875,322.75" id="svg-1-8-L_Task_Scope4_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Task_Scope4_0" data-points="W3sieCI6MTI5MC44MjYxMDM5NDU0OTgsInkiOjE3MS44NzcwMjEwNTQ1MDE4NX0seyJ4IjoyMDY1Ljg3NSwieSI6MzA5Ljc1fSx7IngiOjIwNjUuODc1LCJ5IjozMjYuNzV9XQ==" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M290.094,379.25L290.094,382.083C290.094,384.917,290.094,390.583,290.094,397.458C290.094,404.333,290.094,412.417,290.094,416.458L290.094,420.5" id="svg-1-8-L_Scope1_Prim1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Scope1_Prim1_0" data-points="W3sieCI6MjkwLjA5Mzc1LCJ5IjozNzkuMjV9LHsieCI6MjkwLjA5Mzc1LCJ5IjozOTYuMjV9LHsieCI6MjkwLjA5Mzc1LCJ5Ijo0MjQuNX1d" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M874.031,379.25L874.031,382.083C874.031,384.917,874.031,390.583,874.031,397.458C874.031,404.333,874.031,412.417,874.031,416.458L874.031,420.5" id="svg-1-8-L_Scope2_Prim2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Scope2_Prim2_0" data-points="W3sieCI6ODc0LjAzMTI1LCJ5IjozNzkuMjV9LHsieCI6ODc0LjAzMTI1LCJ5IjozOTYuMjV9LHsieCI6ODc0LjAzMTI1LCJ5Ijo0MjQuNX1d" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M1465.875,379.25L1465.875,382.083C1465.875,384.917,1465.875,390.583,1465.875,395.583C1465.875,400.583,1465.875,404.917,1465.875,407.083L1465.875,409.25" id="svg-1-8-L_Scope3_Prim3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Scope3_Prim3_0" data-points="W3sieCI6MTQ2NS44NzUsInkiOjM3OS4yNX0seyJ4IjoxNDY1Ljg3NSwieSI6Mzk2LjI1fSx7IngiOjE0NjUuODc1LCJ5Ijo0MTMuMjV9XQ==" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path><path d="M2065.875,379.25L2065.875,382.083C2065.875,384.917,2065.875,390.583,2065.875,397.458C2065.875,404.333,2065.875,412.417,2065.875,416.458L2065.875,420.5" id="svg-1-8-L_Scope4_Prim4_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Scope4_Prim4_0" data-points="W3sieCI6MjA2NS44NzUsInkiOjM3OS4yNX0seyJ4IjoyMDY1Ljg3NSwieSI6Mzk2LjI1fSx7IngiOjIwNjUuODc1LCJ5Ijo0MjQuNX1d" data-look="classic" marker-end="url(#svg-1-8_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Task_Scope1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Task_Scope2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Task_Scope3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Task_Scope4_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Scope1_Prim1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Scope2_Prim2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Scope3_Prim3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Scope4_Prim4_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default warm" id="svg-1-8-flowchart-Task-0" data-look="classic" transform="translate(1169.953125, 150.375)"><polygon points="142.375,0 284.75,-142.375 142.375,-284.75 0,-142.375" class="label-container" transform="translate(-141.875, 142.375)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-116.125, -11.25)"><rect></rect><foreignObject width="232.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>当前编码任务的范围与性质是什么?</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-1-8-flowchart-Scope1-1" data-look="classic" transform="translate(290.09375, 353)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-201.25" y="-26.25" width="402.5" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-171.25, -11.25)"><rect></rect><foreignObject width="342.5" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>单函数内部算法实现 · 修改结构体后同步同文件引用</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-1-8-flowchart-Scope2-3" data-look="classic" transform="translate(874.03125, 353)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-230.1875" y="-26.25" width="460.375" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-200.1875, -11.25)"><rect></rect><foreignObject width="400.375" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>对已有 10~50 行函数做局部重构 · 加参数校验或修单点 Bug</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-1-8-flowchart-Scope3-5" data-look="classic" transform="translate(1465.875, 353)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-234.9765625" y="-26.25" width="469.953125" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-204.9765625, -11.25)"><rect></rect><foreignObject width="409.953125" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>需求痛点探讨 · 规格起草 · 架构方案评审 · 安全审计 · 根因分析</p></span></div></foreignObject></g></g><g class="node default green" id="svg-1-8-flowchart-Scope4-7" data-look="classic" transform="translate(2065.875, 353)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-231.25" y="-26.25" width="462.5" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-201.25, -11.25)"><rect></rect><foreignObject width="402.5" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>规格与计划已获批 · 需跨多个前后端文件新增功能并跑通测试</p></span></div></foreignObject></g></g><g class="node default green" id="svg-1-8-flowchart-Prim1-9" data-look="classic" transform="translate(290.09375, 450.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-282.09375" y="-26.25" width="564.1875" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-252.09375, -11.25)"><rect></rect><foreignObject width="504.1875" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>原语 1: 契约注释驱动补全与预测编辑 (Tab / CodeBuddy NES / TRAE CUE)</p></span></div></foreignObject></g></g><g class="node default green" id="svg-1-8-flowchart-Prim2-11" data-look="classic" transform="translate(874.03125, 450.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-279.84375" y="-26.25" width="559.6875" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-249.84375, -11.25)"><rect></rect><foreignObject width="499.6875" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>原语 2: 局部受控内联修改 (Inline Edit: Ctrl+I / Ctrl+K · 锁死最小爆炸半径)</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-1-8-flowchart-Prim3-13" data-look="classic" transform="translate(1465.875, 450.75)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>原语 3: 只读对话与规划门禁 (Ask / Plan / Chat Mode + @ 精准投喂 · 严禁改代码)</p></span></div></foreignObject></g></g><g class="node default red" id="svg-1-8-flowchart-Prim4-15" data-look="classic" transform="translate(2065.875, 450.75)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-288" y="-26.25" width="576" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-258, -11.25)"><rect></rect><foreignObject width="516" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>原语 4: 多文件自主构建代理 (Craft / Built-in Agent + Checkpoint 快照回滚)</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-1-8-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-1-8-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-1-8-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-1-8.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 1-8 ↗</a>：按任务性质与修改爆炸半径匹配四大通用交互原语的决策树</figcaption></figure>
+<p>依据图 1-8 的决策树，下面我们逐一拆解四大通用交互原语的功能定位、底层工作机制与标准操作规程。</p>
+<hr>
+<h3 id="h-1-交互原语一契约式文档注释驱动补全与前瞻式预测编辑tab-nes-cue">1. 交互原语一：契约式文档注释驱动补全与前瞻式预测编辑（Tab / NES / CUE）</h3>
+<h4 id="h-1从盲目按-tab-猜代码到契约注释驱动补全">（1）从“盲目按 Tab 猜代码”到“契约注释驱动补全”</h4>
+<p>初级开发者使用行内补全时，往往只敲一个模糊的函数名就按下 <code>Tab</code> 键，结果模型只能靠猜测生成一段缺乏边界校验、单位混乱的不可靠代码。</p>
+<p>正确的工程原语是<strong>契约注释驱动补全（Contract-Driven Completion）</strong>：在编写单函数或局部算法前，先在函数头部写明结构化的文档注释（如 TypeScript 的 JSDoc 或 Python 的 Docstring），相当于在函数级立下一份微型技术规格（Micro-Spec）。一份合格的契约式文档注释必须包含以下<strong>四大核心要素</strong>：</p>
+<ol>
+<li><strong>函数职责与业务不变量说明</strong>：明确该函数解决什么计算或转换任务，以及计量单位约定（例如明确规定金额单位为“整数分 Cents”而非浮点数元，时间为“毫秒时间戳”）；</li>
+<li><strong>入参类型与合法边界范围（<code>@param</code>）</strong>：明确每个参数的取值范围、非空要求与枚举集合；</li>
+<li><strong>返回值结构与计算分支规则（<code>@returns</code>）</strong>：列出核心阶梯逻辑或状态转换规则；</li>
+<li><strong>显式异常抛出条件（<code>@throws</code>）</strong>：规定当入参越界或前置条件不满足时，抛出哪一个具体的错误类型与错误码。</li>
+</ol>
+<p>当上述四要素在注释中声明完毕后，再敲下函数签名并按 <code>Tab</code> 键，底层补全引擎即可将注释契约直接映射为严密的参数校验与主干实现。</p>
+<h4 id="h-2前瞻式预测编辑codebuddy-nes-与-trae-cue顺着语法树连跳同步">（2）前瞻式预测编辑（CodeBuddy NES 与 TRAE CUE）：顺着语法树连跳同步</h4>
+<p>在日常开发中，最繁琐的机械劳动是“修改了文件顶部的接口字段、枚举定义或组件 Props 类型后，需要手动在文件下方滚动十几次，逐个修改所有关联的构造器、校验器与调用点”。</p>
+<p>现代 AI IDE 已将静态的“光标处续写”升级为<strong>前瞻式下一步编辑预测（Next Edit Suggestions）</strong>：</p>
+<ul>
+<li><strong>底层工作机制</strong>：当你修改了一处数据结构定义时，IDE 在后台实时解析当前文件的抽象语法树（AST）与语言服务（LSP）诊断信号，自动计算出文件内所有因该改动而需要同步调整的下游引用行号，并预先生成对应的修改补丁。</li>
+<li><strong>标准操作动作</strong>：<ul>
+<li>在 <strong>CodeBuddy</strong> 中，NES 引擎会在编辑器右侧高亮提示下一处关联修改点，开发者只需连续按下 <strong><code>Ctrl+Shift+Enter</code></strong>，光标就会自动跳跃到下一个引用点并一键应用修改<sup class="cite"><a href="#ref-2">[2]</a></sup>；</li>
+<li>在 <strong>TRAE</strong> 中，<strong>CUE 智能补全引擎</strong>会自动预测下一处跨行光标位置并展示多行补全预览，连续按 <strong><code>Tab</code> 键</strong>即可顺着依赖链完成全文件同步<sup class="cite"><a href="#ref-3">[3]</a></sup>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="h-2-交互原语二局部受控内联修改inline-editctrl+i-ctrl+k与最小爆炸半径">2. 交互原语二：局部受控内联修改（Inline Edit：<code>Ctrl+I</code> / <code>Ctrl+K</code>）与最小爆炸半径</h3>
+<p>当需要对某一个已经存在的函数或代码块（通常在 10 到 50 行之间）进行重构、补充参数校验、添加超时重试或修复局部缺陷时，<strong>严禁直接去侧边栏的多文件 Agent 聊天框下达指令</strong>——因为侧边栏代理拥有全文件乃至全仓库的写权限，极易触发单元 1.1 所讲的“正交越界乱改（修 A 函数顺手把同文件的 B 函数也改了）”。</p>
+<p>针对局部代码修改，最安全、最高效的原语是<strong>局部受控内联修改（Inline Edit）</strong>：</p>
+<ol>
+<li><strong>框选物理锁死边界</strong>：用鼠标或键盘在编辑器中精确选中需要修改的那十几行代码块；</li>
+<li><strong>唤起行内输入框</strong>：在 <strong>CodeBuddy</strong> 中按下 <strong><code>Ctrl+I</code></strong>（macOS 按 <code>Cmd+I</code>），或在 <strong>TRAE / Cursor</strong> 中按下 <strong><code>Ctrl+K</code></strong>（macOS 按 <code>Cmd+K</code>），直接在选中代码上方弹出轻量指令框；</li>
+<li><strong>下达声明式重构指令</strong>：输入明确的修改目标，并强调“保持函数对外签名与返回值结构不变”；</li>
+<li><strong>原位红绿 Diff 逐行审阅</strong>：在该原语下，智能体的写权限<strong>被编辑器物理锁定在选中的行号区间内</strong>，选中区以外的任何代码行均处于只读保护状态。生成结果直接以红（删除行）、绿（新增行）对照形式内嵌展示在原位置，人工核对无误后点击 <code>Accept</code> 采纳，不满意则点击 <code>Reject</code> 一键丢弃。</li>
+</ol>
+<hr>
+<h3 id="h-3-交互原语三只读对话与规划门禁ask-chat-plan-mode及-@-精准投喂法则">3. 交互原语三：只读对话与规划门禁（Ask / Chat / Plan Mode）及 <code>@</code> 精准投喂法则</h3>
+<p>在进入 GStack 的前三个规划环节（第 1 环 <code>/office-hours</code> 痛点重构、第 2 环 <code>/spec</code> 规格编写、第 3 环 <code>/autoplan</code> 四方评审），或者在第 5 环开展安全审计、在跨环排障时执行 <code>/investigate</code> 根因推演时，有一条铁律：<strong>在方案未定、根因未明之前，严禁智能体擅自修改任何一行源码！</strong></p>
+<h4 id="h-1从工具权限层锁死只读门禁">（1）从工具权限层锁死只读门禁</h4>
+<p>如果仅靠在聊天框里用自然语言嘱咐“请先只分析不要改代码”，处于读写构建模式下的智能体仍经常会直接调用 <code>Write/Edit</code> 工具把代码改掉。正确的工程做法是切换至各工具原生的<strong>只读对话与规划模式</strong>：</p>
+<ul>
+<li>在 <strong>CodeBuddy</strong> 中：将侧边栏切换至 <strong><code>Ask</code> 模式</strong>（纯只读问答与代码检索），或切换至 <strong><code>Plan</code> 模式</strong>（智能体只能先扫描代码库并生成结构化的步骤清单与设计方案，在人类点击确认执行按钮前，写文件工具处于物理禁用状态）<sup class="cite"><a href="#ref-2">[2]</a></sup>；</li>
+<li>在 <strong>TRAE</strong> 中：使用 <strong><code>Chat</code> 对话模式</strong>或调用配置了 <code>disallowedTools: Edit, Write, Bash</code> 的**只读子代理（Subagent）**开展架构评审与安全扫描<sup class="cite"><a href="#ref-3">[3]</a></sup>；</li>
+<li>在 <strong>OpenCode CLI</strong> 中：在终端界面按下 <strong><code>Tab</code> 键</strong>，将状态栏指示器切换为 <strong><code>Plan</code>（只读规划模式）</strong>，待方案评审完全通过后，再按 <code>Tab</code> 键切回 <code>Build</code> 模式施工<sup class="cite"><a href="#ref-4">[4]</a></sup>。</li>
+</ul>
+<h4 id="h-2@-符号精准上下文投喂黄金法则最小完备投喂">（2）<code>@</code> 符号精准上下文投喂黄金法则（最小完备投喂）</h4>
+<p>在只读规划或构建对话中，如何把项目信息喂给智能体？许多新手要么什么都不挂（让模型盲猜），要么每次提问都无脑挂载 <code>@Codebase</code>（全仓搜索，一下子拉入几十个无关文件，导致词元浪费与注意力稀释）。</p>
+<p>高水平工程师遵循**“最小完备上下文投喂（Minimum Viable Context）”**黄金法则——用最精准的 <code>@</code> 引用符号，只把与当前决策强相关的上下文送入模型视野：</p>
+<table>
+<thead>
+<tr>
+<th><code>@</code> 引用原语</th>
+<th>上下文作用粒度与底层机理</th>
+<th>适用场景判断标准</th>
+<th>对应的 GStack 环节与工程动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>@Files</code></strong>（指定文件）</td>
+<td>将选定的 1～5 个完整源码或规格文档精确注入上下文，信噪比最高。</td>
+<td><strong>已知明确关联文件</strong>（如跨环节传递 GStack 落盘工件，或修改固定接口）。</td>
+<td>在第 2 环读取第 1 环的 <code>*-design-*.md</code>，或在第 3 环 <code>/autoplan</code> 同时投喂设计文档与 <code>spec.md</code>。</td>
+</tr>
+<tr>
+<td><strong><code>@Symbols</code></strong>（指定符号）</td>
+<td>基于抽象语法树（AST）仅提取特定函数、类或接口定义的代码片段，不加载整份大文件。</td>
+<td><strong>大文件中的局部类型或函数对齐</strong>（避免加载上千行的完整文件）。</td>
+<td>在第 4 环施工中对齐既有的数据模型接口或复用已有工具函数签名。</td>
+</tr>
+<tr>
+<td><strong><code>@Folders</code></strong>（指定目录）</td>
+<td>注入指定文件夹的目录树结构及模块清单。</td>
+<td><strong>模块级边界梳理与分层检查</strong>（了解某个子系统的目录组织）。</td>
+<td>在第 2 环 <code>/spec</code> 强制读代码阶段扫描目标模块的目录结构。</td>
+</tr>
+<tr>
+<td><strong><code>@Terminal</code> / <code>@Problems</code></strong>（终端与诊断）</td>
+<td>一键注入当前内置终端的最新报错堆栈，或编辑器语言服务（LSP）检测到的类型/语法红线报错。</td>
+<td><strong>编译失败、单测报错或运行崩溃排障</strong>（无需人工复制粘贴长篇报错日志）。</td>
+<td>在第 4 环单测失败或调用 <code>/investigate</code> 根因调试器时直接注入报错现场。</td>
+</tr>
+<tr>
+<td><strong><code>@Docs</code> / <code>@Web</code></strong>（官方文档与网页）</td>
+<td>检索预先登记的框架最新官方文档或实时网页内容。</td>
+<td><strong>对接新版本第三方库或 SDK</strong>（防止模型用训练语料里的旧版废弃 API 瞎写）。</td>
+<td>在规划与施工阶段遵循“先查后建（Search Before Building）”核对官方最新接口规范。</td>
+</tr>
+<tr>
+<td><strong><code>@Git</code> / <code>@Commit</code></strong>（版本差异）</td>
+<td>注入当前工作区未提交的 <code>git diff</code> 或指定历史提交的变更集。</td>
+<td><strong>靶向代码审查与迭代回归</strong>（仅针对本次改动的代码行做精准分析）。</td>
+<td>在第 5 环运行 <code>/review</code> 与 <code>/cso</code> 审计当前分支变更，或在第 6 环执行 Diff-aware <code>/qa</code>。</td>
+</tr>
+<tr>
+<td><strong><code>@Codebase</code> / <code>@Workspace</code></strong>（全仓索引）</td>
+<td>触发全仓 AST 符号图与向量语义检索，召回 top-K 相关代码片段。</td>
+<td><strong>仅用于初探陌生项目，或全仓追踪某个枚举/函数的未知调用点</strong>。</td>
+<td>在第 5 环 <code>/review</code> 全仓排查是否有遗漏的 <code>switch</code> 枚举分支，或初探存量仓库架构。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-4-交互原语四多文件自主构建代理craft-built-in-agent与-checkpoint-快照回滚机制">4. 交互原语四：多文件自主构建代理（Craft / Built-in Agent）与 Checkpoint 快照回滚机制</h3>
+<p>当且仅当 GStack 前三环的 <code>*-design-*.md</code>、<code>spec.md</code> 与 <code>/autoplan</code> 实施计划全部获批落盘后，我们才进入第 4 环受控编码施工，启用威力最大、爆炸半径也最大的第四原语——<strong>多文件自主构建代理</strong>（CodeBuddy 的 <strong><code>Craft</code> 模式</strong>、TRAE 的 <strong><code>Built-in Agent</code> / <code>SOLO</code> 模式</strong>、OpenCode 的 <strong><code>Build</code> 模式</strong>）。</p>
+<p>在该模式下，智能体可以根据 <code>spec.md</code> 中的任务分解列表，自主完成跨目录新建文件、编写前后端代码、安装依赖包、运行终端测试并根据报错自我修正。</p>
+<h4 id="h-核心保命机制一旦发现代理跑偏立即-stop-+-checkpoint-一键快照回滚">核心保命机制：一旦发现代理跑偏，立即 <code>Stop</code> + <code>Checkpoint</code> 一键快照回滚！</h4>
+<p>在使用多文件自主构建代理时，新手与高手最大的分水岭，在于<strong>当智能体改乱代码引发连锁报错时的应对方式</strong>：</p>
+<ul>
+<li><strong>新手的致命陷阱（在错误泥潭上反复叠补丁）</strong>：当智能体在跨文件修改中选错了技术路径，一口气改动了七八个文件并引发大面积编译或测试报错时，新手习惯在聊天框第 2 轮输入“报错了，快修一下”；智能体慌忙打补丁又改了几个文件，报错反而更多；新手继续在聊天框纠缠到第 10 轮……此时上下文窗口已被数万字报错堆栈彻底污染（上下文腐化），代码库也被改得面目全非。</li>
+<li><strong>高手的标准三步自救规程（Interrupt + Checkpoint Restore + Spec Fix）</strong>：<ol>
+<li><strong>第一步（果断叫停 Interrupt）</strong>：盯住智能体的工具调用流，一旦发现它开始偏离 <code>spec.md</code> 的架构设计、误改无关目录，或连续两次修补同一个报错仍未成功，<strong>立即点击对话框右下角的 <code>Stop</code>（停止）按钮</strong>，切断失控链条。</li>
+<li><strong>第二步（一键快照回滚 Checkpoint Restore）</strong>：绝不在改坏的代码上让 AI“往回改”！CodeBuddy 与 TRAE 的 Agent 对话流中，在每一轮用户提问节点旁都内置了自动工作区快照——<strong>检查点（Checkpoint / Revert）</strong><sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。直接向上滚动到跑偏前的那条消息，点击 <strong><code>Restore Checkpoint</code>（还原检查点）</strong>，即可在 1 秒钟内将本地磁盘上被改乱的所有文件全部无损还原到本轮对话前的干净状态（在终端 CLI 中则对应回退至上一个原子 Git Commit）。</li>
+<li><strong>第三步（修正规格或补充约束后重发）</strong>：分析刚才智能体为什么会跑偏——通常是因为提示词或 <code>spec.md</code> 中漏掉了一条边界说明（例如未指明应当复用哪一个现有文件）。把这条约束明确补进 <code>spec.md</code> 或当前指令中，在干净的工作区起点上重新下发执行。</li>
+</ol>
+</li>
+</ul>
+<div class="alert alert-important"><span class="alert-tag">要点</span><p><strong>重点关注：永远从干净的检查点修正重来，绝不在脏上下文里打补丁</strong><br>在多文件 Agent 施工中，“点 <code>Restore Checkpoint</code> 回滚 → 补一句约束 → 重新生成”只需 1 分钟，且生成的代码干净紧凑；而在错误的第 5 轮对话后继续追问修补，不仅耗费半小时，还会留下一堆死代码与冗余特判。把 <strong>“小步 Git 原子提交 + 对话流 Checkpoint 回滚”</strong> 变成肌肉记忆，是驾驭多文件智能体的第一保命技。</p>
+</div>
+<hr>
+<h2 id="h-134-通用软件研发-ai-编程三条高压安全红线">1.3.4 通用软件研发 AI 编程“三条高压安全红线”</h2>
+<p>在正式启动任何项目的编码施工之前，所有参与研发的工程师必须在工具配置与日常操作中立下<strong>三条不可逾越的高压安全红线</strong>。这三条红线适用于 Web/SaaS、企业内部后台、微服务 API、CLI 工具及云原生自动化等一切软件研发场景。</p>
+<h3 id="h-1-红线一绝不硬编码或向外部模型外发真实敏感凭据与客户隐私数据">1. 红线一：绝不硬编码或向外部模型外发真实敏感凭据与客户隐私数据</h3>
+<p>在单元 1.1 引用的 Veracode 安全报告中，“硬编码敏感凭据（Hardcoded Secrets）”是 AI 生成代码最高频的安全漏洞之一。更危险的是，如果开发者将包含真实生产数据库密码、云厂商访问密钥（AK/SK）、私钥证书、JWT 签名密钥或客户个人隐私数据（PII，如真实手机号、身份证号、商业机密文本）的配置文件直接通过 <code>@Files</code> 发送给公网大模型，将直接构成严重的数据泄露合规事故。</p>
+<p><strong>强制工程执行标准</strong>：</p>
+<ol>
+<li><strong>代码层零硬编码与启动期强校验（Fail-Fast）</strong>：所有敏感连接串与密钥一律通过环境变量读取，严禁在源码中提供弱口令默认值（如 <code>process.env.SECRET || &quot;123456&quot;</code>）；服务启动时必须校验必填环境变量是否存在且长度合规，缺失时立即终止启动并报错。</li>
+<li><strong>双文件隔离法（<code>.env</code> vs <code>.env.example</code>）</strong>：代码仓库中只允许提交脱敏的环境变量模板 <strong><code>.env.example</code></strong>（仅保留键名与占位符格式说明），存放真实开发密钥的 <strong><code>.env</code></strong> 文件必须第一时间写入 <code>.gitignore</code>。</li>
+<li><strong>配置 AI 索引与读取黑名单（<code>.aiignore</code>）</strong>：在项目根目录配置 <code>.aiignore</code>（或 <code>.cursorignore</code> / IDE 隐私忽略列表），将 <code>.env*</code>、<code>*.pem</code>、<code>*.key</code>、<code>*.p12</code>、<code>secrets/</code> 及真实生产数据导出目录排除在智能体的全仓索引与文件读取权限之外。</li>
+</ol>
+<hr>
+<h3 id="h-2-红线二绝不对破坏性终端操作开启免确认自动执行auto-run">2. 红线二：绝不对破坏性终端操作开启“免确认自动执行（Auto-Run）”</h3>
+<p>CodeBuddy、TRAE 与各类 CLI 智能体都支持调用本地终端（Terminal / Bash）执行命令，并提供了一项名为“自动运行终端命令（Auto-Run / Yolo Mode）”的设置选项。</p>
+<p>如果开发者为了图省事，在没有配置任何命令拦截钩子的情况下开启了全局免确认自动执行，一旦智能体出现推理幻觉——例如为了“解决数据库表结构冲突”而擅自执行强制重置迁移命令或 <code>DROP TABLE</code>，或者为了“清理构建缓存”而执行 <code>rm -rf</code>、<code>git reset --hard</code>、<code>git push --force</code>——在几秒钟内就会造成不可逆的数据毁灭或生产事故。</p>
+<p><strong>强制工程执行标准</strong>：</p>
+<ol>
+<li><strong>默认关闭全局无条件 Auto-Run</strong>：在 IDE 设置中保留终端命令的人工审批确认（Approve / Reject）；</li>
+<li><strong>仅对纯只读与本地单测命令配置白名单</strong>：若需提升自动化流畅度，仅将 <code>git status</code>、<code>git diff</code>、<code>git log</code>、<code>npm test</code>、<code>pytest</code>、<code>tsc --noEmit</code> 等无副作用的只读检查命令加入安全白名单（如 CodeBuddy Skill 中的 <code>allowed-tools: Bash(git:status,git:diff,npm:test)</code>）；</li>
+<li><strong>强制挂载 GStack <code>/careful</code> 护栏</strong>：在施工与排障阶段开启 <code>/careful</code> 钩子，对 <code>rm -rf</code>、<code>DROP TABLE</code>、<code>TRUNCATE</code>、<code>git reset --hard</code>、<code>git push --force</code>、<code>kubectl delete</code> 等破坏性指令实施底层自动阻断。</li>
+</ol>
+<hr>
+<h3 id="h-3-红线三ai-生成的生产代码必须经过独立-diff-审查与自动化测试门禁方可合入">3. 红线三：AI 生成的生产代码必须经过独立 Diff 审查与自动化测试门禁方可合入</h3>
+<p>无论大模型看起来多么自信、终端输出里写了多少句“我已经完美实现了所有需求并通过了验证”，<strong>都绝不允许人类工程师不看代码直接执行 <code>git add . &amp;&amp; git commit &amp;&amp; git push</code></strong>。</p>
+<p><strong>强制工程执行标准</strong>：</p>
+<ol>
+<li><strong>逐块人工 Diff 审阅</strong>：合入前必须在 IDE 的版本控制面板或内联视图中逐块（Hunk-by-Hunk）审阅代码变更，确认自己完全理解每一处状态流转与权限校验逻辑；</li>
+<li><strong>通过 GStack 第 5 环独立审查</strong>：所有进入主干的生产代码必须运行 <code>/review</code>（结构性缺陷排雷）与 <code>/cso</code>（OWASP 安全审计），生成绑定当前工作树哈希指纹（<code>gstack-wtree</code>）的 <code>CURRENT</code> 审查凭据；</li>
+<li><strong>通过第 6～7 环实机与自动化测试门禁</strong>：必须具备覆盖核心路径与边缘异常的自动化回归测试，且实机验证 100% 变绿后方可触发 <code>/ship</code> 发布。</li>
+</ol>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在工具选型与日常交互操作中，研发人员必须坚决戒除以下五类反模式：</p>
+<ol>
+<li><strong>不分青红皂白“万事皆用多文件 Agent”</strong>：连修改一个 10 行函数的参数名或修一处拼写错误，都去侧边栏唤醒多文件构建代理（Craft / Agent），不仅响应慢、消耗大量词元，还极易招致跨文件越界乱改（应用 <code>Inline Edit</code> <code>Ctrl+I</code>/<code>Ctrl+K</code> 替代）。</li>
+<li><strong>在构建（Build/Craft）模式下探讨模糊需求</strong>：还没想清楚产品边界和技术方案，就在拥有写文件权限的模式下跟 AI 聊天，导致模型一边聊一边在仓库里乱建十几个半成品文件（应强制切入 <code>Ask / Plan</code> 只读模式）。</li>
+<li><strong>无脑全仓投喂 <code>@Codebase</code> 或零上下文盲问</strong>：明明知道要改哪两个文件，却每次都用 <code>@Codebase</code> 塞入海量无关代码片段，或者报错时不挂 <code>@Terminal</code> 只说一句“代码跑不通”，导致模型注意力严重失焦。</li>
+<li><strong>Agent 改乱代码后不回滚快照，而在脏对话里死磕 10 轮</strong>：当智能体偏离架构引发大面积报错时，舍不得点击 <code>Restore Checkpoint</code> 回滚，而是在错误代码和污染上下文的基础上反复让 AI 打补丁，越修越乱。</li>
+<li><strong>把 <code>.env</code> 真密钥留在可索引目录或开启全局无锁 Auto-Run</strong>：图一时省事将真实数据库密码硬编码在源码中，或在未挂载 <code>/careful</code> 护栏时开启终端命令免确认自动执行，把本地与测试库置于随时被删库的高危境地。</li>
+</ol>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong>三层解构实现精准选型与排障</strong>：“脑子（底层大模型）”管推理生成，“手脚（CodeBuddy / TRAE / OpenCode）”管索引读写与交互，“规矩（Harness / GStack）”管流程角色与安全门禁。按 GStack 分层路由策略，将高推理思考模型用于“规划与审查层”，将高性价比主力模型用于“编码施工层”。</li>
+<li><strong>三大工具按场景互补，核心工程资产跨工具通用</strong>：CodeBuddy 强于企业级权限管控、NES 跨行预测与企微生态；TRAE 强于 CUE 补全、多模式规则嵌套、可视化上下文压缩与全栈快速构建；OpenCode CLI 强于远程 SSH 终端与多分支并行。将团队规范沉淀为开放标准的 <code>AGENTS.md</code>、<code>DESIGN.md</code> 与 <code>SKILL.md</code>，即可实现跨工具零成本迁移。</li>
+<li><strong>四大通用交互原语精准控制修改爆炸半径</strong>：单函数与同文件联动用<strong>契约注释 + Tab/NES/CUE</strong>；10～50 行局部重构用<strong>内联修改（Inline Edit <code>Ctrl+I</code>/<code>Ctrl+K</code>）</strong>；需求规划、评审与排障强制用<strong>只读规划模式（Ask/Plan）配合 <code>@</code> 最小完备投喂</strong>；获批后的多文件施工用<strong>自主构建代理（Craft/Agent）</strong>，一旦跑偏立即 <strong><code>Stop</code> + <code>Checkpoint</code> 快照回滚</strong>。</li>
+<li><strong>三条高压安全红线兜底工程底线</strong>：严禁硬编码或外发真实敏感凭据（强制 <code>.env</code> + <code>.env.example</code> + <code>.aiignore</code>），严禁对破坏性终端操作开启免确认 Auto-Run（强制 <code>/careful</code> 护栏），严禁未经独立 Diff 审查与自动化测试门禁的代码合入生产。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 当团队反映“AI 写的代码总是漏改关联文件”或“AI 总是违反团队的分层规范”时，我能用“脑子—手脚—规矩”三层模型立即指出分别是哪一层出了问题，并给出解决动作吗？</li>
+<li><input disabled="" type="checkbox"> 我能说出 GStack“规划审查层（Plan-Review Tier）”与“编码施工层（Implementation Tier）”各自对应的环节，并对比 CodeBuddy（NES、<code>Ask/Plan/Craft</code>）与 TRAE（CUE、Context Compaction、4 模式 Rules）的核心特性吗？</li>
+<li><input disabled="" type="checkbox"> 我能清晰说明四大通用交互原语的适用边界（特别是契约式文档注释的四大要素、<code>Ctrl+I</code>/<code>Ctrl+K</code> 锁定局部修改、以及在 Agent 跑偏时用 <code>Checkpoint</code> 一键还原工作区的三步规程），并按最小完备原则选用 <code>@Files</code>、<code>@Symbols</code>、<code>@Terminal</code> 与 <code>@Git</code> 吗？</li>
+<li><input disabled="" type="checkbox"> 我已检查自己的本地开发环境与项目仓库，确保 <code>.env</code> 与敏感文件已加入 <code>.gitignore</code> 和 <code>.aiignore</code>、破坏性命令未开启免确认 Auto-Run 了吗？</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析三层故障归因与交互原语匹配">基础辨析：三层故障归因与交互原语匹配</h3>
+<ol>
+<li><strong>三层解构归因实战</strong>：在日常研发过程中，三位工程师分别遇到了以下困扰。请运用“脑子—手脚—规矩”三层解构模型，指出每个问题属于哪一层，并给出对应的调优方案：<ul>
+<li>工程师甲：“我让 AI 帮我设计一个复杂的多方对账与差额分摊状态机，它连续生成了三版方案都存在逻辑死胡同。”</li>
+<li>工程师乙：“我已经在项目里写好了统一的金额格式化公共函数，但每次让 AI 写新页面时，它还是在每个组件里自己手写重复的格式化表达式。”</li>
+<li>工程师丙：“我在远程无图形界面的 Linux 构建服务器上需要通过 SSH 直接调用 GStack 八环技能排查问题，不知道该选用哪款工具。”</li>
+</ul>
+</li>
+<li><strong>四大交互原语选型</strong>：针对以下四项具体编码动作，请分别指出应当选用哪一个交互原语（原语 1～4）、对应的快捷键或模式名称，以及应当搭配哪一个 <code>@</code> 引用符号：<ul>
+<li>动作 A：阅读完刚刚落盘的 <code>spec.md</code>，准备运行 <code>/autoplan</code> 做四方架构与设计评审；</li>
+<li>动作 B：发现某个加密工具文件中第 30～45 行的签名比对函数使用了普通字符串比较，需要将其原地改为防时序攻击的常量时间比较函数，且绝不能改动文件里的其他函数；</li>
+<li>动作 C：在某个类型定义文件顶部为接口新增了一个必填字段，需要将同一文件下方 4 处构造该对象的代码快速补齐该字段；</li>
+<li>动作 D：单元测试运行失败，终端打印了 40 行异常堆栈，需要让智能体定位故障根因。</li>
+</ul>
+</li>
+</ol>
+<h3 id="h-进阶分析agent-施工失控急救与敏感凭据排雷">进阶分析：Agent 施工失控急救与敏感凭据排雷</h3>
+<p>某开发者在接入第三方支付退款接口时，直接在 TRAE / CodeBuddy 的多文件构建模式（Agent / Craft）下输入：“帮我把支付退款接口接好，商户号是 <code>xxx</code>，生产私钥是 <code>yyy</code>，顺便把报错的测试修好。”
+随后发生了以下连锁状况：</p>
+<ul>
+<li>状况 1：智能体直接新建了配置文件，把商户号和生产私钥明文写死在了源码里；</li>
+<li>状况 2：智能体为了修好一条报错的退款单测，擅自修改了底层数据表结构、重写了 6 个无关的路由文件，结果导致全仓 18 个文件出现编译错误；</li>
+<li>状况 3：开发者看到满屏红叉后，在当前聊天窗口连续追问了 6 次“你怎么把别的模块改坏了？快改回来！”，智能体越改报错越多。</li>
+</ul>
+<p>请围绕上述情境回答：</p>
+<ol>
+<li>该开发者在起步阶段同时违反了哪两条“高压安全红线”与哪一条交互原语准则？针对状况 1 中已经暴露在聊天记录和代码里的生产私钥，必须立即执行什么补救动作？</li>
+<li>面对状况 2 和状况 3 的失控局面，请写出标准的**“三步急救操作规程”**，帮助他用最短时间恢复干净代码库并走上正规开发轨道。</li>
+</ol>
+<h3 id="h-迁移研讨制定团队的《ai-编码工具选型与安全基线卡》">迁移研讨：制定团队的《AI 编码工具选型与安全基线卡》</h3>
+<p>结合你所在研发团队的真实技术栈、网络环境（公网 / 专有云 / 内网隔离）与协作流程，拟定一份团队配置基线：</p>
+<ol>
+<li><strong>模型双轨路由表</strong>：明确你团队在“规划与代码审查（Plan-Review Tier）”和“日常编码施工（Implementation Tier）”分别选用哪两款具体大模型；</li>
+<li><strong>IDE 与 CLI 组合</strong>：确定团队统一推广的桌面 AI IDE 与终端 CLI 工具，并列出必须写入仓库根目录 <code>.gitignore</code> 与 <code>.aiignore</code> 的 5 类敏感文件匹配规则。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>至此，我们已经完成了第一天上午“认知重构、方法论主线与三层工具基本功”的全部学习：在【单元 1.1】看清了产能压缩与 45% 漏洞困局，在【单元 1.2】建立了 SDD 规范驱动开发与 GStack 八环全局地图，并在本节掌握了“脑子—手脚—规矩”选型框架与 CodeBuddy / TRAE 四大通用交互原语。</p>
+<p>从下一节开始，我们将深入拆解 GStack 八环各环节的内部运行机制与门禁规范。在**【单元 2.1】《GStack 规划三环连击：/office-hours 痛点重构、/spec 规格精炼与 /autoplan 四方评审》**中，我们将系统解析 GStack 前三环如何把模糊的初始需求，锻造为经过产品、设计、DX 与工程四方会审通过、带完整架构图与失败自救表的可执行工程蓝图。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] GStack 跨模型分层路由与架构指南：</strong> Garry Tan (Y Combinator), <em>gstack README.md: Plan-Review and Implementation Tiers &amp; Host Setup</em>（重点研读规划审查层与施工层的模型分工逻辑及多宿主挂载架构），<a href="https://github.com/garrytan/gstack/blob/main/README.md">GitHub 官方文档</a>。</li>
+<li id="ref-2"><strong>[2] 腾讯云 CodeBuddy 官方全特性指南：</strong> 腾讯云开发者文档，《<a href="https://www.tencentcloud.com/zh/document/product/1256/77277">CodeBuddy IDE 用户指南：NES 预测编辑、Ask/Plan/Craft 模式与 Skills/MCP 配置</a>》及《<a href="https://www.codebuddy.cn/docs/cli/skills">CodeBuddy CLI 技能与钩子规范</a>》。</li>
+<li id="ref-3"><strong>[3] 字节跳动 TRAE 官方核心机制文档：</strong> TRAE Documentation, <em>Built-in Agent, CUE Completion, Context Compaction &amp; Project Rules</em>（重点研读 CUE 补全、上下文主动压缩及 <code>.trae/rules</code> 四种激活模式），<a href="https://docs.trae.ai/ide/built-in-agent">TRAE 官方文档中心</a>。</li>
+<li id="ref-4"><strong>[4] OpenCode 终端原生智能体文档：</strong> OpenCode Team, <em>OpenCode CLI: Terminal-Native Coding Agent with Plan/Build Mode Switching</em>（查阅终端 TUI 下 <code>Tab</code> 键只读/读写模式切换与技能扩展），<a href="https://opencode.ai/docs/">OpenCode 官方文档</a>。</li>
+<li id="ref-5"><strong>[5] 开放标准 AGENTS.md 跨工具规范：</strong> OpenAI / Agentic Coding Community, <em>AGENTS.md: A Standard Open Format for Guiding Coding Agents Across IDEs</em>（了解如何编写一份跨 CodeBuddy、TRAE、Claude Code、OpenCode 与 Cursor 通用的项目级工程宪章），<a href="https://agents.md/">AGENTS.md 开放标准站</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/1-2/">← 1.2 从 Vibe Coding 到规范驱动开发</a>
+      <a href="/aicoding/units/2-1/">2.1 GStack 规划三环连击 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-131-脑子手脚与规矩三层工具解构与底层大模型选型策略">1.3.1 “脑子、手脚与规矩”：三层工具解构与底层大模型选型策略</a></li><li class="lv3"><a href="#h-1-三层工具解构模型与日常故障定界">1. 三层工具解构模型与日常故障定界</a></li><li class="lv3"><a href="#h-2-底层大模型脑子的五维评估标尺">2. 底层大模型（“脑子”）的五维评估标尺</a></li><li class="lv3"><a href="#h-3-gstack-跨模型分层路由策略model-tiering">3. GStack 跨模型分层路由策略（Model Tiering）</a></li><li class="lv2"><a href="#h-132-手脚与规矩横向对标codebuddytraeopencode-与六大选型结论">1.3.2 “手脚”与“规矩”横向对标：CodeBuddy、TRAE、OpenCode 与六大选型结论</a></li><li class="lv3"><a href="#h-1-三大主流编码智能体codebuddy-vs-trae-vs-opencode深度对标">1. 三大主流编码智能体（CodeBuddy vs TRAE vs OpenCode）深度对标</a></li><li class="lv3"><a href="#h-2-运行支撑机制规矩-harness的七大工程治理手段">2. 运行支撑机制（“规矩” Harness）的七大工程治理手段</a></li><li class="lv3"><a href="#h-3-面向通用软件研发的六条工具选型落地结论">3. 面向通用软件研发的“六条工具选型落地结论”</a></li><li class="lv2"><a href="#h-133-跨工具四大通用交互原语与-@-精准投喂机制">1.3.3 跨工具四大通用交互原语与 @ 精准投喂机制</a></li><li class="lv3"><a href="#h-1-交互原语一契约式文档注释驱动补全与前瞻式预测编辑tab-nes-cue">1. 交互原语一：契约式文档注释驱动补全与前瞻式预测编辑（Tab / NES / CUE）</a></li><li class="lv3"><a href="#h-2-交互原语二局部受控内联修改inline-editctrl+i-ctrl+k与最小爆炸半径">2. 交互原语二：局部受控内联修改（Inline Edit：Ctrl+I / Ctrl+K）与最小爆炸半径</a></li><li class="lv3"><a href="#h-3-交互原语三只读对话与规划门禁ask-chat-plan-mode及-@-精准投喂法则">3. 交互原语三：只读对话与规划门禁（Ask / Chat / Plan Mode）及 @ 精准投喂法则</a></li><li class="lv3"><a href="#h-4-交互原语四多文件自主构建代理craft-built-in-agent与-checkpoint-快照回滚机制">4. 交互原语四：多文件自主构建代理（Craft / Built-in Agent）与 Checkpoint 快照回滚机制</a></li><li class="lv2"><a href="#h-134-通用软件研发-ai-编程三条高压安全红线">1.3.4 通用软件研发 AI 编程“三条高压安全红线”</a></li><li class="lv3"><a href="#h-1-红线一绝不硬编码或向外部模型外发真实敏感凭据与客户隐私数据">1. 红线一：绝不硬编码或向外部模型外发真实敏感凭据与客户隐私数据</a></li><li class="lv3"><a href="#h-2-红线二绝不对破坏性终端操作开启免确认自动执行auto-run">2. 红线二：绝不对破坏性终端操作开启“免确认自动执行（Auto-Run）”</a></li><li class="lv3"><a href="#h-3-红线三ai-生成的生产代码必须经过独立-diff-审查与自动化测试门禁方可合入">3. 红线三：AI 生成的生产代码必须经过独立 Diff 审查与自动化测试门禁方可合入</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析三层故障归因与交互原语匹配">基础辨析：三层故障归因与交互原语匹配</a></li><li class="lv3"><a href="#h-进阶分析agent-施工失控急救与敏感凭据排雷">进阶分析：Agent 施工失控急救与敏感凭据排雷</a></li><li class="lv3"><a href="#h-迁移研讨制定团队的《ai-编码工具选型与安全基线卡》">迁移研讨：制定团队的《AI 编码工具选型与安全基线卡》</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

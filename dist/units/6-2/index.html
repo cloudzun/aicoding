@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.2 Day-2 生产数据飞轮 · 通用 AI Coding 教材</title>
+<meta name="description" content="企业级 AI 研发治理">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1 active"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/6-1/">← 6.1 场景四 受控行动智能体</a></span>
+      <span><a href="/aicoding/units/7-1/">7.1 运营商内网研发安全红线 →</a></span>
+    </div>
+    <h1>6.2　Day-2 生产数据飞轮</h1>
+    <p class="lede">企业级 AI 研发治理</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第六章的收官单元，也是全书通用工程方法论从“单点项目交付（Day-1）”走向“持续生产运营与百人团队规模化治理（Day-2）”的总收口。前五章与 <code>单元 6.1</code> 解决了四大类 AI 场景如何从 0 到 1 做出可判定、不闯祸的系统；本节回答系统上线与团队推广后最痛的四个工程与管理问题：<strong>线上出现评测集之外的坏样本怎么自动回流？全量调用旗舰大模型太贵太慢怎么降本提速？几十个小组各自写规则怎么收拢成部门级共享资产？研发主管到底该用什么指标考核 AI Coding 的真实效能？</strong></span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">技术负责人、架构师、研发效能主管，以及需要将原型推向生产环境的交付工程师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">熟悉 GStack 八环流程（特别是第 8 环 <code>/retro</code> 与环 0 <code>/eval-plan</code>）及第五章的五类归因法（<code>5.5.4</code>）。</span></div><div class="guide-row"><span class="guide-k">定制定位</span><span class="guide-v">第 7 章为通用版教材的行业定制派生分支，仅替换表层业务实体名词（运营商网元、政企专线、自智网络等），底层 GStack 八环方法论与第 1-6 章 100% 一致。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:6.2"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>能区分生产环境的三大漂移（提问漂移、标准漂移、模型漂移），并画出从线上 <code>trace.jsonl</code> 采集到黄金评估集扩充的 Day-2 数据飞轮（图 6-2）。</li>
+<li>能解释为什么用户在 Dry-Run 预演单上的“手工修改差异（Diff）”是最金贵的免费标注真值，并写出生产轨迹必采的五个核心字段。</li>
+<li>能设计“确定性规则与缓存 → 轻量主力模型 → 高阶推理模型”的三层动态路由漏斗，并用离线分桶评测锁住“质量—成本—延迟”帕累托前沿。</li>
+<li>能规划部门级共享运行支撑机制（Harness）资产库的三类核心资产，并严格执行公网、专有云网关与纯内网三域数据分级准入矩阵。</li>
+<li>能结合 DORA 与 GitClear 实证数据说明“AI 代码采纳率”为何是危险的虚荣指标，并搭建“DORA 四指标 + GStack 工程健康度 + AI 业务门禁”三层度量看板。</li>
+</ol>
+<div class="concl"><span class="concl-tag">一句话结论</span>Day-1 验收靠固定题库证伪，Day-2 生存靠生产飞轮进化；组织级 AI 工程的成败不看“生成了多少行代码”，而看<strong>线上每一次人工纠偏能否自动变成明天的新考题，以及交付稳定性与业务门禁是否持续收敛</strong>。</div>
+<hr>
+<h2 id="h-621-从离线固定题库到day-2-生产数据飞轮">6.2.1 从“离线固定题库”到“Day-2 生产数据飞轮”</h2>
+<h3 id="h-1-为什么-day-1-验收满分不代表生产高枕无忧三大生产漂移">1. 为什么 Day-1 验收满分不代表生产高枕无忧：三大生产漂移</h3>
+<p>很多团队以为，只要在上线前跑通了 20 道或 150 道评测题、拿到了 90% 的验收报告，系统上线后就可以一劳永逸。然而在真实生产环境中，AI 应用上线第一周往往就会遭遇指标下滑。Hamel Husain 与 Shreya Shankar 等人的评估工程研究揭示，生产环境存在三类不可避免的<strong>生产漂移（Production Drift）</strong><sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>漂移类型</th>
+<th>工程定义与产生根源</th>
+<th>线上典型表现</th>
+<th>早期预警信号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 提问分布漂移（Query Drift）</strong></td>
+<td>真实一线用户的口语黑话、缩写、错别字及跨领域组合诉求，超出了 Day-1 离线合成题库的覆盖分布</td>
+<td>离线评测集全绿，但线上频繁触发重排阈值拒答（误拒率飙升），或命中完全无关的旧规则</td>
+<td>线上拒答率、歧义反问率或单表外 JOIN 比例较基线偏离超过 <strong>15%</strong></td>
+</tr>
+<tr>
+<td><strong>2. 评判标准漂移（Criteria Drift）</strong></td>
+<td>业务方在看到真机处理真实单据后，才意识到原先没说清的隐性约束（即 Shankar 论文揭示的“人在审查样本时标准本身也会演化”<sup class="cite"><a href="#ref-2">[2]</a></sup>）</td>
+<td>系统严格按初版 <code>SPEC.md</code> 执行，但业务人员频繁在界面上点“驳回”或手动修改生成的预演单字段</td>
+<td>人工审批一次通过率下降，针对同一业务字段的<strong>人工手动修改率</strong>连续上升</td>
+</tr>
+<tr>
+<td><strong>3. 底座模型漂移（Model Drift）</strong></td>
+<td>云端商用 API 静默升级权重，或企业内网模型网关更换了量化版本/推理引擎参数，导致指令遵循度与输出长度分布发生隐性改变</td>
+<td>代码一行没改，某天起 JSON Schema 解析失败率突然抬头，或原本稳定的 <code>pass^3</code> 出现偶发跳步</td>
+<td>每日定时冒烟基准测试（Smoke Eval）中，固定锚点题的分桶得分或输出词元长度发生突变</td>
+</tr>
+</tbody></table>
+<p>应对三大漂移的唯一工程解法，是把离线静态题库升级为持续生长的<strong>生产评估飞轮（Evaluation Flywheel）</strong>。</p>
+<h3 id="h-2-闭合第-8-环-retro-→-环-0-eval-plan的-trace-to-eval-回流飞轮">2. 闭合“第 8 环 <code>/retro</code> → 环 0 <code>/eval-plan</code>”的 Trace-to-Eval 回流飞轮</h3>
+<p>在本书前四章中，GStack 八环走完第 8 环 <code>/retro</code>（量化复盘）即告一段落。而在生产运营态（Day-2），我们必须将第 8 环 <code>/retro</code> 的线上复盘输出，直接接回下一轮迭代的<strong>环 0（<code>/eval-plan</code> 评测集扩充）</strong>，形成首尾咬合的 <strong>Trace-to-Eval（从生产轨迹到评测题库）</strong> 闭环链路。</p>
+<figure class="fig" id="fig-6-2"><div class="fig-scroll"><svg id="svg-6-2" width="942.109375" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="899" viewBox="0 0 942.109375 899" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-6-2{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-6-2 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-6-2 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-6-2 .error-icon{fill:#eceff1;}#svg-6-2 .error-text{fill:#13100e;stroke:#13100e;}#svg-6-2 .edge-thickness-normal{stroke-width:1px;}#svg-6-2 .edge-thickness-thick{stroke-width:3.5px;}#svg-6-2 .edge-pattern-solid{stroke-dasharray:0;}#svg-6-2 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-6-2 .edge-pattern-dashed{stroke-dasharray:3;}#svg-6-2 .edge-pattern-dotted{stroke-dasharray:2;}#svg-6-2 .marker{fill:#607d8b;stroke:#607d8b;}#svg-6-2 .marker.cross{stroke:#607d8b;}#svg-6-2 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-6-2 p{margin:0;}#svg-6-2 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-6-2 .cluster-label text{fill:#13100e;}#svg-6-2 .cluster-label span{color:#13100e;}#svg-6-2 .cluster-label span p{background-color:transparent;}#svg-6-2 .label text,#svg-6-2 span{fill:#17324d;color:#17324d;}#svg-6-2 .node rect,#svg-6-2 .node circle,#svg-6-2 .node ellipse,#svg-6-2 .node polygon,#svg-6-2 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-6-2 .rough-node .label text,#svg-6-2 .node .label text,#svg-6-2 .image-shape .label,#svg-6-2 .icon-shape .label{text-anchor:middle;}#svg-6-2 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-6-2 .rough-node .label,#svg-6-2 .node .label,#svg-6-2 .image-shape .label,#svg-6-2 .icon-shape .label{text-align:center;}#svg-6-2 .node.clickable{cursor:pointer;}#svg-6-2 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-6-2 .arrowheadPath{fill:#0b0b0b;}#svg-6-2 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-6-2 .flowchart-link{stroke:#607d8b;fill:none;}#svg-6-2 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-6-2 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-6-2 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-6-2 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-6-2 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-6-2 .cluster text{fill:#13100e;}#svg-6-2 .cluster span{color:#13100e;}#svg-6-2 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-6-2 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-6-2 rect.text{fill:none;stroke-width:0;}#svg-6-2 .icon-shape,#svg-6-2 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-6-2 .icon-shape p,#svg-6-2 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-6-2 .icon-shape .label rect,#svg-6-2 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-6-2 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-6-2 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-6-2 .node .neo-node{stroke:#1976d2;}#svg-6-2 [data-look="neo"].node rect,#svg-6-2 [data-look="neo"].cluster rect,#svg-6-2 [data-look="neo"].node polygon{stroke:url(#svg-6-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-6-2 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-6-2 [data-look="neo"].node path{stroke:url(#svg-6-2-gradient);stroke-width:1px;}#svg-6-2 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-6-2 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-6-2 [data-look="neo"].node circle{stroke:url(#svg-6-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-6-2 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-6-2 [data-look="neo"].icon-shape .icon{fill:url(#svg-6-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-6-2 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-6-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-6-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-6-2 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-6-2 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-6-2 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-6-2 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-6-2 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-6-2 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-6-2 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-6-2 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-6-2 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-6-2 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-6-2 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-6-2 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-6-2 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-6-2 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-6-2 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-6-2_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-6-2_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-6-2_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-6-2_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-6-2_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-6-2_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-6-2_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-6-2_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-6-2_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-6-2_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-6-2_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-6-2_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M403.849,60.5L394.419,63.333C384.989,66.167,366.129,71.833,356.699,76.833C347.27,81.833,347.27,86.167,347.27,88.333L347.27,90.5" id="svg-6-2-L_PROD_LOG_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_PROD_LOG_0" data-points="W3sieCI6NDAzLjg0OTE5MTY1NDYyNDMsInkiOjYwLjV9LHsieCI6MzQ3LjI2OTUzMTI1LCJ5Ijo3Ny41fSx7IngiOjM0Ny4yNjk1MzEyNSwieSI6OTQuNX1d" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M347.27,147L347.27,149.833C347.27,152.667,347.27,158.333,347.27,163.333C347.27,168.333,347.27,172.667,347.27,174.833L347.27,177" id="svg-6-2-L_LOG_FILTER_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_LOG_FILTER_0" data-points="W3sieCI6MzQ3LjI2OTUzMTI1LCJ5IjoxNDd9LHsieCI6MzQ3LjI2OTUzMTI1LCJ5IjoxNjR9LHsieCI6MzQ3LjI2OTUzMTI1LCJ5IjoxODF9XQ==" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M295.106,316.336L273.591,333.489C252.076,350.641,209.046,384.945,187.531,409.889C166.016,434.833,166.016,450.417,166.016,458.208L166.016,466" id="svg-6-2-L_FILTER_ARCH_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_FILTER_ARCH_0" data-points="W3sieCI6Mjk1LjEwNTc1NTUxMzQyNzM3LCJ5IjozMTYuMzM2MjI0MjYzNDI3Mzd9LHsieCI6MTY2LjAxNTYyNSwieSI6NDE5LjI1fSx7IngiOjE2Ni4wMTU2MjUsInkiOjQ3MH1d" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M399.433,316.336L420.948,333.489C442.463,350.641,485.493,384.945,507.008,409.889C528.523,434.833,528.523,450.417,528.523,458.208L528.523,466" id="svg-6-2-L_FILTER_TRIAGE_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_FILTER_TRIAGE_0" data-points="W3sieCI6Mzk5LjQzMzMwNjk4NjU3MjYzLCJ5IjozMTYuMzM2MjI0MjYzNDI3Mzd9LHsieCI6NTI4LjUyMzQzNzUsInkiOjQxOS4yNX0seyJ4Ijo1MjguNTIzNDM3NSwieSI6NDcwfV0=" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M528.523,522.5L528.523,525.333C528.523,528.167,528.523,533.833,528.523,538.833C528.523,543.833,528.523,548.167,528.523,550.333L528.523,552.5" id="svg-6-2-L_TRIAGE_REDACT_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_TRIAGE_REDACT_0" data-points="W3sieCI6NTI4LjUyMzQzNzUsInkiOjUyMi41fSx7IngiOjUyOC41MjM0Mzc1LCJ5Ijo1MzkuNX0seyJ4Ijo1MjguNTIzNDM3NSwieSI6NTU2LjV9XQ==" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M528.523,609L528.523,611.833C528.523,614.667,528.523,620.333,528.523,625.333C528.523,630.333,528.523,634.667,528.523,636.833L528.523,639" id="svg-6-2-L_REDACT_ATTRIB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_REDACT_ATTRIB_0" data-points="W3sieCI6NTI4LjUyMzQzNzUsInkiOjYwOX0seyJ4Ijo1MjguNTIzNDM3NSwieSI6NjI2fSx7IngiOjUyOC41MjM0Mzc1LCJ5Ijo2NDN9XQ==" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M528.523,695.5L528.523,700.208C528.523,704.917,528.523,714.333,528.523,723.083C528.523,731.833,528.523,739.917,528.523,743.958L528.523,748" id="svg-6-2-L_ATTRIB_GOLDEN_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_ATTRIB_GOLDEN_0" data-points="W3sieCI6NTI4LjUyMzQzNzUsInkiOjY5NS41fSx7IngiOjUyOC41MjM0Mzc1LCJ5Ijo3MjMuNzV9LHsieCI6NTI4LjUyMzQzNzUsInkiOjc1Mn1d" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M528.523,804.5L528.523,807.333C528.523,810.167,528.523,815.833,537.315,821.308C546.106,826.783,563.689,832.066,572.481,834.707L581.272,837.349" id="svg-6-2-L_GOLDEN_GATE_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_GOLDEN_GATE_0" data-points="W3sieCI6NTI4LjUyMzQzNzUsInkiOjgwNC41fSx7IngiOjUyOC41MjM0Mzc1LCJ5Ijo4MjEuNX0seyJ4Ijo1ODUuMTAzMDk3OTA0NjI0MywieSI6ODM4LjV9XQ==" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path><path d="M759.834,838.5L769.264,835.667C778.694,832.833,797.554,827.167,806.984,817.125C816.414,807.083,816.414,792.667,816.414,776.375C816.414,760.083,816.414,741.917,816.414,723.75C816.414,705.583,816.414,687.417,816.414,671.125C816.414,654.833,816.414,640.417,816.414,626C816.414,611.583,816.414,597.167,816.414,582.75C816.414,568.333,816.414,553.917,816.414,539.5C816.414,525.083,816.414,510.667,816.414,490.625C816.414,470.583,816.414,444.917,816.414,408C816.414,371.083,816.414,322.917,816.414,280.375C816.414,237.833,816.414,200.917,816.414,175.25C816.414,149.583,816.414,135.167,816.414,120.75C816.414,106.333,816.414,91.917,795.771,81.963C775.128,72.009,733.841,66.518,713.198,63.773L692.555,61.027" id="svg-6-2-L_GATE_PROD_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_GATE_PROD_0" data-points="W3sieCI6NzU5LjgzNDQwMjA5NTM3NTcsInkiOjgzOC41fSx7IngiOjgxNi40MTQwNjI1LCJ5Ijo4MjEuNX0seyJ4Ijo4MTYuNDE0MDYyNSwieSI6Nzc4LjI1fSx7IngiOjgxNi40MTQwNjI1LCJ5Ijo3MjMuNzV9LHsieCI6ODE2LjQxNDA2MjUsInkiOjY2OS4yNX0seyJ4Ijo4MTYuNDE0MDYyNSwieSI6NjI2fSx7IngiOjgxNi40MTQwNjI1LCJ5Ijo1ODIuNzV9LHsieCI6ODE2LjQxNDA2MjUsInkiOjUzOS41fSx7IngiOjgxNi40MTQwNjI1LCJ5Ijo0OTYuMjV9LHsieCI6ODE2LjQxNDA2MjUsInkiOjQxOS4yNX0seyJ4Ijo4MTYuNDE0MDYyNSwieSI6Mjc0Ljc1fSx7IngiOjgxNi40MTQwNjI1LCJ5IjoxNjR9LHsieCI6ODE2LjQxNDA2MjUsInkiOjEyMC43NX0seyJ4Ijo4MTYuNDE0MDYyNSwieSI6NzcuNX0seyJ4Ijo2ODguNTkwMDkyMTI0Mjc3NSwieSI6NjAuNX1d" data-look="classic" marker-end="url(#svg-6-2_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_PROD_LOG_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_LOG_FILTER_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(166.015625, 419.25)"><g class="label" data-id="L_FILTER_ARCH_0" transform="translate(-60, -11.25)"><foreignObject width="120" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>正常通过且无修改</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(528.5234375, 419.25)"><g class="label" data-id="L_FILTER_TRIAGE_0" transform="translate(-100, -33.75)"><foreignObject width="200" height="67.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>人工修改了 Dry-Run 字段 / 点踩驳回 / 纠错重试 / 阈值拒答</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_TRIAGE_REDACT_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_REDACT_ATTRIB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(528.5234375, 723.75)"><g class="label" data-id="L_ATTRIB_GOLDEN_0" transform="translate(-67.5, -11.25)"><foreignObject width="135" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>属口径变更或新边界</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_GOLDEN_GATE_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_GATE_PROD_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-6-2-flowchart-PROD-0" data-look="classic" transform="translate(491.21484375, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-227.90625" y="-26.25" width="455.8125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-197.90625, -11.25)"><rect></rect><foreignObject width="395.8125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>线上生产交互：只读问答 / 问数 / 审查 / Dry-Run 行动预演</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-6-2-flowchart-LOG-1" data-look="classic" transform="translate(347.26953125, 120.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-173.7109375" y="-26.25" width="347.421875" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-143.7109375, -11.25)"><rect></rect><foreignObject width="287.421875" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>全链路结构化留痕（trace.jsonl 实时落盘）</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-6-2-flowchart-FILTER-3" data-look="classic" transform="translate(347.26953125, 274.75)"><polygon points="93.75,0 187.5,-93.75 93.75,-187.5 0,-93.75" class="label-container" transform="translate(-93.25, 93.75)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-67.5, -11.25)"><rect></rect><foreignObject width="135" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>高价值信号自动分诊</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-6-2-flowchart-ARCH-5" data-look="classic" transform="translate(166.015625, 496.25)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-158.015625" y="-26.25" width="316.03125" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-128.015625, -11.25)"><rect></rect><foreignObject width="256.03125" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>归档冷备（按周随机抽样 2% 防退化）</p></span></div></foreignObject></g></g><g class="node default red" id="svg-6-2-flowchart-TRIAGE-7" data-look="classic" transform="translate(528.5234375, 496.25)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-182.4921875" y="-26.25" width="364.984375" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-152.4921875, -11.25)"><rect></rect><foreignObject width="304.984375" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>进入待审难例候选池（Hard Negative Pool）</p></span></div></foreignObject></g></g><g class="node default red" id="svg-6-2-flowchart-REDACT-9" data-look="classic" transform="translate(528.5234375, 582.75)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-226.9453125" y="-26.25" width="453.890625" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-196.9453125, -11.25)"><rect></rect><foreignObject width="393.890625" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>确定性脱敏流水线：剥离手机号 / 真实 IP / 客户名称 / 密钥</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-6-2-flowchart-ATTRIB-11" data-look="classic" transform="translate(528.5234375, 669.25)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-266.890625" y="-26.25" width="533.78125" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-236.890625, -11.25)"><rect></rect><foreignObject width="473.78125" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>第 8 环 /retro 周度复盘：五类归因（尺子 / 题库 / 闸门 / 模型 / 环境）</p></span></div></foreignObject></g></g><g class="node default green" id="svg-6-2-flowchart-GOLDEN-13" data-look="classic" transform="translate(528.5234375, 778.25)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-240.03125" y="-26.25" width="480.0625" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-210.03125, -11.25)"><rect></rect><foreignObject width="420.0625" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>环 0 /eval-plan：固化为带黄金真值的新评测题（锁版本指纹）</p></span></div></foreignObject></g></g><g class="node default green" id="svg-6-2-flowchart-GATE-15" data-look="classic" transform="translate(672.46875, 864.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-261.640625" y="-26.25" width="523.28125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-231.640625, -11.25)"><rect></rect><foreignObject width="463.28125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>回归门禁：新旧题库全量重跑，分桶零退化方可发布（第 7 环 /ship）</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-6-2-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-6-2-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-6-2-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-6-2.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 6-2 ↗</a>：闭合第 8 环 `/retro` 到环 0 `/eval-plan` 的 Day-2 生产数据回流飞轮</figcaption></figure>
+<p>如图 6-2 所示，这套飞轮不需要人工每天大海捞针看日志，而是靠四个确定性环节自动运转：</p>
+<ol>
+<li><strong>全链路留痕（Trace Logging）</strong>：每次线上请求（无论成功失败）都在后端追加写入一行结构化的 <code>trace.jsonl</code>；</li>
+<li><strong>高价值负样本自动分诊（Signal Triage）</strong>：系统自动过滤掉 90% 平淡无奇的正常请求，专门抓取四类高价值信号——<strong>用户在 Dry-Run 预演单上手工改了字段、用户点击了驳回/点踩、系统触发了内部自纠错重试、系统触发了临界拒答</strong>；</li>
+<li><strong>本地确定性脱敏（Redaction）</strong>：在样本进入评测仓库前，通过正则与哈希掩码清洗掉个人身份信息（PII）与生产敏感拓扑，确保测试集可安全入库；</li>
+<li><strong>周度定额合入与指纹更新（Weekly Golden Update）</strong>：每周在第 8 环 <code>/retro</code> 复盘会上，从候选池挑出最典型的 <strong>10～20 条真实坏样本</strong>，补齐标准答案后合入 <code>eval/</code> 黄金评估集，升级题库版本号（如从 <code>eval-v1.0</code> 升至 <code>eval-v1.1</code>），作为下一周迭代的准入门禁。</li>
+</ol>
+<h3 id="h-3-为什么用户在-dry-run-预演单上的手工修改-diff-是最金贵的免费真值">3. 为什么用户在 Dry-Run 预演单上的手工修改 Diff 是最金贵的免费真值</h3>
+<p>在企业落地 AI 项目时，团队最常抱怨的一句话是：“业务专家太忙了，根本没空帮我们标注几百道评测标准答案！”</p>
+<p>实际上，<strong>最高质量的黄金标准答案（Golden Truth），从来不是拉着业务专家脱产三天填 Excel 标出来的，而是在日常业务流转中“顺手截获”的</strong>。回顾 <code>单元 6.1</code> 设计的“Dry-Run 干跑预演闸 + 人在回路（HITL）确认”机制：当智能体生成一份工单派发或配置变更预演单 <code>draft_payload</code> 呈现在界面上时，一线工程师为了把工作办成，会自然而然地把智能体填错的字段改对（例如把紧急度从 <code>P3</code> 改为 <code>P2</code>，或补上漏选的关联设备），然后点击“确认执行”提交最终的 <code>committed_payload</code>。</p>
+<p>这两个 JSON 之间的结构化差异 <strong><code>Diff(draft_payload, committed_payload)</code></strong>，就是价值连城的免费标注真值：</p>
+<ul>
+<li>如果 <code>Diff</code> 为空（<code>draft == committed</code>），说明智能体在该真实样本上 <strong>100% 命中业务预期</strong>，可直接作为正向回归样本；</li>
+<li>如果 <code>Diff</code> 非空（<code>draft != committed</code>），那么 <code>draft_payload</code> 就是天然的<strong>模型错误输出</strong>，而业务人员亲手修改并签字提交的 <code>committed_payload</code> 就是<strong>经过业务确权的 100% 黄金标准答案</strong>！</li>
+</ul>
+<p>为了支撑这一机制，生产环境的 <code>trace.jsonl</code> 必须强制采集以下五个核心字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>记录内容</th>
+<th>在数据飞轮中的用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>trace_id</code> &amp; <code>schema_version</code></td>
+<td>String</td>
+<td>全局唯一追踪号 + 当前语义层/提示词/模型配置版本指纹</td>
+<td>精确定位问题是哪个版本引入的</td>
+</tr>
+<tr>
+<td><code>input_context_hash</code></td>
+<td>String / JSON</td>
+<td>脱敏后的用户输入、意图分类与只读探针返回的上下文快照</td>
+<td>重放（Replay）复现当时的完整输入环境</td>
+</tr>
+<tr>
+<td><code>ai_draft_payload</code></td>
+<td>JSON</td>
+<td>智能体在 Dry-Run 阶段生成的原始预演参数、SQL 或审查结论</td>
+<td>记录模型未经人工干预的真实原始表现</td>
+</tr>
+<tr>
+<td><code>human_committed_payload</code></td>
+<td>JSON</td>
+<td>人工在界面上确认提交的最终参数（或驳回原因枚举）</td>
+<td><strong>直接作为黄金评估集的标准答案（Golden Label）</strong></td>
+</tr>
+<tr>
+<td><code>payload_diff</code> &amp; <code>latency_ms</code></td>
+<td>JSON / Int</td>
+<td>自动计算的字段级修改差异（增/删/改了哪个键）及分阶段耗时</td>
+<td>自动筛选 <code>payload_diff != {}</code> 的样本进入每周复盘池</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-622-高低配模型动态路由model-routing与成本延迟精益治理finops">6.2.2 高低配模型动态路由（Model Routing）与成本延迟精益治理（FinOps）</h2>
+<h3 id="h-1-破除全量请求一刀切调旗舰大模型的算力浪费">1. 破除“全量请求一刀切调旗舰大模型”的算力浪费</h3>
+<p>在项目原型期（PoC），为了快速验证效果，把所有请求一股脑发给参数量最大、推理能力最强的旗舰大模型是合理的。但一旦进入 Day-2 生产规模化运行（日均数万次工单流转、问数查询或日志核查），“全量请求一刀切调旗舰模型”会立刻撞上两堵墙：<strong>第一是推理算力账单（Token 成本）失控；第二是首字与端到端延迟（P95 动辄十余秒）拖垮一线人员的操作体验</strong>。</p>
+<p>加州大学伯克利分校与 LMSYS 联合提出的 <strong>RouteLLM</strong> 框架<sup class="cite"><a href="#ref-3">[3]</a></sup> 以及斯坦福大学的 <strong>FrugalGPT</strong> 级联架构实证表明：在真实企业流量中，真正需要旗舰推理模型深度思考的疑难长尾请求通常只占 <strong>20%～30%</strong>；通过构建分层路由与级联回退（Model Cascading），<strong>在保持 95% 以上旗舰模型最终质量水平的前提下，可将端到端推理成本与平均延迟大幅压缩 50%～85%</strong>。</p>
+<h3 id="h-2-三层精益路由漏斗架构">2. 三层精益路由漏斗架构</h3>
+<p>在企业级 AI 工程中，我们不搞黑盒路由，而是构建一套透明、可审计的**“三层精益路由漏斗”**，让每一分算力都花在刀刃上：</p>
+<table>
+<thead>
+<tr>
+<th>漏斗层级</th>
+<th>拦截/处理机制</th>
+<th>覆盖流量占比（典型值）</th>
+<th>词元成本与延迟量级</th>
+<th>负责处理的任务类型</th>
+<th>向上升级（Fallback）的触发条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第 1 层：确定性规则、白名单与语义缓存层</strong></td>
+<td>正则/TextFSM 解析、意图黑名单、高频固定问法精确缓存、确定性算术规则引擎</td>
+<td><strong>40% ～ 60%</strong></td>
+<td><strong>0 词元成本</strong> · 毫秒级（<code>&lt; 50ms</code>）</td>
+<td>已知高危指令直接拦截、高频固定报表查询、标准格式 CLI 回显切分、合同必含字段存在性核查</td>
+<td>未命中缓存或规则、涉及自然语言自由组合表达时，流转至第 2 层</td>
+</tr>
+<tr>
+<td><strong>第 2 层：轻量级主力模型层（Workhorse LLM）</strong></td>
+<td>小参数高吞吐模型（如 7B～32B 级微调/蒸馏模型或高性价比主力 API）+ 严格 JSON Schema</td>
+<td><strong>30% ～ 45%</strong></td>
+<td><strong>基准成本的 1/10 ～ 1/5</strong> · 秒级（<code>0.5s ～ 2s</code>）</td>
+<td>常规单表/双表 NL2SQL 生成、标准工单意图与槽位提取、VLM 原子事实抽取、明确条款比对</td>
+<td>出现以下任一信号即自动升级至第 3 层：一是模型输出置信度或重排分处于临界区；二是生成的 SQL 或参数首次校验/执行报错；三是意图识别判定为跨 3 表或多步复杂归因</td>
+</tr>
+<tr>
+<td><strong>第 3 层：高阶推理模型兜底层（Frontier / Reasoning LLM）</strong></td>
+<td>旗舰大参数模型或深度推理模型</td>
+<td><strong>5% ～ 15%</strong></td>
+<td><strong>1x 基准成本</strong> · 数秒级（<code>3s ～ 10s</code>）</td>
+<td>首次执行失败后的自纠错改写（Fix Loop）、跨多源异构证据的复杂故障定界、模糊争议条款的主观立场权衡</td>
+<td>若第 3 层重试后仍未通过确定性校验闸，立即停止烧词元，体面降级为 <code>needs_human</code> 转人工</td>
+</tr>
+</tbody></table>
+<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong>工程上最管用的路由信号不是“再训一个分类器”，而是“确定性校验器的报错反馈”。</strong> 例如在 NL2SQL（<code>5.3</code>）或行动预演（<code>6.1</code>）中，先让便宜飞快的第 2 层轻量模型生成候选 SQL 或工具参数；90% 的常规题一次就能过白名单与 Schema 校验；只有那 10% 被确定性校验器抓出语法错、表名错或字段缺失的难题，才携带具体报错信息路由给第 3 层高阶模型做精准修复。这叫**“以确定性验证驱动级联路由”**。</p>
+</div>
+<h3 id="h-3-帕累托前沿验证口径防止路由降级沦为静默质量退化">3. 帕累托前沿验证口径：防止路由降级沦为静默质量退化</h3>
+<p>引入高低配模型路由时，最大的管理风险是为了省钱而偷偷牺牲了业务准确率。因此，任何路由策略上线前，必须在黄金评估集上出具如下**《高低配模型路由校准与准出门禁表》**，唯有证明“核心指标零退化”方可放行：</p>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>全量旗舰模型基线（Baseline）</th>
+<th>三层精益路由方案（Cascaded）</th>
+<th>准出门禁判据（Pass/Fail）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心业务主指标（EX / 状态一致率 / 审查 F1）</strong></td>
+<td>如 88.0%</td>
+<td>如 87.5%</td>
+<td>主集总分退化幅度 <strong><code>&lt;= 1.0%</code></strong>，否则禁止切换</td>
+</tr>
+<tr>
+<td><strong>安全闸与拒答红线桶（Safety &amp; Refusal）</strong></td>
+<td>100.0%</td>
+<td><strong>100.0%</strong></td>
+<td>安全与越权拦截桶 <strong>零退化（必须保持 100%）</strong></td>
+</tr>
+<tr>
+<td><strong>难例分桶（3 表 JOIN / 多步冲突预审）</strong></td>
+<td>如 75.0%</td>
+<td>如 75.0%</td>
+<td>难例桶须被准确识别并路由至第 3 层，分桶得分不得下降</td>
+</tr>
+<tr>
+<td><strong>端到端延迟（P50 / P95）</strong></td>
+<td>如 3200ms / 6800ms</td>
+<td><strong>950ms / 2800ms</strong></td>
+<td>P50 延迟下降 <strong><code>&gt;= 50%</code></strong>，显著改善一线交互体感</td>
+</tr>
+<tr>
+<td><strong>单次请求平均词元成本（Normalized Cost）</strong></td>
+<td>1.00（100%）</td>
+<td><strong>0.28（28%）</strong></td>
+<td>综合推理成本下降 <strong><code>&gt;= 60%</code></strong></td>
+</tr>
+<tr>
+<td><strong>第 3 层升级触发率（Escalation Rate）</strong></td>
+<td>100%</td>
+<td><strong>18.5%</strong></td>
+<td>监控该比例；若线上突增超 40%，说明遭遇输入漂移</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-623-组织级-harness-资产库与企业安全合规治理">6.2.3 组织级 Harness 资产库与企业安全合规治理</h2>
+<h3 id="h-1-从个人-agentsmd-到部门级共享-harness-资产库">1. 从个人 <code>AGENTS.md</code> 到部门级共享 Harness 资产库</h3>
+<p>在 <code>单元 3.3</code> 中，我们学习了如何在一个项目仓库里编写 <code>AGENTS.md</code> 和配置 <code>/careful</code>、<code>/freeze</code> 护栏。但是，当一个研发中心有 30 个小组同时开发不同业务线的 AI 应用时，如果每个小组各写各的业务口径、各配各的安全黑名单、各造各的评测脚本，就会陷入“三十个烟囱、三十套口径”的混乱局面。</p>
+<p>成熟的企业级 AI 研发组织，会将单兵经验沉淀为<strong>部门级共享运行支撑机制资产库（Enterprise Harness Repository）</strong>，统管三大类核心工程资产：</p>
+<table>
+<thead>
+<tr>
+<th>共享资产类别</th>
+<th>仓库标准路径</th>
+<th>沉淀什么内容</th>
+<th>解决什么组织痛点</th>
+<th>维护与准入机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 领域语义层与标准术语库</strong></td>
+<td><code>org-harness/semantic_layer/</code></td>
+<td>全公司/全部门统一的业务指标计算式（如“在网有效客户”“SLA 可用率扣减”“含税/不含税营收”）、标准枚举字典与表关联契约</td>
+<td>彻底消灭“A 组问数算出的营收和 B 组报表差 15%”的口径打架问题</td>
+<td>由数据治理组与业务架构师共同维护；各项目只准引用版本号，严禁私自在代码里硬编码覆写口径</td>
+</tr>
+<tr>
+<td><strong>2. 安全护栏与合规规则包</strong></td>
+<td><code>org-harness/security_harness/</code></td>
+<td>行业专属 <code>/careful</code> 高危指令拦截正则库（如生产库删表、核心网元重启指令）、本地确定性脱敏函数库（PII/IP 掩码）、<code>/cso</code> 安全审计基线清单</td>
+<td>防止新手团队因漏配安全规则而发生带密钥提交或越权直连生产事故</td>
+<td>由安全团队（SecOps）强制下发，通过 Git Pre-commit Hook 与持续集成（CI）流水线硬性挂载，项目组无权绕过</td>
+</tr>
+<tr>
+<td><strong>3. 标准评测器与沙盒桩骨架</strong></td>
+<td><code>org-harness/eval_harness/</code></td>
+<td>经过单测验证的 EX 结果集比对器（支持浮点容差、列序无关）、τ-bench 轨迹与状态核验器、LLM 判官自检脚手架、指纹校验脚本 <code>check_starter.py</code></td>
+<td>防止各项目组因为“自己写的评测尺子有 Bug”而报出虚假高分或低分</td>
+<td>作为内部标准 Python/Node 包发布；所有项目的验收报告必须由标准评测器生成并附带评测器版本哈希</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>说明：</strong> 上表 <code>org-harness/</code> 为部门级资产库的<strong>建议命名与规划位置</strong>，属组织自建范畴，本课程不附带该仓库。本节练的是“哪些资产应当抽出去共享”，不是“去哪里取现成模板”。</p>
+</blockquote>
+<h3 id="h-2-公网专有云网关与纯内网三域数据分级准入矩阵">2. 公网、专有云网关与纯内网三域数据分级准入矩阵</h3>
+<p>在企业环境中推进 AI Coding 与智能体应用，数据安全是不可触碰的高压线。研发组织必须按**“环境三域分级”**建立物理与逻辑准入矩阵，明确规定什么数据能进什么模型：</p>
+<table>
+<thead>
+<tr>
+<th>环境域等级</th>
+<th>典型基础设施形态</th>
+<th>允许处理的数据与代码分级</th>
+<th>前置强制安全动作</th>
+<th>严禁触碰的高压红线（一票否决）</th>
+<th>适用研发阶段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L1：公网商用模型域</strong></td>
+<td>外部公网 SaaS 模型 API（零数据留存协议或通用接口）</td>
+<td>开源代码、公开技术文档、<strong>100% 合成生成的仿真测试数据（Synthetic Data）</strong>、通用算法逻辑</td>
+<td>启用本地脱敏扫描（拦截退出码 3）；校验无企业内部主机名、无真实客户名、无私有 API 密钥</td>
+<td><strong>严禁上传任何真实用户个人信息（PII）、现网设备配置原文、未公开财务数据及核心专有业务源码</strong></td>
+<td>通用技术预研、合成数据沙盒实训、公开算法原型验证</td>
+</tr>
+<tr>
+<td><strong>L2：企业专有云/内网安全网关域</strong></td>
+<td>企业统一采购的专属大模型网关（含审计日志、DLP 防泄漏过滤、专线互联）</td>
+<td>内部非涉密业务代码、<strong>已完成格式保留脱敏（Format-Preserving Redaction）</strong> 的历史工单与配置样本</td>
+<td>接入企业统一身份认证（SSO）；开启网关层提示词审计；敏感字段（手机号、管理 IP、合同金额）在本地先行掩码替换</td>
+<td><strong>严禁传入未脱敏的批量用户敏感明细表；严禁挂载直连现网生产写接口的凭证</strong></td>
+<td>部门日常 AI 辅助编码由编码智能体（Coding Agent）承担、内部知识库与脱敏问数系统研发</td>
+</tr>
+<tr>
+<td><strong>L3：纯内网核心生产隔离域</strong></td>
+<td>本地化私有部署大模型（On-Premises GPU 集群）+ 物理隔离网段</td>
+<td>核心生产业务源码、含高敏业务要素的实时工单流转、经严格审批的受控行动预演</td>
+<td>模型权重与推理服务完全不出内网；数据库与网元接口严格执行 Tier 1/2/3 读写物理分离与人工令牌校验</td>
+<td><strong>严禁绕过 Dry-Run 预演闸直接下发生产变更；严禁开发态脚本直连生产主库</strong></td>
+<td>核心生产环境上线运行、高保密等级政企与核心运维业务</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-624-告别虚荣指标企业-ai-研发效能的真实度量体系">6.2.4 告别“虚荣指标”：企业 AI 研发效能的真实度量体系</h2>
+<h3 id="h-1-为什么ai-代码生成率-tab-采纳率是危险的虚荣指标">1. 为什么“AI 代码生成率 / Tab 采纳率”是危险的虚荣指标</h3>
+<p>当企业投入预算引入 AI 编程工具后，管理层最常问的一个问题是：“现在我们多少比例的代码是 AI 写的？工程师的 Tab 补全采纳率是多少？”于是，不少研发部门把 <strong>“AI 代码生成占比 ≥40%”</strong> 或 <strong>“代码补全采纳率 ≥35%”</strong> 定为团队 KPI。</p>
+<p>这是一条已被工业界实证证明极其危险的弯路：</p>
+<ul>
+<li><strong>GitClear 代码质量实证（分析超 1.5 亿行代码变更）</strong><sup class="cite"><a href="#ref-4">[4]</a></sup>：在缺乏规范驱动与独立审查约束、单纯追求“AI 生成代码量”的团队中，<strong>“代码写入后两周内即被推翻重写或删除的代码翻新率（Code Churn）”激增了 100%（翻倍）</strong>，而跨文件复制粘贴的重复代码块（Copy-Pasted Clones）激增了 <strong>4 倍</strong>！工程师为了凑采纳率，把大量未经思考的冗余代码合入仓库，随后又不得不花双倍时间去修补和删改。</li>
+<li><strong>Google Cloud DORA《Accelerate 研发效能报告（AI 增刊）》实证</strong><sup class="cite"><a href="#ref-5">[5]</a></sup>：AI 并非凭空创造质量的魔术棒，而是典型的**“工程放大器（Amplifier）”<strong>。在具备扎实自动化测试与小步快跑规范的团队中，AI 能显著加速交付；但在缺乏测试门禁的团队中，AI 制造的代码洪流直接导致单次合并请求（PR）体积膨胀、资深工程师代码审查（Code Review）严重积压，最终导致</strong>变更失败率（Change Failure Rate）上升、线上交付稳定性反而恶化**。</li>
+</ul>
+<p>按照古德哈特定律（Goodhart&#39;s Law）：“当一个过程指标变成考核目标时，它就不再是一个好指标。”考核“AI 代码行数”，得到的必然是注水的代码与翻倍的技术债。</p>
+<h3 id="h-2-企业-ai-研发效能真伪指标对照与三层度量看板">2. 企业 AI 研发效能真伪指标对照与三层度量看板</h3>
+<p>研发管理者必须果断废除表层的“工具活跃度虚荣指标”，将考核锚定在**“工程交付结果、代码库健康度与 AI 业务门禁”**上。</p>
+<p>首先，明确**《AI 研发效能伪指标（必须废止）vs 真指标（科学锚点）对照表》**：</p>
+<table>
+<thead>
+<tr>
+<th>必须废止的虚荣指标（Vanity Metrics）</th>
+<th>为什么它会误导团队（副作用）</th>
+<th>应替换为哪个科学真指标（True Engineering Metrics）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AI 代码补全采纳率（Acceptance Rate）</strong></td>
+<td>诱导工程师无脑按 Tab 接受劣质代码，导致两周内代码翻新率（Churn）翻倍</td>
+<td><strong>两周代码留存率（2-Week Code Survival Rate）</strong> 与 <strong>缺陷修复提交占比（Fix Ratio）</strong></td>
+</tr>
+<tr>
+<td><strong>AI 生成代码行数占比（% of AI Lines）</strong></td>
+<td>代码行数从来不是资产而是负债；用 500 行冗余代码实现 50 行能干完的事是倒退</td>
+<td><strong>测试代码占比（<code>Test Ratio &gt;= 20%</code>）</strong> 与 <strong>需求规格验收闭环率（Obligation Closure Rate）</strong></td>
+</tr>
+<tr>
+<td><strong>单人每日生成 PR 数量</strong></td>
+<td>制造大量未经自测的半成品 PR，把排雷负担全部甩锅给负责审查的资深骨干</td>
+<td><strong>变更前置时间（Lead Time for Changes，含审查耗时）</strong> 与 <strong>审查一次通过率</strong></td>
+</tr>
+<tr>
+<td><strong>离线演示 Demo 单次跑通率（<code>pass@1</code>）</strong></td>
+<td>挑顺风题跑一次截图汇报，掩盖边界漏检与连续运行的不稳定性</td>
+<td><strong>分桶全量回归通过率</strong>、<strong>安全闸 100% 拦截率</strong> 与 <strong><code>pass^3</code> 连续一致性</strong></td>
+</tr>
+</tbody></table>
+<p>在此基础上，给出一张研发主管与交付负责人可直接落地的**《企业 AI 研发三层度量看板》**：</p>
+<table>
+<thead>
+<tr>
+<th>度量层级</th>
+<th>指标名称</th>
+<th>精确统计口径</th>
+<th>健康基准阈值</th>
+<th>自动化采集来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一层：DORA 交付结果层（衡量端到端工程流速与稳健性）</strong></td>
+<td><strong>1. 变更前置时间（Lead Time）</strong></td>
+<td>从规格锁死（<code>SPEC.md</code> 准出）或代码首次提交，到通过全量门禁合并上线的耗时中位数</td>
+<td>较引入规范化 AI 工程前缩短 <strong>30% ～ 50%</strong></td>
+<td>Git 提交时间戳与 CI/CD 流水线日志</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>2. 部署与迭代频率（Deployment Frequency）</strong></td>
+<td>团队完成完整八环闭环并向预发/生产环境交付可验证版本的频次</td>
+<td>小步快跑，按周或按双日稳定交付</td>
+<td>发布标签（<code>VERSION</code> / Git Tag）统计</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>3. 变更失败率（Change Failure Rate）</strong></td>
+<td>上线或合并后引发主干测试破坏、安全红线告警或紧急回滚的变更占比</td>
+<td><strong><code>&lt;= 5%</code></strong>（严禁因引入 AI 而上升）</td>
+<td>CI 失败率、回滚 Commit 与线上故障单</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>4. 故障恢复与排障耗时（MTTR）</strong></td>
+<td>线上出现异常或评测分桶跌落时，按 <code>/investigate</code> 与五类归因定位并修复的平均耗时</td>
+<td><strong><code>&lt;= 1 小时</code></strong>（依托 <code>trace.jsonl</code> 与沙盒复现）</td>
+<td>故障单闭环时长与修复提交记录</td>
+</tr>
+<tr>
+<td><strong>第二层：GStack 工程健康层（衡量代码库抗腐化能力）</strong></td>
+<td><strong>5. 测试代码占比（Test Ratio）</strong></td>
+<td>新增与修改的自动化测试代码行数 ÷ 总代码变更行数</td>
+<td><strong><code>&gt;= 20%</code></strong>（核心逻辑模块建议 <code>&gt;= 40%</code>）</td>
+<td>第 8 环 <code>/retro</code> 自动统计报告</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>6. 两周代码翻新率（2-Week Churn）</strong></td>
+<td>代码合入主干后 14 天内被重写或删除的行数占比（监控是否出现盲目粘贴后返工）</td>
+<td><strong><code>&lt;= 15%</code></strong>（超出则预警规格不清或滥用补全）</td>
+<td><code>git log</code> 历史行级追溯分析</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>7. 热点文件收敛度（Hotspot Convergence）</strong></td>
+<td>同一核心文件在单次迭代中被反复修改修补的频次</td>
+<td>随迭代推进逐步下降；单文件高频返工超 5 次须重构</td>
+<td>第 8 环 <code>/retro</code> 热点文件分析表</td>
+</tr>
+<tr>
+<td><strong>第三层：AI 应用业务门禁层（衡量智能体本身是否可靠）</strong></td>
+<td><strong>8. 黄金评估集分桶达标率</strong></td>
+<td>离线黄金题库（含每周从生产回流的难例）各分桶（正向/歧义/难例）的准确率及 <code>pass^3</code></td>
+<td>主指标达标且 <strong>新旧版本对比零静默退化</strong></td>
+<td><code>eval_report.json</code>（锁题库 <code>sha256</code>）</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>9. 确定性安全闸拦截率</strong></td>
+<td>针对越权写操作、敏感信息泄漏、无依据瞎编及高危指令的硬拦截成功率</td>
+<td><strong><code>= 100%</code></strong>（任何时候一票否决）</td>
+<td>安全对抗测试集与 <code>/cso</code> 审计报告</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>10. 线上 Dry-Run 人工无修改通过率</strong></td>
+<td>线上受控行动预演单未经人工手动修改字段即被直接确认提交的比例（<code>payload_diff == {}</code>）</td>
+<td>随数据飞轮迭代按月稳步爬升（如从 70% 升至 90%）</td>
+<td>生产 <code>trace.jsonl</code> 周度聚合统计</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<ol>
+<li><strong>上线即放羊，题库万年不更新。</strong> 把 Day-1 验收的 20 道题当成终点，线上用户天天点踩、天天手动改单，却没有任何一条坏样本回流进评测集。</li>
+<li><strong>拉业务专家脱产造假题，却把线上真实的 <code>payload_diff</code> 扔进垃圾桶。</strong> 放着现成、免费且最贴近实战的人工修改差异不采，反而花大力气闭门造车编题。</li>
+<li><strong>未脱敏的生产日志直接入库当测试题。</strong> 把包含真实客户手机号、生产网元管理 IP 或密码的线上 <code>trace</code> 原样塞进 Git 仓库，酿成严重数据合规事故。</li>
+<li><strong>为了省钱直接把全量请求切给小模型，不做分桶回归评测。</strong> 没有帕累托前沿验证的“降本路由”，本质上是难以察觉的静默质量退化。</li>
+<li><strong>每个项目组各自硬编码一套业务口径与安全黑名单。</strong> 缺乏部门级共享 Harness 资产库，导致同一个故障在十个组里重复踩坑十次。</li>
+<li><strong>把“AI 代码生成率 / Tab 采纳率”当成团队绩效 KPI。</strong> 逼着程序员往代码库里灌注未经思考的 AI 泡沫代码，换来翻倍的重写率与审查瘫痪。</li>
+</ol>
+<p>三条不可退的治理红线：<strong>未脱敏的生产真实数据严禁进入开发测试库或发往公网模型；任何模型路由切换或版本升级必须通过黄金评估集全量回归且安全桶 100% 零退化；严禁使用单纯的“AI 代码行数/采纳率”替代工程质量与业务门禁指标。</strong></p>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li>生产环境必然面临<strong>提问漂移、标准漂移与模型漂移</strong>；唯有打通“线上 <code>trace.jsonl</code> 采集 → 难例分诊 → 本地脱敏 → 合入黄金评估集”的 <strong>Day-2 数据飞轮</strong>，才能闭合第 8 环 <code>/retro</code> 到环 0 <code>/eval-plan</code> 的进化环路。</li>
+<li>一线人员在 Dry-Run 预演单上的<strong>手工修改差异 <code>Diff(draft, committed)</code></strong> 是最金贵的免费真值——改前是天然的负样本，改后是确权的黄金答案。</li>
+<li>通过**“第 1 层确定性规则与缓存（0 成本） → 第 2 层轻量主力模型（低成本） → 第 3 层高阶推理模型（疑难兜底）”**的三级漏斗，可在守住核心分桶质量的前提下大幅降低推理成本与 P95 延迟。</li>
+<li>百人研发组织必须将个人经验收拢为<strong>部门级共享 Harness 资产库</strong>（统一语义层、统一安全护栏、统一标准评测器），并严格落实公网（L1）、专有云网关（L2）、纯内网（L3）三域数据分级准入。</li>
+<li>彻底废除“AI 代码采纳率”等虚荣指标，用 <strong>DORA 交付四指标 + GStack 工程健康度（<code>Test Ratio &gt;= 20%</code>、低翻新率）+ AI 业务评测门禁</strong> 衡量真实的工程效能。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能说出生产环境的三大漂移，并画出闭合 <code>/retro</code> 到 <code>/eval-plan</code> 的 Day-2 数据飞轮图（图 6-2）。</li>
+<li><input disabled="" type="checkbox"> 我能列举生产 <code>trace.jsonl</code> 必采的五个核心字段，并解释如何利用 <code>payload_diff</code> 自动获取黄金标注样本。</li>
+<li><input disabled="" type="checkbox"> 我能设计三层模型路由漏斗，并写出从第 2 层轻量模型升级到第 3 层高阶模型的三个确定性触发条件。</li>
+<li><input disabled="" type="checkbox"> 我能画出高低配模型路由的帕累托校准表，说清哪些分桶指标绝对不允许因降本而退化。</li>
+<li><input disabled="" type="checkbox"> 我能列出部门级共享 Harness 资产库的三大核心目录，以及 L1/L2/L3 三域数据准入的高压红线。</li>
+<li><input disabled="" type="checkbox"> 我能用 GitClear 与 DORA 的实证结论批驳“唯 AI 代码采纳率论”，并给出三层十项真实度量看板。</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析">基础辨析</h3>
+<ol>
+<li>为什么说“业务方在系统上线后频繁手动修改智能体预填的字段”不全是坏事？如何通过工程设计把这种摩擦转化为系统每周变聪明的动力？</li>
+<li>某研发团队宣布通过将全部请求从旗舰大模型切换为开源 7B 小模型，“成功将推理成本降低了 80%，且总准确率仅从 90% 微降至 86%”。如果你是技术负责人，你会要求他们补充哪几项分桶数据才敢签字上线？</li>
+</ol>
+<h3 id="h-进阶分析">进阶分析</h3>
+<ol>
+<li>某部门考核“每位工程师每周使用 AI 生成代码行数不得低于 1500 行”。一个月后，代码库总行数增长了 40%，但第 5 环 <code>/review</code> 的高危阻塞项翻倍、线上变更失败率从 3% 升至 12%。请结合 DORA“放大器效应”与 GitClear“代码翻新率”原理剖析根因，并给出整改方案。</li>
+<li>当线上监控发现“第 2 层轻量模型升级到第 3 层旗舰模型的触发率（Escalation Rate）”在三天内从平时的 15% 暴增至 45% 时，这可能对应 6.2.1 中的哪类生产漂移？应该按什么步骤排查？</li>
+</ol>
+<h3 id="h-迁移研讨">迁移研讨</h3>
+<ol>
+<li>为你当前负责的 AI 项目设计一份 <code>trace.jsonl</code> 的单行 JSON 样板，明确标记出哪个字段代表 <code>ai_draft_payload</code>、哪个字段代表 <code>human_committed_payload</code>，以及每周由谁负责将 <code>Diff</code> 非空的样本合入 <code>eval/</code> 目录。</li>
+<li>盘点你所在团队或部门正在开发的多个 AI 课题，挑出至少 3 个可以抽离到部门共享 <code>org-harness/</code> 仓库中的公共资产（如统一指标计算式、通用脱敏脚本、高危指令黑名单），写出它们的复用方式。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>至此，第六章（通用高阶闭环篇）圆满收官。回顾第五章与第六章，我们已经完整构建了一套跨行业通用的企业级 AI 工程方法体系：</p>
+<ul>
+<li><strong>向上看场景广度</strong>：覆盖了知识问答（<code>5.2</code>）、数据问数（<code>5.3</code>）、文档合规审查（<code>5.4</code>）三大只读认知场景，以及带写操作风险的受控行动智能体（<code>6.1</code>）；</li>
+<li><strong>向下看工程深度</strong>：从进场判型、定死口径、搭确定性安全闸、造沙盒验尺子，一直延伸到上线后的 Day-2 生产数据飞轮、高低配模型精益路由与组织级真实效能治理（<code>6.2</code>）。</li>
+</ul>
+<p>那么，当我们将这套硬核工程方法论带入<strong>通信运营商（数智运维 NetOps 与政企市场支撑 BSS）<strong>这一具有极高安全红线、极多异构半结构化数据（多厂商网元 CLI 回显、复杂阶梯结算表、工程现场竣工照片）的垂直行业，并要在</strong>短短 3 天（6 个半天）的实战演练</strong>中从零交付一个可量化验收的高分作品时，该如何快速破局？</p>
+<p>下一章（<strong>第 7 章：通信运营商数智运维与政企支撑实战方法论</strong>），我们将专门针对运营商内网安全红线、“1 小时造数建桩”绝技、自智网络 L4 四大平行影子样板以及三日训战拆骨瘦身法展开最后的总攻。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] 生产级 AI 评估体系与数据飞轮：</strong> Hamel Husain，<em>Your AI Product Needs Evals</em>（重点研读从生产日志 <code>trace</code> 到自动化断言评估集的迭代飞轮构建方法），<a href="https://hamel.dev/blog/posts/evals/">https://hamel.dev/blog/posts/evals/</a>。</li>
+<li id="ref-2"><strong>[2] 评判标准漂移与人在回路校准：</strong> Shreya Shankar 等（UC Berkeley），<em>Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Criteria</em>（重点研读 Criteria Drift 标准漂移机制及人类在审查样本时如何动态修正判据），<a href="https://arxiv.org/abs/2404.12272">https://arxiv.org/abs/2404.12272</a>。</li>
+<li id="ref-3"><strong>[3] RouteLLM 高低配模型动态路由框架：</strong> Isaac Ong 等（LMSYS Org &amp; UC Berkeley），<em>RouteLLM: Learning to Route LLMs with Preference Data</em>（重点研读质量—成本帕累托前沿分析与级联路由策略），<a href="https://arxiv.org/abs/2406.18665">https://arxiv.org/abs/2406.18665</a>。</li>
+<li id="ref-4"><strong>[4] GitClear AI 代码质量与翻新率实证报告：</strong> GitClear，<em>Coding on Copilot: 2024–2025 Data Shows AI&#39;s Downward Pressure on Code Quality</em>（重点研读两周代码翻新率 Code Churn 翻倍与重复代码块激增的实证分析），<a href="https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality">https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality</a>。</li>
+<li id="ref-5"><strong>[5] Google Cloud DORA 研发效能报告：</strong> DORA Team，<em>Accelerate State of DevOps Report (AI Supplement)</em>（重点研读 AI 对研发系统的放大器效应与 DORA 四大核心交付指标），<a href="https://dora.dev/">https://dora.dev/</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/6-1/">← 6.1 场景四 受控行动智能体</a>
+      <a href="/aicoding/units/7-1/">7.1 运营商内网研发安全红线 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-621-从离线固定题库到day-2-生产数据飞轮">6.2.1 从“离线固定题库”到“Day-2 生产数据飞轮”</a></li><li class="lv3"><a href="#h-1-为什么-day-1-验收满分不代表生产高枕无忧三大生产漂移">1. 为什么 Day-1 验收满分不代表生产高枕无忧：三大生产漂移</a></li><li class="lv3"><a href="#h-2-闭合第-8-环-retro-→-环-0-eval-plan的-trace-to-eval-回流飞轮">2. 闭合“第 8 环 /retro → 环 0 /eval-plan”的 Trace-to-Eval 回流飞轮</a></li><li class="lv3"><a href="#h-3-为什么用户在-dry-run-预演单上的手工修改-diff-是最金贵的免费真值">3. 为什么用户在 Dry-Run 预演单上的手工修改 Diff 是最金贵的免费真值</a></li><li class="lv2"><a href="#h-622-高低配模型动态路由model-routing与成本延迟精益治理finops">6.2.2 高低配模型动态路由（Model Routing）与成本延迟精益治理（FinOps）</a></li><li class="lv3"><a href="#h-1-破除全量请求一刀切调旗舰大模型的算力浪费">1. 破除“全量请求一刀切调旗舰大模型”的算力浪费</a></li><li class="lv3"><a href="#h-2-三层精益路由漏斗架构">2. 三层精益路由漏斗架构</a></li><li class="lv3"><a href="#h-3-帕累托前沿验证口径防止路由降级沦为静默质量退化">3. 帕累托前沿验证口径：防止路由降级沦为静默质量退化</a></li><li class="lv2"><a href="#h-623-组织级-harness-资产库与企业安全合规治理">6.2.3 组织级 Harness 资产库与企业安全合规治理</a></li><li class="lv3"><a href="#h-1-从个人-agentsmd-到部门级共享-harness-资产库">1. 从个人 AGENTS.md 到部门级共享 Harness 资产库</a></li><li class="lv3"><a href="#h-2-公网专有云网关与纯内网三域数据分级准入矩阵">2. 公网、专有云网关与纯内网三域数据分级准入矩阵</a></li><li class="lv2"><a href="#h-624-告别虚荣指标企业-ai-研发效能的真实度量体系">6.2.4 告别“虚荣指标”：企业 AI 研发效能的真实度量体系</a></li><li class="lv3"><a href="#h-1-为什么ai-代码生成率-tab-采纳率是危险的虚荣指标">1. 为什么“AI 代码生成率 / Tab 采纳率”是危险的虚荣指标</a></li><li class="lv3"><a href="#h-2-企业-ai-研发效能真伪指标对照与三层度量看板">2. 企业 AI 研发效能真伪指标对照与三层度量看板</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析">基础辨析</a></li><li class="lv3"><a href="#h-进阶分析">进阶分析</a></li><li class="lv3"><a href="#h-迁移研讨">迁移研讨</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

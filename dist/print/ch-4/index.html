@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 4 章 发布排障与复盘 · 打印视图</title>
+<meta name="description" content="整章打印">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="page-print">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+<div class="print-page">
+  <div class="print-head"><a href="/aicoding/print/">← 打印视图</a><span>第 4 章 发布排障与复盘</span></div>
+  <section class="print-unit">
+      <h1 class="first">4.1　第 7 环 <code>/ship</code> 发布工程师流水线</h1>
+      <p class="lede">文档同步与远端部署金丝雀验证</p>
+      <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天下午“发布部署交付、系统化根因排障、量化复盘与多场景迁移篇”的开篇单元，对应 GStack 八环中的第 7 环 <strong>自动化发布与远端部署监控（Ship &amp; Deploy）</strong>。在传统软件工程与早期 AI 编程中，开发者往往把“本地代码写完提交”当成终点，结果导致测试覆盖率不足、仓库文档与最新代码严重脱节、以及“本地 <code>localhost</code> 能跑但远端生产环境报错”的交付断层。本节将系统拆解第 7 环上半程 <code>/ship</code>（发布工程师流水线）的测试框架冷启动（Test Bootstrap）、ASCII 覆盖率星级审计（Coverage Audit）与准出凭据核验；深入讲解内嵌的 <code>/document-release</code> 如何自动对齐代码差异与六大核心文档，以及 <code>/document-generate</code> 如何基于国际公认的 <strong>Diataxis 四象限框架</strong> 生成 100% 忠于源码的文档体系；最后完整打通下半程 <code>/setup-deploy</code> → <code>/land-and-deploy</code> → <code>/canary</code>（SRE 金丝雀巡检）与 <code>/benchmark</code>（Core Web Vitals 性能基线比对）的远端生产交付闭环。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、DevOps 与发布工程师、SRE 站点可靠性工程师、技术文档工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 3.3 学习，掌握第 5 环 <code>gstack-wtree</code> 审查凭据与第 6 环 <code>/qa</code> 实机验收流程。</span></div></div>
+      <article class="prose"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>说明 <code>/ship</code> 发布工程师流水线的核心步骤：解释测试框架冷启动（Test Bootstrap）、基于 <code>git diff</code> 的执行路径分析与 ASCII 覆盖率星级审计（<code>★★★ / ★★☆ / ★☆☆</code>）、准出仪表盘（<code>Review Readiness Dashboard</code>）鲜活度核验以及 PR 审查评论自动分诊机制各自拦截什么风险。</li>
+<li>核验代码驱动的文档工程体系：写出 <code>/ship</code> 内嵌的 <code>/document-release</code> 逐项对齐六大仓库文档的动作清单，并用 <code>/document-generate</code> 按 <strong>Diataxis 四象限框架</strong>（<code>Tutorial / How-To Guide / Reference / Explanation</code>）生成忠于源码的工程文档与架构图。</li>
+<li>串联从本地代码到远端生产环境可访问的完整部署与监控闭环：按“部署决策四问”与密钥安全铁律准备环境，依次执行 <code>/setup-deploy</code>、<code>/land-and-deploy</code>（含 Dry-Run 预演与 <code>/health</code> <code>200 OK</code> 强制核验）、<code>/canary</code> 线上金丝雀巡检以及 <code>/benchmark</code> 性能基线对比。</li>
+</ol>
+<hr>
+<h2 id="4-1--h-411-第-7-环上半程-ship纪律严明的发布工程师流水线">4.1.1 第 7 环上半程 <code>/ship</code>：纪律严明的发布工程师流水线</h2>
+<p>当特性分支通过了第 5 环结构安全审查与第 6 环实机 QA 验收后，工程师输入 <strong><code>/ship</code></strong>，正式召唤 GStack 虚拟团队中的 <strong>发布工程师（Release Engineer）</strong> 接管交付流水线<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</p>
+<p><code>/ship</code> 绝不是简单地运行一条 <code>git push</code> 或创建 Pull Request，而是严格按顺序执行以下 <strong>四项发布前工程核验与加固动作</strong><sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>：</p>
+<ol>
+<li><strong>主干同步与测试框架冷启动（Test Bootstrap）</strong>：
+<code>/ship</code> 首先自动拉取并合并远端主干分支（如 <code>origin/main</code>），确保当前特性分支不存在合并冲突。如果 <code>/ship</code> 检测到当前接手的是一个<strong>没有任何自动化测试的历史遗留项目（Legacy Repo）</strong>，它会自动触发 <strong>Test Bootstrap（测试冷启动规程）</strong>：自动探测语言栈并安装标准测试框架、围绕核心业务路径编写首批真实测试、生成 CI 流水线配置文件，并在根目录创建 <code>TESTING.md</code> 测试指南<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+<li><strong>基于代码路径图的覆盖率星级审计（Coverage Audit）</strong>：
+普通覆盖率工具只看冷冰冰的行号百分比，而 <code>/ship</code> 会深入分析当前分支的 <code>git diff</code>，构建变更代码的<strong>逻辑分支与执行路径图（Code Execution Path Map）</strong>，并在终端绘制一张直观的 <strong>ASCII 覆盖率星级审计表</strong><sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>：<ul>
+<li><strong><code>★★★</code>（三星完备覆盖）</strong>：该函数的正常路径（Happy Path）、边界值与异常自救分支（Error &amp; Rescue）均已有自动化测试断言覆盖；</li>
+<li><strong><code>★★☆</code>（二星局部缺失）</strong>：正常路径已测，但某条边缘异常分支（如并发冲突回滚或外部超时降级）尚未被测试覆盖；</li>
+<li><strong><code>★☆☆</code> / <code>☆☆☆</code>（一星或零星高危裸奔）</strong>：新增或修改的核心逻辑缺少直接的自动化测试保护。</li>
+<li><strong>数值门禁</strong>：星级是逐函数的定性视图，<code>/ship</code> 的 <code>test-coverage.md</code> 另有整体口径 <strong>Minimum 60% / Target 80%</strong>，两者需同时满足（单个函数星级不达标即补测，整体覆盖率不得低于 60%，目标 80%）。
+针对所有低于三星（<code>&lt; ★★★</code>）的核心代码路径，<code>/ship</code> 会<strong>当场自动补写缺失的边界单元测试与集成测试</strong>，跑通全绿后在发布报告中清晰展示测试增量（例如：<code>Tests: 42 → 51 (+9 new coverage tests added)</code>）<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+</ul>
+</li>
+<li><strong>准出仪表盘（<code>Review Readiness Dashboard</code>）与内容指纹鲜活度核验</strong>：
+在打包提交前，<code>/ship</code> 会调用 <code>gstack-review-read</code> 检查第 3 环 <code>/autoplan</code> 准出状态以及第 5 环 <code>/review</code>、<code>/cso</code> 的 <code>gstack-wtree</code> 审查凭据。如果刚才在步骤 2 中仅新增了测试文件，受控业务源码哈希未变，则凭据保持 <strong><code>CURRENT</code>（鲜活有效）</strong> 放行；倘若业务源码被改动导致凭据变为 <code>STALE</code>，<code>/ship</code> 将强制要求先完成增量复审才允许继续。</li>
+<li><strong>PR 自动化创建与审查评论智能分诊（PR Comment Triage）</strong>：
+当代码推送到远端并创建（或更新）Pull Request 后，如果仓库挂载了外部自动化代码审查机器人（如 Greptile 或 GitHub Actions 检查器），<code>/ship</code> 会自动拉取 PR 上的所有审查评论并按三类策略精准分诊<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>：<ul>
+<li><strong>真实有效缺陷（Valid Findings）</strong>：当场修改代码修复并补充测试；</li>
+<li><strong>前序提交已修复项（Already Fixed）</strong>：自动在评论下回复对应的修复 Commit SHA 哈希链接并关闭会话；</li>
+<li><strong>上下文误报（False Positives）</strong>：列出源码证据向人类工程师汇报，经人类确认后有理有据地回复驳回说明。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-1--h-412-文档工程与代码同步内嵌-document-release-与-diataxis-四象限框架">4.1.2 文档工程与代码同步：内嵌 <code>/document-release</code> 与 Diataxis 四象限框架</h2>
+<p>在软件工程领域，有一句臭名昭著的潜规则：“代码从不撒谎，但文档总是过期的。”每当团队紧急修改了某个环境变量名称、新增了一张数据库表或废弃了一个 CLI 参数后，往往没人记得去改 <code>README.md</code> 和架构文档，导致新入职同事或下游调用方频频踩坑。</p>
+<p>为了从机制上彻底根除“代码改了、文档没改”的顽疾，GStack 将文档更新嵌入了第 7 环发布流水线的必经主干中<sup class="cite"><a href="#4-1--ref-2">[2]</a></sup>。</p>
+<h3 id="4-1--h-1-ship-强制内嵌步骤document-release-自动对齐六大仓库文档">1. <code>/ship</code> 强制内嵌步骤：<code>/document-release</code> 自动对齐六大仓库文档</h3>
+<p>在 <code>/ship</code> 最终推送代码前，系统会自动强制触发 <strong><code>/document-release</code>（发布级文档同步器）</strong><sup class="cite"><a href="#4-1--ref-2">[2]</a></sup>。它会将当前分支的完整 <code>git diff</code> 与仓库内的六大核心工程文档进行逐行交叉比对，并自动完成精准修订：</p>
+<table>
+<thead>
+<tr>
+<th>仓库核心文档文件</th>
+<th><code>/document-release</code> 自动交叉核对与同步更新的内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. <code>README.md</code></strong></td>
+<td>核对快速启动步骤、依赖安装命令、CLI 标志说明，以及 <code>.env.example</code> 中新增或改名的环境变量列表。</td>
+</tr>
+<tr>
+<td><strong>2. <code>ARCHITECTURE.md</code></strong></td>
+<td>当新增了核心业务模块、变更了目录树结构或引入了新的数据流分支时，自动同步更新目录职责表与架构说明。</td>
+</tr>
+<tr>
+<td><strong>3. <code>AGENTS.md</code> / <code>CLAUDE.md</code></strong></td>
+<td>若本次迭代新增了公共复用工具函数、更新了必跑测试命令或调整了安全护栏目录，自动同步至 AI 工程宪法。</td>
+</tr>
+<tr>
+<td><strong>4. <code>CONTRIBUTING.md</code></strong></td>
+<td>同步更新本地开发夹具启动方式、数据库迁移规程与测试运行指南。</td>
+</tr>
+<tr>
+<td><strong>5. <code>TODOS.md</code></strong></td>
+<td>自动识别本次分支已经完成的待办事项并将其从 <code>TODOS.md</code> 中核销移除；同时将施工期新发现的远期改进项追加进待办列表。</td>
+</tr>
+<tr>
+<td><strong>6. <code>CHANGELOG.md</code></strong></td>
+<td>基于本分支的原子提交序列与解决的业务问题，按语义化版本规范自动生成结构化的版本变更日志（Added / Changed / Fixed / Security）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-1--h-2-document-generate基于-diataxis-四象限框架生成-100%-忠于源码的文档体系">2. <code>/document-generate</code>：基于 Diataxis 四象限框架生成 100% 忠于源码的文档体系</h3>
+<p>如果团队接手了一个完全没有文档的存量代码库，或者需要为新交付的系统建立一套专业级技术文档，可以调用 GStack 的 <strong><code>/document-generate</code></strong> 技能<sup class="cite"><a href="#4-1--ref-2">[2]</a></sup>。</p>
+<p>该技能立有一条硬性纪律：<strong>严禁凭空捏造或复制粘贴笼统的套话，必须先用 <code>Read / Grep / Glob</code> 完整精读仓库真实源码</strong>，然后严格按照国际公认的 <strong>Diataxis 四象限技术文档工程框架</strong>，产出四类受众与目标截然不同的标准文档<sup class="cite"><a href="#4-1--ref-2">[2]</a></sup><sup class="cite"><a href="#4-1--ref-3">[3]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>Diataxis 文档象限</th>
+<th>目标读者状态与核心诉求</th>
+<th>文档核心内容与编写准则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一象限：<code>Tutorial</code>（新手入门教程）</strong></td>
+<td><strong>学习导向（Learning-oriented）</strong>。读者是刚接触本项目的零基础开发者，需要在 15 分钟内建立直观信心。</td>
+<td>手把手带领读者在本地从零跑通第一个完整的端到端闭环示例（Hello World），不讲深奥原理，确保每一步命令复制粘贴即可成功执行。</td>
+</tr>
+<tr>
+<td><strong>第二象限：<code>How-To Guide</code>（任务操作指南）</strong></td>
+<td><strong>目标导向（Goal-oriented）</strong>。读者已经熟悉基础操作，需要解决某个具体的工程任务或运维场景。</td>
+<td>像菜谱一样提供步骤清晰的行动指南（例如：“如何新增一个带权限校验的业务端点”、“如何执行月度账单异常排查与手动重跑”）。</td>
+</tr>
+<tr>
+<td><strong>第三象限：<code>Reference</code>（技术参考字典）</strong></td>
+<td><strong>信息导向（Information-oriented）</strong>。读者正在写代码对接，需要查阅精确的接口签名、参数类型与错误码。</td>
+<td><strong>100% 忠于源码实现</strong>的百科字典：精确列出所有 REST/RPC 路由入参出参 Schema、环境变量全集、CLI 退出码字典与数据库表字段定义。</td>
+</tr>
+<tr>
+<td><strong>第四象限：<code>Explanation</code>（架构与原理阐述）</strong></td>
+<td><strong>理解导向（Understanding-oriented）</strong>。读者需要理解系统为什么这样设计、背后的权衡与演进脉络。</td>
+<td>深度阐述系统的领域边界、核心状态机设计、并发防超卖锁选型理由、多租户安全模型以及当初放弃的备选方案。</td>
+</tr>
+</tbody></table>
+<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong><code>/document-generate</code> 可与 <code>/diagram</code>、<code>/make-pdf</code> 联动出图与出 PDF。</strong>
+在运行 <code>/document-generate</code> 时，工程师还可配合调用 <strong><code>/diagram</code></strong> 一键生成与源码一致的 <strong>Mermaid 流程图 + 可编辑 <code>.excalidraw</code> 矢量源文件 + 高清 SVG/PNG 图片三件套</strong>；并可调用 <strong><code>/make-pdf</code></strong> 将 Markdown 文档离线渲染为带封面、目录与页码的出版级 PDF 交付物<sup class="cite"><a href="#4-1--ref-2">[2]</a></sup>。</p>
+</div>
+<hr>
+<h2 id="4-1--h-413-第-7-环下半程部署选型land-and-deploy-远端上线与-canary-金丝雀巡检">4.1.3 第 7 环下半程：部署选型、<code>/land-and-deploy</code> 远端上线与 <code>/canary</code> 金丝雀巡检</h2>
+<p>在 GStack 的交付标准中，<strong>“代码合并进了主干分支，绝不等于交付已经完成；只有当新版本在远端目标环境中真实运行、且通过了线上健康检查与金丝雀巡检时，第 7 环才算真正闭环！”</strong><sup class="cite"><a href="#4-1--ref-1">[1]</a></sup></p>
+<h3 id="4-1--h-1-部署选型四问与生产密钥安全铁律">1. 部署选型四问与生产密钥安全铁律</h3>
+<p>在启动远端部署前，工程团队首先通过 <strong>“部署决策四问”</strong> 锁定目标环境配置，并严守密钥安全底线：</p>
+<ol>
+<li><strong>计算与运行形态</strong>：目标服务是部署为容器化实例（Docker / Kubernetes）、云原生 PaaS 平台（如 Fly.io、Render、Vercel、云托管），还是企业内网 Linux 虚拟机？</li>
+<li><strong>有状态存储与数据库迁移</strong>：生产数据库（如 PostgreSQL / MySQL）的 Schema 迁移脚本是否具备向后兼容性（Backward Compatibility），能否在零停机或受控窗口内安全执行？</li>
+<li><strong>健康检查与可观测性端点</strong>：服务是否暴露了标准的 <code>/health</code>（或 <code>/api/healthz</code>）存活与就绪探针端点（包含数据库连通性自检）？</li>
+<li><strong>生产密钥与环境变量注入（绝对安全红线）</strong>：生产环境的数据库密码、JWT 签名密钥与第三方 API Token 必须通过云平台机密管理器（Secrets Manager）或受控环境变量在运行时注入——<strong>严禁将 <code>.env</code> 生产配置文件提交进 Git 仓库，也严禁在构建 Docker 镜像时通过 <code>COPY .env</code> 或明文 <code>ENV</code> 指令将密钥固化进镜像层！</strong></li>
+</ol>
+<hr>
+<h3 id="4-1--h-2-setup-deploy-→-land-and-deploy-→-canary-&amp-benchmark">2. <code>/setup-deploy</code> → <code>/land-and-deploy</code> → <code>/canary</code> &amp; <code>/benchmark</code> 全链路闭环</h3>
+<p>完成环境准备后，团队依次运行第 7 环下半程的四个部署与巡检指令，构成完整的上线守护闭环<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>：</p>
+<figure class="fig" id="4-1--fig-4-1"><div class="fig-scroll"><svg id="svg-4-1" width="1143.6875" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="1073.265625" viewBox="0 0 1143.6875 1073.265625" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-4-1{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-4-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-4-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-4-1 .error-icon{fill:#eceff1;}#svg-4-1 .error-text{fill:#13100e;stroke:#13100e;}#svg-4-1 .edge-thickness-normal{stroke-width:1px;}#svg-4-1 .edge-thickness-thick{stroke-width:3.5px;}#svg-4-1 .edge-pattern-solid{stroke-dasharray:0;}#svg-4-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-4-1 .edge-pattern-dashed{stroke-dasharray:3;}#svg-4-1 .edge-pattern-dotted{stroke-dasharray:2;}#svg-4-1 .marker{fill:#607d8b;stroke:#607d8b;}#svg-4-1 .marker.cross{stroke:#607d8b;}#svg-4-1 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-4-1 p{margin:0;}#svg-4-1 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-4-1 .cluster-label text{fill:#13100e;}#svg-4-1 .cluster-label span{color:#13100e;}#svg-4-1 .cluster-label span p{background-color:transparent;}#svg-4-1 .label text,#svg-4-1 span{fill:#17324d;color:#17324d;}#svg-4-1 .node rect,#svg-4-1 .node circle,#svg-4-1 .node ellipse,#svg-4-1 .node polygon,#svg-4-1 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-4-1 .rough-node .label text,#svg-4-1 .node .label text,#svg-4-1 .image-shape .label,#svg-4-1 .icon-shape .label{text-anchor:middle;}#svg-4-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-4-1 .rough-node .label,#svg-4-1 .node .label,#svg-4-1 .image-shape .label,#svg-4-1 .icon-shape .label{text-align:center;}#svg-4-1 .node.clickable{cursor:pointer;}#svg-4-1 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-4-1 .arrowheadPath{fill:#0b0b0b;}#svg-4-1 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-4-1 .flowchart-link{stroke:#607d8b;fill:none;}#svg-4-1 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-1 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-4-1 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-4-1 .cluster text{fill:#13100e;}#svg-4-1 .cluster span{color:#13100e;}#svg-4-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-4-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-4-1 rect.text{fill:none;stroke-width:0;}#svg-4-1 .icon-shape,#svg-4-1 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-1 .icon-shape p,#svg-4-1 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-4-1 .icon-shape .label rect,#svg-4-1 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-4-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-4-1 .node .neo-node{stroke:#1976d2;}#svg-4-1 [data-look="neo"].node rect,#svg-4-1 [data-look="neo"].cluster rect,#svg-4-1 [data-look="neo"].node polygon{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-4-1 [data-look="neo"].node path{stroke:url(#svg-4-1-gradient);stroke-width:1px;}#svg-4-1 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-4-1 [data-look="neo"].node circle{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-4-1 [data-look="neo"].icon-shape .icon{fill:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-4-1 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-1 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-1 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-4-1 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-1 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-1 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-4-1 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-1 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-1 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-4-1 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-1 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-1 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-4-1 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-1 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-1 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-4-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-4-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-4-1_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M558.266,83L558.266,85.833C558.266,88.667,558.266,94.333,558.266,99.333C558.266,104.333,558.266,108.667,558.266,110.833L558.266,113" id="svg-4-1-L_Setup_DryRun_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Setup_DryRun_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6ODN9LHsieCI6NTU4LjI2NTYyNSwieSI6MTAwfSx7IngiOjU1OC4yNjU2MjUsInkiOjExN31d" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M558.266,192L558.266,194.833C558.266,197.667,558.266,203.333,558.266,208.333C558.266,213.333,558.266,217.667,558.266,219.833L558.266,222" id="svg-4-1-L_DryRun_MergeDeploy_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_DryRun_MergeDeploy_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6MTkyfSx7IngiOjU1OC4yNjU2MjUsInkiOjIwOX0seyJ4Ijo1NTguMjY1NjI1LCJ5IjoyMjZ9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M558.266,278.5L558.266,281.333C558.266,284.167,558.266,289.833,558.266,294.833C558.266,299.833,558.266,304.167,558.266,306.333L558.266,308.5" id="svg-4-1-L_MergeDeploy_HealthCheck_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MergeDeploy_HealthCheck_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6Mjc4LjV9LHsieCI6NTU4LjI2NTYyNSwieSI6Mjk1LjV9LHsieCI6NTU4LjI2NTYyNSwieSI6MzEyLjV9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M448.62,606.12L418.991,630.978C389.361,655.835,330.103,705.55,300.473,738.2C270.844,770.849,270.844,786.432,270.844,794.224L270.844,802.016" id="svg-4-1-L_HealthCheck_RollbackAlert_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HealthCheck_RollbackAlert_0" data-points="W3sieCI6NDQ4LjYyMDA1MzAyNjM4Mzg2LCJ5Ijo2MDYuMTIwMDUzMDI2MzgzOX0seyJ4IjoyNzAuODQzNzUsInkiOjc1NS4yNjU2MjV9LHsieCI6MjcwLjg0Mzc1LCJ5Ijo4MDYuMDE1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M667.911,606.12L697.541,630.978C727.17,655.835,786.429,705.55,816.058,736.325C845.688,767.099,845.688,778.932,845.688,784.849L845.688,790.766" id="svg-4-1-L_HealthCheck_Canary_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HealthCheck_Canary_0" data-points="W3sieCI6NjY3LjkxMTE5Njk3MzYxNjEsInkiOjYwNi4xMjAwNTMwMjYzODM5fSx7IngiOjg0NS42ODc1LCJ5Ijo3NTUuMjY1NjI1fSx7IngiOjg0NS42ODc1LCJ5Ijo3OTQuNzY1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M845.688,869.766L845.688,872.599C845.688,875.432,845.688,881.099,845.688,886.099C845.688,891.099,845.688,895.432,845.688,897.599L845.688,899.766" id="svg-4-1-L_Canary_Benchmark_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Canary_Benchmark_0" data-points="W3sieCI6ODQ1LjY4NzUsInkiOjg2OS43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjg4Ni43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjkwMy43NjU2MjV9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M845.688,978.766L845.688,981.599C845.688,984.432,845.688,990.099,845.688,995.099C845.688,1000.099,845.688,1004.432,845.688,1006.599L845.688,1008.766" id="svg-4-1-L_Benchmark_ShipDone_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Benchmark_ShipDone_0" data-points="W3sieCI6ODQ1LjY4NzUsInkiOjk3OC43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjk5NS43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjEwMTIuNzY1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Setup_DryRun_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_DryRun_MergeDeploy_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_MergeDeploy_HealthCheck_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(270.84375, 755.265625)"><g class="label" data-id="L_HealthCheck_RollbackAlert_0" transform="translate(-68.9453125, -11.25)"><foreignObject width="137.890625" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>超时或返回 5xx 异常</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(845.6875, 755.265625)"><g class="label" data-id="L_HealthCheck_Canary_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>确认新版本生效且返回 200 OK</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Canary_Benchmark_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Benchmark_ShipDone_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-4-1-flowchart-Setup-0" data-look="classic" transform="translate(558.265625, 45.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第1步 /setup-deploy: 自动探测部署平台 · 锁定远端生产 URL 与 /health 健康检查端点</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-1-flowchart-DryRun-1" data-look="classic" transform="translate(558.265625, 154.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第2步 /land-and-deploy (预演阶段): 首次运行或配置变更时强制执行 Dry-Run 干跑验证</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-1-flowchart-MergeDeploy-3" data-look="classic" transform="translate(558.265625, 252.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-275.3671875" y="-26.25" width="550.734375" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-245.3671875, -11.25)"><rect></rect><foreignObject width="490.734375" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第3步 合入主干并触发远端部署流水线 · 实时跟踪构建与容器滚动发布状态</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-1-flowchart-HealthCheck-5" data-look="classic" transform="translate(558.265625, 514.1328125)"><polygon points="201.6328125,0 403.265625,-201.6328125 201.6328125,-403.265625 0,-201.6328125" class="label-container" transform="translate(-201.1328125, 201.6328125)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-175.3828125, -11.25)"><rect></rect><foreignObject width="350.765625" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>第4步 远端真实 URL /health 探针是否返回 200 OK?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-4-1-flowchart-RollbackAlert-7" data-look="classic" transform="translate(270.84375, 832.265625)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-262.84375" y="-26.25" width="525.6875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-232.84375, -11.25)"><rect></rect><foreignObject width="465.6875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>立即拉响部署失败警报 · 阻断交付并引导回滚或进入 /investigate 排障</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-Canary-9" data-look="classic" transform="translate(845.6875, 832.265625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>第5步 /canary (SRE 金丝雀巡检): 驱动真实浏览器循环巡检线上核心页面 · 确认 Console 零报错</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-Benchmark-11" data-look="classic" transform="translate(845.6875, 941.265625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>第6步 /benchmark (性能工程师基线比对): 实测线上 LCP / CLS / INP 指标 · 确认无性能退化</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-ShipDone-13" data-look="classic" transform="translate(845.6875, 1039.015625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-195.0859375" y="-26.25" width="390.171875" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-165.0859375, -11.25)"><rect></rect><foreignObject width="330.171875" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>输出完整《工程发布交付清单》 · 第 7 环圆满闭环</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-4-1-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-4-1-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-4-1-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-4-1.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 4-1 ↗</a>：第 7 环下半程从 `/setup-deploy` 到 `/canary` 金丝雀巡检与 `/benchmark` 性能比对的远端上线闭环</figcaption></figure>
+<p>如图 4-1 所示，这四个环节层层递进：</p>
+<ol>
+<li><strong><code>/setup-deploy</code>（部署配置探测与建档）</strong>：
+自动扫描仓库中的 <code>Dockerfile</code>、<code>docker-compose.yml</code>、GitHub Actions 工作流或云平台配置文件（Fly.io / Render / Vercel / Netlify / 自定义部署脚本），识别并持久化记录项目的部署命令、远端生产/预发环境真实 URL 以及 <code>/health</code> 健康检查端点路径<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+<li><strong><code>/land-and-deploy</code>（Dry-Run 预演、合入部署与真实入口核验）</strong>：<ul>
+<li><strong>Dry-Run 预演保护</strong>：在首次执行部署或部署脚本发生变更时，强制先运行一次只读预演（Dry-Run），检验构建产物、镜像打包与环境变量映射是否完备；</li>
+<li><strong>真实入口 <code>200 OK</code> 硬门禁</strong>：代码合入主干并触发远端部署后，智能体持续轮询监控 CI/CD 与容器发布进度，并在发布完成后直接向远端真实 URL 的 <code>/health</code> 端点发起实机请求——<strong>只有亲眼确认远端返回 <code>200 OK</code> 且版本号已更新为最新 Commit，才允许判定部署成功</strong><sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+</ul>
+</li>
+<li><strong><code>/canary</code>（SRE 站点可靠性工程师金丝雀巡检）</strong>：
+部署刚结束的前几分钟是线上故障高发期。运行 <code>/canary</code> 后，智能体化身为值班 SRE，驱动 <code>/browse</code> 真实浏览器定期循环访问远端生产环境的核心页面，持续监测 <strong>HTTP 响应延迟、页面渲染完整性以及浏览器 Console 是否出现任何运行时未捕获异常</strong>，确保线上真实用户体验丝滑稳定<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+<li><strong><code>/benchmark</code>（性能工程师 Core Web Vitals 基线比对）</strong>：
+为了防止某次发版无意间引入了巨大的前端依赖包或慢查询导致页面变慢，运行 <strong><code>/benchmark</code></strong> 可对线上页面开展量化性能评测：实测页面加载耗时、静态资源体积以及三大核心 Web 性能指标——<strong>LCP（最大内容绘制时间）、CLS（累积布局偏移）与 INP（交互到下一帧延迟）</strong>，并与上一次发版的基线数据逐项对比，一旦发现显著性能退化立即预警<sup class="cite"><a href="#4-1--ref-1">[1]</a></sup>。</li>
+</ol>
+<hr>
+<h2 id="4-1--h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在第 7 环发布流水线、文档同步与远端部署中，团队必须坚决杜绝以下五类反模式：</p>
+<ol>
+<li><strong>跳过 Coverage Audit 覆盖率星级审计，带着一星（<code>★☆☆</code>）裸奔代码直接发版</strong>：对新增的核心业务分支不补齐边界测试，导致异常处理逻辑在生产环境首次触发时即崩溃。</li>
+<li><strong>只推代码不跑 <code>/document-release</code>，放任仓库文档沦为过期谎言</strong>：修改了环境变量、接口参数或数据库表结构后不更新 <code>README.md</code> 与 <code>ARCHITECTURE.md</code>，给后续维护者埋下认知陷阱。</li>
+<li><strong>以“本地 <code>localhost</code> 能跑”或“CI 编译通过”冒充部署完成</strong>：从不通过远端目标环境的真实 URL 核验 <code>/health</code> <code>200 OK</code> 状态，忽略了生产环境容器配置、反向代理或防火墙差异导致的启动失败。</li>
+<li><strong>将 <code>.env</code> 密钥文件提交进 Git 仓库或打包进 Docker 镜像层</strong>：违背配置与代码分离原则，导致生产数据库凭据或私钥随代码库与镜像仓库泄露。</li>
+<li><strong>发版后立即关电脑走人，不做 <code>/canary</code> 金丝雀巡检与 <code>/benchmark</code> 性能回归对比</strong>：对上线后真实的控制台报错与首屏加载性能退化毫无感知，直到用户投诉才被动救火。</li>
+</ol>
+<hr>
+<h2 id="4-1--h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong><code>/ship</code> 流水线筑牢发版前最后一道代码防线</strong>：自动完成主干合并、遗留项目测试冷启动（Test Bootstrap）、基于执行路径图的 <strong>ASCII 覆盖率星级审计（<code>★★★</code>）与自动补测</strong>、准出凭据鲜活度核验及 PR 审查评论智能分诊。</li>
+<li><strong>代码驱动的文档工程消灭过期文档</strong>：每次 <code>/ship</code> 强制内嵌运行 <strong><code>/document-release</code></strong> 同步更新六大核心文档；从零构建文档时通过 <strong><code>/document-generate</code></strong> 按 <strong>Diataxis 四象限框架</strong>（<code>Tutorial / How-To Guide / Reference / Explanation</code>）产出 100% 忠于源码的文档与架构图。</li>
+<li><strong>远端部署与金丝雀监控打通交付最后一公里</strong>：遵循部署选型四问与密钥外部注入红线，通过 <strong><code>/setup-deploy</code> → <code>/land-and-deploy</code></strong> 完成 Dry-Run 预演与远端 <code>/health</code> <code>200 OK</code> 实机核验，并结合 <strong><code>/canary</code></strong> 循环巡检与 <strong><code>/benchmark</code></strong>（LCP / CLS / INP）锁死线上运行品质。</li>
+</ol>
+<hr>
+<h2 id="4-1--h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能完整说出 <code>/ship</code> 发布工程师流水线的四个核心步骤，并解释 ASCII 覆盖率星级图（<code>★★★ / ★★☆ / ★☆☆</code>）是如何指导智能体自动补齐缺失测试的吗？</li>
+<li><input disabled="" type="checkbox"> 我能列出 <code>/document-release</code> 自动同步的六大仓库文档名称，并清晰区分 Diataxis 四象限文档框架中 <code>Tutorial</code>、<code>How-To Guide</code>、<code>Reference</code> 与 <code>Explanation</code> 的受众与定位吗？</li>
+<li><input disabled="" type="checkbox"> 在将应用部署到远端环境前，我能对照“部署决策四问”检查配置，并确保 <code>.env</code> 生产密钥绝不进入 Git 仓库或 Docker 镜像层吗？</li>
+<li><input disabled="" type="checkbox"> 我能说明 <code>/land-and-deploy</code> 为什么要强制核验远端 <code>/health</code> 返回 <code>200 OK</code>，以及 <code>/canary</code>（金丝雀巡检）与 <code>/benchmark</code>（性能基线比对）各自监控哪些核心指标吗？</li>
+</ul>
+<hr>
+<h2 id="4-1--h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="4-1--h-基础辨析覆盖率星级审计与-diataxis-四象限文档分类">基础辨析：覆盖率星级审计与 Diataxis 四象限文档分类</h3>
+<ol>
+<li><strong>Diataxis 四象限归类</strong>：某开源中间件团队准备使用 <code>/document-generate</code> 重构其杂乱的文档库。请判断以下四篇文档标题分别属于 Diataxis 框架的哪一个象限（<code>Tutorial</code>、<code>How-To Guide</code>、<code>Reference</code> 或 <code>Explanation</code>），并简述判断依据：<ul>
+<li>文档甲：《5 分钟快速上手：在本地启动你的第一个消息生产与消费示例》；</li>
+<li>文档乙：《为什么我们选择基于磁盘顺序写的日志结构，而非内存哈希表？——存储引擎架构权衡解析》；</li>
+<li>文档丙：《客户端配置参数全集、错误码字典与 CLI 退出状态码一览表》；</li>
+<li>文档丁：《如何在不停机的情况下为生产集群配置 TLS 双向证书轮换》。</li>
+</ul>
+</li>
+<li><strong>PR 审查评论分诊策略</strong>：当 <code>/ship</code> 创建 Pull Request 后，自动化代码审查机器人在 PR 上留下了 3 条评论：第 1 条指出某新增查询漏了复合索引；第 2 条指出某处拼写错误（但该拼写错误其实在 10 分钟前的最新一次 Commit 中已经修过了）；第 3 条误以为某个只读公开配置接口缺少管理员权限校验。请问 <code>/ship</code> 会如何分别处置这 3 条评论？</li>
+</ol>
+<h3 id="4-1--h-进阶分析根治本地一切正常远端部署即崩与文档脱节">进阶分析：根治“本地一切正常、远端部署即崩”与文档脱节</h3>
+<p>假设某研发团队在交付一个企业内部系统时遭遇了两个尴尬场景：</p>
+<ul>
+<li><strong>场景 A（文档严重脱节）</strong>：后端工程师在周三下午为了修复一个计费问题，新增了一个必填环境变量 <code>TAX_RATE_REGION_CODE</code>，并在本地 <code>.env</code> 里配好了值；但他忘了更新 <code>README.md</code> 和 <code>.env.example</code>。周五下午运维同事拉取代码部署时，服务启动直接崩溃。</li>
+<li><strong>场景 B（缺乏上线后巡检）</strong>：前端工程师在发版时引入了一个未做按需加载的 4MB 图表库，虽然 <code>/health</code> 接口返回 <code>200 OK</code>，但用户打开首页的白屏等待时间从 1.2 秒暴增到了 6.5 秒，且在 Safari 浏览器下控制台抛出了兼容性异常。</li>
+</ul>
+<p>请结合本节所学回答：</p>
+<ol>
+<li>在 GStack 第 7 环中，哪一个内嵌机制能够从流程上 100% 阻止场景 A 的发生？它是如何工作的？</li>
+<li>针对场景 B，在 <code>/land-and-deploy</code> 确认 <code>/health</code> <code>200 OK</code> 之后，哪两个后续技能能够立即揪出“控制台兼容性报错”与“首屏加载时间从 1.2 秒退化到 6.5 秒”的问题？</li>
+</ol>
+<h3 id="4-1--h-迁移研讨为你当前项目制定《工程发布与远端部署核查单》">迁移研讨：为你当前项目制定《工程发布与远端部署核查单》</h3>
+<p>结合你当前负责或正在实训的软件工程项目：</p>
+<ol>
+<li>设计该项目的 <code>/health</code> 健康检查端点返回结构（需包含应用版本号/Commit SHA、服务启动时长以及底层数据库/缓存连通性自检状态）；</li>
+<li>列出该项目在每次执行 <code>/ship</code> 与 <code>/land-and-deploy</code> 时必须通过的 5 项准出核查清单（涵盖测试星级、审查凭据状态、文档同步、密钥隔离与远端金丝雀验证）。</li>
+</ol>
+<hr>
+<h2 id="4-1--h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>通过第 7 环 <code>/ship</code> 与 <code>/land-and-deploy</code>，我们的应用已经顺利部署到远端目标环境并通过了 <code>/canary</code> 金丝雀巡检。</p>
+<p>然而，在真实的软件生命周期中，没有任何系统能够永远一帆风顺。当系统运行一段时间后，如果远端生产或预发环境突然报出了一条极其诡异的偶发故障（例如：在本地开发环境跑测试 100% 正常，但一到远端容器环境调用某个报表接口就偶发抛出 <code>500 Internal Server Error</code>），此时应该怎么办？</p>
+<p>是像氛围编程（Vibe Coding）那样，把报错丢给 AI 让它“盲目猜代码、叠补丁”，结果陷入“修一个 Bug 引出三个新 Bug”的死循环？还是有一套铁律严明的科学根因排障法？</p>
+<p>请进入下一节**【单元 4.2】《/investigate 五阶段排障：系统化根因定位与受控修复》**！</p>
+<hr>
+<h2 id="4-1--h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="4-1--ref-1"><strong>[1] GStack 发布流水线、部署与金丝雀监控官方深潜：</strong> Garry Tan (Y Combinator), <em>gstack Skill Deep Dives (docs/skills.md): <code>/ship</code>, <code>/setup-deploy</code>, <code>/land-and-deploy</code>, <code>/canary</code> &amp; <code>/benchmark</code></em>（重点研读 Test Bootstrap、Coverage Audit 星级图、Dry-Run 部署与 SRE 金丝雀巡检机制），<a href="https://github.com/garrytan/gstack/blob/main/docs/skills.md">GitHub 官方技能手册</a>。</li>
+<li id="4-1--ref-2"><strong>[2] GStack 自动文档同步与生成规范：</strong> Garry Tan, <em>gstack <code>document-release/SKILL.md</code> &amp; <code>/document-generate</code></em>（了解代码 diff 驱动的文档自动对齐与架构图生成工具链），<a href="https://github.com/garrytan/gstack/blob/main/document-release/SKILL.md">GitHub 官方仓库</a>。</li>
+<li id="4-1--ref-3"><strong>[3] Diataxis 国际技术文档工程框架：</strong> Daniele Procida, <em>Diataxis: A Systematic Approach to Technical Documentation Authoring</em>（深入理解 Tutorials、How-To Guides、Reference 与 Explanation 四象限架构），<a href="https://diataxis.fr/">Diataxis 官方网站</a>。</li>
+</ol>
+</article>
+    </section>
+<section class="print-unit">
+      <h1 class="">4.2　<code>/investigate</code> 五阶段排障</h1>
+      <p class="lede">系统化根因定位与受控修复</p>
+      <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天下午的专项工程排障单元，聚焦 AI 编程时代最容易失控的痛点场景——<strong>复杂线上与联调故障排查（Systematic Root-Cause Debugging）</strong>。在使用普通编码智能体时，一旦遇到“本地开发环境正常、远端环境报错”或偶发的深层逻辑异常，开发者最常见的错误做法是直接把报错日志丢给 AI 说“帮我修好它”。这往往会诱发智能体跳过根因分析、在表象位置盲目叠加防御补丁（如到处乱加 <code>try/catch</code> 或空值吞没），导致“修一个表象 Bug、掩盖真实根因、同时引出三个新 Bug”的恶性死循环。本节将深入拆解 GStack 的 <strong><code>/investigate</code>（系统化根因调试器）</strong>：立下 <strong>“未查明根因前严禁写一行修复代码”</strong> 的最高铁律，详解五阶段标准排障工作流、六大生产故障模式匹配、自动 <code>/freeze</code> 目录锁定、<strong>“三振停机铁律（3-Strike Rule）”</strong> 以及 <strong>“5 文件爆炸半径门禁”</strong>。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、后端与基础架构工程师、SRE 运维工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 4.1 学习，掌握 <code>/freeze</code> 目录编辑半径锁与第 6 环 Fail-Before-Repair 回归测试铁律。</span></div></div>
+      <article class="prose"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>深刻剖析 AI 盲目修 Bug 导致“打地鼠式越改越乱”的机理，牢固树立 <code>/investigate</code> 的最高调试铁律（<code>NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST</code>）。</li>
+<li>复述 <code>/investigate</code> 的五阶段标准排障工作流：解释 Phase 1 如何通过堆栈、最近 20 条 <code>git log</code> 与 <code>learnings.jsonl</code> 锁定线索并自动挂载 <code>/freeze</code> 目录锁。</li>
+<li>识别 Phase 2 的六大生产故障模式（并发竞态、空值传播、状态损坏、外部集成异常、配置漂移、陈旧缓存），并选用三大专项排查配方（偶发闪烁 <code>flake</code>、状态污染 <code>polluter</code>、并发竞态 <code>race</code>）定位对应症状。</li>
+<li>严格执行 Phase 3 的 <strong>“三振停机铁律（3-Strike Rule）”</strong> 与 Phase 4 的 <strong>“5 文件爆炸半径门禁（Blast Radius Gate）”</strong>，产出标准化的 <code>DEBUG REPORT</code> 并沉淀排障记忆。</li>
+</ol>
+<hr>
+<h2 id="4-2--h-421-根因调试最高铁律no-fixes-without-root-cause-investigation-fi">4.2.1 根因调试最高铁律：<code>NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST</code></h2>
+<p>为什么大语言模型在从零编写新模块时表现惊艳，但在面对复杂线上故障时却经常表现得像一个“慌乱的实习生”？</p>
+<p>原因在于模型的自回归生成本质：当人类工程师把一段报错堆栈粘贴进对话框并下达“修好这个报错”的指令时，模型承受着极强的“立即给出代码修改方案”的指令压力。为了最快消除眼前的报错信息，模型往往会走阻力最小的表象捷径——例如，看到某处抛出 <code>TypeError: Cannot read properties of undefined</code>，它不去追查上游为什么会传过来一个未定义的脏数据，而是直接在报错那一行加一个可选链 <code>?.</code> 或默认空对象 <code>|| {}</code> 把报错吞掉！</p>
+<p>这种 <strong>“只消症状、不查病根”</strong> 的盲目打补丁行为，在软件工程中会酿成双重灾难：</p>
+<ol>
+<li><strong>掩盖真实数据损坏</strong>：被 <code>?.</code> 静默吞掉的空值继续流入下游财务或订单表，把原本显性的程序报错变成了极难修复的静默脏数据（State Corruption）；</li>
+<li><strong>打地鼠式死循环（Whack-a-Mole Loop）</strong>：当第一个猜测不对时，智能体在不回退第一次错误补丁的情况下继续叠加第二个、第三个猜测补丁，短短十分钟内改乱十几个文件，彻底破坏原有的清晰架构。</li>
+</ol>
+<p>为了终结这一乱象，GStack 的 <code>/investigate</code> 技能在启动的第一秒，就会向智能体下达一条不可违抗的 <strong>最高调试铁律（The Iron Law of Debugging）</strong><sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<blockquote>
+<p><strong><code>NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST.</code></strong><br><strong>（在未查明并证实根本原因之前，严禁修改任何一行业务修复代码！）</strong></p>
+</blockquote>
+<hr>
+<h2 id="4-2--h-422-investigate-五阶段系统化排障工作流与六大故障模式匹配">4.2.2 <code>/investigate</code> 五阶段系统化排障工作流与六大故障模式匹配</h2>
+<p>当工程师在终端输入 <code>/investigate</code> 并附上故障现象或报错日志时，智能体被强制纳入一套由 <strong>五个严格阶段（Phases 1–5）</strong> 组成的科学排障状态机<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<figure class="fig" id="4-2--fig-4-2"><div class="fig-scroll"><svg id="svg-4-2" width="1438.09375" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="1363.0625" viewBox="0 0 1438.09375 1363.0625" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-4-2{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-4-2 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-4-2 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-4-2 .error-icon{fill:#eceff1;}#svg-4-2 .error-text{fill:#13100e;stroke:#13100e;}#svg-4-2 .edge-thickness-normal{stroke-width:1px;}#svg-4-2 .edge-thickness-thick{stroke-width:3.5px;}#svg-4-2 .edge-pattern-solid{stroke-dasharray:0;}#svg-4-2 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-4-2 .edge-pattern-dashed{stroke-dasharray:3;}#svg-4-2 .edge-pattern-dotted{stroke-dasharray:2;}#svg-4-2 .marker{fill:#607d8b;stroke:#607d8b;}#svg-4-2 .marker.cross{stroke:#607d8b;}#svg-4-2 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-4-2 p{margin:0;}#svg-4-2 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-4-2 .cluster-label text{fill:#13100e;}#svg-4-2 .cluster-label span{color:#13100e;}#svg-4-2 .cluster-label span p{background-color:transparent;}#svg-4-2 .label text,#svg-4-2 span{fill:#17324d;color:#17324d;}#svg-4-2 .node rect,#svg-4-2 .node circle,#svg-4-2 .node ellipse,#svg-4-2 .node polygon,#svg-4-2 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-4-2 .rough-node .label text,#svg-4-2 .node .label text,#svg-4-2 .image-shape .label,#svg-4-2 .icon-shape .label{text-anchor:middle;}#svg-4-2 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-4-2 .rough-node .label,#svg-4-2 .node .label,#svg-4-2 .image-shape .label,#svg-4-2 .icon-shape .label{text-align:center;}#svg-4-2 .node.clickable{cursor:pointer;}#svg-4-2 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-4-2 .arrowheadPath{fill:#0b0b0b;}#svg-4-2 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-4-2 .flowchart-link{stroke:#607d8b;fill:none;}#svg-4-2 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-2 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-2 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-2 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-4-2 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-4-2 .cluster text{fill:#13100e;}#svg-4-2 .cluster span{color:#13100e;}#svg-4-2 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-4-2 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-4-2 rect.text{fill:none;stroke-width:0;}#svg-4-2 .icon-shape,#svg-4-2 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-2 .icon-shape p,#svg-4-2 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-4-2 .icon-shape .label rect,#svg-4-2 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-2 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-4-2 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-4-2 .node .neo-node{stroke:#1976d2;}#svg-4-2 [data-look="neo"].node rect,#svg-4-2 [data-look="neo"].cluster rect,#svg-4-2 [data-look="neo"].node polygon{stroke:url(#svg-4-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-2 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-4-2 [data-look="neo"].node path{stroke:url(#svg-4-2-gradient);stroke-width:1px;}#svg-4-2 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-2 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-4-2 [data-look="neo"].node circle{stroke:url(#svg-4-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-2 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-4-2 [data-look="neo"].icon-shape .icon{fill:url(#svg-4-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-2 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-4-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-4-2 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-2 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-2 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-4-2 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-2 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-2 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-4-2 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-2 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-2 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-4-2 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-2 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-2 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-4-2 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-2 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-2 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-4-2_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-2_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-2_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-2_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-4-2_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-2_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-2_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-2_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-2_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-2_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-2_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-4-2_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M430.047,60.5L430.047,63.333C430.047,66.167,430.047,71.833,430.047,76.833C430.047,81.833,430.047,86.167,430.047,88.333L430.047,90.5" id="svg-4-2-L_StartDebug_Phase1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_StartDebug_Phase1_0" data-points="W3sieCI6NDMwLjA0Njg3NSwieSI6NjAuNX0seyJ4Ijo0MzAuMDQ2ODc1LCJ5Ijo3Ny41fSx7IngiOjQzMC4wNDY4NzUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M430.047,169.5L430.047,172.333C430.047,175.167,430.047,180.833,430.047,185.833C430.047,190.833,430.047,195.167,430.047,197.333L430.047,199.5" id="svg-4-2-L_Phase1_Phase2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Phase1_Phase2_0" data-points="W3sieCI6NDMwLjA0Njg3NSwieSI6MTY5LjV9LHsieCI6NDMwLjA0Njg3NSwieSI6MTg2LjV9LHsieCI6NDMwLjA0Njg3NSwieSI6MjAzLjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M430.047,278.5L430.047,281.333C430.047,284.167,430.047,289.833,430.047,294.833C430.047,299.833,430.047,304.167,430.047,306.333L430.047,308.5" id="svg-4-2-L_Phase2_Phase3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Phase2_Phase3_0" data-points="W3sieCI6NDMwLjA0Njg3NSwieSI6Mjc4LjV9LHsieCI6NDMwLjA0Njg3NSwieSI6Mjk1LjV9LHsieCI6NDMwLjA0Njg3NSwieSI6MzEyLjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M577.713,365L593.651,367.833C609.59,370.667,641.467,376.333,657.405,381.333C673.344,386.333,673.344,390.667,673.344,392.833L673.344,395" id="svg-4-2-L_Phase3_CheckHyp_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Phase3_CheckHyp_0" data-points="W3sieCI6NTc3LjcxMjYwODM4MTUwMjgsInkiOjM2NX0seyJ4Ijo2NzMuMzQzNzUsInkiOjM4Mn0seyJ4Ijo2NzMuMzQzNzUsInkiOjM5OX1d" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M587.174,567.58L543.374,588.525C499.573,609.47,411.972,651.36,348.649,700.45C285.327,749.54,246.282,805.83,226.76,833.975L207.238,862.12" id="svg-4-2-L_CheckHyp_RevertDiag_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CheckHyp_RevertDiag_0" data-points="W3sieCI6NTg3LjE3NDEzODU4MjIwMzEsInkiOjU2Ny41ODAzODg1ODIyMDMxfSx7IngiOjMyNC4zNzEwOTM3NSwieSI6NjkzLjI1fSx7IngiOjIwNC45NTc4NjI0NTg2NTQ5MiwieSI6ODY1LjQwNjI1fV0=" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M179.384,865.406L171.332,836.714C163.281,808.021,147.177,750.635,139.126,694.13C131.074,637.625,131.074,582,131.074,530.125C131.074,478.25,131.074,430.125,150,403.325C168.926,376.524,206.779,371.048,225.705,368.311L244.631,365.573" id="svg-4-2-L_RevertDiag_Phase3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RevertDiag_Phase3_0" data-points="W3sieCI6MTc5LjM4Mzg1NDc0MDkwNDA3LCJ5Ijo4NjUuNDA2MjV9LHsieCI6MTMxLjA3NDIxODc1LCJ5Ijo2OTMuMjV9LHsieCI6MTMxLjA3NDIxODc1LCJ5Ijo1MjYuMzc1fSx7IngiOjEzMS4wNzQyMTg3NSwieSI6MzgyfSx7IngiOjI0OC41ODk0ODI0NzgzMjM3LCJ5IjozNjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M673.344,653.75L673.344,660.333C673.344,666.917,673.344,680.083,673.344,714.693C673.344,749.302,673.344,805.354,673.344,833.38L673.344,861.406" id="svg-4-2-L_CheckHyp_HardStop_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CheckHyp_HardStop_0" data-points="W3sieCI6NjczLjM0Mzc1LCJ5Ijo2NTMuNzV9LHsieCI6NjczLjM0Mzc1LCJ5Ijo2OTMuMjV9LHsieCI6NjczLjM0Mzc1LCJ5Ijo4NjUuNDA2MjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M767.173,559.921L829.326,582.143C891.48,604.364,1015.787,648.807,1077.94,676.945C1140.094,705.083,1140.094,716.917,1140.094,722.833L1140.094,728.75" id="svg-4-2-L_CheckHyp_BlastCheck_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CheckHyp_BlastCheck_0" data-points="W3sieCI6NzY3LjE3MjU2MjM4OTAzMTMsInkiOjU1OS45MjExODc2MTA5Njg3fSx7IngiOjExNDAuMDkzNzUsInkiOjY5My4yNX0seyJ4IjoxMTQwLjA5Mzc1LCJ5Ijo3MzIuNzV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M1064.163,974.632L1048.274,991.995C1032.385,1009.359,1000.606,1044.086,984.717,1065.491C968.828,1086.896,968.828,1094.979,968.828,1099.021L968.828,1103.063" id="svg-4-2-L_BlastCheck_AskBlast_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_BlastCheck_AskBlast_0" data-points="W3sieCI6MTA2NC4xNjMxNzczMzk5MDE1LCJ5Ijo5NzQuNjMxOTI3MzM5OTAxNX0seyJ4Ijo5NjguODI4MTI1LCJ5IjoxMDc4LjgxMjV9LHsieCI6OTY4LjgyODEyNSwieSI6MTEwNy4wNjI1fV0=" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M1216.024,974.632L1231.913,991.995C1247.803,1009.359,1279.581,1044.086,1295.47,1070.532C1311.359,1096.979,1311.359,1115.146,1311.359,1131.438C1311.359,1147.729,1311.359,1162.146,1300.786,1172.024C1290.213,1181.903,1269.066,1187.243,1258.493,1189.913L1247.919,1192.583" id="svg-4-2-L_BlastCheck_FixCode_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_BlastCheck_FixCode_0" data-points="W3sieCI6MTIxNi4wMjQzMjI2NjAwOTg1LCJ5Ijo5NzQuNjMxOTI3MzM5OTAxNX0seyJ4IjoxMzExLjM1OTM3NSwieSI6MTA3OC44MTI1fSx7IngiOjEzMTEuMzU5Mzc1LCJ5IjoxMTMzLjMxMjV9LHsieCI6MTMxMS4zNTkzNzUsInkiOjExNzYuNTYyNX0seyJ4IjoxMjQ0LjA0MTA5NDY1MzE3OTIsInkiOjExOTMuNTYyNX1d" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M968.828,1159.563L968.828,1162.396C968.828,1165.229,968.828,1170.896,979.401,1176.399C989.975,1181.903,1011.121,1187.243,1021.695,1189.913L1032.268,1192.583" id="svg-4-2-L_AskBlast_FixCode_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_AskBlast_FixCode_0" data-points="W3sieCI6OTY4LjgyODEyNSwieSI6MTE1OS41NjI1fSx7IngiOjk2OC44MjgxMjUsInkiOjExNzYuNTYyNX0seyJ4IjoxMDM2LjE0NjQwNTM0NjgyMDgsInkiOjExOTMuNTYyNX1d" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path><path d="M1140.094,1246.063L1140.094,1248.896C1140.094,1251.729,1140.094,1257.396,1140.094,1262.396C1140.094,1267.396,1140.094,1271.729,1140.094,1273.896L1140.094,1276.063" id="svg-4-2-L_FixCode_Phase5_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_FixCode_Phase5_0" data-points="W3sieCI6MTE0MC4wOTM3NSwieSI6MTI0Ni4wNjI1fSx7IngiOjExNDAuMDkzNzUsInkiOjEyNjMuMDYyNX0seyJ4IjoxMTQwLjA5Mzc1LCJ5IjoxMjgwLjA2MjV9XQ==" data-look="classic" marker-end="url(#svg-4-2_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_StartDebug_Phase1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Phase1_Phase2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Phase2_Phase3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Phase3_CheckHyp_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(361.26384, 675.60828)"><g class="label" data-id="L_CheckHyp_RevertDiag_0" transform="translate(-91.3515625, -11.25)"><foreignObject width="182.703125" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>未证实 (且累计失败 &lt; 3 次)</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_RevertDiag_Phase3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(673.34375, 693.25)"><g class="label" data-id="L_CheckHyp_HardStop_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>连续 3 个假设验证失败! (命中 3-Strike Rule)</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1140.09375, 693.25)"><g class="label" data-id="L_CheckHyp_BlastCheck_0" transform="translate(-64.15625, -11.25)"><foreignObject width="128.3125" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>假设被 100% 证实!</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(968.828125, 1078.8125)"><g class="label" data-id="L_BlastCheck_AskBlast_0" transform="translate(-51.6328125, -11.25)"><foreignObject width="103.265625" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>是 (&gt; 5 个文件)</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1311.359375, 1133.3125)"><g class="label" data-id="L_BlastCheck_FixCode_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>否 (&lt;= 5 个文件) 或人类已批准</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_AskBlast_FixCode_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_FixCode_Phase5_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-4-2-flowchart-StartDebug-0" data-look="classic" transform="translate(430.046875, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-250.90625" y="-26.25" width="501.8125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-220.90625, -11.25)"><rect></rect><foreignObject width="441.8125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>触发 /investigate: 严守铁律『未查明根因前严禁写业务修复代码』</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-2-flowchart-Phase1-1" data-look="classic" transform="translate(430.046875, 132)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 1 收集证据与锁范围: 查堆栈/数据流 -&gt; 查近 20 条 git log -&gt; 查 learnings.jsonl -&gt; 自动触发 /freeze 锁死故障模块目录!</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-2-flowchart-Phase2-3" data-look="classic" transform="translate(430.046875, 241)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 2 故障模式匹配: 对照六大生产故障模式 (竞态/空值传播/状态损坏/集成异常/配置漂移/陈旧缓存) 形成可测试根因假设</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-2-flowchart-Phase3-5" data-look="classic" transform="translate(430.046875, 338.75)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-228.9453125" y="-26.25" width="457.890625" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-198.9453125, -11.25)"><rect></rect><foreignObject width="397.890625" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 3 假设验证: 仅添加最小诊断日志或断言验证当前假设</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-2-flowchart-CheckHyp-7" data-look="classic" transform="translate(673.34375, 526.375)"><polygon points="127.375,0 254.75,-127.375 127.375,-254.75 0,-127.375" class="label-container" transform="translate(-126.875, 127.375)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-101.125, -11.25)"><rect></rect><foreignObject width="202.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>当前假设是否被实机复现证实?</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-2-flowchart-RevertDiag-9" data-look="classic" transform="translate(186.75, 891.65625)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-178.75" y="-26.25" width="357.5" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-148.75, -11.25)"><rect></rect><foreignObject width="297.5" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>立即清理回退临时诊断代码 · 提出下一个假设</p></span></div></foreignObject></g></g><g class="node default red" id="svg-4-2-flowchart-HardStop-13" data-look="classic" transform="translate(673.34375, 891.65625)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-285.84375" y="-26.25" width="571.6875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-255.84375, -11.25)"><rect></rect><foreignObject width="511.6875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>三振强制停机 (STOP)! 严禁第 4 次盲试 · 向人类汇报已排除项并请求架构会诊</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-2-flowchart-BlastCheck-15" data-look="classic" transform="translate(1140.09375, 891.65625)"><polygon points="158.90625,0 317.8125,-158.90625 158.90625,-317.8125 0,-158.90625" class="label-container" transform="translate(-158.40625, 158.90625)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-132.65625, -11.25)"><rect></rect><foreignObject width="265.3125" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 4 修复方案是否触碰 &gt; 5 个文件?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-4-2-flowchart-AskBlast-17" data-look="classic" transform="translate(968.828125, 1133.3125)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-221.53125" y="-26.25" width="443.0625" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-191.53125, -11.25)"><rect></rect><foreignObject width="383.0625" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>触发爆炸半径门禁弹窗: 需人类显式批准方可跨多文件修改</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-2-flowchart-FixCode-19" data-look="classic" transform="translate(1140.09375, 1219.8125)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-251.4296875" y="-26.25" width="502.859375" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-221.4296875, -11.25)"><rect></rect><foreignObject width="442.859375" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>执行 Fail-Before-Repair: 先写变红复现测试 -&gt; 最小 Diff 修复根因</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-2-flowchart-Phase5-23" data-look="classic" transform="translate(1140.09375, 1317.5625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>Phase 5 闭环报告: 全量测试变绿 -&gt; 释放 /freeze 锁 -&gt; 输出 DEBUG REPORT 并写入 learnings.jsonl</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-4-2-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-4-2-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-4-2-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-4-2.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 4-2 ↗</a>：`/investigate` 五阶段系统化根因排障、自动 `/freeze` 锁与三振停机（3-Strike Rule）闭环</figcaption></figure>
+<p>下面我们逐一拆解图 4-2 中五个阶段的核心工程机制：</p>
+<h3 id="4-2--h-1-phase-1根因调查与编辑半径自动锁定investigation-&amp-automatic-scope">1. Phase 1：根因调查与编辑半径自动锁定（Investigation &amp; Automatic Scope Lock）</h3>
+<p>在第一阶段，智能体处于严格的“侦探取证”状态，按顺序完成四项动作<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<ol>
+<li><strong>追踪报错堆栈与数据流向</strong>：定位异常抛出的精确行号，并顺着调用链向上回溯入参的最初来源；</li>
+<li><strong>检索最近 20 条 Git 提交历史（<code>git log -n 20</code>）</strong>：排查该故障是否由近期某次变更（即回归缺陷 Regression）直接引入；</li>
+<li><strong>检索 <code>.gstack/learnings.jsonl</code> 机构记忆库</strong>：查询本项目历史上是否曾在该模块或同类技术栈上踩过相似的坑；</li>
+<li><strong>自动挂载 <code>/freeze</code> 目录锁</strong>：一旦初步锁定故障所属的子模块目录（例如 <code>src/modules/report/</code>），<code>/investigate</code> 会<strong>自动调用底层脚本 <code>freeze-state.sh acquire</code></strong>，将文件写权限物理限制在该故障目录内<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>。这一机制从源头上防止了智能体在排障过程中“病急乱投医”、跨目录改坏无关模块！</li>
+</ol>
+<hr>
+<h3 id="4-2--h-2-phase-2匹配六大生产故障模式与三大专项排查配方pattern-analysis">2. Phase 2：匹配六大生产故障模式与三大专项排查配方（Pattern Analysis）</h3>
+<p>取证完成后，智能体不会漫无目的地乱猜，而是将收集到的症状与 GStack 归纳的 <strong>六大高频生产故障模式（Six Canonical Failure Patterns）</strong> 进行结构化比对<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>生产故障模式类别</th>
+<th>典型故障症状特征</th>
+<th>根因排查重点方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 并发竞态条件</strong>（Race Condition）</td>
+<td>本地单步调试永远正常，仅在高并发压测或生产高峰期偶发出现数据覆盖、计数错乱或死锁报错。</td>
+<td>检查是否存在非原子的“先读后写（Check-Then-Act）”、共享内存变量未加锁或事务隔离级别过低。</td>
+</tr>
+<tr>
+<td><strong>2. 空值静默传播</strong>（Nil / Null Propagation）</td>
+<td>报错崩溃的位置在下游视图或组装层，但真正的罪魁祸首是上游某处查询未命中或字段映射拼写错误返回了 <code>null / undefined</code>。</td>
+<td>严禁在报错点加 <code>?.</code> 掩盖！必须顺着调用链逆流而上，找到第一个产生非法空值的源头函数并做边界校验。</td>
+</tr>
+<tr>
+<td><strong>3. 状态损坏与不变量破环</strong>（State Corruption）</td>
+<td>某条业务记录进入了规格状态机中根本不存在的非法组合态（如订单状态为 <code>CANCELLED</code>，但关联优惠券仍为 <code>LOCKED</code>）。</td>
+<td>排查是否存在跨表更新未包裹在同一个数据库原子事务中，或异步补偿任务半途崩溃未回滚。</td>
+</tr>
+<tr>
+<td><strong>4. 外部集成异常</strong>（Integration Failure）</td>
+<td>调用第三方支付、短信、OSS 存储或下游微服务时，因对方接口超时、返回格式微调或限流（<code>429</code>）导致本方服务崩溃。</td>
+<td>检查外部客户端的超时设置、响应 Schema 容错解析、错误码映射以及降级熔断（Fallback）逻辑。</td>
+</tr>
+<tr>
+<td><strong>5. 环境配置漂移</strong>（Configuration Drift）</td>
+<td><strong>最典型的“在我电脑上明明是好的，一上远端容器就报 500”</strong>。</td>
+<td>重点对比本地与远端容器的 <strong>系统时区（如本地 <code>Asia/Shanghai</code> vs 容器默认 <code>UTC</code>）</strong>、操作系统大小写敏感度、Node/Python 小版本号、以及缺失或拼写不一致的环境变量。</td>
+</tr>
+<tr>
+<td><strong>6. 陈旧缓存污染</strong>（Stale Cache）</td>
+<td>数据库里的真实数据明明已经更新，但接口依然返回旧状态，或者部署新版本后前端因为静态资源缓存策略不当加载了旧版 JS 分片。</td>
+<td>检查缓存键（Cache Key）命名空间、写操作后的缓存失效（Cache Invalidation）时机与 TTL 过期配置。</td>
+</tr>
+</tbody></table>
+<p>此外，针对三类最令工程师头疼的顽固疑难杂症，<code>/investigate</code> 还内置了三份专项排查规程配方（Special Recipes）<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup><sup class="cite"><a href="#4-2--ref-2">[2]</a></sup>：</p>
+<ul>
+<li><strong>偶发闪烁测试配方（<code>sections/flake.md</code>）</strong>：专门排查时过时不过的测试（检查硬编码 <code>sleep</code> 等待、未固定随机种子或跨时区午夜边界时间戳）；</li>
+<li><strong>状态污染测试配方（<code>sections/polluter.md</code>）</strong>：专门排查“单独跑某条测试能过，但全量跑测试就挂”的故障（使用二分法定位哪一条前置测试修改了全局单例或未清理测试数据库表）；</li>
+<li><strong>并发竞态复现配方（<code>sections/race.md</code>）</strong>：使用并发屏障（Barrier）在本地确定性放大并复现毫秒级竞态窗口。</li>
+</ul>
+<hr>
+<h2 id="4-2--h-423-三振停机铁律3-strike-rule爆炸半径门禁与结构化排障报告">4.2.3 “三振停机铁律（3-Strike Rule）”、爆炸半径门禁与结构化排障报告</h2>
+<h3 id="4-2--h-1-phase-3科学假设验证与三振停机铁律3-strike-rule">1. Phase 3：科学假设验证与“三振停机铁律（3-Strike Rule）”</h3>
+<p>在锁定 1～2 个最可疑的故障模式后，智能体进入 <strong>Phase 3（假设验证阶段）</strong>。此时它依然不能写业务修复代码，只能通过添加最小化的临时诊断断言、打印关键变量快照或编写复现脚本来验证当前假设是否成立。</p>
+<p>为了彻底阻断智能体在错误方向上陷入死循环，GStack 在 Phase 3 立下了极其著名的 <strong>“三振停机铁律（The 3-Strike Rule）”</strong><sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<ul>
+<li><strong>第 1 次假设未证实</strong>：立即清理回退刚才添加的临时诊断代码（绝不在仓库里残留调试垃圾），基于新证据提出第 2 个根因假设；</li>
+<li><strong>第 2 次假设未证实</strong>：再次回退清理，提出第 3 个根因假设；</li>
+<li><strong>第 3 次假设仍未证实（Three Strikes — HARD STOP）</strong>：
+一旦连续 <strong>3 个</strong> 根因假设均被证实不成立，表明当前故障超出了局部代码的可见范围（可能涉及复杂的跨系统基础设施故障或深层架构缺陷）。此时，<strong>智能体被硬性禁止发起第 4 次猜测尝试！</strong> 它必须立即触发 <strong><code>[3-STRIKE RULE — STOP]</code></strong> 停机，向人类工程师完整呈报前三次已排除的假设与观测证据，并提供三个后续选项请人类裁决<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：<ol>
+<li><strong>选项 A（注入新领域线索后继续）</strong>：由熟悉生产架构的人类工程师指出新的排查方向，重置计数器继续；</li>
+<li><strong>选项 B（升级为人工架构会诊）</strong>：保存当前诊断现场，交由人类资深专家接手；</li>
+<li><strong>选项 C（植入生产可观测性埋点等待复现）</strong>：对于极低频且无法在本地复现的偶发故障，先在关键路径补充结构化追踪日志（Tracing Logs）上线观测，待捕获下一次真实复现载荷后再行根治。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="4-2--h-2-phase-4-&amp-phase-55-文件爆炸半径门禁blast-radius-gate与闭环报告">2. Phase 4 &amp; Phase 5：5 文件爆炸半径门禁（Blast Radius Gate）与闭环报告</h3>
+<p>当根因在 Phase 3 被 100% 证实（例如：证实是因为远端容器默认时区为 <code>UTC</code> 且某处日期解析函数未显式指定时区偏移，叠加空值未初始化导致跨日切分报表报错）后，才正式进入修复与收尾阶段<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</p>
+<ol>
+<li><strong>Phase 4：最小 Diff 修复与“5 文件爆炸半径门禁”</strong>：<ul>
+<li>严格遵循第 6 环的 <strong>Fail-Before-Repair</strong> 铁律：先写一条模拟该根因条件（如显式传入 <code>TZ=UTC</code> 与跨日边界时间戳）的回归测试并确认其变红失败，然后用**最小的代码改动（Minimal Diff）**修复根因；</li>
+<li><strong>5 文件爆炸半径硬门禁（Blast Radius Gate — Touches &gt; 5 Files）</strong>：一个精准的根因修复通常只需要改动 1～3 个文件。如果智能体发现修复方案需要同时修改 <strong>超过 5 个文件（<code>&gt; 5 files</code>）</strong>，系统会立即认为该修复可能演变成了高风险的大规模重构，<strong>强制弹出爆炸半径告警并暂停执行</strong>，必须经人类工程师显式确认影响范围后才允许落地<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>！</li>
+</ul>
+</li>
+<li><strong>Phase 5：全量验证、释放目录锁与输出 <code>DEBUG REPORT</code></strong>：
+修复完成后，智能体重新运行复现测试与全量回归测试集确保 100% 变绿，调用 <code>freeze-state.sh release</code> <strong>自动释放 Phase 1 挂载的 <code>/freeze</code> 目录锁</strong>，向人类输出一份标准化的 <strong><code>DEBUG REPORT</code>（结构化排障报告）</strong>，并将本次故障的“症状 → 根因 → 避坑准则”写入 <code>.gstack/learnings.jsonl</code> 持久化沉淀<sup class="cite"><a href="#4-2--ref-1">[1]</a></sup>：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><code>DEBUG REPORT</code> 标准章节</th>
+<th>必须包含的核心工程记录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 故障症状与复现条件</strong>（Symptom &amp; Reproduction）</td>
+<td>精确的报错堆栈、HTTP 状态码、触发该故障所需的特定输入载荷与环境条件（如容器时区、并发度）。</td>
+</tr>
+<tr>
+<td><strong>2. 已验证的根本原因</strong>（Verified Root Cause）</td>
+<td>命中的故障模式类别、缺陷所在的精确文件与行号，以及为什么原有单元测试未能拦截该缺陷的根因剖析。</td>
+</tr>
+<tr>
+<td><strong>3. 已排除的干扰假设</strong>（Ruled-Out Hypotheses）</td>
+<td>记录在 Phase 3 中曾怀疑但经实测排除的假设（为团队保留完整的排障推理链条）。</td>
+</tr>
+<tr>
+<td><strong>4. 最小修复 Diff 与回归测试</strong>（Fix &amp; Regression Guard）</td>
+<td>本次修改的文件列表、修复前后核心逻辑对比，以及新增的防复发回归测试用例路径。</td>
+</tr>
+<tr>
+<td><strong>5. 机构记忆沉淀条目</strong>（Captured Learning）</td>
+<td>提炼出的一句话工程避坑铁律（自动同步至 <code>.gstack/learnings.jsonl</code>，防止团队未来再犯同类错误）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-2--h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在系统化故障排查与缺陷修复中，团队必须坚决杜绝以下五类反模式：</p>
+<ol>
+<li><strong>违背最高铁律，在未查明根因前直接让 AI 盲目改代码试错</strong>：一看到报错堆栈就让智能体“赶紧修好”，导致其在不理解上下文的情况下乱打补丁。</li>
+<li><strong>在下游报错位置用 <code>?.</code> 或空 <code>catch {}</code> 静默吞掉异常（治标不治本）</strong>：遇到空指针或数据格式异常时，不回溯上游产生脏数据的源头，而在消费端强行容错吞掉报错，导致脏数据静默流入生产数据库。</li>
+<li><strong>排障时不开启 <code>/freeze</code> 目录锁，在修 A 模块 Bug 时顺手改坏 B 模块</strong>：在全仓可写状态下放任智能体东一榔头西一棒子地修改公共配置与无关业务代码。</li>
+<li><strong>无视“三振停机铁律（3-Strike Rule）”，连续失败四五次仍在盲目叠补丁</strong>：当连续 3 次假设都不对时，不清理回退前序错误补丁、也不停机呼叫人类架构会诊，最终把工作区改得面目全非。</li>
+<li><strong>在排障修复中顺手发起跨十几个文件的大规模重构（突破 5 文件爆炸半径门禁）</strong>：将紧急故障修复与大范围代码美化混为一谈，极大增加了修复引入二次线上故障的风险。</li>
+</ol>
+<hr>
+<h2 id="4-2--h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong>最高排障铁律终结盲目打地鼠</strong>：严格恪守 <strong><code>NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST</code></strong>——在根因未被证实前，禁止写任何一行业务修复代码。</li>
+<li><strong>前两阶段实现科学取证与模式定位</strong>：<strong>Phase 1</strong> 综合报错堆栈、近 20 条 <code>git log</code> 与 <code>learnings.jsonl</code> 锁定范围，并自动触发 <strong><code>/freeze</code></strong> 物理锁死故障目录；<strong>Phase 2</strong> 对照<strong>六大生产故障模式</strong>（并发竞态、空值传播、状态损坏、外部集成异常、配置漂移、陈旧缓存）与三大专项配方形成可测试假设。</li>
+<li><strong>三振停机与爆炸半径门禁守住安全底线</strong>：<strong>Phase 3</strong> 强制执行 <strong>3-Strike Rule（连续 3 次假设验证失败立即强制 STOP 停机汇报人类）</strong>；<strong>Phase 4 &amp; 5</strong> 执行先败后修与 <strong>5 文件爆炸半径门禁（<code>&gt; 5 files</code> 强制确认）</strong>，最终释放目录锁、输出 <code>DEBUG REPORT</code> 并沉淀至 <code>learnings.jsonl</code>。</li>
+</ol>
+<hr>
+<h2 id="4-2--h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能背出 <code>/investigate</code> 的最高调试铁律，并解释为什么在下游报错点直接加 <code>?.</code> 吞掉空值是一种高危的工程反模式吗？</li>
+<li><input disabled="" type="checkbox"> 我能完整说出 <code>/investigate</code> 五个阶段（Phases 1–5）的标准动作，并解释为什么 Phase 1 要自动调用 <code>/freeze</code> 锁定故障模块目录吗？</li>
+<li><input disabled="" type="checkbox"> 我能列举六大生产故障模式的名称，并结合“本地开发环境正常、一上远端容器就报错”的现象精准定位到“环境配置漂移（Configuration Drift）”吗？</li>
+<li><input disabled="" type="checkbox"> 我能准确说出触发“三振停机铁律（3-Strike Rule）”与“爆炸半径门禁（Blast Radius Gate）”的量化阈值（<code>3 次</code>假设失败、<code>&gt; 5 个</code>修改文件）及触发后的标准处置动作吗？</li>
+</ul>
+<hr>
+<h2 id="4-2--h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="4-2--h-基础辨析六大生产故障模式诊断与最高铁律">基础辨析：六大生产故障模式诊断与最高铁律</h3>
+<ol>
+<li><strong>故障模式精准对号</strong>：以下是某研发团队近期遇到的四个真实线上故障现象。请对照本节 Phase 2 的<strong>六大生产故障模式</strong>，逐一判断每个现象最可能属于哪一类故障模式：<ul>
+<li>现象甲：某营销活动配置在后台管理界面已经修改并提示“保存成功”，数据库中字段也已更新，但消费者端小程序在接下来的 30 分钟内刷出来的依然是旧的活动规则；</li>
+<li>现象乙：某日报表生成接口在全员 Mac 笔记本本地开发环境下测试 100% 通过，但部署到 Linux Alpine 容器后，每天凌晨 <code>00:30</code>（北京时间）生成的报表总是把当天凌晨的订单算进前一天，且偶发因找不到系统中文字体包而崩溃；</li>
+<li>现象丙：某积分兑换接口在平时运行良好，但在周五中午 12 点整秒杀开启瞬间，有 3 名仅剩 100 积分的用户通过脚本并发发起 5 次兑换请求，成功兑走了 5 件需要 100 积分的商品，账户积分变成了 <code>-400</code>；</li>
+<li>现象丁：某订单详情页面突然报错 <code>Cannot read property &#39;province&#39; of null</code>，排查发现是因为三天前导入的一批历史迁移订单缺少收货地址扩展记录，而查询接口在组装 DTO 时未做历史数据兼容，将 <code>null</code> 一路传到了前端模板。</li>
+</ul>
+</li>
+<li><strong>三振停机（3-Strike Rule）情景判断</strong>：智能体在排查一个“WebSocket 连接每 65 秒自动断开”的故障时，先后提出了 3 个假设：假设 1（前端心跳包定时器未启动）经查日志排除；假设 2（后端 JWT 令牌 60 秒过期）经查配置排除；假设 3（数据库连接池超时断开）经抓包排除。此时智能体准备自己提出第 4 个假设并去修改 WebSocket 底层重连代码。请问智能体的行为是否合规？按 <code>/investigate</code> 规程此时应立即执行什么动作？</li>
+</ol>
+<h3 id="4-2--h-进阶分析重构一次失控的打地鼠式排障现场">进阶分析：重构一次失控的“打地鼠式排障”现场</h3>
+<p>回顾这样一个典型的失控排障案例：
+某初级工程师发现线上“导出月度 PDF 对账单”接口返回 <code>500</code> 错误。他没有看日志，直接把报错贴给 AI。</p>
+<ul>
+<li>第 1 轮：AI 猜是内存不够，修改了 <code>Dockerfile</code> 调大内存限制；</li>
+<li>第 2 轮：部署后还是报 <code>500</code>，AI 又猜是查询太慢超时，跑去改了公共数据库连接池配置文件 <code>src/db/pool.ts</code> 和全局路由超时中间件；</li>
+<li>第 3 轮：依然报错，AI 又去把 PDF 渲染函数里所有的报错全部用 <code>try { ... } catch (e) { return null; }</code> 包了起来。结果接口不再报 <code>500</code> 了，而是给商户下载了一个空白的 0 字节损坏文件，且因为乱改了 <code>src/db/pool.ts</code> 导致整个系统的登录接口开始出现连接泄漏！</li>
+</ul>
+<p>请作为技术负责人，运用本节的 <code>/investigate</code> 五阶段工作流对该排障过程进行彻底复盘与纠正：</p>
+<ol>
+<li>指出上述过程中违反了 <code>/investigate</code> 的哪几条硬性门禁与铁律；</li>
+<li>写出如果严格按照 Phase 1 ～ Phase 5 执行，应该如何安全、精准地定位并修复该问题。</li>
+</ol>
+<h3 id="4-2--h-迁移研讨建立你项目的《高频环境配置漂移configuration-drift核查表》">迁移研讨：建立你项目的《高频环境配置漂移（Configuration Drift）核查表》</h3>
+<p>结合你当前项目的技术栈与部署架构：</p>
+<ol>
+<li>列出至少 4 项在“本地开发机（Windows/macOS）”与“远端部署环境（Linux Docker 容器/云平台）”之间最容易发生**配置漂移（Configuration Drift）**的具体维度（如系统时区 <code>TZ</code>、文件路径大小写敏感度、行尾换行符 <code>CRLF/LF</code>、环境变量注入、系统级原生依赖库等）；</li>
+<li>将这 4 项检查固化为你项目 <code>AGENTS.md</code> 或排障 Skill 中的标准预检清单。</li>
+</ol>
+<hr>
+<h2 id="4-2--h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>至此，我们已经掌握了在系统上线运行后如何运用 <code>/investigate</code> 科学排障、稳准狠地消除线上隐患。</p>
+<p>当一个完整的迭代周期（从第 1 环 <code>/office-hours</code> 到第 7 环 <code>/ship</code> 部署及线上排障）走完全程，前七环收官后，我们进入八环闭环的最后一环——<strong>如何用真实的 Git 数据量化复盘整个周期的工程质量（第 8 环 <code>/retro</code>）？如何将这两天踩过的所有坑转化为团队越用越聪明的机构记忆复利（<code>/learn</code> 与 GBrain）？以及如何将这套 GStack 八环方法论扩展到 10 路并行的多智能体软件工厂，并迁移应用到企业最常见的五大真实研发场景中？</strong></p>
+<p>请翻开下一节**【单元 4.3】《第 8 环 /retro + /learn：量化复盘、多智能体并行工厂与五大场景迁移》**！</p>
+<hr>
+<h2 id="4-2--h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="4-2--ref-1"><strong>[1] GStack 系统化根因调试器官方规范：</strong> Garry Tan (Y Combinator), <em>gstack <code>investigate/SKILL.md</code> &amp; Skill Deep Dives: <code>/investigate</code> (Five-Phase Root Cause Debugger)</em>（重点研读最高调试铁律、自动 <code>/freeze</code>、六大故障模式、三振停机铁律与 5 文件爆炸半径门禁），<a href="https://github.com/garrytan/gstack/blob/main/investigate/SKILL.md">GitHub 官方技能源码</a>。</li>
+<li id="4-2--ref-2"><strong>[2] 偶发测试与并发竞态专项排查配方：</strong> Garry Tan, <em>gstack Investigate Recipes: <code>sections/flake.md</code>, <code>sections/polluter.md</code> &amp; <code>sections/race.md</code></em>（查阅偶发闪烁测试、测试间状态污染与并发竞态的确定性复现方法），<a href="https://github.com/garrytan/gstack/tree/main/investigate">GitHub 官方仓库</a>。</li>
+</ol>
+</article>
+    </section>
+<section class="print-unit">
+      <h1 class="">4.3　第 8 环 <code>/retro</code> + <code>/learn</code></h1>
+      <p class="lede">量化复盘、多智能体并行工厂与五大场景迁移</p>
+      <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">前四章（确定性软件工程）的收官单元，对应 GStack 八环中的第 8 环 <strong>量化复盘与机构记忆沉淀（Retro &amp; Learn）</strong>，并向上延伸至高阶多智能体并行软件工厂与五大通用行业场景迁移指南。本节首先拆解 <code>/retro</code>（工程经理量化复盘）如何秉持“不靠感觉靠数据（Not vibes — data）”原则，基于真实 Git 历史核算测试占比（<code>Test Ratio &gt;= 20%</code>）、修复率、高频热点文件并回收全仓 <code>gstack-shortcut</code> 技术债账本；进而剖析 <code>/learn</code> 与 GBrain 知识库如何将排障与审查经验沉淀为下一次自动触发 <code>&quot;Prior learning applied&quot;</code> 的机构记忆复利；随后拓展展示如何利用 Git Worktree 驾驭 10～15 路并行 AI 冲刺会话、如何用 <code>/eval-plan</code> 开展 AI 应用科学评测；最后给出覆盖全栈 Web/SaaS、企业审批后台、高并发 API/数据管道、CLI/SDK 工具及 DevOps 运维自动化的 <strong>五大通用场景迁移矩阵与五维实训验收标准</strong>，闭合整个现代 AI 软件工程飞轮。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、架构师、研发效能负责人、工程经理（EM）、技术总监。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 4.2 学习，完整掌握 GStack 前七环方法论与运行支撑机制（Harness）治理架构。</span></div></div>
+      <article class="prose"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>解释第 8 环 <code>/retro</code> 的数据驱动复盘机制：读出一个迭代周期的各项 Git 量化指标（特别是 <code>Test Ratio &lt; 20%</code> 红灯预警与 <code>Hotspot Files</code> 热点文件分析）、<code>gstack-shortcut</code> 技术债账本自动盘点及 <code>/retro global</code> 跨项目全局复盘结果。</li>
+<li>核验 <code>/learn</code> 机构记忆管理与 GBrain 跨项目知识库飞轮：区分 <code>learnings.jsonl</code> 的六大分类与置信度评分，判断过期条目的自动清理时机，并说明后续技能启动时自动注入 <code>&quot;Prior learning applied&quot;</code> 的复利路径。</li>
+<li>定位高阶工程范式：解释基于 Git Worktree 的 10～15 路多智能体并行软件工厂（含 <code>/landing-report</code> 与 <code>/pair-agent</code>）如何隔离并行冲突，并写出针对大模型业务应用的 <code>/eval-plan</code> 四步科学评测工程（预注册 → <code>$0</code> Stub 干跑 → 3 样本计费试跑成本外推 → 正式基准评测）。</li>
+<li>能够根据自身所处的真实业务领域，熟练套用 <strong>五大通用软件研发场景定制化迁移策略</strong> 与 <strong>五维里程碑准出物验收表</strong>，在日常工作中全面落地规范驱动开发（SDD）。</li>
+</ol>
+<hr>
+<h2 id="4-3--h-431-第-8-环-retro-数据驱动量化复盘与-learn-机构记忆复利飞轮">4.3.1 第 8 环 <code>/retro</code> 数据驱动量化复盘与 <code>/learn</code> 机构记忆复利飞轮</h2>
+<p>在传统敏捷开发中，迭代复盘会（Sprint Retrospective）往往流于形式——大家凭主观印象聊几句“这周感觉挺忙的”、“下次注意多写测试”，既没有客观数据支撑，也没有任何机制保证下次不再犯同样的错误。</p>
+<p>GStack 的第 8 环通过 <strong><code>/retro</code>（数据驱动的工程经理）</strong> 与 <strong><code>/learn</code>（机构记忆沉淀器）</strong> 的双剑合璧，将迭代复盘改造为精密的数据审计与记忆复利闭环<sup class="cite"><a href="#4-3--ref-1">[1]</a></sup><sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>。</p>
+<h3 id="4-3--h-1-not-vibes-—-data不靠感觉靠数据retro-的-git-量化指标与技术债回收">1. “Not Vibes — Data（不靠感觉靠数据）”：<code>/retro</code> 的 Git 量化指标与技术债回收</h3>
+<p>当一个迭代周期收官时，运行 <code>/retro</code>（或运行 <code>/retro global</code> 跨本机所有代码仓库与 AI 编程工具做全局汇总），系统会直接深度解析 Git 提交历史与代码树，自动核算并输出以下 <strong>六大核心工程健康度指标</strong><sup class="cite"><a href="#4-3--ref-1">[1]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th><code>/retro</code> 量化审计维度</th>
+<th>数据采集口径与核心警戒线</th>
+<th>工程治理与改进指导意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 测试代码占比</strong>（<code>Test Ratio</code>）</td>
+<td>统计本周期新增/修改的测试代码行数占总净逻辑代码行数（LOC）的比例；<strong>官方硬性警戒线为 <code>&gt;= 20%</code></strong>。</td>
+<td><strong>一旦 <code>Test Ratio &lt; 20%</code>，<code>/retro</code> 立即亮起红灯预警</strong>，将其列为下周期首要整改项，防止项目退化为缺乏回归保护的脆弱代码库。</td>
+</tr>
+<tr>
+<td><strong>2. 修复提交占比</strong>（<code>Fix Ratio</code>）</td>
+<td>统计 <code>fix:</code> / <code>hotfix:</code> 类缺陷修复提交占总提交数（Commits）的比例。</td>
+<td>若 <code>Fix Ratio</code> 异常偏高，说明前序第 2 环 <code>/spec</code> 或第 5 环 <code>/review</code> 门禁执行不严，大量缺陷漏到了施工后期才被动修补。</td>
+</tr>
+<tr>
+<td><strong>3. 高频变更热点文件</strong>（<code>Hotspot Files</code>）</td>
+<td>识别在本周期内被反复修改次数最多的 Top 5 源码文件。</td>
+<td>一个文件被反复修改十几次，往往意味着该模块<strong>职责过重（上帝类）、抽象边界不清或测试极度脆弱</strong>，是下周期架构重构的头号靶点。</td>
+</tr>
+<tr>
+<td><strong>4. PR 平均规模与原子性</strong>（<code>PR Size &amp; Granularity</code>）</td>
+<td>核算单次提交与单个 PR 的平均改动行数及文件跨度。</td>
+<td>检验团队是否真正落实了第 4 环的“小步原子提交”纪律，揪出动辄上千行的巨型混杂提交。</td>
+</tr>
+<tr>
+<td><strong>5. 交付节奏与最大成果</strong>（<code>Streaks &amp; Biggest Ship</code>）</td>
+<td>统计编码活跃峰值时段、连续稳定交付天数（Streaks）以及本周期最具价值的里程碑交付项。</td>
+<td>赋能团队管理：自动生成针对每位团队成员的具体亮点表扬（Praise）与个性化工程成长建议。</td>
+</tr>
+<tr>
+<td><strong>6. 显式技术债账本回收</strong>（<code>Technical Debt Ledger</code>）</td>
+<td>自动全仓扫描所有带有 <strong><code>gstack-shortcut(dec-id)</code></strong> 标记的源码注释。</td>
+<td>将第 4 环施工期获批的所有临时捷径汇总成表，逐条核对当前业务规模是否已触发其声明的 <code>upgrade when</code> 阈值，确保技术债笔笔有账、按期偿还！</td>
+</tr>
+</tbody></table>
+<p>每次运行结束后，<code>/retro</code> 会将结构化的 JSON 趋势快照保存至仓库的 <code>.context/retros/</code> 目录下，支持跨周、跨月进行工程效能趋势对比<sup class="cite"><a href="#4-3--ref-1">[1]</a></sup>。</p>
+<hr>
+<h3 id="4-3--h-2-learn-与-gbrain-知识库打造吃一堑长一智的机构记忆复利">2. <code>/learn</code> 与 GBrain 知识库：打造“吃一堑、长一智”的机构记忆复利</h3>
+<p>如果一个团队在周二花了两小时用 <code>/investigate</code> 查明了一个“Alpine 容器缺失时区包导致跨日切分报错”的隐蔽故障，但到了下个月开发新报表时，新开启的智能体会话又把同样的错犯了一遍——这说明团队只有“个人临时记忆”，没有建立**“机构持久化记忆（Institutional Memory）”**。</p>
+<p>为此，GStack 构建了由 <strong><code>/learn</code>（项目级记忆库）</strong> 与 <strong>GBrain（跨项目组织级知识大脑）</strong> 组成的记忆复利飞轮<sup class="cite"><a href="#4-3--ref-1">[1]</a></sup><sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>：</p>
+<figure class="fig" id="4-3--fig-4-3"><div class="fig-scroll"><svg id="svg-4-3" width="1106.3125" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="655" viewBox="0 0 1106.3125 655" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-4-3{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-4-3 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-4-3 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-4-3 .error-icon{fill:#eceff1;}#svg-4-3 .error-text{fill:#13100e;stroke:#13100e;}#svg-4-3 .edge-thickness-normal{stroke-width:1px;}#svg-4-3 .edge-thickness-thick{stroke-width:3.5px;}#svg-4-3 .edge-pattern-solid{stroke-dasharray:0;}#svg-4-3 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-4-3 .edge-pattern-dashed{stroke-dasharray:3;}#svg-4-3 .edge-pattern-dotted{stroke-dasharray:2;}#svg-4-3 .marker{fill:#607d8b;stroke:#607d8b;}#svg-4-3 .marker.cross{stroke:#607d8b;}#svg-4-3 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-4-3 p{margin:0;}#svg-4-3 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-4-3 .cluster-label text{fill:#13100e;}#svg-4-3 .cluster-label span{color:#13100e;}#svg-4-3 .cluster-label span p{background-color:transparent;}#svg-4-3 .label text,#svg-4-3 span{fill:#17324d;color:#17324d;}#svg-4-3 .node rect,#svg-4-3 .node circle,#svg-4-3 .node ellipse,#svg-4-3 .node polygon,#svg-4-3 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-4-3 .rough-node .label text,#svg-4-3 .node .label text,#svg-4-3 .image-shape .label,#svg-4-3 .icon-shape .label{text-anchor:middle;}#svg-4-3 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-4-3 .rough-node .label,#svg-4-3 .node .label,#svg-4-3 .image-shape .label,#svg-4-3 .icon-shape .label{text-align:center;}#svg-4-3 .node.clickable{cursor:pointer;}#svg-4-3 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-4-3 .arrowheadPath{fill:#0b0b0b;}#svg-4-3 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-4-3 .flowchart-link{stroke:#607d8b;fill:none;}#svg-4-3 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-3 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-3 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-3 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-4-3 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-4-3 .cluster text{fill:#13100e;}#svg-4-3 .cluster span{color:#13100e;}#svg-4-3 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-4-3 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-4-3 rect.text{fill:none;stroke-width:0;}#svg-4-3 .icon-shape,#svg-4-3 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-3 .icon-shape p,#svg-4-3 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-4-3 .icon-shape .label rect,#svg-4-3 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-3 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-4-3 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-4-3 .node .neo-node{stroke:#1976d2;}#svg-4-3 [data-look="neo"].node rect,#svg-4-3 [data-look="neo"].cluster rect,#svg-4-3 [data-look="neo"].node polygon{stroke:url(#svg-4-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-3 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-4-3 [data-look="neo"].node path{stroke:url(#svg-4-3-gradient);stroke-width:1px;}#svg-4-3 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-3 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-4-3 [data-look="neo"].node circle{stroke:url(#svg-4-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-3 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-4-3 [data-look="neo"].icon-shape .icon{fill:url(#svg-4-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-3 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-4-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-3 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-4-3 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-3 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-3 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-4-3 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-3 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-3 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-4-3 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-3 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-3 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-4-3 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-3 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-3 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-4-3 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-3 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-3 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-4-3_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-3_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-3_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-3_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-4-3_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-3_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-3_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-3_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-3_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-3_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-3_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-4-3_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M548.293,60.5L548.293,63.333C548.293,66.167,548.293,71.833,548.293,76.833C548.293,81.833,548.293,86.167,548.293,88.333L548.293,90.5" id="svg-4-3-L_Source_Extract_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Source_Extract_0" data-points="W3sieCI6NTQ4LjI5Mjk2ODc1LCJ5Ijo2MC41fSx7IngiOjU0OC4yOTI5Njg3NSwieSI6NzcuNX0seyJ4Ijo1NDguMjkyOTY4NzUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M548.293,147L548.293,149.833C548.293,152.667,548.293,158.333,548.293,163.333C548.293,168.333,548.293,172.667,548.293,174.833L548.293,177" id="svg-4-3-L_Extract_WriteJsonl_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Extract_WriteJsonl_0" data-points="W3sieCI6NTQ4LjI5Mjk2ODc1LCJ5IjoxNDd9LHsieCI6NTQ4LjI5Mjk2ODc1LCJ5IjoxNjR9LHsieCI6NTQ4LjI5Mjk2ODc1LCJ5IjoxODF9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M548.293,233.5L548.293,236.333C548.293,239.167,548.293,244.833,548.293,249.833C548.293,254.833,548.293,259.167,548.293,261.333L548.293,263.5" id="svg-4-3-L_WriteJsonl_Schema_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_WriteJsonl_Schema_0" data-points="W3sieCI6NTQ4LjI5Mjk2ODc1LCJ5IjoyMzMuNX0seyJ4Ijo1NDguMjkyOTY4NzUsInkiOjI1MC41fSx7IngiOjU0OC4yOTI5Njg3NSwieSI6MjY3LjV9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M369.38,342.5L355.863,345.333C342.345,348.167,315.309,353.833,301.791,358.833C288.273,363.833,288.273,368.167,288.273,370.333L288.273,372.5" id="svg-4-3-L_Schema_Prune_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Schema_Prune_0" data-points="W3sieCI6MzY5LjM4MDQ0NzI0NzcwNjQ2LCJ5IjozNDIuNX0seyJ4IjoyODguMjczNDM3NSwieSI6MzU5LjV9LHsieCI6Mjg4LjI3MzQzNzUsInkiOjM3Ni41fV0=" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M727.205,342.5L740.723,345.333C754.241,348.167,781.277,353.833,794.795,358.833C808.313,363.833,808.313,368.167,808.313,370.333L808.313,372.5" id="svg-4-3-L_Schema_NextSprint_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Schema_NextSprint_0" data-points="W3sieCI6NzI3LjIwNTQ5MDI1MjI5MzUsInkiOjM0Mi41fSx7IngiOjgwOC4zMTI1LCJ5IjozNTkuNX0seyJ4Ijo4MDguMzEyNSwieSI6Mzc2LjV9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M808.313,429L808.313,431.833C808.313,434.667,808.313,440.333,808.313,445.333C808.313,450.333,808.313,454.667,808.313,456.833L808.313,459" id="svg-4-3-L_NextSprint_AutoInject_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_NextSprint_AutoInject_0" data-points="W3sieCI6ODA4LjMxMjUsInkiOjQyOX0seyJ4Ijo4MDguMzEyNSwieSI6NDQ2fSx7IngiOjgwOC4zMTI1LCJ5Ijo0NjN9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path><path d="M808.313,538L808.313,540.833C808.313,543.667,808.313,549.333,808.313,554.333C808.313,559.333,808.313,563.667,808.313,565.833L808.313,568" id="svg-4-3-L_AutoInject_ZeroRepeat_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_AutoInject_ZeroRepeat_0" data-points="W3sieCI6ODA4LjMxMjUsInkiOjUzOH0seyJ4Ijo4MDguMzEyNSwieSI6NTU1fSx7IngiOjgwOC4zMTI1LCJ5Ijo1NzJ9XQ==" data-look="classic" marker-end="url(#svg-4-3_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Source_Extract_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Extract_WriteJsonl_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_WriteJsonl_Schema_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Schema_Prune_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Schema_NextSprint_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_NextSprint_AutoInject_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_AutoInject_ZeroRepeat_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-4-3-flowchart-Source-0" data-look="classic" transform="translate(548.29296875, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-254.125" y="-26.25" width="508.25" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-224.125, -11.25)"><rect></rect><foreignObject width="448.25" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第 5 环 /review · 第 6 环 /qa · 第 7 环 /investigate · 第 8 环 /retro</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-3-flowchart-Extract-1" data-look="classic" transform="translate(548.29296875, 120.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-154.8203125" y="-26.25" width="309.640625" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-124.8203125, -11.25)"><rect></rect><foreignObject width="249.640625" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>触发 /learn: 提炼工程规律与踩坑教训</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-3-flowchart-WriteJsonl-3" data-look="classic" transform="translate(548.29296875, 207.25)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-216.625" y="-26.25" width="433.25" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-186.625, -11.25)"><rect></rect><foreignObject width="373.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>结构化写入 ~/.gstack/projects/$SLUG/learnings.jsonl</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-3-flowchart-Schema-5" data-look="classic" transform="translate(548.29296875, 305)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>记录六大分类 (pattern / pitfall / preference / architecture / tool / operational) + 1~10 置信度 + 关联文件路径</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-4-3-flowchart-Prune-7" data-look="classic" transform="translate(288.2734375, 402.75)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-280.2734375" y="-26.25" width="560.546875" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-250.2734375, -11.25)"><rect></rect><foreignObject width="500.546875" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>自动保鲜机制: 检测到关联源码文件被删除或重构时 · 自动标记清理过期条目</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-3-flowchart-NextSprint-9" data-look="classic" transform="translate(808.3125, 402.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-217.765625" y="-26.25" width="435.53125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-187.765625, -11.25)"><rect></rect><foreignObject width="375.53125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>下一轮迭代启动 /spec · /autoplan · /review 或受控施工</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-3-flowchart-AutoInject-11" data-look="classic" transform="translate(808.3125, 500.5)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>系统自动检索匹配当前操作目录的记忆条目 -&gt; 终端弹出『Prior learning applied』!</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-3-flowchart-ZeroRepeat-13" data-look="classic" transform="translate(808.3125, 609.5)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>智能体在写代码前即主动避开历史陷阱 · 实现『吃一堑、长一智』的机构记忆复利</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-4-3-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-4-3-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-4-3-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-4-3.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 4-3 ↗</a>：第 8 环 `/learn`（`learnings.jsonl`）驱动 GStack 八环持续进化的机构记忆复利飞轮</figcaption></figure>
+<p>如图 4-3 所示，这一记忆系统的运作机制极为精巧<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>：</p>
+<ol>
+<li><strong>六大结构化记忆分类与置信度评级</strong>：
+调用 <code>/learn</code> 时，经验条目被按 JSON Lines 格式追加写入项目的 <code>learnings.jsonl</code> 中。每条记录明确归属六大类别之一：<strong><code>pattern</code>（推荐复用的代码模式）</strong>、<strong><code>pitfall</code>（必须避开的踩坑陷阱）</strong>、<strong><code>preference</code>（团队架构与审美偏好）</strong>、<strong><code>architecture</code>（核心模块边界约定）</strong>、<strong><code>tool</code>（工具链与命令行诀窍）</strong> 或 <strong><code>operational</code>（部署与运维环境特性）</strong>，并附带 <code>1–10</code> 的置信度评分与关联的源码文件路径。</li>
+<li><strong>自动过期清理与 <code>&quot;Prior learning applied&quot;</code> 自动注入</strong>：
+为了防止陈旧经验误导未来开发，系统会自动检查每条记忆关联的源码文件路径——一旦对应文件在后续重构中被删除，系统会自动将该条目识别为陈旧记录并提请清理；而在开启新一轮 <code>/spec</code>、<code>/autoplan</code> 或 <code>/review</code> 时，系统会自动检索与当前任务相关的历史记忆，并在终端醒目提示 <strong><code>&quot;Prior learning applied&quot;</code></strong>，让智能体在动手前就自动避开所有已知的雷区<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>！</li>
+<li><strong>GBrain 跨项目知识库升级（<code>/setup-gbrain</code> &amp; <code>/sync-gbrain</code>）</strong>：
+对于拥有数十个代码仓库的中大型研发组织，还可以进一步运行 <code>/setup-gbrain</code> 与 <code>/sync-gbrain</code>，将各项目的代码结构与 <code>learnings.jsonl</code> 同步索引至本地 <strong>PGLite</strong> 或远端 <strong>Supabase MCP 向量知识库</strong>中，并实施严格的三级仓库信任隔离（<strong><code>read-write</code> 可读写核心库 / <code>read-only</code> 只读公共参考库 / <code>deny</code> 涉密隔离库</strong>），实现跨团队、跨项目的工程智慧共享<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>。</li>
+</ol>
+<hr>
+<h2 id="4-3--h-432-高阶视野拓展多智能体并行软件工厂与-ai-应用科学评测工程eval-plan">4.3.2 高阶视野拓展：多智能体并行软件工厂与 AI 应用科学评测工程（<code>/eval-plan</code>）</h2>
+<p>当一名工程师彻底熟练掌握了单线程的 GStack 八环闭环后，他的产能上限将迎来第二次指数级跃迁——从“单兵操作一个编码智能体（Coding Agent）会话”升级为“调度多智能体并行软件工厂”<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>。</p>
+<h3 id="4-3--h-1-git-worktree-+-conductor10～15-路并行冲刺软件工厂与-pair-agent">1. Git Worktree + Conductor：10～15 路并行冲刺软件工厂与 <code>/pair-agent</code></h3>
+<p>为什么传统开发者同一时间只能做一个需求？因为在单个本地目录下频繁 <code>git checkout</code> 切换分支会打断编译缓存与未提交代码。
+而在现代 AI IDE（CodeBuddy、TRAE 以及 GStack 配套的 Conductor 编排器）中，均原生支持基于 <strong>Git Worktree（多工作树物理隔离）</strong> 的并行会话管理<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>：</p>
+<ul>
+<li><strong>一人指挥 10～15 路并行冲刺（Parallel Sprints）</strong>：
+利用 Git Worktree 为每个特性分支挂载独立的物理目录与端口，一名资深工程师可以像工程副总裁（VP of Engineering）一样，在同一台机器上同时驱动 10～15 个处于不同 GStack 环节点的智能体会话：<ul>
+<li><strong>工作区 1</strong>：正在运行第 1 环 <code>/office-hours</code> 构思下周的新产品特性；</li>
+<li><strong>工作区 2</strong>：正在运行第 3 环 <code>/autoplan</code> 对第二个需求进行四方流水线会审；</li>
+<li><strong>工作区 3～6</strong>：开启 <code>/guard</code> 护栏，正在四个完全隔离的 Worktree 目录中全速推进第 4 环受控编码施工；</li>
+<li><strong>工作区 7～8</strong>：正在运行第 5 环 <code>/review</code> + <code>/cso</code> 与第 6 环 <code>/qa</code> 实机浏览器测试；</li>
+<li><strong>全局统筹看板（<code>/landing-report</code>）</strong>：面对多路并发推进的分支，工程师只需运行 <strong><code>/landing-report</code></strong>，即可生成一份全局发版队列就绪看板（按各分支的审查凭据状态、QA 健康度评分与冲突风险排序），有条不紊地依次执行第 7 环 <code>/ship</code> 合入上限<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>。</li>
+</ul>
+</li>
+<li><strong><code>/pair-agent</code> 跨厂商智能体浏览器协同</strong>：
+当需要在同一个复杂的 Web 环境里让不同特长的智能体（如 Claude Code、Codex、Cursor 或 OpenClaw）协同完成任务时，GStack 的 <strong><code>/pair-agent</code></strong> 支持通过受控授权令牌（Scoped Token）与浏览器标签页隔离（Tab Isolation），将同一个浏览器守护进程安全共享给多个异构智能体协同操作<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>。</li>
+</ul>
+<hr>
+<h3 id="4-3--h-2-ai-应用与提示词的科学评测工程eval-plan-与-gstack-model-benchmark">2. AI 应用与提示词的科学评测工程：<code>/eval-plan</code> 与 <code>gstack-model-benchmark</code></h3>
+<p>在许多现代业务系统中，我们开发的软件本身就需要调用大语言模型 API（例如开发智能工单分类器、合同条款风险提取器或企业知识库 RAG 问答服务）。
+在调试这类 AI 原生业务功能时，最常见的败家行为是：<strong>每次改完一句业务提示词，就直接拿 1,000 条真实样本去跑昂贵的旗舰模型 API——跑完一轮花掉几百美元，却因为事先没有定义清晰的合格线与对照组，根本说不清到底是变好了还是变差了！</strong></p>
+<p>为了将严谨的实验科学引入 AI 应用开发，GStack 提供了 <strong><code>/eval-plan</code>（评测预注册与成本受控流水线）</strong> 与 <strong><code>gstack-model-benchmark</code></strong> 工具<sup class="cite"><a href="#4-3--ref-1">[1]</a></sup>：</p>
+<ol>
+<li><strong>第一步：评测预注册（Preregistration）</strong>：
+在发起任何 API 调用前，<code>/eval-plan</code> 强制要求先落盘一份预注册实验契约，明确锁定六个要素：<strong>评测核心问题（Question）</strong>、<strong>量化合格线（Bars，如准确率 <code>&gt;= 92%</code> 且 P95 延迟 <code>&lt; 1.5s</code>）</strong>、<strong>对比实验组（Arms，如候选提示词 A vs B、候选模型 X vs Y）</strong>、<strong>防过拟合诱饵样本（Decoys / Hard Negatives）</strong>、<strong>提前终止规则（Stopping Rules）</strong> 以及 <strong>本次评测的最高美元预算上限（Budget Cap）</strong><sup class="cite"><a href="#4-3--ref-1">[1]</a></sup>。</li>
+<li><strong>第二步：<code>$0</code> 零成本桩模型干跑（<code>$0</code> Stub Dry-Run）</strong>：
+先使用完全免费的本地桩模型（Stub Model）跑通全量测试数据集的输入读取、评分解析与报表汇总管线，确保评测代码本身零 Bug（避免花冤枉钱跑了一半因脚本解析报错而前功尽弃）。</li>
+<li><strong>第三步：3 样本计费试跑与全量成本外推（3-Sample Priced Pilot &amp; Cost Extrapolation）</strong>：
+调用真实付费模型，但<strong>严格限制只跑 3 个样本</strong>！系统会根据这 3 个样本消耗的真实输入/输出词元数与耗时，自动计算并打印一张**《全量运行成本与耗时外推预测表》**，呈报人类工程师审批预算。</li>
+<li><strong>第四步：正式基准评测（<code>gstack-model-benchmark</code>）</strong>：
+只有在人类确认外推成本在预算上限（Cap）之内并点击批准后，系统才正式运行全量评测，并通过 <code>gstack-model-benchmark</code> 输出各候选模型在<strong>质量得分、P50/P95 延迟、词元消耗与单次调用成本</strong>四个维度上的帕累托前沿对比表<sup class="cite"><a href="#4-3--ref-1">[1]</a></sup>。</li>
+</ol>
+<hr>
+<h2 id="4-3--h-433-五大通用软件研发场景迁移指南与实训五维验收标准">4.3.3 五大通用软件研发场景迁移指南与实训五维验收标准</h2>
+<p>经过两天共 11 个单元的系统学习，我们已经完整掌握了规范驱动开发（SDD）与 GStack 八环方法论骨架<sup class="cite"><a href="#4-3--ref-3">[3]</a></sup>。由于不同研发人员在各自企业中负责的软件形态各异，下表提供了将 GStack 八环精准裁剪并迁移至 <strong>五大通用软件研发场景</strong> 的实战行动指南<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>通用软件研发场景</th>
+<th>典型业务系统代表</th>
+<th>GStack 八环重点发力环节点与定制化落地策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>场景一：全栈 Web / SaaS 产品开发</strong></td>
+<td>电商交易平台、内容与知识社区、面向客户的 SaaS 工作台、营销互动应用</td>
+<td>1. <strong>第 1 环 <code>/office-hours</code></strong>：严控范围蔓延，锁定明天就能验证价值的<strong>最窄切入点（Narrowest Wedge）</strong>；2. <strong>视觉管线</strong>：强制先行建立开放标准 <strong><code>DESIGN.md</code></strong>，配合 <code>/design-shotgun</code> 与 <code>/design-html</code>（Pretext 三视口验证）彻底消除 AI 模板感（AI Slop）并补齐交互 5 状态；3. <strong>第 6 环 <code>/qa</code> + <code>/browse</code></strong>：驱动真实浏览器跑通从登录、加购、下单到异常重试的端到端视觉与功能闭环。</td>
+</tr>
+<tr>
+<td><strong>场景二：企业内部管理后台与审批工作流系统</strong></td>
+<td>ERP / CRM / OA 审批流、多级商户运营中台、财务对账与人力管理后台</td>
+<td>1. <strong>第 2 &amp; 3 环 <code>/spec</code> + <code>/autoplan</code></strong>：在工程评审中强制绘制 <strong>ASCII 多角色状态机流转图（State Machine Diagram）</strong> 与 <strong>RBAC/ABAC 角色权限矩阵表</strong>；2. <strong>第 5 环 <code>/review</code> + <code>/cso</code></strong>：作为重中之重，严查跨部门/跨租户的<strong>水平越权（IDOR）<strong>与普通员工调用管理审批接口的</strong>垂直越权</strong>，强制核验敏感操作审计日志（Audit Log）的完整性。</td>
+</tr>
+<tr>
+<td><strong>场景三：高并发后端 API、微服务与异步数据管道</strong></td>
+<td>核心交易/计费网关、分布式消息队列消费者（Workers）、跨系统 Webhook 同步、ETL 数据管道</td>
+<td>1. <strong>第 3 环 <code>/plan-eng-review</code></strong>：重点构建详尽的 <strong>失败模式与自救注册表（Error &amp; Rescue Registry）</strong>，明确超时、指数退避重试、死信队列（DLQ）与幂等键契约；2. <strong>第 5 环 <code>/review</code></strong>：猎杀 N+1 查询、缺失复合索引、脏读与并发扣减竞态；3. <strong>第 6 环无界面 <code>/qa</code></strong>：在<strong>本地隔离夹具</strong>中实测并发重放幂等性与任务半途崩溃后的断点自愈能力。</td>
+</tr>
+<tr>
+<td><strong>场景四：CLI 命令行工具、SDK 与开发者效率工具</strong></td>
+<td>企业内部脚手架 CLI、多语言业务 SDK、代码静态分析插件、研发效能辅助工具</td>
+<td>1. <strong>第 3 环 Phase 2.5 <code>/plan-devex-review</code></strong>：强制启用开发者体验评审，极力压缩 <strong>TTHW（Time-to-Hello-World）</strong>，打磨 <code>--help</code> 自解释文档与可操作的报错提示；2. <strong>第 6 环无界面 <code>/qa</code></strong>：在本地隔离夹具中严格测试合法/非法标志、进程退出状态码（<code>0</code> vs 非 <code>0</code>）、<code>stdout</code>（纯净 JSON）与 <code>stderr</code>（错误流）分离以及 <code>SIGINT</code> 中断清理。</td>
+</tr>
+<tr>
+<td><strong>场景五：DevOps、云原生基础设施与智能运维自动化</strong></td>
+<td>CI/CD 流水线脚本、Kubernetes 巡检与扩缩容工具、数据库备份归档脚本、监控告警自愈机器人</td>
+<td>1. <strong>第 4 环 <code>/guard</code> 护栏</strong>：在 Project Rules 与 <strong><code>/careful</code>（含自定义 <code>careful-patterns.txt</code>）</strong> 中锁死只读探针白名单，对 <code>rm -rf</code>、<code>kubectl delete</code>、生产配置覆盖执行硬性阻断；2. <strong>第 5 环 <code>/cso</code></strong>：严查脚本中的 Shell 字符串拼接，100% 强制参数数组化（<code>shell=False</code>）防命令注入；3. <strong>第 7 环 <code>/investigate</code></strong>：重点排查本地与生产容器集群之间的<strong>环境配置漂移（Configuration Drift）</strong>。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-3--h-通用-ai-coding-实战训练营五维里程碑准出物与验收评分表">通用 AI Coding 实战训练营：五维里程碑准出物与验收评分表</h3>
+<p>无论个人或团队在上述五大场景中选择哪一类课题开展实战演练或企业内部项目立项，均可采用以下 <strong>GStack 五维里程碑准出物验收表（总分 100 分）</strong> 作为统一的质量度量衡<sup class="cite"><a href="#4-3--ref-2">[2]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>验收维度与权重</th>
+<th>对应 GStack 环节点</th>
+<th>必须提交的磁盘可审计准出物（Deliverable Artifacts）</th>
+<th>核心否决红线（一票否决项）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>维度一：痛点重构与可执行规格</strong>（占 <strong>20%</strong>）</td>
+<td>第 1 环 <code>/office-hours</code>、第 2 环 <code>/spec</code>、第 3 环 <code>/autoplan</code></td>
+<td>1. 经前提挑战确认的 <code>*-design-*.md</code> 设计文档；2. 包含明确 <code>NOT in scope</code> 且通过 <code>&gt;= 7/10</code> 门禁的 <code>spec.md</code>；3. 包含强制 ASCII 架构/状态机图、失败自救注册表与落盘 <code>test-plan.md</code> 的四方评审报告。</td>
+<td>未写 <code>spec.md</code> 直接开写代码；或缺少失败自救表与 ASCII 状态图。</td>
+</tr>
+<tr>
+<td><strong>维度二：Harness 规范与受控施工</strong>（占 <strong>20%</strong>）</td>
+<td>第 4 环受控施工、上下文与 Harness 工程</td>
+<td>1. 仓库根目录 <code>AGENTS.md</code> 及分层 <code>.trae/rules/</code> 或 <code>.codebuddy/skills/</code> 配置（前端项目含开放标准 <code>DESIGN.md</code>）；2. 清晰的**小步原子级 Git 提交历史（Atomic Commits）**与 <code>gstack-shortcut</code> 显式标记。</td>
+<td>把所有代码塞进单个巨型 Commit；或前端出现严重 AI Slop 且缺失交互 5 状态。</td>
+</tr>
+<tr>
+<td><strong>维度三：结构排雷与全栈安全红线</strong>（占 <strong>25%</strong>）</td>
+<td>第 5 环 <code>/review</code>、<code>/cso</code>、<code>/codex</code></td>
+<td>1. <code>/review</code> 与 <code>/cso</code> 审查修复记录（零未解决的高危结构缺陷与 OWASP 漏洞）；2. 源码内容指纹匹配、处于 <strong><code>CURRENT</code></strong> 鲜活状态的 <code>gstack-wtree</code> 审查凭据。</td>
+<td>存在硬编码明文密钥、SQL/命令拼接注入、或未绑定用户/租户 ID 导致的 IDOR 越权漏洞。</td>
+</tr>
+<tr>
+<td><strong>维度四：实机 QA 证据与远端部署交付</strong>（占 <strong>20%</strong>）</td>
+<td>第 6 环 <code>/qa</code>、第 7 环 <code>/ship</code>、<code>/land-and-deploy</code></td>
+<td>1. <code>.gstack/qa-logs/exploration-NNN.json</code> 实机探测证据链与遵循 Fail-Before-Repair 补齐的 100% 全绿测试集；2. 经 <code>/document-release</code> 同步的 <code>README.md</code> / <code>ARCHITECTURE.md</code>；3. 远端目标环境真实 URL 返回 <code>200 OK</code> 及 <code>/canary</code> 巡检通过记录。</td>
+<td>仅在本地 <code>localhost</code> 演示而未完成远端环境部署；或改了代码未同步更新文档。</td>
+</tr>
+<tr>
+<td><strong>维度五：数据量化复盘与记忆沉淀</strong>（占 <strong>15%</strong>）</td>
+<td>第 8 环 <code>/retro</code>、<code>/learn</code></td>
+<td>1. <code>.context/retros/</code> 下的 Git 量化复盘报告（<strong>测试代码占比 <code>Test Ratio &gt;= 20%</code></strong> 达标）；2. 写入 <code>.gstack/learnings.jsonl</code> 的结构化项目经验条目（不少于 3 条高置信度记录）。</td>
+<td><code>Test Ratio</code> 低于 20% 且未补齐核心回归测试；或零经验沉淀。</td>
+</tr>
+</tbody></table>
+<p>上表是<strong>结业评分口径</strong>（五维加权 100 分，每个维度都挂一条一票否决红线，例如维度三的 <code>gstack-wtree</code> 凭据必须 <code>CURRENT</code>、维度四的远端必须返回 <code>200 OK</code>）；配套实验手册跟跑用的是<strong>课堂清单口径</strong>（八份环产物 + 三张跨环表，逐环验收、不做加权），两者不是同一个东西。</p>
+<p>对应关系：维度一 ≈ 设计文档 <code>*-design-*.md</code> + <code>spec.md</code> + 四方评审报告（含 <code>test-plan.md</code>）；维度二 ≈ <code>AGENTS.md</code>/规则配置 + 原子提交；维度三 ≈ <code>/review</code> 与 <code>/cso</code> 修复记录 + <code>CURRENT</code> 凭据；维度四 ≈ <code>exploration-NNN.json</code> + 远端 <code>200 OK</code>；维度五 ≈ <code>/retro</code> 报告与 <code>learnings.jsonl</code>。</p>
+<p>讲师给分以五维表为准，课堂跟跑以清单为准；同一份产物可以同时作为两边的凭据。</p>
+<hr>
+<h2 id="4-3--h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在第 8 环复盘沉淀、高阶多智能体并行与业务迁移中，团队必须坚决杜绝以下五类反模式：</p>
+<ol>
+<li><strong>用主观感觉代替 <code>/retro</code> 客观 Git 数据，容忍 <code>Test Ratio &lt; 20%</code> 长期裸奔</strong>：复盘时不看测试占比、修复率与高频变更热点文件，任由代码库在缺乏自动化测试保护的状态下持续膨胀。</li>
+<li><strong>只踩坑不跑 <code>/learn</code>，导致同一个架构或环境错误在团队内重复发生</strong>：花了半天时间排障修复后不写入 <code>learnings.jsonl</code>，导致新会话或新同事在下周继续掉进同一个坑里。</li>
+<li><strong>在同一个工作目录里开多个智能体同时改代码，不使用 Git Worktree 物理隔离</strong>：多个并行代理在同一个文件树下互相覆盖未提交的修改、争抢本地端口，引发严重的竞态损坏。</li>
+<li><strong>在开发大模型应用时不跑 <code>/eval-plan</code> 预注册与 <code>$0</code> 干跑，直接盲跑全量付费 API</strong>：在评测脚本还有 Bug 或没有设定预算上限（Cap）的情况下直接发起成千上万次旗舰模型调用，造成高昂的词元资金浪费。</li>
+<li><strong>生搬硬套单一模板，忽视五大业务场景的工程侧重点差异</strong>：例如在开发纯后端 CLI 工具时不去跑 <code>/plan-devex-review</code> 和退出码测试，或者在开发多租户审批后台时不去严查状态机与 IDOR 越权。</li>
+</ol>
+<hr>
+<h2 id="4-3--h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong>第 8 环 <code>/retro</code> + <code>/learn</code> 闭合数据与记忆飞轮</strong>：<code>/retro</code> 基于 Git 历史客观核算 <code>Test Ratio &gt;= 20%</code>、修复率、热点文件并盘点全仓 <code>gstack-shortcut</code> 技术债；<code>/learn</code> 与 GBrain 将经验结构化写入 <code>learnings.jsonl</code>，通过自动触发 <code>&quot;Prior learning applied&quot;</code> 实现机构记忆复利。</li>
+<li><strong>多智能体并行工厂与科学评测拓展工程上限</strong>：借助 <strong>Git Worktree + Conductor + <code>/landing-report</code></strong>，单人可安全驾驭 10～15 路并行 AI 冲刺；借助 <strong><code>/eval-plan</code></strong>（预注册 → <code>$0</code> 干跑 → 3 样本试跑成本外推 → 正式评测），实现 AI 应用的质量与成本双受控。</li>
+<li><strong>五大通用场景迁移矩阵指导实战落地</strong>：针对全栈 Web/SaaS、企业管理后台、高并发 API/数据管道、CLI/SDK 工具与 DevOps 自动化五类场景按需裁剪 GStack 八环重点，并以五维里程碑准出物标准锁定企业级交付品质。</li>
+</ol>
+<hr>
+<h2 id="4-3--h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能说出 <code>/retro</code> 自动统计的六项核心量化指标，解释为什么 <code>Test Ratio &lt; 20%</code> 会触发红灯预警，以及热点文件（Hotspot Files）反映了什么架构问题吗？</li>
+<li><input disabled="" type="checkbox"> 我能说明 <code>/learn</code> 生成的 <code>learnings.jsonl</code> 包含哪六大记忆分类，以及它是如何在下一轮迭代中自动弹出 <code>&quot;Prior learning applied&quot;</code> 赋能团队的吗？</li>
+<li><input disabled="" type="checkbox"> 我能解释为什么运行 10 路并行 AI 会话必须依赖 Git Worktree 物理隔离，并完整背出 <code>/eval-plan</code> 科学评测的四个标准步骤吗？</li>
+<li><input disabled="" type="checkbox"> 对照五大通用软件研发场景迁移表与五维验收评分表，我能为自己当前负责的真实业务项目制定出完整的 GStack 八环落地路线图吗？</li>
+</ul>
+<hr>
+<h2 id="4-3--h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="4-3--h-基础辨析git-量化复盘指标解读与-eval-plan-流程">基础辨析：Git 量化复盘指标解读与 <code>/eval-plan</code> 流程</h3>
+<ol>
+<li><strong><code>/retro</code> 异常指标会诊</strong>：某研发小组在周五下午运行 <code>/retro</code> 后，得到了以下三组异常数据：<ul>
+<li>数据甲：本周新增净逻辑代码 3,200 行，但 <code>Test Ratio</code> 仅为 <code>6.5%</code>（远低于 <code>20%</code> 红线）；</li>
+<li>数据乙：本周总计 45 次 Git 提交中，<code>Fix Ratio</code>（修复类提交占比）高达 <code>58%</code>；</li>
+<li>数据丙：<code>src/services/orderProcessor.ts</code> 单文件在一周内被反复修改了 23 次，高居 <code>Hotspot Files</code> 榜首。
+请作为工程经理，分别指出这三组数据暴露了团队在 GStack 前七环的哪个环节出现了失守，并给出下周的 3 条具体整改动作。</li>
+</ul>
+</li>
+<li><strong><code>/eval-plan</code> 成本风控辨析</strong>：某工程师正在优化企业智能客服的意图识别提示词，准备在包含 5,000 条历史对话的测试集上对比 3 个候选旗舰模型。如果他直接写个循环脚本开始跑，会面临什么工程与财务风险？如果改用 <code>/eval-plan</code>，系统会强制他先走哪三个前置步骤才允许发起全量评测？</li>
+</ol>
+<h3 id="4-3--h-进阶分析设计多智能体并行冲刺工作流">进阶分析：设计多智能体并行冲刺工作流</h3>
+<p>假设你是一名独立全栈工程师（或技术小组长），本周需要同时推进三个互不依赖的任务：</p>
+<ul>
+<li><strong>任务 1（新特性规划）</strong>：构思并起草“企业客户自助开具电子发票”模块的产品设计文档与可执行规格；</li>
+<li><strong>任务 2（核心功能施工）</strong>：按照上周已获批的 <code>spec.md</code>，开发“多渠道支付对账 CLI 工具”；</li>
+<li><strong>任务 3（存量缺陷排障）</strong>：排查并修复线上偶发的“导出报表大文件内存溢出”故障。</li>
+</ul>
+<p>请结合本节 <code>4.3.2</code> 的 <strong>Git Worktree 并行软件工厂</strong> 与单元 1.3 的 <strong>动态模型分级路由（Model Tiering）</strong>，规划一套三路并行作业方案：说明如何创建隔离工作区、每个工作区分别调用哪一个 GStack 技能、挂载什么安全护栏、以及最后如何通过 <code>/landing-report</code> 协调合入顺序。</p>
+<h3 id="4-3--h-迁移研讨为你所在团队制定《规范驱动-ai-软件工程sdd-+-gstack落地行动计划》">迁移研讨：为你所在团队制定《规范驱动 AI 软件工程（SDD + GStack）落地行动计划》</h3>
+<p>作为本课程的毕业综合设计，请结合你日常工作中最核心的一个真实研发项目：</p>
+<ol>
+<li>在本节的<strong>五大通用软件研发场景</strong>中定位你项目所属的主场景（或复合场景），列出你们团队当前在 AI 编程中最痛的 3 个问题；</li>
+<li>对照 <strong>五维里程碑准出物验收表</strong>，规划你回到工作岗位后的 <strong>“第一周破冰行动清单”</strong>（例如：第 1 天编写根目录 <code>AGENTS.md</code> 与 <code>/guard</code> 护栏；第 2 天在下个新需求上首次试用 <code>/office-hours</code> + <code>/spec</code>；第 4 天在 PR 合并前首次引入 <code>/review</code> + <code>/cso</code>；周五下午运行第一次 <code>/retro</code> 与 <code>/learn</code>），开启从“氛围编程（Vibe Coding）”向“现代规范驱动 AI 软件工程（SDD）”的真正跃迁！</li>
+</ol>
+<hr>
+<h2 id="4-3--h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>至此，前四章（单元 1.1–4.3）闭合了面向<strong>确定性软件工程</strong>的 GStack 八环与五大通用场景迁移。当 FDE 走进企业一线交付<strong>大模型原生应用</strong>（知识问答、经营问数、合同审查）时，会遇到一个前四章没有覆盖的挑战：<strong>代码链路全绿，但模型输出的业务结论是错的（静默失败），甚至连评估它的尺子本身也会出错。</strong></p>
+<p>下一章（单元 5.1–5.5，FDE 场景实战进阶篇）把八环推进到概率性 AI 应用工程：用三个真实项目的口径定义、技术选型、确定性闸门与两轮实测归因，完成从“会用工具与流程”到“掌握可迁移判定方法”的跃迁。</p>
+<hr>
+<h2 id="4-3--h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="4-3--ref-1"><strong>[1] GStack 量化复盘、机构记忆与科学评测官方深潜：</strong> Garry Tan (Y Combinator), <em>gstack Skill Deep Dives (docs/skills.md): <code>/retro</code>, <code>/learn</code>, <code>/eval-plan</code> &amp; <code>gstack-model-benchmark</code></em>（重点研读 Git 量化指标核算、<code>Test Ratio</code> 警戒线、<code>learnings.jsonl</code> 结构与预注册评测流程），<a href="https://github.com/garrytan/gstack/blob/main/docs/skills.md">GitHub 官方技能手册</a>。</li>
+<li id="4-3--ref-2"><strong>[2] 多智能体并行冲刺与 GBrain 知识库架构：</strong> Garry Tan, <em>gstack README.md: “10-15 Parallel Sprints with Git Worktrees”, <code>/landing-report</code>, <code>/pair-agent</code> &amp; GBrain Integration</em>（查阅并行软件工厂编排与跨项目知识库隔离机制），<a href="https://github.com/garrytan/gstack">GitHub 官方仓库</a>。</li>
+<li id="4-3--ref-3"><strong>[3] 规范驱动开发（SDD）与 Harness 工程全景综述：</strong> Thoughtworks &amp; Martin Fowler, <em>Spec-Driven Development and Harness Engineering for Coding Agents (2026)</em>（回顾全书理论底座与行业演进趋势），<a href="https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html">martinfowler.com</a>。</li>
+</ol>
+</article>
+    </section>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

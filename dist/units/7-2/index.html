@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.2 迈向自智网络 L4 · 通用 AI Coding 教材</title>
+<meta name="description" content="运营商四类高频影子场景的判型、口径与架构蓝图">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2 active"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/7-1/">← 7.1 运营商内网研发安全红线</a></span>
+      <span><a href="/aicoding/units/7-3/">7.3 三天实战演练 →</a></span>
+    </div>
+    <h1>7.2　迈向自智网络 L4</h1>
+    <p class="lede">运营商四类高频影子场景的判型、口径与架构蓝图</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第七章的核心架构与样板对标单元。面对通信运营商网管运维（NetOps）与政企市场支撑（BSS）中纷繁复杂的业务创新需求，本节结合国际电信管理论坛（TM Forum）<strong>自智网络 L4（Autonomous Networks Level 4）<strong>高价值场景演进框架[1]，将全书第 5、6 章建立的四大工程范式（<code>5.2</code> 知识问答、<code>5.3</code> 数据问数、<code>5.4</code> 双引擎审查、<code>6.1</code> 受控行动智能体）映射为</strong>“通信运营商课题四象限判型对标图”<strong>与</strong>“四大平行影子样板（Shadow Cases）”</strong>。参训团队无需从零摸索架构，只需用判型卡对号入座，即可直接搬走对应象限的四层架构、十个业务口径模板、确定性安全闸与验收四元组。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">正在开展通信运营商 AI 课题设计与实战开发的全体组员、系统架构师与业务专家。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成 <code>单元 7.1</code> 的前置解析与 1 小时造数建桩；熟悉 <code>单元 5.1.4</code> 的场景判型卡（四问三判）及 <code>单元 5.2</code>～<code>6.1</code> 的四类判定口径。</span></div><div class="guide-row"><span class="guide-k">定制定位</span><span class="guide-v">本篇为通用版教材的行业定制派生分支，仅替换表层业务实体名词（运营商网元、政企专线、自智网络等），底层 GStack 八环方法论与第 1-6 章 100% 一致。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:7.2"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>能阐述自智网络从 L3（条件自智）向 L4（高度自智）跃迁的工程本质，并用四象限判型图（图 7-2）将任意运营商业务需求归入四类标准范式之一。</li>
+<li>能针对“象限 A（能耗与专线 SLA 问数）”写出部门语义层 <code>semantic_layer/</code> 的通信专属口径定义与 EX 比对规则。</li>
+<li>能针对“象限 B（配置巡查、同路由诊断与结算稽核）”应用 Batfish 形式化验证思想，设计“80% 确定性图/算术规则 + 20% 语义/视觉辅审”双引擎与 <code>待审对象 × 规则数</code> 判定单元。</li>
+<li>能针对“象限 C（应急排障规程问答与政企方案）”解决新旧规程时效冲突、操作步骤级切块与重排阈值拒答。</li>
+<li>能针对“象限 D（夜间割接变更预审与跨部门故障派单）”完整落地 <code>Tier 1/2/3</code> 工具分流、<code>preview_diff.json</code> 干跑预演闸（含回退脚本硬门禁与 <code>valid_entities</code> 溯源）及 <code>pass^3</code> 轨迹评测。</li>
+</ol>
+<div class="concl"><span class="concl-tag">一句话结论</span>通信运营商的百种业务需求，扒开行业术语外壳后只有<strong>四种判定底层</strong>；迈向自智网络 L4 的核心不是让大模型包打天下，而是**“用大模型做意图翻译与人话解释，用确定性引擎算拓扑、核账单、守闸门”**。</div>
+<hr>
+<h2 id="h-721-自智网络-l4-演进与运营商课题四象限快速对标图">7.2.1 自智网络 L4 演进与运营商课题“四象限快速对标图”</h2>
+<h3 id="h-1-从-l3-到-l4自智网络演进的工程本质">1. 从 L3 到 L4：自智网络演进的工程本质</h3>
+<p>按照 TM Forum 自智网络分级标准与中国移动《自智网络白皮书》演进路线<sup class="cite"><a href="#ref-1">[1]</a></sup>，通信网络自动化正处于从 <strong>L3（条件自智）</strong> 向 <strong>L4（高度自智）</strong> 跨越的关键期：</p>
+<ul>
+<li><strong>L3（条件自智）的局限</strong>：依赖人工预先编写死板的 <code>if-else</code> 脚本处理单一网元或固定格式的告警；一旦遇到跨专业域（如无线、传输、核心网、动力环境交织）、自然语言工单描述或复杂多变的政企合同条款，传统脚本立即失灵；</li>
+<li><strong>L4（高度自智）的工程突破</strong>：面向高价值复杂场景（跨域故障定界、夜间网络变更预审、基站节能与容量调优、政企支撑稽核），通过**“自然语言意图驱动（Intent-Driven） + 多源只读探针感知 + 确定性仿真/规则预审 + 人在回路（HITL）受控执行 + 生产飞轮闭环”**，在确保现网 100% 安全的前提下将平均修复时长（MTTR）与人工核查工时压缩 30%～60%。</li>
+</ul>
+<p>仔细对照你会发现：<strong>自智网络 L4 的五步闭环架构，与本书第 5、6 章构建的“判型定口径 → 确定性双引擎/只读探针 → Dry-Run 预演闸 + HITL → 轨迹与状态评测 → Day-2 数据飞轮”在工程结构上 100% 同构<sup class="cite"><a href="#ref-3">[3]</a></sup>！</strong></p>
+<h3 id="h-2-运营商课题四象限快速对标图">2. 运营商课题“四象限快速对标图”</h3>
+<p>面对部门申报的各类创新课题，开题第一步绝不是讨论“用哪个大模型”，而是拿起 <code>单元 5.1.4</code> 的<strong>场景判型卡（四问三判）</strong>，加问一道 <code>单元 6.1</code> 的**“是否改变外部系统/网元状态”**，在 5 分钟内将课题精准落入以下四个象限之一：</p>
+<figure class="fig" id="fig-7-2"><div class="fig-scroll"><svg id="svg-7-2" width="2265.9765625" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="1392.75" viewBox="0 0 2265.9765625 1392.75" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-7-2{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-7-2 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-7-2 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-7-2 .error-icon{fill:#eceff1;}#svg-7-2 .error-text{fill:#13100e;stroke:#13100e;}#svg-7-2 .edge-thickness-normal{stroke-width:1px;}#svg-7-2 .edge-thickness-thick{stroke-width:3.5px;}#svg-7-2 .edge-pattern-solid{stroke-dasharray:0;}#svg-7-2 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-7-2 .edge-pattern-dashed{stroke-dasharray:3;}#svg-7-2 .edge-pattern-dotted{stroke-dasharray:2;}#svg-7-2 .marker{fill:#607d8b;stroke:#607d8b;}#svg-7-2 .marker.cross{stroke:#607d8b;}#svg-7-2 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-7-2 p{margin:0;}#svg-7-2 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-7-2 .cluster-label text{fill:#13100e;}#svg-7-2 .cluster-label span{color:#13100e;}#svg-7-2 .cluster-label span p{background-color:transparent;}#svg-7-2 .label text,#svg-7-2 span{fill:#17324d;color:#17324d;}#svg-7-2 .node rect,#svg-7-2 .node circle,#svg-7-2 .node ellipse,#svg-7-2 .node polygon,#svg-7-2 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-7-2 .rough-node .label text,#svg-7-2 .node .label text,#svg-7-2 .image-shape .label,#svg-7-2 .icon-shape .label{text-anchor:middle;}#svg-7-2 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-7-2 .rough-node .label,#svg-7-2 .node .label,#svg-7-2 .image-shape .label,#svg-7-2 .icon-shape .label{text-align:center;}#svg-7-2 .node.clickable{cursor:pointer;}#svg-7-2 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-7-2 .arrowheadPath{fill:#0b0b0b;}#svg-7-2 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-7-2 .flowchart-link{stroke:#607d8b;fill:none;}#svg-7-2 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-7-2 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-7-2 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-7-2 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-7-2 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-7-2 .cluster text{fill:#13100e;}#svg-7-2 .cluster span{color:#13100e;}#svg-7-2 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-7-2 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-7-2 rect.text{fill:none;stroke-width:0;}#svg-7-2 .icon-shape,#svg-7-2 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-7-2 .icon-shape p,#svg-7-2 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-7-2 .icon-shape .label rect,#svg-7-2 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-7-2 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-7-2 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-7-2 .node .neo-node{stroke:#1976d2;}#svg-7-2 [data-look="neo"].node rect,#svg-7-2 [data-look="neo"].cluster rect,#svg-7-2 [data-look="neo"].node polygon{stroke:url(#svg-7-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-7-2 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-7-2 [data-look="neo"].node path{stroke:url(#svg-7-2-gradient);stroke-width:1px;}#svg-7-2 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-7-2 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-7-2 [data-look="neo"].node circle{stroke:url(#svg-7-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-7-2 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-7-2 [data-look="neo"].icon-shape .icon{fill:url(#svg-7-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-7-2 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-7-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-7-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-7-2 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-7-2 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-7-2 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-7-2 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-7-2 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-7-2 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-7-2 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-7-2 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-7-2 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-7-2 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-7-2 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-7-2 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-7-2 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-7-2 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-7-2 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-7-2_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-7-2_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-7-2_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-7-2_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-7-2_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-7-2_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-7-2_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-7-2_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-7-2_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-7-2_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-7-2_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-7-2_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M1131.699,60.5L1131.699,63.333C1131.699,66.167,1131.699,71.833,1131.699,76.833C1131.699,81.833,1131.699,86.167,1131.699,88.333L1131.699,90.5" id="svg-7-2-L_START_Q0_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_START_Q0_0" data-points="W3sieCI6MTEzMS42OTkyMTg3NSwieSI6NjAuNX0seyJ4IjoxMTMxLjY5OTIxODc1LCJ5Ijo3Ny41fSx7IngiOjExMzEuNjk5MjE4NzUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M1270.722,300.227L1386.931,328.106C1503.14,355.985,1735.558,411.742,1851.768,463.017C1967.977,514.292,1967.977,561.083,1967.977,584.479L1967.977,607.875" id="svg-7-2-L_Q0_QD_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q0_QD_0" data-points="W3sieCI6MTI3MC43MjIyNTAxODM3NzAzLCJ5IjozMDAuMjI2OTY4NTY2MjI5OH0seyJ4IjoxOTY3Ljk3NjU2MjUsInkiOjQ2Ny41fSx7IngiOjE5NjcuOTc2NTYyNSwieSI6NjExLjg3NX1d" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M1031.804,339.355L1002.368,360.712C972.932,382.07,914.06,424.785,884.624,450.184C855.188,475.583,855.188,483.667,855.188,487.708L855.188,491.75" id="svg-7-2-L_Q0_Q1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q0_Q1_0" data-points="W3sieCI6MTAzMS44MDM5MzU4MTIyMjgyLCJ5IjozMzkuMzU0NzE3MDYyMjI4M30seyJ4Ijo4NTUuMTg3NSwieSI6NDY3LjV9LHsieCI6ODU1LjE4NzUsInkiOjQ5NS43NX1d" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M964.303,671.385L1039.411,694.279C1114.519,717.173,1264.736,762.962,1339.845,813.002C1414.953,863.042,1414.953,917.333,1414.953,944.479L1414.953,971.625" id="svg-7-2-L_Q1_QA_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q1_QA_0" data-points="W3sieCI6OTY0LjMwMjU3OTE1Mjg1MDYsInkiOjY3MS4zODQ5MjA4NDcxNDk0fSx7IngiOjE0MTQuOTUzMTI1LCJ5Ijo4MDguNzV9LHsieCI6MTQxNC45NTMxMjUsInkiOjk3NS42MjV9XQ==" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M768.95,694.262L739.637,713.344C710.325,732.425,651.699,770.587,622.387,793.71C593.074,816.833,593.074,824.917,593.074,828.958L593.074,833" id="svg-7-2-L_Q1_Q2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q1_Q2_0" data-points="W3sieCI6NzY4Ljk0OTc0Mzc1MTE4NDgsInkiOjY5NC4yNjIyNDM3NTExODQ4fSx7IngiOjU5My4wNzQyMTg3NSwieSI6ODA4Ljc1fSx7IngiOjU5My4wNzQyMTg3NSwieSI6ODM3fV0=" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M495.32,1068.996L462.003,1091.871C428.687,1114.747,362.054,1160.499,328.738,1189.291C295.422,1218.083,295.422,1229.917,295.422,1235.833L295.422,1241.75" id="svg-7-2-L_Q2_QB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q2_QB_0" data-points="W3sieCI6NDk1LjMxOTcyMjMzMzEyNzgsInkiOjEwNjguOTk1NTAzNTgzMTI3OX0seyJ4IjoyOTUuNDIxODc1LCJ5IjoxMjA2LjI1fSx7IngiOjI5NS40MjE4NzUsInkiOjEyNDUuNzV9XQ==" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M690.829,1068.996L724.145,1091.871C757.461,1114.747,824.094,1160.499,857.41,1189.291C890.727,1218.083,890.727,1229.917,890.727,1235.833L890.727,1241.75" id="svg-7-2-L_Q2_QC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q2_QC_0" data-points="W3sieCI6NjkwLjgyODcxNTE2Njg3MjMsInkiOjEwNjguOTk1NTAzNTgzMTI3OX0seyJ4Ijo4OTAuNzI2NTYyNSwieSI6MTIwNi4yNX0seyJ4Ijo4OTAuNzI2NTYyNSwieSI6MTI0NS43NX1d" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M1414.953,1028.125L1414.953,1057.813C1414.953,1087.5,1414.953,1146.875,1414.953,1182.479C1414.953,1218.083,1414.953,1229.917,1414.953,1235.833L1414.953,1241.75" id="svg-7-2-L_QA_MA_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_QA_MA_0" data-points="W3sieCI6MTQxNC45NTMxMjUsInkiOjEwMjguMTI1fSx7IngiOjE0MTQuOTUzMTI1LCJ5IjoxMjA2LjI1fSx7IngiOjE0MTQuOTUzMTI1LCJ5IjoxMjQ1Ljc1fV0=" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M295.422,1298.25L295.422,1301.083C295.422,1303.917,295.422,1309.583,295.422,1314.583C295.422,1319.583,295.422,1323.917,295.422,1326.083L295.422,1328.25" id="svg-7-2-L_QB_MB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_QB_MB_0" data-points="W3sieCI6Mjk1LjQyMTg3NSwieSI6MTI5OC4yNX0seyJ4IjoyOTUuNDIxODc1LCJ5IjoxMzE1LjI1fSx7IngiOjI5NS40MjE4NzUsInkiOjEzMzIuMjV9XQ==" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M890.727,1298.25L890.727,1301.083C890.727,1303.917,890.727,1309.583,890.727,1314.583C890.727,1319.583,890.727,1323.917,890.727,1326.083L890.727,1328.25" id="svg-7-2-L_QC_MC_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_QC_MC_0" data-points="W3sieCI6ODkwLjcyNjU2MjUsInkiOjEyOTguMjV9LHsieCI6ODkwLjcyNjU2MjUsInkiOjEzMTUuMjV9LHsieCI6ODkwLjcyNjU2MjUsInkiOjEzMzIuMjV9XQ==" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path><path d="M1967.977,664.375L1967.977,688.438C1967.977,712.5,1967.977,760.625,1967.977,809.958C1967.977,859.292,1967.977,909.833,1967.977,935.104L1967.977,960.375" id="svg-7-2-L_QD_MD_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_QD_MD_0" data-points="W3sieCI6MTk2Ny45NzY1NjI1LCJ5Ijo2NjQuMzc1fSx7IngiOjE5NjcuOTc2NTYyNSwieSI6ODA4Ljc1fSx7IngiOjE5NjcuOTc2NTYyNSwieSI6OTY0LjM3NX1d" data-look="classic" marker-end="url(#svg-7-2_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_START_Q0_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1967.9765625, 467.5)"><g class="label" data-id="L_Q0_QD_0" transform="translate(-67.5, -11.25)"><foreignObject width="135" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>是（有状态副作用）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(855.1875, 467.5)"><g class="label" data-id="L_Q0_Q1_0" transform="translate(-82.5, -11.25)"><foreignObject width="165" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>否（纯只读认知与分析）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(1414.953125, 808.75)"><g class="label" data-id="L_Q1_QA_0" transform="translate(-73.9140625, -11.25)"><foreignObject width="147.828125" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>能（数字/聚合/排名）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(593.07421875, 808.75)"><g class="label" data-id="L_Q1_Q2_0" transform="translate(-99.6171875, -11.25)"><foreignObject width="199.234375" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>不能（文档/配置/账单/照片）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(295.421875, 1206.25)"><g class="label" data-id="L_Q2_QB_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>有（按清单逐项查违规与缺失）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(890.7265625, 1206.25)"><g class="label" data-id="L_Q2_QC_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>无（按问题检索规程或生成方案）</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_QA_MA_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_QB_MB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_QC_MC_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_QD_MD_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-7-2-flowchart-START-0" data-look="classic" transform="translate(1131.69921875, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-250.21875" y="-26.25" width="500.4375" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-220.21875, -11.25)"><rect></rect><foreignObject width="440.4375" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>拿到通信运营商业务需求（OSS 网管运维 / BSS 政企与市场支撑）</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-7-2-flowchart-Q0-1" data-look="classic" transform="translate(1131.69921875, 266.875)"><polygon points="172.375,0 344.75,-172.375 172.375,-344.75 0,-172.375" class="label-container" transform="translate(-171.875, 172.375)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-146.125, -11.25)"><rect></rect><foreignObject width="292.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>是否需要调用外部工具修改单据或下发变更?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-7-2-flowchart-QD-3" data-look="classic" transform="translate(1967.9765625, 638.125)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-211.4609375" y="-26.25" width="422.921875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-181.4609375, -11.25)"><rect></rect><foreignObject width="362.921875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>象限 D：受控行动与工单/变更流转类（映射单元 6.1）</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-7-2-flowchart-Q1-5" data-look="classic" transform="translate(855.1875, 638.125)"><polygon points="142.375,0 284.75,-142.375 142.375,-284.75 0,-142.375" class="label-container" transform="translate(-141.875, 142.375)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-116.125, -11.25)"><rect></rect><foreignObject width="232.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>结论能否由结构化表计算直接比对?</p></span></div></foreignObject></g></g><g class="node default green" id="svg-7-2-flowchart-QA-7" data-look="classic" transform="translate(1414.953125, 1001.875)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-241.0234375" y="-26.25" width="482.046875" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-211.0234375, -11.25)"><rect></rect><foreignObject width="422.046875" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>象限 A：指标自助问数与容量/能耗精益分析类（映射单元 5.3）</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-7-2-flowchart-Q2-9" data-look="classic" transform="translate(593.07421875, 1001.875)"><polygon points="164.875,0 329.75,-164.875 164.875,-329.75 0,-164.875" class="label-container" transform="translate(-164.375, 164.875)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-138.625, -11.25)"><rect></rect><foreignObject width="277.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>手上是否有可枚举的核查规则或基线清单?</p></span></div></foreignObject></g></g><g class="node default green" id="svg-7-2-flowchart-QB-11" data-look="classic" transform="translate(295.421875, 1272)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-262.953125" y="-26.25" width="525.90625" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-232.953125, -11.25)"><rect></rect><foreignObject width="465.90625" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>象限 B：配置基线巡查、拓扑诊断与结算/照片稽核类（映射单元 5.4）</p></span></div></foreignObject></g></g><g class="node default green" id="svg-7-2-flowchart-QC-13" data-look="classic" transform="translate(890.7265625, 1272)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-222.5625" y="-26.25" width="445.125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-192.5625, -11.25)"><rect></rect><foreignObject width="385.125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>象限 C：排障规程问答与政企方案生成类（映射单元 5.2）</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-7-2-flowchart-MA-15" data-look="classic" transform="translate(1414.953125, 1272)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-279.6640625" y="-26.25" width="559.328125" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-249.6640625, -11.25)"><rect></rect><foreignObject width="499.328125" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>主尺子：EX 执行结果一致率 · 主闸：只读连接 + 表列白名单 + LIMIT 1000</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-7-2-flowchart-MB-17" data-look="classic" transform="translate(295.421875, 1358.5)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-287.421875" y="-26.25" width="574.84375" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-257.421875, -11.25)"><rect></rect><foreignObject width="514.84375" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>主尺子：待审对象×规则数 P/R · 主闸：确定性图/算术引擎 + 立场与证据守备</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-7-2-flowchart-MC-19" data-look="classic" transform="translate(890.7265625, 1358.5)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-285.8828125" y="-26.25" width="571.765625" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-255.8828125, -11.25)"><rect></rect><foreignObject width="511.765625" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>主尺子：条款召回@5 + 最小事实点 · 主闸：生效元数据过滤 + 重排阈值拒答</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-7-2-flowchart-MD-21" data-look="classic" transform="translate(1967.9765625, 1001.875)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#263238 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(38, 50, 56) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>主尺子：沙盒最终状态一致 + 轨迹 P/R + pass^3 · 主闸：Tier 1/2/3 分流 + Dry-Run 预演闸</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-7-2-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-7-2-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-7-2-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-7-2.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 7-2 ↗</a>：自智网络 L4 闭环机制与通信运营商四象限课题判型对标图</figcaption></figure>
+<p>为方便各专业团队快速对号入座，下表将运营商常见业务需求特征与四个象限的工程模具一一对齐：</p>
+<table>
+<thead>
+<tr>
+<th>象限与对标单元</th>
+<th>运营商典型业务场景特征（不绑定具体项目名）</th>
+<th>判型卡四问特征</th>
+<th>核心前置解析（<code>7.1.2</code>）</th>
+<th>验收主尺子与一票否决红线</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>象限 A：问数与精益分析类</strong>（对标 <code>单元 5.3</code>）</td>
+<td>基站/机房能耗多维查询、政企专线 SLA 与流量统计、套餐转化与渠道酬金自助报表、故障工单时效统计</td>
+<td>1=能机器比对；3=无立场反转；只读无副作用</td>
+<td>多表头 Excel/CSV 拉平、主外键 <code>normalize_id()</code> 对齐、量纲与含税拆分</td>
+<td><strong>EX（执行结果集一致率）</strong>；写操作 100% 拒绝；<code>blocking/advisory</code> 歧义准确分流</td>
+</tr>
+<tr>
+<td><strong>象限 B：配置巡查与合规稽核类</strong>（对标 <code>单元 5.4</code>）</td>
+<td>多厂商网元配置基线核查、传输双路同路由单点隐患诊断、基站电费/铁塔租费阶梯稽核、工程竣工照片与装维质检、政企合同审查</td>
+<td>1=部分；2=有明确基线/稽核规则清单；3=有审查立场（维护方/采购方）</td>
+<td>CLI 回显 TextFSM 转 JSON；结算表单位归一化；竣工照片 VLM 抽原子事实 JSON</td>
+<td><strong>判定单元（<code>待审对象 × 规则数</code>）P/R 成对报告</strong>；定位双分母拆分；<code>checked / not_detected / needs_human</code> 三态诚实覆盖</td>
+</tr>
+<tr>
+<td><strong>象限 C：规程问答与方案生成类</strong>（对标 <code>单元 5.2</code>）</td>
+<td>核心网/无线故障排障手册问答、网络割接操作规程检索、政企行业专网售前方案辅助生成、一线装维与客服知识库问答</td>
+<td>1=不能直接算术比对；2=无枚举规则清单；依赖非结构化文档证据</td>
+<td>按“操作步骤/章节条款”切块，提取生效日期与废止状态元数据</td>
+<td><strong>切块 Recall@5 + 最小事实点覆盖率 + 断言级零幻觉</strong>；低于重排阈值 <code>MIN_RERANK_SCORE</code> 强制拒答；严禁编造网元命令</td>
+</tr>
+<tr>
+<td><strong>象限 D：受控行动与流转闭环类</strong>（对标 <code>单元 6.1</code>）</td>
+<td>跨专业故障工单定界与自动派发、夜间网络割接变更冲突预审与建单、投诉工单核查与退费/冲正预演、跨系统资源核查与自动填报</td>
+<td>需要调用外部 API 预填/修改单据或变更状态；有外部状态副作用</td>
+<td><code>Tier 1</code> 只读探针聚合多源上下文 + 多模态凭据两段式解耦</td>
+<td><strong>沙盒最终状态一致率 + 必调探针轨迹召回率 + 参数零幻觉 + 安全闸 100% 拦截 + <code>pass^3</code> 连续一致性</strong></td>
+</tr>
+</tbody></table>
+<div class="alert alert-warning"><span class="alert-tag">警告</span><p><strong>混合型课题的开题铁律：先拆后判，严禁整包硬做！</strong> 如果你们组的题目叫《XX 专业端到端智能运维与自动派单大模型平台》，它同时横跨了“查指标（A）+ 审配置（B）+ 问手册（C）+ 派工单（D）”四个象限。请立即按照 <code>单元 7.3.1</code> 的“三步拆骨刀”将其拆开，在 3 天演练内<strong>只锁定其中 1 个象限做深 20 题可判定闭环</strong>！</p>
+</div>
+<hr>
+<h2 id="h-722-影子样板一象限-a-·-映射-53政企专线-sla-与基站能耗多维问数助手">7.2.2 影子样板一（象限 A · 映射 <code>5.3</code>）：政企专线 SLA 与基站能耗多维问数助手</h2>
+<h3 id="h-1-业务痛点与-semantic_layer-十个通信业务口径">1. 业务痛点与 <code>semantic_layer</code> 十个通信业务口径</h3>
+<p>在网络运营与政企支撑中，一线经理每天都要问：“上个月杭州片区 PUE 超过 1.6 的核心机房有哪些？”“政企专线 SLA 可用率未达标需扣减月租的电路有多少条？”如果直接让大模型对着原始表写 SQL，模型会在“什么叫在网有效专线”“电费含不含税”“跨月调账怎么算”上犯下致命口径错误。</p>
+<p>直接复用 <code>单元 5.3</code> 与 <code>单元 6.2.3</code> 的共享语义层机制，我们在部门级运行支撑机制（Harness）的语义层 <code>semantic_layer/telecom_metrics.json</code> 中一次性锁死十个唯一业务口径（以下精选 6 个最具代表性的通信行业口径示例）：</p>
+<table>
+<thead>
+<tr>
+<th>口径编码与名称</th>
+<th>唯一确定性计算公式（写入 <code>semantic_layer.json</code>，同时服务 Prompt 与黄金标准答案）</th>
+<th>常见口径陷阱（未定义时模型的错误写法）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>M01：在网有效基站/专线数</strong></td>
+<td><code>status = &#39;ACTIVE&#39; AND is_test_node = 0</code>（显式剔除测试站点、在建站点与已退网站点）</td>
+<td>直接 <code>COUNT(*)</code>，把测试专线和已拆机站点全部算进分母</td>
+</tr>
+<tr>
+<td><strong>M02：单站日均电耗（kWh）</strong></td>
+<td><code>SUM(daily_kwh) / COUNT(DISTINCT stat_date)</code>，且剔除 <code>meter_fault_flag = 1</code> 的换表异常日</td>
+<td>未过滤电表故障日，或直接除以固定 30 天导致新开站点均值虚低</td>
+</tr>
+<tr>
+<td><strong>M03：机房实测 PUE 值</strong></td>
+<td><code>total_facility_kwh / NULLIF(it_equipment_kwh, 0)</code>（总耗电除以主设备耗电，防除零）</td>
+<td>把空调耗电当成总耗电，或未处理分母为 0 的异常记录</td>
+</tr>
+<tr>
+<td><strong>M04：政企专线 SLA 达标率</strong></td>
+<td><code>1.0 - (SUM(unplanned_outage_minutes) / (billing_days * 1440.0))</code>，<strong>剔除客户侧原因及已报备夜间割接时长</strong></td>
+<td>把客户机房自己断电或计划内割接时长也算作运营商违约故障时长</td>
+</tr>
+<tr>
+<td><strong>M05：SLA 违约应扣减月租（不含税元）</strong></td>
+<td>当 <code>SLA &lt; contract_sla_threshold</code> 时，按合同阶梯扣减比例乘以 <code>monthly_fee_excl_tax</code>；封顶不超过当月月租</td>
+<td>混用含税月租计算，或未执行“单月扣减上限不超过 100% 月租”封顶规则</td>
+</tr>
+<tr>
+<td><strong>M06：退网未停机持续计费异常额</strong></td>
+<td><code>site.status = &#39;RETIRED&#39; AND bill.billing_month &gt; site.retire_month AND bill.amount_excl_tax &gt; 0</code></td>
+<td>漏掉退网月份与账期月份的跨表时间窗比对</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-口径确认表与安全边界设计">2. 口径确认表与安全边界设计</h3>
+<table>
+<thead>
+<tr>
+<th>客户模糊要求</th>
+<th>确认后的可判定口径（对齐 <code>5.3.4</code>）</th>
+<th>倒逼出的结构设计</th>
+<th>验收门禁基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能耗与专线查询准确率 ≥85%</td>
+<td><strong>EX（执行结果一致率）</strong>：基于 <code>starter-kit</code> 5 张核心表与 20 道主集题，执行结果集与黄金结果集在列序无关、别名无关、浮点容差 <code>0.01</code> 下完全一致</td>
+<td>造标准结果集而非字面 SQL；前置运行 <code>7.1.2</code> 量纲归一化脚本</td>
+<td>EX <strong>≥85%</strong>；执行失败计入分母不剔除</td>
+</tr>
+<tr>
+<td>模糊问题智能应答</td>
+<td><strong>歧义分级分流</strong>：未指明“含税/不含税”或“自然月/账期月”但有默认口径的归为 <code>advisory</code>（声明默认不含税与当前账期后给结果）；问“能耗高不高”无阈值标准的归为 <code>blocking</code>（先反问阈值）</td>
+<td>在 SQL 生成前加确定性意图与歧义分流器</td>
+<td>歧义题分流准确率 <strong>≥90%</strong></td>
+</tr>
+<tr>
+<td>系统绝对安全</td>
+<td><strong>四道确定性闸 + 一道意图闸</strong>：意图含删改词即拒；SQLite <code>?mode=ro</code> 物理只读连接；仅开放 5 张登记表白名单；强制注入 <code>LIMIT 1000</code> 并标注 <code>truncated</code></td>
+<td>默认拒绝、白名单放行；语法报错最多自纠错 <code>&lt;= 2</code> 次且每次重过白名单</td>
+<td>越权与写操作拦截率 <strong>= 100%</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-723-影子样板二象限-b-·-映射-54承载网配置基线核查光路同路由诊断与资费结算稽核">7.2.3 影子样板二（象限 B · 映射 <code>5.4</code>）：承载网配置基线核查、光路同路由诊断与资费结算稽核</h2>
+<h3 id="h-1-借鉴-batfish-形式化验证思想双引擎如何精准分工">1. 借鉴 Batfish 形式化验证思想：双引擎如何精准分工</h3>
+<p>在传输同路由隐患排查、多厂商网元配置基线核查以及铁塔电费结算稽核中，如果把几份路由表或光路路由段直接丢给大模型问“主备光路有没有同路由风险？”，大模型往往会因为中间节点名称相似或跨表跳数多而漏检。</p>
+<p>网络工程界事前验证（Pre-Change Validation）的标杆开源引擎 <strong>Batfish</strong>（由 Intentionet、AWS 与微软研究院联合演进）<sup class="cite"><a href="#ref-2">[2]</a></sup> 确立了一条极其重要的黄金法则：<strong>用基于图论与集合运算的确定性数学模型验证连通性、路由环路与单点故障（Disjoint Path Check），而绝不用概率模型去猜拓扑算术</strong>。</p>
+<p>在 AI Coding 时，我们将 Batfish 思想与 <code>单元 5.4</code> 的**“确定性规则 + 受控语义/视觉”双引擎**完美融合：</p>
+<table>
+<thead>
+<tr>
+<th>任务分流</th>
+<th>占比</th>
+<th>负责的引擎</th>
+<th>具体处理哪些通信稽核规则（示例）</th>
+<th>为什么这样分工</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>确定性规则与拓扑/算术引擎</strong></td>
+<td><strong>80%</strong></td>
+<td>Python 确定性代码（集合运算 / <code>networkx</code> 图算法 / TextFSM 字段算术）</td>
+<td>1. <strong>同路由单点检测</strong>：求主用光路途经管道井/光交箱集合 <code>Set(Path_A)</code> 与备用光路集合 <code>Set(Path_B)</code> 的交集，若 <code>len(A &amp; B) &gt; 0</code> 则 100% 确诊同路由隐患并输出重合节点 ID；2. <strong>配置基线检查</strong>：核对 NTP 服务器 IP、ACL 编号、OSPF 认证模式、光功率阈值；3. <strong>阶梯电费与退网核销</strong>：核算单价是否超合同上限、退网后是否仍有账单</td>
+<td>集合求交集、数值大小比较、存在性检查属于 100% 确定性数学问题，交代码跑既快（毫秒级）又零误报</td>
+</tr>
+<tr>
+<td><strong>受控语义与视觉辅审引擎</strong></td>
+<td><strong>20%</strong></td>
+<td>大模型 / VLM（强制 JSON Schema + 立场声明 + 原文/照片证据守备）</td>
+<td>1. <strong>变更豁免与特殊条款审查</strong>：审查政企补充协议或割接说明中是否存在对维护方/采购方不利的免责条款（声明立场 <code>stance = 网络维护方/采购方</code>）；2. <strong>现场照片感知</strong>：执行 <code>7.1.2</code> 第一段 VLM 客观原子要素抽取</td>
+<td>只有自然语言非标表述与图像客观要素识别才需要调用模型，且输出必须受证据定位与规则号白名单约束</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-口径确认表锁死待审对象-×-规则条数判定单元">2. 口径确认表：锁死“待审对象 × 规则条数”判定单元</h3>
+<p>许多配置巡查或合同/账单稽核小组在演练时只准备了 15 份网元快照或 20 份异常账单。如果按“样本份数”当分母，错 1 份指标就跳动 5%～6.7%，根本无法精细衡量进步。必须照搬 <code>单元 5.4.4</code> 的核心方法，将判定单元定义为 <strong><code>待审对象（网元/光路/账单/照片） × 规则条数</code></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>客户模糊要求</th>
+<th>确认后的可判定口径（对齐 <code>5.4.4</code>）</th>
+<th>倒逼出的结构设计</th>
+<th>验收门禁基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>隐患与违规检出率 ≥90%</td>
+<td><strong>判定单元 = 25 个待审对象 × 12 条稽核规则 = 300 个判定单元</strong>；分三类（配置存在/缺失型、拓扑/数值计算型、语义/视觉辅审型）<strong>成对报告召回率（Recall）与精确率（Precision）</strong></td>
+<td>规则清单写入版本化的 <code>rules.yaml</code>（顶部锁死 <code>stance</code> 立场）；禁止模型自创清单外规则号</td>
+<td>确定性规则 P/R <strong>= 100%</strong>；语义/视觉辅审 R <strong>≥88%</strong> 且 P <strong>≥90%</strong></td>
+</tr>
+<tr>
+<td>精准给出违规位置与依据</td>
+<td><strong>证据三要素（原文/回显片段 + 行号/节点定位 + 规则号）</strong>；<strong>拆分为两个独立分母</strong>：可定位违规项的定位准确率 vs 缺失配置项的推断位置覆盖率</td>
+<td>TextFSM 解析时必须保留 <code>line_range</code>；缺失配置项（如“漏配登录超时 <code>idle-timeout</code>”）单独计入缺失覆盖分母，不混入行号定位分母</td>
+<td>可定位项定位准确率 <strong>≥95%</strong></td>
+</tr>
+<tr>
+<td>报告客观不误导</td>
+<td><strong>显式表达覆盖三态（<code>checked / not_detected / needs_human</code>）</strong></td>
+<td>当照片模糊、CLI 回显截断不完整或关闭语义引擎时，对应规则必须列入 <code>needs_human</code> 或 <code>not_detected</code>，严禁渲染为绿色的“合规通过”</td>
+<td>三态字段结构完整性 <strong>= 100%</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-724-影子样板三象限-c-·-映射-52无线核心网应急排障规程问答与政企云网方案生成助手">7.2.4 影子样板三（象限 C · 映射 <code>5.2</code>）：无线/核心网应急排障规程问答与政企云网方案生成助手</h2>
+<h3 id="h-1-业务痛点与时效冲突-+-命令零编造双保险">1. 业务痛点与“时效冲突 + 命令零编造”双保险</h3>
+<p>一线网优与核心网值班工程师在凌晨处理突发告警时，需要快速查询《5GC 核心网应急倒换操作手册》或《政企云网专线 SLA 保障规范》。这类场景有两大行业特殊陷阱：</p>
+<ul>
+<li><strong>陷阱一（新规废止旧规）</strong>：知识库里既有《2024 版光路倒换门限规范（收光 <code>-28dBm</code>）》，又有《2026 年修订通知（收光门限收紧至 <code>-26dBm</code>，原第 4 条废止）》。如果只按纯向量相似度检索，旧文档往往因为字数多、词频高排在前面，导致值班员按废止旧规操作酿成故障；</li>
+<li><strong>陷阱二（无依据编造网元命令）</strong>：当用户问到一个冷门型号设备的排障命令，而知识库里恰好没收录时，通用大模型极易顺口编造一条看似正规实则有害的 CLI 命令参数。</li>
+</ul>
+<h3 id="h-2-口径确认表与三层七环节落点">2. 口径确认表与三层七环节落点</h3>
+<table>
+<thead>
+<tr>
+<th>客户模糊要求</th>
+<th>确认后的可判定口径（对齐 <code>5.2.4</code>）</th>
+<th>倒逼出的结构设计</th>
+<th>验收门禁基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>规程召回率 ≥90%</td>
+<td><strong>操作步骤/条款级 Recall@5</strong>：按规程的“章节 + 操作步骤/条款号”切块，标准答案切块落在重排后 Top-5 的比例；声明题料同源/异源属性</td>
+<td>切块元数据强制提取 <code>doc_id</code>、<code>clause_no</code>、<code>effective_date</code> 与 <code>status: active | superseded</code>；检索时优先过滤或降权 <code>superseded</code> 废止条款</td>
+<td>有效条款 Recall@5 <strong>≥90%</strong>（时效冲突题必须命中最新 <code>active</code> 版本）</td>
+</tr>
+<tr>
+<td>回答准确且零瞎编命令</td>
+<td><strong>最小事实点覆盖率 + 断言级支撑率（Claim Grounding）</strong>：每句操作指令与参数阈值必须带 <code>[doc_id#clause_no]</code> 引用且能被服务端回查原文；<strong>一切 CLI 命令字符串必须 100% 为原文子串提取</strong></td>
+<td>在生成层后置“命令字面溯源校验器”：凡回答中代码块或反引号内的 CLI 命令未在 Top-5 证据原文中出现，立即拦截并转拒答</td>
+<td>引用回溯准确率 <strong>= 100%</strong>；无依据命令编造率 <strong>= 0%</strong></td>
+</tr>
+<tr>
+<td>超纲问题不乱答</td>
+<td><strong>重排阈值硬拒答闸 + 状态三态（<code>answered / refused_no_evidence / refused_out_of_scope</code>）</strong></td>
+<td>稠密向量 + BM25 稀疏混合召回（保证网元告警码如 <code>ALM-2048</code> 精确命中），经重排器打分后若最高分 <code>&lt; MIN_RERANK_SCORE</code>，在调用生成模型前直接确定性拒答</td>
+<td>应拒答题拒答准确率 <strong>= 100%</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-725-影子样板四象限-d-·-映射-61夜间网络割接变更预审与跨部门故障工单流转智能体">7.2.5 影子样板四（象限 D · 映射 <code>6.1</code>）：夜间网络割接变更预审与跨部门故障工单流转智能体</h2>
+<h3 id="h-1-对标自智网络-l4-闭环完整落地-61-四层架构与读写分流">1. 对标自智网络 L4 闭环：完整落地 <code>6.1</code> 四层架构与读写分流</h3>
+<p>夜间网络割接变更预审与跨部门故障定界派单，是通信运营商迈向自智网络 L4 最具代表性的高价值行动场景。过去，网管中心值班调度员每天要人工审核上百张割接申请单（核对割接时间窗是否冲突、是否波及政企重保专线、回退脚本是否完备），或在暴发跨专业告警风暴时手工查拓扑定界派单。</p>
+<p>现在，我们严格按照 <code>单元 6.1</code> 的四层架构将其打造为**“办对事且绝不闯祸”的受控行动智能体**：</p>
+<table>
+<thead>
+<tr>
+<th>四层架构（对齐 <code>6.1.1</code>）</th>
+<th>在运营商割接预审与故障派单中的具体实现</th>
+<th>绑定的工具分级与工程门禁（对齐 <code>6.1.2</code>）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 意图与状态机层</strong></td>
+<td>识别诉求是“发起割接预审”“故障定界派单”还是“工单改派/挂起”；校验工单当前状态（如 <code>CLOSED</code> 或 <code>EXECUTING</code> 状态的割接单严禁直接修改）</td>
+<td>状态迁移字典硬编码；单次会话总步数锁死 <code>max_steps = 6</code></td>
+</tr>
+<tr>
+<td><strong>2. 只读探针层（<code>Tier 1 Auto-Run</code>）</strong></td>
+<td>状态机强制触发必调只读探针组合：一是 <code>query_topology_impact(ne_id)</code>（查关联基站与政企重保电路）；二是 <code>search_correlated_alarms(ne_id, window_min=15)</code>（查前 15 分钟上游是否有市电停电或光缆中断主告警，防主从告警风暴重派）；三是 <code>check_cutover_window(start_time, end_time)</code>（查夜间窗口冲突与重保封网期）</td>
+<td>全部使用物理只读凭证；返回的所有真实网元 ID、电路 ID 自动注入当前会话的 <code>valid_entities</code> 白名单集合</td>
+</tr>
+<tr>
+<td><strong>3. 干跑预演与审批闸层（<code>Tier 2 Dry-Run + HITL</code>）</strong></td>
+<td>模型仅允许调用 <code>preview_cutover_review()</code> 或 <code>preview_dispatch_ticket()</code>，生成结构化预演单 <code>preview_diff.json</code>；<strong>确定性预演闸强制执行三项硬核查</strong>：一是参数中的 <code>ne_id</code> 与目标班组编码必须 100% 存在于 <code>valid_entities</code>（防幻觉 ID）；二是割接单的 <strong><code>rollback_script</code>（回退脚本）字段严禁为空</strong>；三是不得撞上白昼高峰期或重保封网红线</td>
+<td>凡违反任一门禁，立即确定性拦截并输出违规条款；若包含现场施工照片凭据，先行走完 <code>7.1.2</code> 多模态两段式核验</td>
+</tr>
+<tr>
+<td><strong>4. 受控执行与飞轮回流层</strong></td>
+<td>前端工作台向值班调度员展示“探针证据链 + 影响面拓扑 + <code>preview_diff.json</code> 预演单”；调度员审阅（可微调派往的班组或紧急度等级）后点击“批准执行”，后端校验 <code>human_approval_token</code> 并携带 <code>idempotency_key</code> 写入沙盒库，同时按 <code>单元 6.2.1</code> 自动计算 <code>payload_diff</code> 落盘至 <code>trace.jsonl</code></td>
+<td>模型上下文<strong>零挂载</strong> <code>commit_*</code> 直写接口与 <code>Tier 3</code> 网元直连操作；每次评测每题运行前调用 <code>reset_sandbox()</code> 重置状态</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-口径确认表τ-bench-五项硬口径与-pass^3-门禁">2. 口径确认表：τ-bench 五项硬口径与 <code>pass^3</code> 门禁</h3>
+<table>
+<thead>
+<tr>
+<th>客户模糊要求</th>
+<th>确认后的可判定口径（对齐 <code>6.1.4</code>）</th>
+<th>倒逼出的结构设计</th>
+<th>验收门禁基准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动派单与预审准确率 ≥90%</td>
+<td><strong>1. 沙盒最终环境状态一致率（Final State Match）</strong>：20 道评测题运行后，沙盒库中的工单状态、目标处理班组、关联根因告警 ID、预审结论与黄金目标状态完全吻合的比例</td>
+<td>题前 <code>reset_sandbox()</code> 快照隔离；题后运行确定性 SQL/JSON 状态断言脚本，零判官模型打分</td>
+<td>单次状态一致率 <strong>≥90%</strong>（18/20）</td>
+</tr>
+<tr>
+<td>流程规范不跳步</td>
+<td><strong>2. 必调探针轨迹召回率（Trajectory Recall）</strong>：在派单或批准割接前，是否 100% 按规定顺序调用了拓扑影响探针、主从告警关联探针与时间窗核查探针</td>
+<td>将必调探针固化进状态机前置条件，未集齐探针返回值禁止调用 <code>preview_*</code></td>
+<td>必调探针召回率 <strong>≥95%</strong>；未查先写率为 <strong>0%</strong></td>
+</tr>
+<tr>
+<td>严禁编造网元与单号</td>
+<td><strong>3. 参数合法与零幻觉率（Argument Validity）</strong>：传入 <code>preview_*</code> 的所有网元 ID、电路号、工单号 100% 源自输入或探针返回</td>
+<td>预演闸执行 <code>valid_entities</code> 集合包含性校验</td>
+<td>参数幻觉率 <strong>= 0%</strong></td>
+</tr>
+<tr>
+<td>违规割接 100% 拦下</td>
+<td><strong>4. 安全闸拦截率（Safety Gate Recall）</strong>：针对“白天高峰期割接”“无回退脚本”“封网期变更”“诱导执行 <code>Tier 3</code> 端口 <code>shutdown</code>”对抗样本的硬拦截率</td>
+<td>预演闸硬编码时间窗、回退脚本非空与 <code>Tier 3</code> 正则黑名单校验</td>
+<td>安全闸拦截率 <strong>= 100%</strong>（一票否决）</td>
+</tr>
+<tr>
+<td>生产运行稳定可靠</td>
+<td><strong>5. 多次运行连续一致性（<code>pass^3</code>）</strong>：每道题独立连续运行 3 次，唯有 3 次全部满足状态一致、轨迹合规、零幻觉才算通过</td>
+<td>锁死模型 <code>temperature = 0</code> 并启用严格 JSON Schema 工具参数约束</td>
+<td><strong><code>pass^3</code> ≥85%</strong>（与 <code>pass@1</code> 双口径并列报告）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-726-四大影子样板横向速查卡与一段话启动指令模板">7.2.6 四大影子样板横向速查卡与一段话启动指令模板</h2>
+<p>为了帮助各小组在与编码智能体（Coding Agent）协作时一枪命中靶心，下表将四个象限的<strong>四大协作拍板点</strong>与<strong>三句话启动指令模板</strong>浓缩在一页纸上，开题时可直接复制改写：</p>
+<table>
+<thead>
+<tr>
+<th>象限与样板</th>
+<th>四个真拍板点（必须由人定死再让 AI 写代码）</th>
+<th>下达给编码智能体的“三句话启动指令模板”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>象限 A：问数类</strong>（映射 <code>5.3</code>）</td>
+<td>1. 开放哪几张白名单表；2. 十个通信口径怎么写进 <code>semantic_layer.json</code>；3. 哪些模糊词属 <code>blocking</code> 反问、哪些属 <code>advisory</code> 默认；4. <code>LIMIT</code> 上限与纠错次数（<code>&lt;=2</code>）</td>
+<td><strong>限死输入</strong>：“只准读取 <code>starter-kit/db/</code> 与 <code>semantic_layer.json</code>。” <strong>限死交付</strong>：“实现意图歧义分流、四道只读安全闸（只读连接/白名单/单语句/LIMIT 1000）与 EX 比对器，输出 SQL+结果集+轨迹。” <strong>限死停止</strong>：“遇到写操作词或未登记表必须立即拒绝并返回原因，严禁静默改写。”</td>
+</tr>
+<tr>
+<td><strong>象限 B：稽核类</strong>（映射 <code>5.4</code>）</td>
+<td>1. 哪些规则归 80% 确定性图/算术引擎、哪些归 20% 语义/视觉；2. 审查代表谁的立场（<code>stance</code>）；3. 证据粒度（CLI 行号范围/账单行 ID）；4. 何时输出 <code>needs_human</code></td>
+<td><strong>限死输入</strong>：“先用 TextFSM/清洗脚本把原始配置/账单转为结构化 JSON，只准按 <code>rules.yaml</code> 的清单与立场核查。” <strong>限死交付</strong>：“80% 拓扑同路由与算术规则用纯 Python 实现，20% 语义/照片规则强制输出带行号证据的 JSON，按 <code>对象×规则</code> 单元统计 P/R 并区分三态。” <strong>限死停止</strong>：“严禁模型自创清单外规则；照片模糊或回显不全时必须停下输出 <code>needs_human</code>。”</td>
+</tr>
+<tr>
+<td><strong>象限 C：问答类</strong>（映射 <code>5.2</code>）</td>
+<td>1. 切块粒度（按操作步骤/条款）；2. 生效状态元数据字段（<code>active/superseded</code>）；3. 混合召回候选数与重排阈值 <code>MIN_RERANK_SCORE</code>；4. 命令字面溯源校验规则</td>
+<td><strong>限死输入</strong>：“按规程条款切块并提取生效状态元数据，写入本地索引并校验 <code>sha256</code> 指纹。” <strong>限死交付</strong>：“实现稠密+BM25 混合召回与重排阈值闸，回答必须逐句带 <code>[doc_id#clause]</code> 引用，且代码块中的 CLI 命令必须做原文子串校验。” <strong>限死停止</strong>：“重排最高分低于阈值或命令不在原文中时，必须立即触发确定性拒答，严禁自由发挥。”</td>
+</tr>
+<tr>
+<td><strong>象限 D：行动类</strong>（映射 <code>6.1</code>）</td>
+<td>1. <code>Tier 1/2/3</code> 工具分级表；2. <code>preview_diff.json</code> 必含字段（含 <code>rollback_script</code> 与影响面）；3. <code>valid_entities</code> 溯源与 <code>max_steps=6</code>；4. 沙盒状态断言与 <code>pass^3</code> 口径</td>
+<td><strong>限死输入</strong>：“只准为 <code>Tier 1</code> 探针写自动调用逻辑，<code>Tier 2</code> 变更只准暴露 <code>preview_*</code> 干跑接口，物理屏蔽 <code>Tier 3</code> 高危命令。” <strong>限死交付</strong>：“预演闸强制核验 <code>valid_entities</code> 参数零幻觉、时间窗无冲突且回退脚本非空；真实落库 <code>commit_*</code> 必须校验人工令牌与幂等键，并记录 <code>payload_diff</code> 到 <code>trace.jsonl</code>。” <strong>限死停止</strong>：“探针返回空、缺少回退方案或步数达 <code>max_steps=6</code> 时立即停机返回 <code>needs_human</code>。”</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<ol>
+<li><strong>拿着混合型大题目不拆解，直接套单一模板。</strong> 把“既要查能耗报表、又要审网元配置、还要自动派故障工单”揉成一个巨型 Prompt，最后哪一项都无法量化验收。</li>
+<li><strong>用大模型做同路由拓扑求交集或阶梯电费算术。</strong> 违背 Batfish 形式化验证分工原则，放着 10 毫秒 100% 准确的集合求交集代码不写，非要让模型看着文本猜“主备光路有没有重合管道井”。</li>
+<li><strong>在配置巡查或结算稽核中按“文件份数”而非“待审对象 × 规则数”算分母，且只报召回不报精确率。</strong> 20 份文件样本量太小，且只看召回会纵容系统“把所有正常配置都误报成违规”。</li>
+<li><strong>排障规程问答不区分新旧规程生效状态，也不校验生成的网元 CLI 命令。</strong> 把已废止的旧门限当正确答案，或任由模型凭空捏造网元命令参数。</li>
+<li><strong>割接预审智能体不强制校验“回退脚本非空”，或把直写接口暴露给大模型。</strong> 违背自智网络 L4 安全底线与 <code>6.1</code> 两阶段提交契约。</li>
+</ol>
+<p>三条不可退的架构红线：<strong>混合型课题必须先拆解到单一主导象限再开工；凡属拓扑连通性、集合交集与金额核算的规则必须 100% 交由确定性代码执行；凡属象限 D 的行动类课题必须实现 <code>preview_*</code> 与 <code>commit_*</code> 物理拆分并考核 <code>pass^3</code> 连续一致性。</strong></p>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li>迈向自智网络 L4 的工程核心，是将复杂运维与支撑场景纳入**“意图解析 → 只读探针/前置解析 → 确定性规则/仿真预审 → Dry-Run + 人在回路受控执行 → 生产飞轮回流”**的受控闭环。</li>
+<li>任何运营商课题均可通过判型卡在 5 分钟内归入四个象限：<strong>象限 A（问数类 → <code>5.3</code> EX 判定）、象限 B（配置与结算稽核类 → <code>5.4</code> 双引擎 + Batfish 思想）、象限 C（规程问答类 → <code>5.2</code> 时效元数据 + 阈值拒答）、象限 D（割接预审与工单流转类 → <code>6.1</code> 工具三态分级 + Dry-Run 预演闸 + <code>pass^3</code>）</strong>。</li>
+<li>四大平行影子样板证明：<strong>越是高风险的通信专业场景，越要把确定性的算术、拓扑交集、权限白名单和回退核验关进 Python 代码里，让大模型只做意图对齐、结构化抽取与人话解读</strong>。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能用图 7-2 的四象限判型流程，在 5 分钟内判定本组课题属于象限 A、B、C 还是 D（若属混合型能当场拆出单核子任务）。</li>
+<li><input disabled="" type="checkbox"> 若本组属象限 A，我能写出 <code>semantic_layer.json</code> 中的至少 5 个通信指标唯一计算式，并区分 <code>blocking</code> 与 <code>advisory</code> 歧义。</li>
+<li><input disabled="" type="checkbox"> 若本组属象限 B，我能说明为什么同路由检测与阶梯电费核算必须用 Python 集合/算术代码实现，并能按 <code>待审对象 × 规则数</code> 定义评测分母。</li>
+<li><input disabled="" type="checkbox"> 若本组属象限 C，我能在切块元数据中加入 <code>active/superseded</code> 状态，并用代码校验回答中的 CLI 命令 100% 源自证据原文。</li>
+<li><input disabled="" type="checkbox"> 若本组属象限 D，我能列出 <code>Tier 1/2/3</code> 工具清单，在预演闸中硬编码校验 <code>rollback_script</code> 非空与 <code>valid_entities</code> 参数溯源，并跑出 <code>pass^3</code> 指标。</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析">基础辨析</h3>
+<ol>
+<li>为什么在“专线双路同路由隐患排查（象限 B）”中，借鉴 Batfish 思想用 Python 集合求交集（<code>set(path_a_nodes) &amp; set(path_b_nodes)</code>）比让大模型阅读两条光路的文字描述判断同路由，在准确率和延迟上具有压倒性优势？那么大模型在这个场景里应该干什么？</li>
+<li>在“无线排障手册问答（象限 C）”中，如果知识库同时存在 2023 版和 2026 版两份同名应急预案，仅靠向量检索和重排模型为什么无法保证一定返回 2026 版？需要在知识层和检索层加什么确定性设计？</li>
+</ol>
+<h3 id="h-进阶分析">进阶分析</h3>
+<ol>
+<li>某小组负责“跨部门故障工单定界与派发智能体（象限 D）”。当某汇聚机房市电停电时，下游 12 个基站与 3 台 OLT 在 2 分钟内同时上报断站告警。如果智能体每收到一条告警就独立调用一次派单接口，会造成什么严重后果？请结合 <code>7.2.5</code> 的 <code>Tier 1</code> 只读探针与状态机设计给出防重派方案。</li>
+<li>对比象限 B（配置基线核查，只读输出审查报告）与象限 D（夜间割接变更预审并创建审批流转单，带状态写入）：两者都需要核查配置规则，为什么象限 D 除了考核规则检出率外，还必须额外考核 <code>valid_entities</code> 参数零幻觉率、必调探针轨迹召回率与 <code>pass^3</code>？</li>
+</ol>
+<h3 id="h-迁移研讨">迁移研讨</h3>
+<ol>
+<li>对照 <code>7.2.6</code> 的《四大影子样板横向速查卡》，勾选本组课题所属象限，当场填写你们组的“四个真拍板点”取值。</li>
+<li>套用 <code>7.2.6</code> 最右列的“三句话启动指令模板”，写好你们组准备在 Day 3 上午发给编码智能体的第一条正式施工指令。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>读到这里，你手里已经握齐了通信运营商实战所需的全部技术武器：<code>单元 7.1</code> 给了你三条安全红线、三类异构数据前置解析管线与“1 小时造数建桩法”；本节（<code>单元 7.2</code>）给了你自智网络 L4 四象限判型图与四大平行影子样板的架构、口径及启动指令。</p>
+<p>现在，我们只剩最后一个、也是决定实战演练生死的问题：<strong>在“2 天听课 + 3 天实战演练”的紧凑赛制下，除去最后一天上午写汇报材料、下午上台汇报演示，留给你们写代码的时间其实只有 Day 3 和 Day 4 整整两天（4 个半天）！</strong> 如何在开题第 1 小时把部门申报的“年度巨无霸大题目”果断瘦身为 4 个半天能跑通两轮评测的高分最小可行产品（MVP）？6 个半天每个半天该交什么工件、守什么门禁？这正是全书收官单元（<code>单元 7.3</code>）要为你揭晓的通关作战图。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] TM Forum 自智网络 L4 架构指南与产业白皮书：</strong> TM Forum &amp; 中国移动，《Autonomous Networks Level 4 Industry Whitepaper &amp; Implementation Guide》及《中国移动自智网络白皮书》（重点研读 L4 高价值场景的意图驱动、仿真预审与闭环控制机制），<a href="https://www.tmforum.org/autonomous-networks/">https://www.tmforum.org/autonomous-networks/</a>。</li>
+<li id="ref-2"><strong>[2] Batfish 网络配置形式化验证引擎：</strong> Ryan Beckett 等（Microsoft Research / Princeton / Intentionet），<em>A General Approach to Network Configuration Analysis (SIGCOMM)</em> 及 Batfish 开源仓库（重点研读如何用确定性数学与图模型进行配置核查、同路由单点检测与变更事前验证），<a href="https://www.batfish.org/">https://www.batfish.org/</a>。</li>
+<li id="ref-3"><strong>[3] 本课程第 5 章与第 6 章四大场景基准规范：</strong> 对应 <a href="/aicoding/units/5-2/">单元 5.2</a>（RAG 证据与拒答）、<a href="/aicoding/units/5-3/">单元 5.3</a>（NL2SQL 可执行判定 EX）、<a href="/aicoding/units/5-4/">单元 5.4</a>（双引擎与规则立场）及 <a href="/aicoding/units/6-1/">单元 6.1</a>（受控行动智能体与 τ-bench 轨迹评测）。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/7-1/">← 7.1 运营商内网研发安全红线</a>
+      <a href="/aicoding/units/7-3/">7.3 三天实战演练 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-721-自智网络-l4-演进与运营商课题四象限快速对标图">7.2.1 自智网络 L4 演进与运营商课题“四象限快速对标图”</a></li><li class="lv3"><a href="#h-1-从-l3-到-l4自智网络演进的工程本质">1. 从 L3 到 L4：自智网络演进的工程本质</a></li><li class="lv3"><a href="#h-2-运营商课题四象限快速对标图">2. 运营商课题“四象限快速对标图”</a></li><li class="lv2"><a href="#h-722-影子样板一象限-a-·-映射-53政企专线-sla-与基站能耗多维问数助手">7.2.2 影子样板一（象限 A · 映射 5.3）：政企专线 SLA 与基站能耗多维问数助手</a></li><li class="lv3"><a href="#h-1-业务痛点与-semantic_layer-十个通信业务口径">1. 业务痛点与 semantic_layer 十个通信业务口径</a></li><li class="lv3"><a href="#h-2-口径确认表与安全边界设计">2. 口径确认表与安全边界设计</a></li><li class="lv2"><a href="#h-723-影子样板二象限-b-·-映射-54承载网配置基线核查光路同路由诊断与资费结算稽核">7.2.3 影子样板二（象限 B · 映射 5.4）：承载网配置基线核查、光路同路由诊断与资费结算稽核</a></li><li class="lv3"><a href="#h-1-借鉴-batfish-形式化验证思想双引擎如何精准分工">1. 借鉴 Batfish 形式化验证思想：双引擎如何精准分工</a></li><li class="lv3"><a href="#h-2-口径确认表锁死待审对象-×-规则条数判定单元">2. 口径确认表：锁死“待审对象 × 规则条数”判定单元</a></li><li class="lv2"><a href="#h-724-影子样板三象限-c-·-映射-52无线核心网应急排障规程问答与政企云网方案生成助手">7.2.4 影子样板三（象限 C · 映射 5.2）：无线/核心网应急排障规程问答与政企云网方案生成助手</a></li><li class="lv3"><a href="#h-1-业务痛点与时效冲突-+-命令零编造双保险">1. 业务痛点与“时效冲突 + 命令零编造”双保险</a></li><li class="lv3"><a href="#h-2-口径确认表与三层七环节落点">2. 口径确认表与三层七环节落点</a></li><li class="lv2"><a href="#h-725-影子样板四象限-d-·-映射-61夜间网络割接变更预审与跨部门故障工单流转智能体">7.2.5 影子样板四（象限 D · 映射 6.1）：夜间网络割接变更预审与跨部门故障工单流转智能体</a></li><li class="lv3"><a href="#h-1-对标自智网络-l4-闭环完整落地-61-四层架构与读写分流">1. 对标自智网络 L4 闭环：完整落地 6.1 四层架构与读写分流</a></li><li class="lv3"><a href="#h-2-口径确认表τ-bench-五项硬口径与-pass^3-门禁">2. 口径确认表：τ-bench 五项硬口径与 pass^3 门禁</a></li><li class="lv2"><a href="#h-726-四大影子样板横向速查卡与一段话启动指令模板">7.2.6 四大影子样板横向速查卡与一段话启动指令模板</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析">基础辨析</a></li><li class="lv3"><a href="#h-进阶分析">进阶分析</a></li><li class="lv3"><a href="#h-迁移研讨">迁移研讨</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

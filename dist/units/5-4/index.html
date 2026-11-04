@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.4 场景三 合同合规审查 · 通用 AI Coding 教材</title>
+<meta name="description" content="主观判断的工程约束与规则立场">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0 active"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/5-3/">← 5.3 场景二 经营数据问数</a></span>
+      <span><a href="/aicoding/units/5-5/">5.5 方法沉淀 →</a></span>
+    </div>
+    <h1>5.4　场景三 合同合规审查</h1>
+    <p class="lede">主观判断的工程约束与规则立场</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">三类 FDE 典型场景的第三类——<strong>主观判断</strong>的那一类。它解决的是“该不该报”：按规则清单查风险、给出位置与证据、并在一开始就声明<strong>站在谁的立场</strong>。案例本身就是合同审查，所以本节不讨论“要不要做审查”，只讨论“怎么让它报得准、报得住”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">做法务科技、合规审查、单证审核类 AI 应用的工程师与交付负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">读得懂合同条款；知道“召回”和“精确率”的区别（不知道也能读，5.4.4 从头讲）。文中数字均为 30 份合成合同上的实测值，n 很小，带口径标注。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:5.4"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>能画出合同审查的双引擎结构，说清确定性层与语义层的分工边界。</li>
+<li>能解释“立场”为什么不是可选项，并写出立场声明的三个落点。</li>
+<li>能把“核心风险召回 ≥88%”改写成含判定单元、分母、分类型的口径。</li>
+<li>能给出证据三要素（原文片段 / 定位 / 主题归属）与三态覆盖的落地方式。</li>
+<li>能按“解析 → 规则 → 语义 → 合并定位”的顺序排查失败。</li>
+</ol>
+<div class="concl"><span class="concl-tag">一句话结论</span>合同审查不是“让模型读合同”，而是<strong>把规则、立场、证据三件事先钉死，再让模型只做它能做的那一小段</strong>。</div>
+<hr>
+<h2 id="h-541-合同审查体系双引擎与四层">5.4.1 合同审查体系：双引擎与四层</h2>
+<h3 id="h-1-它解决什么问题">1. 它解决什么问题</h3>
+<p>合同的“风险”有三个来源，性质完全不同：</p>
+<ul>
+<li><strong>该有的条款没有</strong>（缺失型）：可以穷举清单，属于<strong>存在性检查</strong>；</li>
+<li><strong>数值越线</strong>（数值型）：违约金比例、付款比例、期限，属于<strong>算术</strong>；</li>
+<li><strong>条款表述对某一方不利</strong>（语义型）：需要读句子、需要立场，属于<strong>判断</strong>。</li>
+</ul>
+<p>把三类混在一起交给模型，结果是“能说出一堆看起来有理的风险，但漏的比报的多”。所以要分层：<strong>能算的交代码，能查的交规则，只有最后那一层交模型。</strong></p>
+<h3 id="h-2-四层结构">2. 四层结构</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>职责</th>
+<th>输入</th>
+<th>输出</th>
+<th>典型失效</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析层</td>
+<td>docx → 条款序列（章 / 条 / 段）</td>
+<td>合同文件</td>
+<td>带定位的段落</td>
+<td>标题当正文、条款错位、跨页切断</td>
+</tr>
+<tr>
+<td>规则引擎</td>
+<td>存在型 / 缺失型 / 数值型 / 结构性</td>
+<td>段落 + 规则清单</td>
+<td>确定性判定</td>
+<td>关键词误命中、标题别名漏配</td>
+</tr>
+<tr>
+<td>语义层</td>
+<td>只有语义规则（本案例 6 条）</td>
+<td>段落 + 规则 + 立场</td>
+<td>语义判定 + 证据</td>
+<td>无证据乱报、主题漂移、JSON 截断</td>
+</tr>
+<tr>
+<td>合并分级层</td>
+<td>汇总、去重、分级、给定位</td>
+<td>两路判定</td>
+<td>报告（分级 + 位置 + 证据）</td>
+<td>两路冲突无裁决、位置口径混用</td>
+</tr>
+</tbody></table>
+<figure class="fig" id="fig-5-4"><div class="fig-scroll"><svg id="svg-5-4" width="618.8828125" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="785.75" viewBox="0 0 618.8828125 785.75" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-5-4{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-5-4 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-5-4 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-5-4 .error-icon{fill:#eceff1;}#svg-5-4 .error-text{fill:#13100e;stroke:#13100e;}#svg-5-4 .edge-thickness-normal{stroke-width:1px;}#svg-5-4 .edge-thickness-thick{stroke-width:3.5px;}#svg-5-4 .edge-pattern-solid{stroke-dasharray:0;}#svg-5-4 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-5-4 .edge-pattern-dashed{stroke-dasharray:3;}#svg-5-4 .edge-pattern-dotted{stroke-dasharray:2;}#svg-5-4 .marker{fill:#607d8b;stroke:#607d8b;}#svg-5-4 .marker.cross{stroke:#607d8b;}#svg-5-4 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-5-4 p{margin:0;}#svg-5-4 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-5-4 .cluster-label text{fill:#13100e;}#svg-5-4 .cluster-label span{color:#13100e;}#svg-5-4 .cluster-label span p{background-color:transparent;}#svg-5-4 .label text,#svg-5-4 span{fill:#17324d;color:#17324d;}#svg-5-4 .node rect,#svg-5-4 .node circle,#svg-5-4 .node ellipse,#svg-5-4 .node polygon,#svg-5-4 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-5-4 .rough-node .label text,#svg-5-4 .node .label text,#svg-5-4 .image-shape .label,#svg-5-4 .icon-shape .label{text-anchor:middle;}#svg-5-4 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-5-4 .rough-node .label,#svg-5-4 .node .label,#svg-5-4 .image-shape .label,#svg-5-4 .icon-shape .label{text-align:center;}#svg-5-4 .node.clickable{cursor:pointer;}#svg-5-4 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-5-4 .arrowheadPath{fill:#0b0b0b;}#svg-5-4 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-5-4 .flowchart-link{stroke:#607d8b;fill:none;}#svg-5-4 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-4 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-4 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-4 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-5-4 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-5-4 .cluster text{fill:#13100e;}#svg-5-4 .cluster span{color:#13100e;}#svg-5-4 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-5-4 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-5-4 rect.text{fill:none;stroke-width:0;}#svg-5-4 .icon-shape,#svg-5-4 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-4 .icon-shape p,#svg-5-4 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-5-4 .icon-shape .label rect,#svg-5-4 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-4 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-5-4 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-5-4 .node .neo-node{stroke:#1976d2;}#svg-5-4 [data-look="neo"].node rect,#svg-5-4 [data-look="neo"].cluster rect,#svg-5-4 [data-look="neo"].node polygon{stroke:url(#svg-5-4-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-4 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-5-4 [data-look="neo"].node path{stroke:url(#svg-5-4-gradient);stroke-width:1px;}#svg-5-4 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-4 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-5-4 [data-look="neo"].node circle{stroke:url(#svg-5-4-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-4 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-5-4 [data-look="neo"].icon-shape .icon{fill:url(#svg-5-4-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-4 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-5-4-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-4 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-5-4 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-4 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-4 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-5-4 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-4 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-4 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-5-4 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-4 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-4 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-5-4 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-4 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-4 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-5-4 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-4 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-4 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-5-4_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-4_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-4_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-4_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-5-4_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-4_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-4_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-4_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-4_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-4_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-4_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-5-4_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M175.93,60.5L175.93,63.333C175.93,66.167,175.93,71.833,175.93,76.833C175.93,81.833,175.93,86.167,175.93,88.333L175.93,90.5" id="svg-5-4-L_D_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_P_0" data-points="W3sieCI6MTc1LjkyOTY4NzUsInkiOjYwLjV9LHsieCI6MTc1LjkyOTY4NzUsInkiOjc3LjV9LHsieCI6MTc1LjkyOTY4NzUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M169.86,147L169.205,149.833C168.55,152.667,167.24,158.333,166.585,168.375C165.93,178.417,165.93,192.833,165.93,207.25C165.93,221.667,165.93,236.083,165.93,261.063C165.93,286.042,165.93,321.583,165.93,339.354L165.93,357.125" id="svg-5-4-L_P_R1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_R1_0" data-points="W3sieCI6MTY5Ljg2MDMyMzMzODE1MDMsInkiOjE0N30seyJ4IjoxNjUuOTI5Njg3NSwieSI6MTY0fSx7IngiOjE2NS45Mjk2ODc1LCJ5IjoyMDcuMjV9LHsieCI6MTY1LjkyOTY4NzUsInkiOjI1MC41fSx7IngiOjE2NS45Mjk2ODc1LCJ5IjozNjEuMTI1fV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M266.911,147L276.731,149.833C286.551,152.667,306.192,158.333,324.54,163.803C342.888,169.273,359.945,174.546,368.473,177.182L377.001,179.819" id="svg-5-4-L_P_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_S_0" data-points="W3sieCI6MjY2LjkxMDg3ODc5MzM1MjYsInkiOjE0N30seyJ4IjozMjUuODMyMDMxMjUsInkiOjE2NH0seyJ4IjozODAuODIyNTQ3ODY4NDk3MSwieSI6MTgxfV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M475.734,147L475.734,149.833C475.734,152.667,475.734,158.333,475.229,163.35C474.725,168.368,473.715,172.735,473.21,174.919L472.705,177.103" id="svg-5-4-L_ST_S_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_ST_S_0" data-points="W3sieCI6NDc1LjczNDM3NSwieSI6MTQ3fSx7IngiOjQ3NS43MzQzNzUsInkiOjE2NH0seyJ4Ijo0NzEuODAzNzM5MTYxODQ5NywieSI6MTgxfV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M165.93,413.625L165.93,433.938C165.93,454.25,165.93,494.875,166.741,520.618C167.553,546.361,169.176,557.222,169.988,562.652L170.799,568.083" id="svg-5-4-L_R1_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_R1_M_0" data-points="W3sieCI6MTY1LjkyOTY4NzUsInkiOjQxMy42MjV9LHsieCI6MTY1LjkyOTY4NzUsInkiOjUzNS41fSx7IngiOjE3MS4zOTA2ODA0MDc4MDE0MywieSI6NTcyLjAzOTAwNzA5MjE5ODZ9XQ==" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M465.734,233.5L465.734,236.333C465.734,239.167,465.734,244.833,465.734,249.833C465.734,254.833,465.734,259.167,465.734,261.333L465.734,263.5" id="svg-5-4-L_S_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S_E_0" data-points="W3sieCI6NDY1LjczNDM3NSwieSI6MjMzLjV9LHsieCI6NDY1LjczNDM3NSwieSI6MjUwLjV9LHsieCI6NDY1LjczNDM3NSwieSI6MjY3LjV9XQ==" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M478.4,494.584L479.206,501.403C480.012,508.223,481.623,521.861,482.429,538.972C483.234,556.083,483.234,576.667,483.234,586.958L483.234,597.25" id="svg-5-4-L_E_N_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_N_0" data-points="W3sieCI6NDc4LjQwMDQxMjczNTg0OTA1LCJ5Ijo0OTQuNTgzOTYyMjY0MTUwOTV9LHsieCI6NDgzLjIzNDM3NSwieSI6NTM1LjV9LHsieCI6NDgzLjIzNDM3NSwieSI6NjAxLjI1fV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M408.321,449.837L395.198,464.114C382.075,478.391,355.828,506.946,324.874,532.167C293.919,557.387,258.256,579.275,240.425,590.219L222.594,601.162" id="svg-5-4-L_E_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_M_0" data-points="W3sieCI6NDA4LjMyMTIwOTQyMTE2MTEsInkiOjQ0OS44MzY4MzQ0MjExNjExfSx7IngiOjMyOS41ODIwMzEyNSwieSI6NTM1LjV9LHsieCI6MjE5LjE4NDM2NjM5NjExOTYzLCJ5Ijo2MDMuMjU0Njc4ODk2MTE5Nn1d" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M179.68,691.25L179.68,694.083C179.68,696.917,179.68,702.583,187.964,708.048C196.248,713.513,212.816,718.776,221.1,721.407L229.384,724.039" id="svg-5-4-L_M_REP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_REP_0" data-points="W3sieCI6MTc5LjY3OTY4NzUsInkiOjY5MS4yNX0seyJ4IjoxNzkuNjc5Njg3NSwieSI6NzA4LjI1fSx7IngiOjIzMy4xOTYyMTU2NzkxOTA3NCwieSI6NzI1LjI1fV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path><path d="M483.234,653.75L483.234,662.833C483.234,671.917,483.234,690.083,472.913,701.833C462.592,713.583,441.95,718.916,431.629,721.583L421.307,724.249" id="svg-5-4-L_N_REP_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_N_REP_0" data-points="W3sieCI6NDgzLjIzNDM3NSwieSI6NjUzLjc1fSx7IngiOjQ4My4yMzQzNzUsInkiOjcwOC4yNX0seyJ4Ijo0MTcuNDM0NjA5ODI2NTg5NiwieSI6NzI1LjI1fV0=" data-look="classic" marker-end="url(#svg-5-4_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_D_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P_R1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P_S_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_ST_S_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_R1_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(483.234375, 535.5)"><g class="label" data-id="L_E_N_0" transform="translate(-7.5, -11.25)"><foreignObject width="15" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>否</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(323.96625, 538.94659)"><g class="label" data-id="L_E_M_0" transform="translate(-7.5, -11.25)"><foreignObject width="15" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>是</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_M_REP_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_N_REP_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-5-4-flowchart-D-0" data-look="classic" transform="translate(175.9296875, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-64.3515625" y="-26.25" width="128.703125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-34.3515625, -11.25)"><rect></rect><foreignObject width="68.703125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>合同 docx</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-5-4-flowchart-P-1" data-look="classic" transform="translate(175.9296875, 120.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-115.2890625" y="-26.25" width="230.578125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-85.2890625, -11.25)"><rect></rect><foreignObject width="170.578125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>解析：章 / 条 / 段 + 定位</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-4-flowchart-R1-3" data-look="classic" transform="translate(165.9296875, 387.375)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-157.9296875" y="-26.25" width="315.859375" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-127.9296875, -11.25)"><rect></rect><foreignObject width="255.859375" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>确定性引擎：存在 / 缺失 / 数值 / 结构</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-4-flowchart-S-5" data-look="classic" transform="translate(465.734375, 207.25)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-111.625" y="-26.25" width="223.25" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-81.625, -11.25)"><rect></rect><foreignObject width="163.25" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>语义引擎：6 条语义规则</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-5-4-flowchart-ST-6" data-look="classic" transform="translate(475.734375, 120.75)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-90" y="-26.25" width="180" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-60, -11.25)"><rect></rect><foreignObject width="120" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>立场声明（甲方）</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-4-flowchart-M-9" data-look="classic" transform="translate(179.6796875, 627.5)"><polygon points="63.75,0 127.5,-63.75 63.75,-127.5 0,-63.75" class="label-container" transform="translate(-63.25, 63.75)" style="fill:#eceff1 !important;stroke:#607d8b !important"></polygon><g class="label" style="color:#263238 !important" transform="translate(-37.5, -11.25)"><rect></rect><foreignObject width="75" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>合并与分级</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-4-flowchart-E-11" data-look="classic" transform="translate(465.734375, 387.375)"><polygon points="119.875,0 239.75,-119.875 119.875,-239.75 0,-119.875" class="label-container" transform="translate(-119.375, 119.875)" style="fill:#eceff1 !important;stroke:#607d8b !important"></polygon><g class="label" style="color:#263238 !important" transform="translate(-93.625, -11.25)"><rect></rect><foreignObject width="187.25" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>有原文证据且属该规则主题?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-5-4-flowchart-N-13" data-look="classic" transform="translate(483.234375, 627.5)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-127.6484375" y="-26.25" width="255.296875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-97.6484375, -11.25)"><rect></rect><foreignObject width="195.296875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>未检出 / 需人工（不是合规）</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-4-flowchart-REP-17" data-look="classic" transform="translate(315.83203125, 751.5)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-150.0078125" y="-26.25" width="300.015625" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-120.0078125, -11.25)"><rect></rect><foreignObject width="240.015625" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>报告：分级 + 位置 + 证据 + 规则号</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-5-4-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-5-4-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-5-4-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-5-4.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 5-4 ↗</a>：合同审查的双引擎——确定性规则保底，语义层受证据与立场双重约束</figcaption></figure>
+<p>如图 5-4 所示，解析层一次产出同时喂给两条互不干扰的支路：确定性引擎走存在 / 缺失 / 数值 / 结构四类规则，语义引擎只走 6 条语义规则，后者还额外吃一个来自左侧的输入——立场声明。两条支路在“合并与分级”节点汇合之前，语义支路必须先过一道证据门禁：没有原文证据、或证据不属于该规则主题，就落到“未检出 / 需人工”，而不是被算作合规。读这张图要盯住那个门禁节点——它把“模型说有风险”和“这个风险能被原文撑住”明确分成了两件事。</p>
+<h3 id="h-3-和另外两个场景的差别">3. 和另外两个场景的差别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>场景一 RAG</th>
+<th>场景二 问数</th>
+<th>场景三 合同审查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判定方式</td>
+<td>模型当判官</td>
+<td>执行结果比对</td>
+<td><strong>确定性规则 + 语义层（证据约束）</strong></td>
+</tr>
+<tr>
+<td>主要风险</td>
+<td>编造、引用错</td>
+<td>口径错、越权</td>
+<td><strong>立场未定 → 系统性误报</strong></td>
+</tr>
+<tr>
+<td>关键约束</td>
+<td>阈值</td>
+<td>白名单</td>
+<td><strong>立场 + 证据主题</strong></td>
+</tr>
+<tr>
+<td>失败特征</td>
+<td>数字不可读</td>
+<td>快而错</td>
+<td><strong>报得很多、错得很有规律</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-542-场景拆解客户给什么我们定什么">5.4.2 场景拆解：客户给什么，我们定什么</h2>
+<p>客户只给两行：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>客户原话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>任务范围</td>
+<td>Word/PDF 上传；按规则清单识别风险、缺失项；分级意见</td>
+</tr>
+<tr>
+<td>验收指标</td>
+<td>核心风险召回率 ≥88%；10 页以内单份 ≤10 秒；风险等级标注；结构化报告</td>
+</tr>
+</tbody></table>
+<h3 id="h-1-哪些能问客户哪些必须自己定">1. 哪些能问客户，哪些必须自己定</h3>
+<table>
+<thead>
+<tr>
+<th>分界</th>
+<th>内容</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能问客户（业务取舍）</td>
+<td>审查代表哪一方；风险清单谁提供、多久更新；扫描件要不要做；10 秒含不含上传与解析；误报与漏报哪个更不可接受</td>
+<td>都是业务与合规判断，客户有依据</td>
+</tr>
+<tr>
+<td>必须自己定（技术口径）</td>
+<td>判定单元是“合同”还是“规则 × 合同”；P/R 的分母；定位的分母（可定位项 vs 缺失项）；证据粒度（句/段）；语义规则的判定方式</td>
+<td>客户答不出；问了只会得到“你们专业你们定”</td>
+</tr>
+</tbody></table>
+<p>一句话：<strong>“核心风险召回 88%” 里，客户给的只有“88%”，“核心风险”与“召回”都是我们定义的。</strong></p>
+<h3 id="h-2-任务范围落到四层">2. 任务范围落到四层</h3>
+<table>
+<thead>
+<tr>
+<th>客户要的</th>
+<th>落到哪一层</th>
+<th>工程含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Word/PDF 上传</td>
+<td>解析层</td>
+<td>docx 直接解析；<strong>扫描件不在承诺范围</strong>（要 OCR 就单独立项）</td>
+</tr>
+<tr>
+<td>按规则清单识别</td>
+<td>规则引擎</td>
+<td>清单是可枚举的资产，版本化、可评审</td>
+</tr>
+<tr>
+<td>缺失项识别</td>
+<td>规则引擎</td>
+<td>先建“应有条款域”清单，再做存在性检查</td>
+</tr>
+<tr>
+<td>分级意见</td>
+<td>合并层</td>
+<td>等级由规则等级 + 数值偏离度决定，不由模型随意给</td>
+</tr>
+<tr>
+<td>10 页 ≤10 秒</td>
+<td>全链路</td>
+<td>解析与语义调用是主要耗时；语义层要能分片与并发</td>
+</tr>
+<tr>
+<td>结构化报告</td>
+<td>合并层</td>
+<td>每条结论必须带：规则号、等级、证据、位置、整改建议</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-3-素材与起点你不是从我们的仓库开始">3. 素材与起点：你不是从我们的仓库开始</h3>
+<p>与场景一、二相同，<strong>学员是白手起家的</strong>。素材包内容：</p>
+<pre><code>starter-kit/
+├── materials/contracts/  30 份合成合同（CT001–CT030.docx）
+├── rules/rules.yaml      27 条规则（21 确定性 + 6 语义），顶部含 stance = 甲方
+├── truth/                60 条判定单元样本 + 20 条人工锚点
+├── eval/                 口径说明 + 素材校验脚本
+├── 契约.md               接口、双引擎、证据与三态约定
+└── requirements.txt / .env.example / README-素材说明.md
+</code></pre>
+<p>包里<strong>没有</strong>实现代码、完整 810 单元标注、现成评测器。开工前先跑素材校验：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>期望</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>合同数</td>
+<td>30 份（CT001–CT030）</td>
+</tr>
+<tr>
+<td>合同内容指纹</td>
+<td><code>7fd9a1f3…</code> 开头</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>27 条，且含 <code>stance: 甲方（采购方）</code></td>
+</tr>
+<tr>
+<td>判定单元样本</td>
+<td>60（存在型 30 / 缺失型 20 / 语义 10）</td>
+</tr>
+<tr>
+<td>锚点</td>
+<td>20</td>
+</tr>
+</tbody></table>
+<p>这 60 条只覆盖 <code>CT001</code>–<code>CT004</code> 四份合同（含 CT001 19 条、CT002 17 条、CT003 13 条、CT004 11 条），是<strong>评分器校准集</strong>（以不误报为主），<strong>不是全量评测集</strong>；正式分母是 规则 × 合同 = 27 × 30 = <strong>810</strong>。</p>
+<p>校准集里风险样本仅 3 条（<code>CT003/R02</code>、<code>CT004/R02</code>、<code>CT004/R09</code>），<strong>召回在该集上不可估</strong>（漏 1 条即掉 33 个百分点）；57 条无风险对照可用于估<strong>精确率与误报率</strong>。</p>
+<p><code>CT001</code> 的风险项全 0、<code>CT003</code> 含 <code>R02</code>/<code>R19</code>，这两处按<strong>锚点文件（<code>truth/anchors.jsonl</code>）口径</strong>计，拿 60 条校准集去核会对不上，别误判成素材错了。</p>
+<div class="alert alert-note"><span class="alert-tag">说明</span><p><strong>立场与规则清单都在素材里，不在实现里。</strong> 改它们等于改验收基准，不是“调参”。<sup class="cite"><a href="#ref-2">[2]</a></sup></p>
+</div>
+<hr>
+<h2 id="h-543-技术选型判据取值与替换条件">5.4.3 技术选型：判据、取值与替换条件</h2>
+<h3 id="h-1-三条总判据">1. 三条总判据</h3>
+<table>
+<thead>
+<tr>
+<th>判据</th>
+<th>怎么问</th>
+<th>决定什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>约束</td>
+<td>扫描件要不要做？单份多长？一天多少份？</td>
+<td>解析方式、分片策略、并发与超时</td>
+</tr>
+<tr>
+<td>替代</td>
+<td>这条规则能不能用关键词 + 标题 + 正则判？</td>
+<td>21 条确定性 vs 6 条语义的分界</td>
+</tr>
+<tr>
+<td>可换</td>
+<td>换掉它的代价？</td>
+<td>换规则清单要重标单元；换立场要重跑全部语义</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-供应商与模型">2. 供应商与模型</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>判据</th>
+<th>我们的方向</th>
+<th>什么时候换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>供应商</td>
+<td>一套 key 是否够（只需生成）</td>
+<td>一站式平台</td>
+<td>数据不能出域 → 本地网关</td>
+</tr>
+<tr>
+<td>语义模型</td>
+<td>长文本下的证据抽取能力、结构化输出稳定性、输出上限</td>
+<td>中文强、输出上限足够的通用模型</td>
+<td>JSON 截断频发 → 提高上限或换模型</td>
+</tr>
+<tr>
+<td>判官（若用）</td>
+<td>与语义模型不同家族</td>
+<td>异家族 70B 级</td>
+<td>只做人工抽检 → 可省</td>
+</tr>
+</tbody></table>
+<h3 id="h-3-组件取值">3. 组件取值</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>环节</th>
+<th>判据</th>
+<th>我们的取值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析</td>
+<td>docx 解析</td>
+<td>能否稳定切出章/条/段并保留定位</td>
+<td><code>python-docx</code> 逐段读，按标题与“第 X 条”切<sup class="cite"><a href="#ref-1">[1]</a></sup></td>
+</tr>
+<tr>
+<td>规则</td>
+<td>规则清单</td>
+<td>是否可枚举、可版本化</td>
+<td><code>rules.yaml</code> 27 条（21 确定性 + 6 语义），含立场</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>存在性检查</td>
+<td>关键词 + 标题 + 别名三重匹配</td>
+<td>命中任一即可，避免同义表述漏检</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>数值规则</td>
+<td>能否用正则抽数后比较</td>
+<td>比例、期限、金额门槛全部交代码</td>
+</tr>
+<tr>
+<td>语义</td>
+<td>输入长度</td>
+<td>一次送入多少字</td>
+<td><strong>按条款分片送入</strong>；整份塞入会静默失声（本案例早期只截前 6000 字符）</td>
+</tr>
+<tr>
+<td>语义</td>
+<td>输出格式</td>
+<td>是否强制结构化</td>
+<td>强制 JSON + 规则号白名单 + 证据字段</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>冲突裁决</td>
+<td>两路冲突谁优先</td>
+<td>确定性优先；语义层只补“语义型”规则</td>
+</tr>
+<tr>
+<td>服务</td>
+<td>接口</td>
+<td>要能看原文、能点结论定位</td>
+<td>FastAPI + 单页；<code>/api/contract/{id}/text</code> 返回段落</td>
+</tr>
+</tbody></table>
+<h3 id="h-4-应用层与前端">4. 应用层与前端</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>判据</th>
+<th>我们的取值</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务</td>
+<td>单语言、少依赖</td>
+<td>FastAPI + uvicorn</td>
+<td>生态不如 Django 全</td>
+</tr>
+<tr>
+<td>前端</td>
+<td>要左右分栏：左边原文、右边结论，点结论跳原文</td>
+<td>原生 HTML + JS</td>
+<td>复杂交互要自己写，但可控</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>合同与结论要不要留档</td>
+<td>文件 + JSON 结论，不建库</td>
+<td>量大时要换库</td>
+</tr>
+</tbody></table>
+<h3 id="h-5-选型卡一页带走">5. 选型卡（一页带走）</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>我们选它</th>
+<th>什么时候换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>供应商</td>
+<td>一站式（只需生成）</td>
+<td>数据不能出域</td>
+</tr>
+<tr>
+<td>解析</td>
+<td>python-docx + 规则切分</td>
+<td>出现扫描件 → 单独立项 OCR</td>
+</tr>
+<tr>
+<td>规则清单</td>
+<td>YAML，版本化，含立场</td>
+<td>规则超过 50 条 → 拆域、加规则管理界面</td>
+</tr>
+<tr>
+<td>语义层</td>
+<td>6 条，强制 JSON + 证据</td>
+<td>长文分片（&gt;6000 字符）必须做</td>
+</tr>
+<tr>
+<td>服务/前端</td>
+<td>FastAPI + 原生分栏页</td>
+<td>需要多人协同、留痕审计 → 上工作流系统</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>官方文档出处</strong>：<a href="https://python-docx.readthedocs.io/">python-docx 文档</a>、<a href="https://pyyaml.org/wiki/PyYAMLDocumentation">PyYAML 文档</a>、<a href="https://fastapi.tiangolo.com/">FastAPI</a>。</p>
+</blockquote>
+<hr>
+<h2 id="h-544-口径确认把召回-88%改成可判定口径">5.4.4 口径确认：把“召回 88%”改成可判定口径</h2>
+<table>
+<thead>
+<tr>
+<th>客户的指标</th>
+<th>确认后的口径</th>
+<th>它倒逼出的设计</th>
+<th>我们的实测（带限定）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心风险召回 ≥88%</td>
+<td>分三类分别报：存在型 P/R/F1、<strong>缺失型 Recall</strong>、语义型 Recall/Precision <strong>成对</strong>；判定单元 = 规则 × 合同</td>
+<td>按“合同”计测不出来（±14pp）；必须有单元级标注</td>
+<td>存在型 <strong>100/100/100</strong>；缺失型 <strong>100%（30/30）</strong>；语义 R <strong>90.32%</strong> / P <strong>100%</strong>（30 份合成合同）</td>
+</tr>
+<tr>
+<td>10 页内 ≤10 秒</td>
+<td>拆成解析 + 规则 + 语义三段耗时；单份、单并发</td>
+<td>语义调用是瓶颈；要能分片与并发</td>
+<td>本案例为演示级：单份秒级到十几秒，取决于语义条数与网关</td>
+</tr>
+<tr>
+<td>风险等级标注</td>
+<td>等级由规则等级 + 数值偏离度决定；等级一致率单独算</td>
+<td>等级不能由模型自由给</td>
+<td>等级一致率 <strong>100%</strong></td>
+</tr>
+<tr>
+<td>结构化报告</td>
+<td>每条结论必须带：规则号、等级、证据、定位、整改建议</td>
+<td>报告 schema 先定，再写引擎</td>
+<td>报告结构通过率 <strong>100%</strong></td>
+</tr>
+<tr>
+<td>精准定位</td>
+<td><strong>拆两个分母</strong>：定位准确率（可定位项）、缺失项位置覆盖率（推断）</td>
+<td>缺失项没有原文位置，不能混进定位分母</td>
+<td>定位准确率 <strong>100%（n=30）</strong>；覆盖率 <strong>100%（n=63，推断）</strong>；旧口径 47.62% 是分母错配</td>
+</tr>
+<tr>
+<td>—（客户没提）立场</td>
+<td>声明审查代表甲方；同一句条款在两种立场下结论相反</td>
+<td>立场必须进提示词；界面与 <code>rules</code> 接口都不展示，但报告首页要写</td>
+<td>加立场字段后语义精确率 <strong>51.79% → 100%</strong>，误报 27 → 0</td>
+</tr>
+<tr>
+<td>—（客户没提）覆盖三态</td>
+<td>checked / not_detected / needs_human</td>
+<td>关闭语义层时，6 条语义规则必须显式列出</td>
+<td><code>with_semantic=false</code> 时 <code>coverage.not_detected</code> 含 R20–R25</td>
+</tr>
+</tbody></table>
+<p>四条判断必须讲透：</p>
+<p><strong>第一，判定单元必须是“规则 × 合同”。</strong> 按合同计时，30 份合同差一份就是 3.3 个百分点，置信区间宽到 ±14pp——采集成本没变，结论却测不出来。换成 810 个单元后区间收窄到可读。<strong>同样工作量，换个分母就能测。</strong></p>
+<p><strong>第二，召回必须与精确率成对报。</strong> 只报召回，最优策略是“把每条都报成风险”——召回 100%，精确率归零。这就是为什么 v1.2 把语义 Precision 加进了门禁。<sup class="cite"><a href="#ref-3">[3]</a></sup></p>
+<p><strong>第三，定位要拆分母。</strong> 旧口径把“没有位置可指”的缺失项算进定位分母，得到 47.62%；拆开后定位准确率是 100%。这不是能力提升 52 个百分点，是<strong>分母修正</strong>。</p>
+<p><strong>第四，立场不是可选项。</strong> 同一句“任何一方提前三十日书面通知即可解除合同”，站在甲方是风险、站在乙方是保护。立场不声明，规则就没有结论，系统只能凭语感乱报——20/27 的误报就是这么来的。</p>
+<hr>
+<h2 id="h-545-设计与排查口径怎么变成结构坏了怎么找">5.4.5 设计与排查：口径怎么变成结构，坏了怎么找</h2>
+<h3 id="h-1-口径怎么变成结构">1. 口径怎么变成结构</h3>
+<table>
+<thead>
+<tr>
+<th>客户指标</th>
+<th>判据</th>
+<th>因此的设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>召回要可信</td>
+<td>只报召回会奖励乱报</td>
+<td>P/R 成对进门禁；语义层误差在 30 份样本上非常显眼</td>
+</tr>
+<tr>
+<td>结论要能追责</td>
+<td>每条判定必须能指回原文</td>
+<td>证据三要素：原文片段、定位（段 + 偏移）、主题归属</td>
+</tr>
+<tr>
+<td>立场要生效</td>
+<td>模型不知道你代表谁</td>
+<td><code>stance</code> 写进规则文件顶部 + 语义提示词 + 报告首页</td>
+</tr>
+<tr>
+<td>缺失项要查全</td>
+<td>缺失检查是系统性弱项</td>
+<td>先建“应有条款域”清单，再做存在性检查；关键词 + 标题 + 别名三重匹配</td>
+</tr>
+<tr>
+<td>误报要压住</td>
+<td>主题漂移是最大来源</td>
+<td>规则白名单（不得新增规则）+ 证据主题守备</td>
+</tr>
+<tr>
+<td>覆盖要诚实</td>
+<td>“没查”与“查了没发现”不同</td>
+<td>三态覆盖：checked / not_detected / needs_human</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-坏了怎么找按层排查">2. 坏了怎么找：按层排查</h3>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>属于哪一层</th>
+<th>先看什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>满屏误报、精确率很低</td>
+<td>语义层</td>
+<td>立场写了吗？证据是否属该规则主题？</td>
+</tr>
+<tr>
+<td>同一份合同反复报同一条</td>
+<td>合并层</td>
+<td>是否两路都报了同一条规则，去重逻辑在不在</td>
+</tr>
+<tr>
+<td>缺失型漏检</td>
+<td>规则引擎</td>
+<td>标题别名是否配全；匹配范围是否写得太窄</td>
+</tr>
+<tr>
+<td>引用指向错位置</td>
+<td>解析层</td>
+<td>段落切分是否错位；偏移量是否按字符还是按段</td>
+</tr>
+<tr>
+<td>语义召回突然掉到很低</td>
+<td>语义层</td>
+<td>JSON 是否被截断（输出上限/长文）；空返回是否被当“无风险”</td>
+</tr>
+<tr>
+<td>所有结论等级都是“中”</td>
+<td>合并层</td>
+<td>等级是否由模型给，而不是由规则等级 + 偏离度算</td>
+</tr>
+<tr>
+<td>10 秒超时</td>
+<td>环境</td>
+<td>语义条数与分片；网关排队；是否串行调用</td>
+</tr>
+</tbody></table>
+<p>排查顺序：<strong>先规则与立场、再证据与主题、最后才怀疑模型。</strong> 我们的三次显著提升，两次来自规则匹配范围与立场字段，一次来自删除噪声（不是换模型）。<sup class="cite"><a href="#ref-4">[4]</a></sup></p>
+<hr>
+<h2 id="h-546-与编码智能体协作四个真拍板点">5.4.6 与编码智能体协作：四个真拍板点</h2>
+<table>
+<thead>
+<tr>
+<th>拍板点</th>
+<th>选项</th>
+<th>判据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>规则清单来源</td>
+<td>客户给 / 我们起草 / 联合评审</td>
+<td>客户给最省事，但必须写明立场与版本</td>
+</tr>
+<tr>
+<td>立场声明</td>
+<td>甲方 / 乙方 / 中立（不推荐）</td>
+<td>“中立”等于没定；不确定就问客户</td>
+</tr>
+<tr>
+<td>证据粒度</td>
+<td>段 / 句 / 字符偏移</td>
+<td>要能点回原文才算；段级最省事，句级最好用</td>
+</tr>
+<tr>
+<td>语义层启用开关</td>
+<td>始终开 / 可关 / 分场景</td>
+<td>必须能关：关掉时三态里的 <code>not_detected</code> 要显式列出</td>
+</tr>
+</tbody></table>
+<p>指令三句版：<strong>限死输入（只准读 <code>materials/</code>、<code>rules/</code>、<code>truth/</code>）、限死交付（报告 schema 三件：结论、证据、定位）、限死停止（规则清单与立场必须我确认）。</strong></p>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<ol>
+<li><strong>不声明立场就开审。</strong> 系统会凭语感把“对甲方有利”的条款报成风险。</li>
+<li><strong>只报召回不报精确率。</strong> 最优策略立刻变成“全部报成风险”。</li>
+<li><strong>让模型自创规则。</strong> 它会“发现”一堆清单外的风险，而这些无法验收。</li>
+<li><strong>只要证据、不管主题。</strong> 证据里出现“法院”不等于就是管辖地条款的问题。</li>
+<li><strong>把“未检出”当“合规”。</strong> 两种状态给用户的动作完全不同。</li>
+<li><strong>整份合同一次塞进模型。</strong> 长输入会静默失声（返回空），空被当成“没风险”。</li>
+<li><strong>定位分母混用。</strong> 把无位置项算进分母，数字既不是能力也不是缺陷。</li>
+</ol>
+<p>三条红线：未达标不许写成达标；“未检出”不是“合规”；换分母不算提升。</p>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li>三类风险（缺失、数值、语义）要用两种引擎解决；能算能查的绝不交模型。</li>
+<li><strong>判定单元是规则 × 合同</strong>；分母一变，数字不可比。</li>
+<li>立场、证据、主题三件事先钉死，语义层才不会变成“误报机器”。</li>
+<li>定位要拆两个分母；旧口径的 47.62% 是分母错配，不是能力缺口。</li>
+<li>排查顺序：规则与立场 → 证据与主题 → 模型。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能画出双引擎结构，并说出 21 条确定性规则为什么不能交模型。</li>
+<li><input disabled="" type="checkbox"> 我能写出立场声明的三个落点（规则文件 / 提示词 / 报告首页）。</li>
+<li><input disabled="" type="checkbox"> 我能把“召回 88%”改写成含判定单元、分母、分类型的口径。</li>
+<li><input disabled="" type="checkbox"> 我能说出证据三要素，并举一个“有证据但主题不符”的例子。</li>
+<li><input disabled="" type="checkbox"> 我能解释“未检出”与“合规”的区别，以及三态各自落到哪个字段。</li>
+<li><input disabled="" type="checkbox"> 我能解释定位为什么要拆两个分母。</li>
+<li><input disabled="" type="checkbox"> 我能按“规则 → 证据 → 模型”的顺序排查误报。</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析">基础辨析</h3>
+<ol>
+<li>为什么缺失型检查必须“先建应有条款域清单”，而不是直接问模型“缺什么”？</li>
+<li>“有证据”与“证据属该规则主题”是两件事。请各举一个反例。</li>
+</ol>
+<h3 id="h-进阶分析">进阶分析</h3>
+<ol>
+<li>你的系统误报很多。请给出三种改法（分属立场、主题、规则范围），并说明各自代价。</li>
+<li>语义召回 90.32%，精确率 100%。如果客户要求召回提到 95%，最可能牺牲什么？怎么向客户解释这个取舍？</li>
+</ol>
+<h3 id="h-迁移研讨">迁移研讨</h3>
+<ol>
+<li>把你手上“主观判断”类需求拆成确定性部分与语义部分，各列三条。</li>
+<li>为你的场景写一份立场声明与证据规范（各三行），并指出如果立场写反会有什么后果。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>三个场景走完了：知识问答靠判官与证据、问数靠可执行判定、合同审查靠规则与立场。下一节（5.5）把三者收口成一套可迁移做法与行动清单，包括“哪一类失败该先修尺子、哪一类该先修闸门”。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] python-docx 官方文档：</strong> python-docx 项目文档，<em>python-docx Documentation</em>（重点研读：段落级解析与样式读取，本案例解析层的基础），<a href="https://python-docx.readthedocs.io/">链接</a>。</li>
+<li id="ref-2"><strong>[2] PyYAML 文档：</strong> PyYAML 项目文档，<em>PyYAML Documentation</em>（重点研读：规则清单的序列化与版本管理），<a href="https://pyyaml.org/wiki/PyYAMLDocumentation">链接</a>。</li>
+<li id="ref-3"><strong>[3] Hamel Husain《Your AI Product Needs Evals》：</strong> Hamel Husain，<em>Your AI Product Needs Evals</em>（重点研读：精确率 / 召回成对报与人工锚点的方法来源），<a href="https://hamel.dev/blog/posts/evals/">链接</a>。</li>
+<li id="ref-4"><strong>[4] 本课程单元 3.1–3.3 审查与 QA：</strong> 课程内部出处，第 5 环 review 与第 6 环 qa 的配套做法（重点研读：独立评审如何抓出“证据主题漂移”），<a href="/aicoding/units/3-1/">单元 3.1</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/5-3/">← 5.3 场景二 经营数据问数</a>
+      <a href="/aicoding/units/5-5/">5.5 方法沉淀 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-541-合同审查体系双引擎与四层">5.4.1 合同审查体系：双引擎与四层</a></li><li class="lv3"><a href="#h-1-它解决什么问题">1. 它解决什么问题</a></li><li class="lv3"><a href="#h-2-四层结构">2. 四层结构</a></li><li class="lv3"><a href="#h-3-和另外两个场景的差别">3. 和另外两个场景的差别</a></li><li class="lv2"><a href="#h-542-场景拆解客户给什么我们定什么">5.4.2 场景拆解：客户给什么，我们定什么</a></li><li class="lv3"><a href="#h-1-哪些能问客户哪些必须自己定">1. 哪些能问客户，哪些必须自己定</a></li><li class="lv3"><a href="#h-2-任务范围落到四层">2. 任务范围落到四层</a></li><li class="lv3"><a href="#h-3-素材与起点你不是从我们的仓库开始">3. 素材与起点：你不是从我们的仓库开始</a></li><li class="lv2"><a href="#h-543-技术选型判据取值与替换条件">5.4.3 技术选型：判据、取值与替换条件</a></li><li class="lv3"><a href="#h-1-三条总判据">1. 三条总判据</a></li><li class="lv3"><a href="#h-2-供应商与模型">2. 供应商与模型</a></li><li class="lv3"><a href="#h-3-组件取值">3. 组件取值</a></li><li class="lv3"><a href="#h-4-应用层与前端">4. 应用层与前端</a></li><li class="lv3"><a href="#h-5-选型卡一页带走">5. 选型卡（一页带走）</a></li><li class="lv2"><a href="#h-544-口径确认把召回-88%改成可判定口径">5.4.4 口径确认：把“召回 88%”改成可判定口径</a></li><li class="lv2"><a href="#h-545-设计与排查口径怎么变成结构坏了怎么找">5.4.5 设计与排查：口径怎么变成结构，坏了怎么找</a></li><li class="lv3"><a href="#h-1-口径怎么变成结构">1. 口径怎么变成结构</a></li><li class="lv3"><a href="#h-2-坏了怎么找按层排查">2. 坏了怎么找：按层排查</a></li><li class="lv2"><a href="#h-546-与编码智能体协作四个真拍板点">5.4.6 与编码智能体协作：四个真拍板点</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析">基础辨析</a></li><li class="lv3"><a href="#h-进阶分析">进阶分析</a></li><li class="lv3"><a href="#h-迁移研讨">迁移研讨</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

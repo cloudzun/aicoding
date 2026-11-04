@@ -6,16 +6,20 @@
 - **配套手册站**：<https://www.cloudzun.com/mingzhou/>（讲"怎么做"：三篇实操、五套向导、三套素材包）
 - **本站定位**：讲"为什么"——八环的门禁与判据、三个典型场景的原理、30 张架构图的读法
 
-## 当前状态：M0（链路验证）
+## 当前状态：M1（21 单元已上线）
 
-仓库、Actions 与 Pages 子路径已打通，**正文尚未上线**。`dist/index.html` 是占位页，仅用于验证 `/aicoding/` 可达。
+21 个单元、章封面首页、全文检索、7 卷打印视图已全部生成并发布。
+
+**产物入库策略**：`dist/` 由本地构建脚本生成后提交（31 个页面 / 6.8 MB），CI 只做校验 + 扫描 + 发布。
+原因是 30 张 mermaid 图需要 Playwright 预渲染成 SVG，放进 CI 反而更慢更脆。
+构建脚本在文档仓 `project/aicoding/proto/`：`build-all.ps1`（复制样式 → 生成页面 → 建 Pagefind 索引）。
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
-| M0 | 建仓 + Pages 子路径 + 发布链路 | **进行中** |
-| M1 | Astro 骨架、正文同步、7 章 × 21 单元两级导航 | 待做 |
-| M2 | 渲染：提示框/角标引注/跨单元内链/导引卡/图注/锚点/打印 | 待做 |
-| M3 | 检索配置、QA 扩展、双站互链 | 待做 |
+| M0 | 建仓 + Pages 子路径 + 发布链路 | 已完成（2026-11-04） |
+| M1 | 21 单元 + 章封面 + 两级侧栏 + 页内目录 + 检索 + 打印 | **已完成（2026-11-04）** |
+| M2 | 渲染细化：提示框/角标/内链/导引卡/图注/锚点/打印分卷 | **已完成（随 M1）** |
+| M3 | QA 自动化、双站互链、CI 加 QA 步骤 | 待做 |
 | M4 | 上线与四步验证 | 待做 |
 
 设计依据见内部文档 `00-建站可行性调研.md`（不在本仓库内，仓库只放站点代码）。
@@ -29,17 +33,20 @@
 
 ## 本地预览
 
-M0 阶段是纯静态页：
-
 ```bash
-npx serve dist          # 或任意静态服务器
+node scripts/serve-dist.cjs 4323    # 把 dist 挂到 /aicoding/ 前缀下（直接 serve dist 会让带 BASE 的链接 404）
+# → http://127.0.0.1:4323/aicoding/
 ```
 
-M1 起改为：
+## 重新发布
 
-```bash
-npm ci && npm run build
-node scripts/serve-dist.cjs 4321    # 把 dist 挂到 /aicoding/ 前缀下，避免带 BASE 的链接 404
+```powershell
+# 1 改教材源文件（通用AI_Coding课程与教材/text/单元*.md）
+# 2 重建（在项目文档仓 project/aicoding/proto/）
+powershell -File build-all.ps1
+# 3 把 proto/dist 同步到本仓 dist，跑扫描，提交推送
+python scripts/scan_sensitive.py
+git add -A; git commit -m "content: 同步教材"; git push
 ```
 
 ## 纪律

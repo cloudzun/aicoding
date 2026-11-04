@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.1 第 7 环 /ship 发布工程师流水线 · 通用 AI Coding 教材</title>
+<meta name="description" content="文档同步与远端部署金丝雀验证">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3 active"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/3-3/">← 3.3 AI Coding 上下文工程（Context Engineering）</a></span>
+      <span><a href="/aicoding/units/4-2/">4.2 /investigate 五阶段排障 →</a></span>
+    </div>
+    <h1>4.1　第 7 环 <code>/ship</code> 发布工程师流水线</h1>
+    <p class="lede">文档同步与远端部署金丝雀验证</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天下午“发布部署交付、系统化根因排障、量化复盘与多场景迁移篇”的开篇单元，对应 GStack 八环中的第 7 环 <strong>自动化发布与远端部署监控（Ship &amp; Deploy）</strong>。在传统软件工程与早期 AI 编程中，开发者往往把“本地代码写完提交”当成终点，结果导致测试覆盖率不足、仓库文档与最新代码严重脱节、以及“本地 <code>localhost</code> 能跑但远端生产环境报错”的交付断层。本节将系统拆解第 7 环上半程 <code>/ship</code>（发布工程师流水线）的测试框架冷启动（Test Bootstrap）、ASCII 覆盖率星级审计（Coverage Audit）与准出凭据核验；深入讲解内嵌的 <code>/document-release</code> 如何自动对齐代码差异与六大核心文档，以及 <code>/document-generate</code> 如何基于国际公认的 <strong>Diataxis 四象限框架</strong> 生成 100% 忠于源码的文档体系；最后完整打通下半程 <code>/setup-deploy</code> → <code>/land-and-deploy</code> → <code>/canary</code>（SRE 金丝雀巡检）与 <code>/benchmark</code>（Core Web Vitals 性能基线比对）的远端生产交付闭环。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、DevOps 与发布工程师、SRE 站点可靠性工程师、技术文档工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 3.3 学习，掌握第 5 环 <code>gstack-wtree</code> 审查凭据与第 6 环 <code>/qa</code> 实机验收流程。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:4.1"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>说明 <code>/ship</code> 发布工程师流水线的核心步骤：解释测试框架冷启动（Test Bootstrap）、基于 <code>git diff</code> 的执行路径分析与 ASCII 覆盖率星级审计（<code>★★★ / ★★☆ / ★☆☆</code>）、准出仪表盘（<code>Review Readiness Dashboard</code>）鲜活度核验以及 PR 审查评论自动分诊机制各自拦截什么风险。</li>
+<li>核验代码驱动的文档工程体系：写出 <code>/ship</code> 内嵌的 <code>/document-release</code> 逐项对齐六大仓库文档的动作清单，并用 <code>/document-generate</code> 按 <strong>Diataxis 四象限框架</strong>（<code>Tutorial / How-To Guide / Reference / Explanation</code>）生成忠于源码的工程文档与架构图。</li>
+<li>串联从本地代码到远端生产环境可访问的完整部署与监控闭环：按“部署决策四问”与密钥安全铁律准备环境，依次执行 <code>/setup-deploy</code>、<code>/land-and-deploy</code>（含 Dry-Run 预演与 <code>/health</code> <code>200 OK</code> 强制核验）、<code>/canary</code> 线上金丝雀巡检以及 <code>/benchmark</code> 性能基线对比。</li>
+</ol>
+<hr>
+<h2 id="h-411-第-7-环上半程-ship纪律严明的发布工程师流水线">4.1.1 第 7 环上半程 <code>/ship</code>：纪律严明的发布工程师流水线</h2>
+<p>当特性分支通过了第 5 环结构安全审查与第 6 环实机 QA 验收后，工程师输入 <strong><code>/ship</code></strong>，正式召唤 GStack 虚拟团队中的 <strong>发布工程师（Release Engineer）</strong> 接管交付流水线<sup class="cite"><a href="#ref-1">[1]</a></sup>。</p>
+<p><code>/ship</code> 绝不是简单地运行一条 <code>git push</code> 或创建 Pull Request，而是严格按顺序执行以下 <strong>四项发布前工程核验与加固动作</strong><sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
+<ol>
+<li><strong>主干同步与测试框架冷启动（Test Bootstrap）</strong>：
+<code>/ship</code> 首先自动拉取并合并远端主干分支（如 <code>origin/main</code>），确保当前特性分支不存在合并冲突。如果 <code>/ship</code> 检测到当前接手的是一个<strong>没有任何自动化测试的历史遗留项目（Legacy Repo）</strong>，它会自动触发 <strong>Test Bootstrap（测试冷启动规程）</strong>：自动探测语言栈并安装标准测试框架、围绕核心业务路径编写首批真实测试、生成 CI 流水线配置文件，并在根目录创建 <code>TESTING.md</code> 测试指南<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+<li><strong>基于代码路径图的覆盖率星级审计（Coverage Audit）</strong>：
+普通覆盖率工具只看冷冰冰的行号百分比，而 <code>/ship</code> 会深入分析当前分支的 <code>git diff</code>，构建变更代码的<strong>逻辑分支与执行路径图（Code Execution Path Map）</strong>，并在终端绘制一张直观的 <strong>ASCII 覆盖率星级审计表</strong><sup class="cite"><a href="#ref-1">[1]</a></sup>：<ul>
+<li><strong><code>★★★</code>（三星完备覆盖）</strong>：该函数的正常路径（Happy Path）、边界值与异常自救分支（Error &amp; Rescue）均已有自动化测试断言覆盖；</li>
+<li><strong><code>★★☆</code>（二星局部缺失）</strong>：正常路径已测，但某条边缘异常分支（如并发冲突回滚或外部超时降级）尚未被测试覆盖；</li>
+<li><strong><code>★☆☆</code> / <code>☆☆☆</code>（一星或零星高危裸奔）</strong>：新增或修改的核心逻辑缺少直接的自动化测试保护。</li>
+<li><strong>数值门禁</strong>：星级是逐函数的定性视图，<code>/ship</code> 的 <code>test-coverage.md</code> 另有整体口径 <strong>Minimum 60% / Target 80%</strong>，两者需同时满足（单个函数星级不达标即补测，整体覆盖率不得低于 60%，目标 80%）。
+针对所有低于三星（<code>&lt; ★★★</code>）的核心代码路径，<code>/ship</code> 会<strong>当场自动补写缺失的边界单元测试与集成测试</strong>，跑通全绿后在发布报告中清晰展示测试增量（例如：<code>Tests: 42 → 51 (+9 new coverage tests added)</code>）<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+</ul>
+</li>
+<li><strong>准出仪表盘（<code>Review Readiness Dashboard</code>）与内容指纹鲜活度核验</strong>：
+在打包提交前，<code>/ship</code> 会调用 <code>gstack-review-read</code> 检查第 3 环 <code>/autoplan</code> 准出状态以及第 5 环 <code>/review</code>、<code>/cso</code> 的 <code>gstack-wtree</code> 审查凭据。如果刚才在步骤 2 中仅新增了测试文件，受控业务源码哈希未变，则凭据保持 <strong><code>CURRENT</code>（鲜活有效）</strong> 放行；倘若业务源码被改动导致凭据变为 <code>STALE</code>，<code>/ship</code> 将强制要求先完成增量复审才允许继续。</li>
+<li><strong>PR 自动化创建与审查评论智能分诊（PR Comment Triage）</strong>：
+当代码推送到远端并创建（或更新）Pull Request 后，如果仓库挂载了外部自动化代码审查机器人（如 Greptile 或 GitHub Actions 检查器），<code>/ship</code> 会自动拉取 PR 上的所有审查评论并按三类策略精准分诊<sup class="cite"><a href="#ref-1">[1]</a></sup>：<ul>
+<li><strong>真实有效缺陷（Valid Findings）</strong>：当场修改代码修复并补充测试；</li>
+<li><strong>前序提交已修复项（Already Fixed）</strong>：自动在评论下回复对应的修复 Commit SHA 哈希链接并关闭会话；</li>
+<li><strong>上下文误报（False Positives）</strong>：列出源码证据向人类工程师汇报，经人类确认后有理有据地回复驳回说明。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="h-412-文档工程与代码同步内嵌-document-release-与-diataxis-四象限框架">4.1.2 文档工程与代码同步：内嵌 <code>/document-release</code> 与 Diataxis 四象限框架</h2>
+<p>在软件工程领域，有一句臭名昭著的潜规则：“代码从不撒谎，但文档总是过期的。”每当团队紧急修改了某个环境变量名称、新增了一张数据库表或废弃了一个 CLI 参数后，往往没人记得去改 <code>README.md</code> 和架构文档，导致新入职同事或下游调用方频频踩坑。</p>
+<p>为了从机制上彻底根除“代码改了、文档没改”的顽疾，GStack 将文档更新嵌入了第 7 环发布流水线的必经主干中<sup class="cite"><a href="#ref-2">[2]</a></sup>。</p>
+<h3 id="h-1-ship-强制内嵌步骤document-release-自动对齐六大仓库文档">1. <code>/ship</code> 强制内嵌步骤：<code>/document-release</code> 自动对齐六大仓库文档</h3>
+<p>在 <code>/ship</code> 最终推送代码前，系统会自动强制触发 <strong><code>/document-release</code>（发布级文档同步器）</strong><sup class="cite"><a href="#ref-2">[2]</a></sup>。它会将当前分支的完整 <code>git diff</code> 与仓库内的六大核心工程文档进行逐行交叉比对，并自动完成精准修订：</p>
+<table>
+<thead>
+<tr>
+<th>仓库核心文档文件</th>
+<th><code>/document-release</code> 自动交叉核对与同步更新的内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. <code>README.md</code></strong></td>
+<td>核对快速启动步骤、依赖安装命令、CLI 标志说明，以及 <code>.env.example</code> 中新增或改名的环境变量列表。</td>
+</tr>
+<tr>
+<td><strong>2. <code>ARCHITECTURE.md</code></strong></td>
+<td>当新增了核心业务模块、变更了目录树结构或引入了新的数据流分支时，自动同步更新目录职责表与架构说明。</td>
+</tr>
+<tr>
+<td><strong>3. <code>AGENTS.md</code> / <code>CLAUDE.md</code></strong></td>
+<td>若本次迭代新增了公共复用工具函数、更新了必跑测试命令或调整了安全护栏目录，自动同步至 AI 工程宪法。</td>
+</tr>
+<tr>
+<td><strong>4. <code>CONTRIBUTING.md</code></strong></td>
+<td>同步更新本地开发夹具启动方式、数据库迁移规程与测试运行指南。</td>
+</tr>
+<tr>
+<td><strong>5. <code>TODOS.md</code></strong></td>
+<td>自动识别本次分支已经完成的待办事项并将其从 <code>TODOS.md</code> 中核销移除；同时将施工期新发现的远期改进项追加进待办列表。</td>
+</tr>
+<tr>
+<td><strong>6. <code>CHANGELOG.md</code></strong></td>
+<td>基于本分支的原子提交序列与解决的业务问题，按语义化版本规范自动生成结构化的版本变更日志（Added / Changed / Fixed / Security）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-2-document-generate基于-diataxis-四象限框架生成-100%-忠于源码的文档体系">2. <code>/document-generate</code>：基于 Diataxis 四象限框架生成 100% 忠于源码的文档体系</h3>
+<p>如果团队接手了一个完全没有文档的存量代码库，或者需要为新交付的系统建立一套专业级技术文档，可以调用 GStack 的 <strong><code>/document-generate</code></strong> 技能<sup class="cite"><a href="#ref-2">[2]</a></sup>。</p>
+<p>该技能立有一条硬性纪律：<strong>严禁凭空捏造或复制粘贴笼统的套话，必须先用 <code>Read / Grep / Glob</code> 完整精读仓库真实源码</strong>，然后严格按照国际公认的 <strong>Diataxis 四象限技术文档工程框架</strong>，产出四类受众与目标截然不同的标准文档<sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>Diataxis 文档象限</th>
+<th>目标读者状态与核心诉求</th>
+<th>文档核心内容与编写准则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一象限：<code>Tutorial</code>（新手入门教程）</strong></td>
+<td><strong>学习导向（Learning-oriented）</strong>。读者是刚接触本项目的零基础开发者，需要在 15 分钟内建立直观信心。</td>
+<td>手把手带领读者在本地从零跑通第一个完整的端到端闭环示例（Hello World），不讲深奥原理，确保每一步命令复制粘贴即可成功执行。</td>
+</tr>
+<tr>
+<td><strong>第二象限：<code>How-To Guide</code>（任务操作指南）</strong></td>
+<td><strong>目标导向（Goal-oriented）</strong>。读者已经熟悉基础操作，需要解决某个具体的工程任务或运维场景。</td>
+<td>像菜谱一样提供步骤清晰的行动指南（例如：“如何新增一个带权限校验的业务端点”、“如何执行月度账单异常排查与手动重跑”）。</td>
+</tr>
+<tr>
+<td><strong>第三象限：<code>Reference</code>（技术参考字典）</strong></td>
+<td><strong>信息导向（Information-oriented）</strong>。读者正在写代码对接，需要查阅精确的接口签名、参数类型与错误码。</td>
+<td><strong>100% 忠于源码实现</strong>的百科字典：精确列出所有 REST/RPC 路由入参出参 Schema、环境变量全集、CLI 退出码字典与数据库表字段定义。</td>
+</tr>
+<tr>
+<td><strong>第四象限：<code>Explanation</code>（架构与原理阐述）</strong></td>
+<td><strong>理解导向（Understanding-oriented）</strong>。读者需要理解系统为什么这样设计、背后的权衡与演进脉络。</td>
+<td>深度阐述系统的领域边界、核心状态机设计、并发防超卖锁选型理由、多租户安全模型以及当初放弃的备选方案。</td>
+</tr>
+</tbody></table>
+<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong><code>/document-generate</code> 可与 <code>/diagram</code>、<code>/make-pdf</code> 联动出图与出 PDF。</strong>
+在运行 <code>/document-generate</code> 时，工程师还可配合调用 <strong><code>/diagram</code></strong> 一键生成与源码一致的 <strong>Mermaid 流程图 + 可编辑 <code>.excalidraw</code> 矢量源文件 + 高清 SVG/PNG 图片三件套</strong>；并可调用 <strong><code>/make-pdf</code></strong> 将 Markdown 文档离线渲染为带封面、目录与页码的出版级 PDF 交付物<sup class="cite"><a href="#ref-2">[2]</a></sup>。</p>
+</div>
+<hr>
+<h2 id="h-413-第-7-环下半程部署选型land-and-deploy-远端上线与-canary-金丝雀巡检">4.1.3 第 7 环下半程：部署选型、<code>/land-and-deploy</code> 远端上线与 <code>/canary</code> 金丝雀巡检</h2>
+<p>在 GStack 的交付标准中，<strong>“代码合并进了主干分支，绝不等于交付已经完成；只有当新版本在远端目标环境中真实运行、且通过了线上健康检查与金丝雀巡检时，第 7 环才算真正闭环！”</strong><sup class="cite"><a href="#ref-1">[1]</a></sup></p>
+<h3 id="h-1-部署选型四问与生产密钥安全铁律">1. 部署选型四问与生产密钥安全铁律</h3>
+<p>在启动远端部署前，工程团队首先通过 <strong>“部署决策四问”</strong> 锁定目标环境配置，并严守密钥安全底线：</p>
+<ol>
+<li><strong>计算与运行形态</strong>：目标服务是部署为容器化实例（Docker / Kubernetes）、云原生 PaaS 平台（如 Fly.io、Render、Vercel、云托管），还是企业内网 Linux 虚拟机？</li>
+<li><strong>有状态存储与数据库迁移</strong>：生产数据库（如 PostgreSQL / MySQL）的 Schema 迁移脚本是否具备向后兼容性（Backward Compatibility），能否在零停机或受控窗口内安全执行？</li>
+<li><strong>健康检查与可观测性端点</strong>：服务是否暴露了标准的 <code>/health</code>（或 <code>/api/healthz</code>）存活与就绪探针端点（包含数据库连通性自检）？</li>
+<li><strong>生产密钥与环境变量注入（绝对安全红线）</strong>：生产环境的数据库密码、JWT 签名密钥与第三方 API Token 必须通过云平台机密管理器（Secrets Manager）或受控环境变量在运行时注入——<strong>严禁将 <code>.env</code> 生产配置文件提交进 Git 仓库，也严禁在构建 Docker 镜像时通过 <code>COPY .env</code> 或明文 <code>ENV</code> 指令将密钥固化进镜像层！</strong></li>
+</ol>
+<hr>
+<h3 id="h-2-setup-deploy-→-land-and-deploy-→-canary-&amp-benchmark">2. <code>/setup-deploy</code> → <code>/land-and-deploy</code> → <code>/canary</code> &amp; <code>/benchmark</code> 全链路闭环</h3>
+<p>完成环境准备后，团队依次运行第 7 环下半程的四个部署与巡检指令，构成完整的上线守护闭环<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
+<figure class="fig" id="fig-4-1"><div class="fig-scroll"><svg id="svg-4-1" width="1143.6875" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="1073.265625" viewBox="0 0 1143.6875 1073.265625" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-4-1{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-4-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-4-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-4-1 .error-icon{fill:#eceff1;}#svg-4-1 .error-text{fill:#13100e;stroke:#13100e;}#svg-4-1 .edge-thickness-normal{stroke-width:1px;}#svg-4-1 .edge-thickness-thick{stroke-width:3.5px;}#svg-4-1 .edge-pattern-solid{stroke-dasharray:0;}#svg-4-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-4-1 .edge-pattern-dashed{stroke-dasharray:3;}#svg-4-1 .edge-pattern-dotted{stroke-dasharray:2;}#svg-4-1 .marker{fill:#607d8b;stroke:#607d8b;}#svg-4-1 .marker.cross{stroke:#607d8b;}#svg-4-1 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-4-1 p{margin:0;}#svg-4-1 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-4-1 .cluster-label text{fill:#13100e;}#svg-4-1 .cluster-label span{color:#13100e;}#svg-4-1 .cluster-label span p{background-color:transparent;}#svg-4-1 .label text,#svg-4-1 span{fill:#17324d;color:#17324d;}#svg-4-1 .node rect,#svg-4-1 .node circle,#svg-4-1 .node ellipse,#svg-4-1 .node polygon,#svg-4-1 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-4-1 .rough-node .label text,#svg-4-1 .node .label text,#svg-4-1 .image-shape .label,#svg-4-1 .icon-shape .label{text-anchor:middle;}#svg-4-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-4-1 .rough-node .label,#svg-4-1 .node .label,#svg-4-1 .image-shape .label,#svg-4-1 .icon-shape .label{text-align:center;}#svg-4-1 .node.clickable{cursor:pointer;}#svg-4-1 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-4-1 .arrowheadPath{fill:#0b0b0b;}#svg-4-1 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-4-1 .flowchart-link{stroke:#607d8b;fill:none;}#svg-4-1 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-1 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-4-1 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-4-1 .cluster text{fill:#13100e;}#svg-4-1 .cluster span{color:#13100e;}#svg-4-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-4-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-4-1 rect.text{fill:none;stroke-width:0;}#svg-4-1 .icon-shape,#svg-4-1 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-4-1 .icon-shape p,#svg-4-1 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-4-1 .icon-shape .label rect,#svg-4-1 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-4-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-4-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-4-1 .node .neo-node{stroke:#1976d2;}#svg-4-1 [data-look="neo"].node rect,#svg-4-1 [data-look="neo"].cluster rect,#svg-4-1 [data-look="neo"].node polygon{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-4-1 [data-look="neo"].node path{stroke:url(#svg-4-1-gradient);stroke-width:1px;}#svg-4-1 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-4-1 [data-look="neo"].node circle{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-4-1 [data-look="neo"].icon-shape .icon{fill:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-4-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-4-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-4-1 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-1 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-4-1 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-4-1 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-1 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-4-1 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-4-1 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-1 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-4-1 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-4-1 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-1 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-4-1 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-4-1 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-1 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-4-1 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-4-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-4-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-4-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-4-1_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-4-1_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M558.266,83L558.266,85.833C558.266,88.667,558.266,94.333,558.266,99.333C558.266,104.333,558.266,108.667,558.266,110.833L558.266,113" id="svg-4-1-L_Setup_DryRun_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Setup_DryRun_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6ODN9LHsieCI6NTU4LjI2NTYyNSwieSI6MTAwfSx7IngiOjU1OC4yNjU2MjUsInkiOjExN31d" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M558.266,192L558.266,194.833C558.266,197.667,558.266,203.333,558.266,208.333C558.266,213.333,558.266,217.667,558.266,219.833L558.266,222" id="svg-4-1-L_DryRun_MergeDeploy_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_DryRun_MergeDeploy_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6MTkyfSx7IngiOjU1OC4yNjU2MjUsInkiOjIwOX0seyJ4Ijo1NTguMjY1NjI1LCJ5IjoyMjZ9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M558.266,278.5L558.266,281.333C558.266,284.167,558.266,289.833,558.266,294.833C558.266,299.833,558.266,304.167,558.266,306.333L558.266,308.5" id="svg-4-1-L_MergeDeploy_HealthCheck_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MergeDeploy_HealthCheck_0" data-points="W3sieCI6NTU4LjI2NTYyNSwieSI6Mjc4LjV9LHsieCI6NTU4LjI2NTYyNSwieSI6Mjk1LjV9LHsieCI6NTU4LjI2NTYyNSwieSI6MzEyLjV9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M448.62,606.12L418.991,630.978C389.361,655.835,330.103,705.55,300.473,738.2C270.844,770.849,270.844,786.432,270.844,794.224L270.844,802.016" id="svg-4-1-L_HealthCheck_RollbackAlert_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HealthCheck_RollbackAlert_0" data-points="W3sieCI6NDQ4LjYyMDA1MzAyNjM4Mzg2LCJ5Ijo2MDYuMTIwMDUzMDI2MzgzOX0seyJ4IjoyNzAuODQzNzUsInkiOjc1NS4yNjU2MjV9LHsieCI6MjcwLjg0Mzc1LCJ5Ijo4MDYuMDE1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M667.911,606.12L697.541,630.978C727.17,655.835,786.429,705.55,816.058,736.325C845.688,767.099,845.688,778.932,845.688,784.849L845.688,790.766" id="svg-4-1-L_HealthCheck_Canary_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_HealthCheck_Canary_0" data-points="W3sieCI6NjY3LjkxMTE5Njk3MzYxNjEsInkiOjYwNi4xMjAwNTMwMjYzODM5fSx7IngiOjg0NS42ODc1LCJ5Ijo3NTUuMjY1NjI1fSx7IngiOjg0NS42ODc1LCJ5Ijo3OTQuNzY1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M845.688,869.766L845.688,872.599C845.688,875.432,845.688,881.099,845.688,886.099C845.688,891.099,845.688,895.432,845.688,897.599L845.688,899.766" id="svg-4-1-L_Canary_Benchmark_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Canary_Benchmark_0" data-points="W3sieCI6ODQ1LjY4NzUsInkiOjg2OS43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjg4Ni43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjkwMy43NjU2MjV9XQ==" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path><path d="M845.688,978.766L845.688,981.599C845.688,984.432,845.688,990.099,845.688,995.099C845.688,1000.099,845.688,1004.432,845.688,1006.599L845.688,1008.766" id="svg-4-1-L_Benchmark_ShipDone_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Benchmark_ShipDone_0" data-points="W3sieCI6ODQ1LjY4NzUsInkiOjk3OC43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjk5NS43NjU2MjV9LHsieCI6ODQ1LjY4NzUsInkiOjEwMTIuNzY1NjI1fV0=" data-look="classic" marker-end="url(#svg-4-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Setup_DryRun_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_DryRun_MergeDeploy_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_MergeDeploy_HealthCheck_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(270.84375, 755.265625)"><g class="label" data-id="L_HealthCheck_RollbackAlert_0" transform="translate(-68.9453125, -11.25)"><foreignObject width="137.890625" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>超时或返回 5xx 异常</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(845.6875, 755.265625)"><g class="label" data-id="L_HealthCheck_Canary_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>确认新版本生效且返回 200 OK</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Canary_Benchmark_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Benchmark_ShipDone_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-4-1-flowchart-Setup-0" data-look="classic" transform="translate(558.265625, 45.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第1步 /setup-deploy: 自动探测部署平台 · 锁定远端生产 URL 与 /health 健康检查端点</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-1-flowchart-DryRun-1" data-look="classic" transform="translate(558.265625, 154.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第2步 /land-and-deploy (预演阶段): 首次运行或配置变更时强制执行 Dry-Run 干跑验证</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-4-1-flowchart-MergeDeploy-3" data-look="classic" transform="translate(558.265625, 252.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-275.3671875" y="-26.25" width="550.734375" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-245.3671875, -11.25)"><rect></rect><foreignObject width="490.734375" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>第3步 合入主干并触发远端部署流水线 · 实时跟踪构建与容器滚动发布状态</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-4-1-flowchart-HealthCheck-5" data-look="classic" transform="translate(558.265625, 514.1328125)"><polygon points="201.6328125,0 403.265625,-201.6328125 201.6328125,-403.265625 0,-201.6328125" class="label-container" transform="translate(-201.1328125, 201.6328125)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-175.3828125, -11.25)"><rect></rect><foreignObject width="350.765625" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>第4步 远端真实 URL /health 探针是否返回 200 OK?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-4-1-flowchart-RollbackAlert-7" data-look="classic" transform="translate(270.84375, 832.265625)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-262.84375" y="-26.25" width="525.6875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-232.84375, -11.25)"><rect></rect><foreignObject width="465.6875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>立即拉响部署失败警报 · 阻断交付并引导回滚或进入 /investigate 排障</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-Canary-9" data-look="classic" transform="translate(845.6875, 832.265625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>第5步 /canary (SRE 金丝雀巡检): 驱动真实浏览器循环巡检线上核心页面 · 确认 Console 零报错</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-Benchmark-11" data-look="classic" transform="translate(845.6875, 941.265625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>第6步 /benchmark (性能工程师基线比对): 实测线上 LCP / CLS / INP 指标 · 确认无性能退化</p></span></div></foreignObject></g></g><g class="node default green" id="svg-4-1-flowchart-ShipDone-13" data-look="classic" transform="translate(845.6875, 1039.015625)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-195.0859375" y="-26.25" width="390.171875" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-165.0859375, -11.25)"><rect></rect><foreignObject width="330.171875" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>输出完整《工程发布交付清单》 · 第 7 环圆满闭环</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-4-1-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-4-1-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-4-1-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-4-1.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 4-1 ↗</a>：第 7 环下半程从 `/setup-deploy` 到 `/canary` 金丝雀巡检与 `/benchmark` 性能比对的远端上线闭环</figcaption></figure>
+<p>如图 4-1 所示，这四个环节层层递进：</p>
+<ol>
+<li><strong><code>/setup-deploy</code>（部署配置探测与建档）</strong>：
+自动扫描仓库中的 <code>Dockerfile</code>、<code>docker-compose.yml</code>、GitHub Actions 工作流或云平台配置文件（Fly.io / Render / Vercel / Netlify / 自定义部署脚本），识别并持久化记录项目的部署命令、远端生产/预发环境真实 URL 以及 <code>/health</code> 健康检查端点路径<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+<li><strong><code>/land-and-deploy</code>（Dry-Run 预演、合入部署与真实入口核验）</strong>：<ul>
+<li><strong>Dry-Run 预演保护</strong>：在首次执行部署或部署脚本发生变更时，强制先运行一次只读预演（Dry-Run），检验构建产物、镜像打包与环境变量映射是否完备；</li>
+<li><strong>真实入口 <code>200 OK</code> 硬门禁</strong>：代码合入主干并触发远端部署后，智能体持续轮询监控 CI/CD 与容器发布进度，并在发布完成后直接向远端真实 URL 的 <code>/health</code> 端点发起实机请求——<strong>只有亲眼确认远端返回 <code>200 OK</code> 且版本号已更新为最新 Commit，才允许判定部署成功</strong><sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+</ul>
+</li>
+<li><strong><code>/canary</code>（SRE 站点可靠性工程师金丝雀巡检）</strong>：
+部署刚结束的前几分钟是线上故障高发期。运行 <code>/canary</code> 后，智能体化身为值班 SRE，驱动 <code>/browse</code> 真实浏览器定期循环访问远端生产环境的核心页面，持续监测 <strong>HTTP 响应延迟、页面渲染完整性以及浏览器 Console 是否出现任何运行时未捕获异常</strong>，确保线上真实用户体验丝滑稳定<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+<li><strong><code>/benchmark</code>（性能工程师 Core Web Vitals 基线比对）</strong>：
+为了防止某次发版无意间引入了巨大的前端依赖包或慢查询导致页面变慢，运行 <strong><code>/benchmark</code></strong> 可对线上页面开展量化性能评测：实测页面加载耗时、静态资源体积以及三大核心 Web 性能指标——<strong>LCP（最大内容绘制时间）、CLS（累积布局偏移）与 INP（交互到下一帧延迟）</strong>，并与上一次发版的基线数据逐项对比，一旦发现显著性能退化立即预警<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+</ol>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在第 7 环发布流水线、文档同步与远端部署中，团队必须坚决杜绝以下五类反模式：</p>
+<ol>
+<li><strong>跳过 Coverage Audit 覆盖率星级审计，带着一星（<code>★☆☆</code>）裸奔代码直接发版</strong>：对新增的核心业务分支不补齐边界测试，导致异常处理逻辑在生产环境首次触发时即崩溃。</li>
+<li><strong>只推代码不跑 <code>/document-release</code>，放任仓库文档沦为过期谎言</strong>：修改了环境变量、接口参数或数据库表结构后不更新 <code>README.md</code> 与 <code>ARCHITECTURE.md</code>，给后续维护者埋下认知陷阱。</li>
+<li><strong>以“本地 <code>localhost</code> 能跑”或“CI 编译通过”冒充部署完成</strong>：从不通过远端目标环境的真实 URL 核验 <code>/health</code> <code>200 OK</code> 状态，忽略了生产环境容器配置、反向代理或防火墙差异导致的启动失败。</li>
+<li><strong>将 <code>.env</code> 密钥文件提交进 Git 仓库或打包进 Docker 镜像层</strong>：违背配置与代码分离原则，导致生产数据库凭据或私钥随代码库与镜像仓库泄露。</li>
+<li><strong>发版后立即关电脑走人，不做 <code>/canary</code> 金丝雀巡检与 <code>/benchmark</code> 性能回归对比</strong>：对上线后真实的控制台报错与首屏加载性能退化毫无感知，直到用户投诉才被动救火。</li>
+</ol>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong><code>/ship</code> 流水线筑牢发版前最后一道代码防线</strong>：自动完成主干合并、遗留项目测试冷启动（Test Bootstrap）、基于执行路径图的 <strong>ASCII 覆盖率星级审计（<code>★★★</code>）与自动补测</strong>、准出凭据鲜活度核验及 PR 审查评论智能分诊。</li>
+<li><strong>代码驱动的文档工程消灭过期文档</strong>：每次 <code>/ship</code> 强制内嵌运行 <strong><code>/document-release</code></strong> 同步更新六大核心文档；从零构建文档时通过 <strong><code>/document-generate</code></strong> 按 <strong>Diataxis 四象限框架</strong>（<code>Tutorial / How-To Guide / Reference / Explanation</code>）产出 100% 忠于源码的文档与架构图。</li>
+<li><strong>远端部署与金丝雀监控打通交付最后一公里</strong>：遵循部署选型四问与密钥外部注入红线，通过 <strong><code>/setup-deploy</code> → <code>/land-and-deploy</code></strong> 完成 Dry-Run 预演与远端 <code>/health</code> <code>200 OK</code> 实机核验，并结合 <strong><code>/canary</code></strong> 循环巡检与 <strong><code>/benchmark</code></strong>（LCP / CLS / INP）锁死线上运行品质。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能完整说出 <code>/ship</code> 发布工程师流水线的四个核心步骤，并解释 ASCII 覆盖率星级图（<code>★★★ / ★★☆ / ★☆☆</code>）是如何指导智能体自动补齐缺失测试的吗？</li>
+<li><input disabled="" type="checkbox"> 我能列出 <code>/document-release</code> 自动同步的六大仓库文档名称，并清晰区分 Diataxis 四象限文档框架中 <code>Tutorial</code>、<code>How-To Guide</code>、<code>Reference</code> 与 <code>Explanation</code> 的受众与定位吗？</li>
+<li><input disabled="" type="checkbox"> 在将应用部署到远端环境前，我能对照“部署决策四问”检查配置，并确保 <code>.env</code> 生产密钥绝不进入 Git 仓库或 Docker 镜像层吗？</li>
+<li><input disabled="" type="checkbox"> 我能说明 <code>/land-and-deploy</code> 为什么要强制核验远端 <code>/health</code> 返回 <code>200 OK</code>，以及 <code>/canary</code>（金丝雀巡检）与 <code>/benchmark</code>（性能基线比对）各自监控哪些核心指标吗？</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析覆盖率星级审计与-diataxis-四象限文档分类">基础辨析：覆盖率星级审计与 Diataxis 四象限文档分类</h3>
+<ol>
+<li><strong>Diataxis 四象限归类</strong>：某开源中间件团队准备使用 <code>/document-generate</code> 重构其杂乱的文档库。请判断以下四篇文档标题分别属于 Diataxis 框架的哪一个象限（<code>Tutorial</code>、<code>How-To Guide</code>、<code>Reference</code> 或 <code>Explanation</code>），并简述判断依据：<ul>
+<li>文档甲：《5 分钟快速上手：在本地启动你的第一个消息生产与消费示例》；</li>
+<li>文档乙：《为什么我们选择基于磁盘顺序写的日志结构，而非内存哈希表？——存储引擎架构权衡解析》；</li>
+<li>文档丙：《客户端配置参数全集、错误码字典与 CLI 退出状态码一览表》；</li>
+<li>文档丁：《如何在不停机的情况下为生产集群配置 TLS 双向证书轮换》。</li>
+</ul>
+</li>
+<li><strong>PR 审查评论分诊策略</strong>：当 <code>/ship</code> 创建 Pull Request 后，自动化代码审查机器人在 PR 上留下了 3 条评论：第 1 条指出某新增查询漏了复合索引；第 2 条指出某处拼写错误（但该拼写错误其实在 10 分钟前的最新一次 Commit 中已经修过了）；第 3 条误以为某个只读公开配置接口缺少管理员权限校验。请问 <code>/ship</code> 会如何分别处置这 3 条评论？</li>
+</ol>
+<h3 id="h-进阶分析根治本地一切正常远端部署即崩与文档脱节">进阶分析：根治“本地一切正常、远端部署即崩”与文档脱节</h3>
+<p>假设某研发团队在交付一个企业内部系统时遭遇了两个尴尬场景：</p>
+<ul>
+<li><strong>场景 A（文档严重脱节）</strong>：后端工程师在周三下午为了修复一个计费问题，新增了一个必填环境变量 <code>TAX_RATE_REGION_CODE</code>，并在本地 <code>.env</code> 里配好了值；但他忘了更新 <code>README.md</code> 和 <code>.env.example</code>。周五下午运维同事拉取代码部署时，服务启动直接崩溃。</li>
+<li><strong>场景 B（缺乏上线后巡检）</strong>：前端工程师在发版时引入了一个未做按需加载的 4MB 图表库，虽然 <code>/health</code> 接口返回 <code>200 OK</code>，但用户打开首页的白屏等待时间从 1.2 秒暴增到了 6.5 秒，且在 Safari 浏览器下控制台抛出了兼容性异常。</li>
+</ul>
+<p>请结合本节所学回答：</p>
+<ol>
+<li>在 GStack 第 7 环中，哪一个内嵌机制能够从流程上 100% 阻止场景 A 的发生？它是如何工作的？</li>
+<li>针对场景 B，在 <code>/land-and-deploy</code> 确认 <code>/health</code> <code>200 OK</code> 之后，哪两个后续技能能够立即揪出“控制台兼容性报错”与“首屏加载时间从 1.2 秒退化到 6.5 秒”的问题？</li>
+</ol>
+<h3 id="h-迁移研讨为你当前项目制定《工程发布与远端部署核查单》">迁移研讨：为你当前项目制定《工程发布与远端部署核查单》</h3>
+<p>结合你当前负责或正在实训的软件工程项目：</p>
+<ol>
+<li>设计该项目的 <code>/health</code> 健康检查端点返回结构（需包含应用版本号/Commit SHA、服务启动时长以及底层数据库/缓存连通性自检状态）；</li>
+<li>列出该项目在每次执行 <code>/ship</code> 与 <code>/land-and-deploy</code> 时必须通过的 5 项准出核查清单（涵盖测试星级、审查凭据状态、文档同步、密钥隔离与远端金丝雀验证）。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>通过第 7 环 <code>/ship</code> 与 <code>/land-and-deploy</code>，我们的应用已经顺利部署到远端目标环境并通过了 <code>/canary</code> 金丝雀巡检。</p>
+<p>然而，在真实的软件生命周期中，没有任何系统能够永远一帆风顺。当系统运行一段时间后，如果远端生产或预发环境突然报出了一条极其诡异的偶发故障（例如：在本地开发环境跑测试 100% 正常，但一到远端容器环境调用某个报表接口就偶发抛出 <code>500 Internal Server Error</code>），此时应该怎么办？</p>
+<p>是像氛围编程（Vibe Coding）那样，把报错丢给 AI 让它“盲目猜代码、叠补丁”，结果陷入“修一个 Bug 引出三个新 Bug”的死循环？还是有一套铁律严明的科学根因排障法？</p>
+<p>请进入下一节**【单元 4.2】《/investigate 五阶段排障：系统化根因定位与受控修复》**！</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] GStack 发布流水线、部署与金丝雀监控官方深潜：</strong> Garry Tan (Y Combinator), <em>gstack Skill Deep Dives (docs/skills.md): <code>/ship</code>, <code>/setup-deploy</code>, <code>/land-and-deploy</code>, <code>/canary</code> &amp; <code>/benchmark</code></em>（重点研读 Test Bootstrap、Coverage Audit 星级图、Dry-Run 部署与 SRE 金丝雀巡检机制），<a href="https://github.com/garrytan/gstack/blob/main/docs/skills.md">GitHub 官方技能手册</a>。</li>
+<li id="ref-2"><strong>[2] GStack 自动文档同步与生成规范：</strong> Garry Tan, <em>gstack <code>document-release/SKILL.md</code> &amp; <code>/document-generate</code></em>（了解代码 diff 驱动的文档自动对齐与架构图生成工具链），<a href="https://github.com/garrytan/gstack/blob/main/document-release/SKILL.md">GitHub 官方仓库</a>。</li>
+<li id="ref-3"><strong>[3] Diataxis 国际技术文档工程框架：</strong> Daniele Procida, <em>Diataxis: A Systematic Approach to Technical Documentation Authoring</em>（深入理解 Tutorials、How-To Guides、Reference 与 Explanation 四象限架构），<a href="https://diataxis.fr/">Diataxis 官方网站</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/3-3/">← 3.3 AI Coding 上下文工程（Context Engineering）</a>
+      <a href="/aicoding/units/4-2/">4.2 /investigate 五阶段排障 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-411-第-7-环上半程-ship纪律严明的发布工程师流水线">4.1.1 第 7 环上半程 /ship：纪律严明的发布工程师流水线</a></li><li class="lv2"><a href="#h-412-文档工程与代码同步内嵌-document-release-与-diataxis-四象限框架">4.1.2 文档工程与代码同步：内嵌 /document-release 与 Diataxis 四象限框架</a></li><li class="lv3"><a href="#h-1-ship-强制内嵌步骤document-release-自动对齐六大仓库文档">1. /ship 强制内嵌步骤：/document-release 自动对齐六大仓库文档</a></li><li class="lv3"><a href="#h-2-document-generate基于-diataxis-四象限框架生成-100%-忠于源码的文档体系">2. /document-generate：基于 Diataxis 四象限框架生成 100% 忠于源码的文档体系</a></li><li class="lv2"><a href="#h-413-第-7-环下半程部署选型land-and-deploy-远端上线与-canary-金丝雀巡检">4.1.3 第 7 环下半程：部署选型、/land-and-deploy 远端上线与 /canary 金丝雀巡检</a></li><li class="lv3"><a href="#h-1-部署选型四问与生产密钥安全铁律">1. 部署选型四问与生产密钥安全铁律</a></li><li class="lv3"><a href="#h-2-setup-deploy-→-land-and-deploy-→-canary-&amp-benchmark">2. /setup-deploy → /land-and-deploy → /canary &amp;amp; /benchmark 全链路闭环</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析覆盖率星级审计与-diataxis-四象限文档分类">基础辨析：覆盖率星级审计与 Diataxis 四象限文档分类</a></li><li class="lv3"><a href="#h-进阶分析根治本地一切正常远端部署即崩与文档脱节">进阶分析：根治“本地一切正常、远端部署即崩”与文档脱节</a></li><li class="lv3"><a href="#h-迁移研讨为你当前项目制定《工程发布与远端部署核查单》">迁移研讨：为你当前项目制定《工程发布与远端部署核查单》</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

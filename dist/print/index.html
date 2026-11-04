@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打印视图 · 通用 AI Coding 教材</title>
+<meta name="description" content="按章分卷的整章打印页">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+<div class="home"><h1 class="page-h1">打印视图</h1><p class="page-lede">按章分卷，浏览器打印时每个单元自动分页。</p><ul class="print-list"><li><a href="/aicoding/print/ch-1/">第 1 章 认知与工具</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-2/">第 2 章 规划与施工</a><span class="muted">（2 单元）</span></li><li><a href="/aicoding/print/ch-3/">第 3 章 审查与上下文治理</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-4/">第 4 章 发布排障与复盘</a><span class="muted">（3 单元）</span></li><li><a href="/aicoding/print/ch-5/">第 5 章 从工具到方法</a><span class="muted">（5 单元）</span></li><li><a href="/aicoding/print/ch-6/">第 6 章 受控行动与生产飞轮</a><span class="muted">（2 单元）</span></li><li><a href="/aicoding/print/ch-7/">第 7 章 运营商内网与三日演练</a><span class="muted">（3 单元）</span></li></ul></div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

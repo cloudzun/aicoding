@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.3 场景二 经营数据问数 · 通用 AI Coding 教材</title>
+<meta name="description" content="可执行判定与确定性安全边界">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0 active"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/5-2/">← 5.2 场景一 政企知识问答</a></span>
+      <span><a href="/aicoding/units/5-4/">5.4 场景三 合同合规审查 →</a></span>
+    </div>
+    <h1>5.3　场景二 经营数据问数</h1>
+    <p class="lede">可执行判定与确定性安全边界</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">三类 FDE 典型场景的第二类——<strong>可自动判定</strong>的那一类。它解决的是“数字从哪来”：把一句中文问题变成可执行的 SQL，并且<strong>对错由执行结果判定，不靠模型自评</strong>。案例本身就是 NL2SQL，所以本节不讨论“要不要做问数”，只讨论“怎么做对”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">要做经营分析、报表自助、客服工单问数的工程师与交付负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">会写基础 SQL；知道“结果集”和“口径”的区别（不知道也能读，5.3.1 从头讲）。文中数字均为合成库上的实测值，带口径与样本量。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:5.3"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>能画出 NL2SQL 的四层结构，说清每层的输入、输出与失效点。</li>
+<li>能把“解析准确率 85%”改写成含分母、比对规则、样本量的 EX 口径。</li>
+<li>能给出四道确定性闸与一道意图闸的通过判据，并说清为什么默认拒绝。</li>
+<li>能写出十个业务口径（营收、在网、SLA 超时…），并解释它同时是三样东西。</li>
+<li>能按“数据 → 生成 → 校验 → 执行”的顺序排查失败。</li>
+</ol>
+<div class="concl"><span class="concl-tag">一句话结论</span>问数系统最值钱的地方不是“能出 SQL”，而是<strong>它的对错可以被机器判定</strong>；一旦口径与比对规则定不死，EX 数字和模型自评一样不可信。</div>
+<hr>
+<h2 id="h-531-nl2sql-体系四层与一条链路">5.3.1 NL2SQL 体系：四层与一条链路</h2>
+<h3 id="h-1-它解决什么问题">1. 它解决什么问题</h3>
+<p>业务方要的不是 SQL，是一个能对账的数字。中间要跨三道鸿沟：</p>
+<ul>
+<li><strong>语言鸿沟</strong>：口语（“上个月杭州那边正常客户有多少”）与表结构（<code>dim_customer.city LIKE &#39;杭州%&#39;</code>）不是一回事；</li>
+<li><strong>口径鸿沟</strong>：同一句“营收”，含不含调整、含不含税、含不含退订后的账，答案能差一倍；</li>
+<li><strong>安全鸿沟</strong>：模型能写 <code>DELETE</code>，而业务系统不能让它碰。</li>
+</ul>
+<p>NL2SQL 的工程价值就在于：把这三道鸿沟分别交给<strong>语义层</strong>、<strong>EX 口径</strong>、<strong>确定性闸门</strong>处理，而不是指望提示词。</p>
+<h3 id="h-2-四层结构">2. 四层结构</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>职责</th>
+<th>输入</th>
+<th>输出</th>
+<th>典型失效</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>理解层</td>
+<td>把口语问题落到表与列（含歧义识别）</td>
+<td>问题 + 库结构/语义层</td>
+<td>结构化意图 + 歧义标记</td>
+<td>选错表、选错列、该反问却硬答</td>
+</tr>
+<tr>
+<td>语义层</td>
+<td>十个业务口径的唯一定义</td>
+<td>业务概念</td>
+<td>计算式（表.字段 + 条件）</td>
+<td>同一概念两处定义，结果对不上</td>
+</tr>
+<tr>
+<td>生成层</td>
+<td>写 SQL（含自纠错）</td>
+<td>意图 + 语义层</td>
+<td>候选 SQL</td>
+<td>语法错、JOIN 不全、聚合粒度错</td>
+</tr>
+<tr>
+<td>校验与执行层</td>
+<td>白名单、只读、LIMIT、执行与比对</td>
+<td>候选 SQL</td>
+<td>结果集 + 轨迹</td>
+<td>闸被绕过、结果被截断后拿去判分</td>
+</tr>
+</tbody></table>
+<figure class="fig" id="fig-5-3"><div class="fig-scroll"><svg id="svg-5-3" width="777.86328125" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="715" viewBox="0 0 777.86328125 715" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-5-3{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-5-3 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-5-3 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-5-3 .error-icon{fill:#eceff1;}#svg-5-3 .error-text{fill:#13100e;stroke:#13100e;}#svg-5-3 .edge-thickness-normal{stroke-width:1px;}#svg-5-3 .edge-thickness-thick{stroke-width:3.5px;}#svg-5-3 .edge-pattern-solid{stroke-dasharray:0;}#svg-5-3 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-5-3 .edge-pattern-dashed{stroke-dasharray:3;}#svg-5-3 .edge-pattern-dotted{stroke-dasharray:2;}#svg-5-3 .marker{fill:#607d8b;stroke:#607d8b;}#svg-5-3 .marker.cross{stroke:#607d8b;}#svg-5-3 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-5-3 p{margin:0;}#svg-5-3 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-5-3 .cluster-label text{fill:#13100e;}#svg-5-3 .cluster-label span{color:#13100e;}#svg-5-3 .cluster-label span p{background-color:transparent;}#svg-5-3 .label text,#svg-5-3 span{fill:#17324d;color:#17324d;}#svg-5-3 .node rect,#svg-5-3 .node circle,#svg-5-3 .node ellipse,#svg-5-3 .node polygon,#svg-5-3 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-5-3 .rough-node .label text,#svg-5-3 .node .label text,#svg-5-3 .image-shape .label,#svg-5-3 .icon-shape .label{text-anchor:middle;}#svg-5-3 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-5-3 .rough-node .label,#svg-5-3 .node .label,#svg-5-3 .image-shape .label,#svg-5-3 .icon-shape .label{text-align:center;}#svg-5-3 .node.clickable{cursor:pointer;}#svg-5-3 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-5-3 .arrowheadPath{fill:#0b0b0b;}#svg-5-3 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-5-3 .flowchart-link{stroke:#607d8b;fill:none;}#svg-5-3 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-3 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-3 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-3 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-5-3 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-5-3 .cluster text{fill:#13100e;}#svg-5-3 .cluster span{color:#13100e;}#svg-5-3 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-5-3 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-5-3 rect.text{fill:none;stroke-width:0;}#svg-5-3 .icon-shape,#svg-5-3 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-3 .icon-shape p,#svg-5-3 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-5-3 .icon-shape .label rect,#svg-5-3 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-3 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-5-3 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-5-3 .node .neo-node{stroke:#1976d2;}#svg-5-3 [data-look="neo"].node rect,#svg-5-3 [data-look="neo"].cluster rect,#svg-5-3 [data-look="neo"].node polygon{stroke:url(#svg-5-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-3 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-5-3 [data-look="neo"].node path{stroke:url(#svg-5-3-gradient);stroke-width:1px;}#svg-5-3 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-3 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-5-3 [data-look="neo"].node circle{stroke:url(#svg-5-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-3 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-5-3 [data-look="neo"].icon-shape .icon{fill:url(#svg-5-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-3 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-5-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-3 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-5-3 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-3 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-3 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-5-3 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-3 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-3 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-5-3 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-3 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-3 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-5-3 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-3 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-3 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-5-3 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-3 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-3 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-5-3_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-3_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-3_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-3_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-5-3_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-3_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-3_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-3_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-3_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-3_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-3_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-5-3_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M222.902,60.5L222.902,63.333C222.902,66.167,222.902,71.833,222.902,76.833C222.902,81.833,222.902,86.167,222.902,88.333L222.902,90.5" id="svg-5-3-L_Q_U_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Q_U_0" data-points="W3sieCI6MjIyLjkwMjM0Mzc1LCJ5Ijo2MC41fSx7IngiOjIyMi45MDIzNDM3NSwieSI6NzcuNX0seyJ4IjoyMjIuOTAyMzQzNzUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M222.902,147L222.902,149.833C222.902,152.667,222.902,158.333,222.902,163.333C222.902,168.333,222.902,172.667,222.902,174.833L222.902,177" id="svg-5-3-L_U_A_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_U_A_0" data-points="W3sieCI6MjIyLjkwMjM0Mzc1LCJ5IjoxNDd9LHsieCI6MjIyLjkwMjM0Mzc1LCJ5IjoxNjR9LHsieCI6MjIyLjkwMjM0Mzc1LCJ5IjoxODF9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M193.242,263.84L182.476,273.491C171.71,283.143,150.177,302.447,139.411,316.14C128.645,329.833,128.645,337.917,128.645,341.958L128.645,346" id="svg-5-3-L_A_ASK_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_ASK_0" data-points="W3sieCI6MTkzLjI0MjA5MDcwMTYxOTI1LCJ5IjoyNjMuODM5NzQ2OTUxNjE5MjV9LHsieCI6MTI4LjY0NDUzMTI1LCJ5IjozMjEuNzV9LHsieCI6MTI4LjY0NDUzMTI1LCJ5IjozNTB9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M252.563,263.84L263.329,273.491C274.095,283.143,295.628,302.447,306.394,316.14C317.16,329.833,317.16,337.917,317.16,341.958L317.16,346" id="svg-5-3-L_A_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_G_0" data-points="W3sieCI6MjUyLjU2MjU5Njc5ODM4MDc1LCJ5IjoyNjMuODM5NzQ2OTUxNjE5MjV9LHsieCI6MzE3LjE2MDE1NjI1LCJ5IjozMjEuNzV9LHsieCI6MzE3LjE2MDE1NjI1LCJ5IjozNTB9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M263.653,402.5L257.877,405.333C252.102,408.167,240.551,413.833,234.775,418.833C229,423.833,229,428.167,229,430.333L229,432.5" id="svg-5-3-L_G_V_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_G_V_0" data-points="W3sieCI6MjYzLjY1MjU0Njk2NTMxNzksInkiOjQwMi41fSx7IngiOjIyOSwieSI6NDE5LjV9LHsieCI6MjI5LCJ5Ijo0MzYuNX1d" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M176.741,489L167.367,493.708C157.994,498.417,139.247,507.833,129.873,516.583C120.5,525.333,120.5,533.417,120.5,537.458L120.5,541.5" id="svg-5-3-L_V_REJ_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_V_REJ_0" data-points="W3sieCI6MTc2Ljc0MDgyNTY4ODA3MzQsInkiOjQ4OX0seyJ4IjoxMjAuNSwieSI6NTE3LjI1fSx7IngiOjEyMC41LCJ5Ijo1NDUuNX1d" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M281.259,489L290.633,493.708C300.006,498.417,318.753,507.833,328.127,516.583C337.5,525.333,337.5,533.417,337.5,537.458L337.5,541.5" id="svg-5-3-L_V_EX_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_V_EX_0" data-points="W3sieCI6MjgxLjI1OTE3NDMxMTkyNjYsInkiOjQ4OX0seyJ4IjozMzcuNSwieSI6NTE3LjI1fSx7IngiOjMzNy41LCJ5Ijo1NDUuNX1d" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M337.5,598L337.5,602.708C337.5,607.417,337.5,616.833,344.549,625.899C351.598,634.966,365.697,643.681,372.746,648.039L379.795,652.397" id="svg-5-3-L_EX_FIX_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_EX_FIX_0" data-points="W3sieCI6MzM3LjUsInkiOjU5OH0seyJ4IjozMzcuNSwieSI6NjI2LjI1fSx7IngiOjM4My4xOTc2OTU2NzA4NzE1NSwieSI6NjU0LjV9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M471.825,654.5L480.106,649.792C488.386,645.083,504.947,635.667,513.227,621.875C521.508,608.083,521.508,589.917,521.508,571.75C521.508,553.583,521.508,535.417,521.508,517.25C521.508,499.083,521.508,480.917,521.508,464.625C521.508,448.333,521.508,433.917,500.855,422.337C480.202,410.758,438.895,402.015,418.242,397.644L397.589,393.273" id="svg-5-3-L_FIX_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_FIX_G_0" data-points="W3sieCI6NDcxLjgyNTMxMTc4MzI1NjksInkiOjY1NC41fSx7IngiOjUyMS41MDc4MTI1LCJ5Ijo2MjYuMjV9LHsieCI6NTIxLjUwNzgxMjUsInkiOjU3MS43NX0seyJ4Ijo1MjEuNTA3ODEyNSwieSI6NTE3LjI1fSx7IngiOjUyMS41MDc4MTI1LCJ5Ijo0NjIuNzV9LHsieCI6NTIxLjUwNzgxMjUsInkiOjQxOS41fSx7IngiOjM5My42NzU3ODEyNSwieSI6MzkyLjQ0NDQ2NDA5MTE0Mzd9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path><path d="M420,586.03L458.726,592.734C497.452,599.437,574.904,612.843,613.63,623.588C652.355,634.333,652.355,642.417,652.355,646.458L652.355,650.5" id="svg-5-3-L_EX_RES_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_EX_RES_0" data-points="W3sieCI6NDIwLCJ5Ijo1ODYuMDMwMzYxNzczMTM1fSx7IngiOjY1Mi4zNTU0Njg3NSwieSI6NjI2LjI1fSx7IngiOjY1Mi4zNTU0Njg3NSwieSI6NjU0LjV9XQ==" data-look="classic" marker-end="url(#svg-5-3_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Q_U_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_U_A_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(128.64453125, 321.75)"><g class="label" data-id="L_A_ASK_0" transform="translate(-30.8203125, -11.25)"><foreignObject width="61.640625" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>blocking</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(317.16015625, 321.75)"><g class="label" data-id="L_A_G_0" transform="translate(-64.71875, -11.25)"><foreignObject width="129.4375" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>advisory 或 无歧义</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_G_V_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(120.5, 517.25)"><g class="label" data-id="L_V_REJ_0" transform="translate(-15, -11.25)"><foreignObject width="30" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>越界</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(337.5, 517.25)"><g class="label" data-id="L_V_EX_0" transform="translate(-15, -11.25)"><foreignObject width="30" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>通过</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(337.5, 626.25)"><g class="label" data-id="L_EX_FIX_0" transform="translate(-15, -11.25)"><foreignObject width="30" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>失败</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_FIX_G_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(652.35546875, 626.25)"><g class="label" data-id="L_EX_RES_0" transform="translate(-15, -11.25)"><foreignObject width="30" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>成功</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-5-3-flowchart-Q-0" data-look="classic" transform="translate(222.90234375, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-60" y="-26.25" width="120" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-30, -11.25)"><rect></rect><foreignObject width="60" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>中文问题</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-5-3-flowchart-U-1" data-look="classic" transform="translate(222.90234375, 120.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-92.5078125" y="-26.25" width="185.015625" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-62.5078125, -11.25)"><rect></rect><foreignObject width="125.015625" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>理解：意图 + 歧义</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-5-3-flowchart-A-3" data-look="classic" transform="translate(222.90234375, 237.25)"><polygon points="56.25,0 112.5,-56.25 56.25,-112.5 0,-56.25" class="label-container" transform="translate(-55.75, 56.25)" style="fill:#f5ece0 !important;stroke:#a8895f !important"></polygon><g class="label" style="color:#4a3525 !important" transform="translate(-30, -11.25)"><rect></rect><foreignObject width="60" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>歧义分级</p></span></div></foreignObject></g></g><g class="node default red" id="svg-5-3-flowchart-ASK-5" data-look="classic" transform="translate(128.64453125, 376.25)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-90" y="-26.25" width="180" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-60, -11.25)"><rect></rect><foreignObject width="120" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>反问：先确认口径</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-3-flowchart-G-7" data-look="classic" transform="translate(317.16015625, 376.25)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-76.515625" y="-26.25" width="153.03125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-46.515625, -11.25)"><rect></rect><foreignObject width="93.03125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>生成候选 SQL</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-3-flowchart-V-9" data-look="classic" transform="translate(229, 462.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-155.3203125" y="-26.25" width="310.640625" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-125.3203125, -11.25)"><rect></rect><foreignObject width="250.640625" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>校验：白名单 / 只读 / 多语句 / LIMIT</p></span></div></foreignObject></g></g><g class="node default red" id="svg-5-3-flowchart-REJ-11" data-look="classic" transform="translate(120.5, 571.75)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-112.5" y="-26.25" width="225" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-82.5, -11.25)"><rect></rect><foreignObject width="165" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>拒绝：说明原因，不执行</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-3-flowchart-EX-13" data-look="classic" transform="translate(337.5, 571.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-82.5" y="-26.25" width="165" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-52.5, -11.25)"><rect></rect><foreignObject width="105" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>执行：只读连接</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-3-flowchart-FIX-15" data-look="classic" transform="translate(425.66015625, 680.75)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-87.1875" y="-26.25" width="174.375" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-57.1875, -11.25)"><rect></rect><foreignObject width="114.375" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>自纠错（≤2 次）</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-3-flowchart-RES-19" data-look="classic" transform="translate(652.35546875, 680.75)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-117.5078125" y="-26.25" width="235.015625" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-87.5078125, -11.25)"><rect></rect><foreignObject width="175.015625" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>结果集 + 图表建议 + 轨迹</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-5-3-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-5-3-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-5-3-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-5-3.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 5-3 ↗</a>：问数系统的四层与一条链路——歧义在生成之前分流，闸门在执行之前拦下</figcaption></figure>
+<p>如图 5-3 所示，控制流在生成之前就先分了一次叉：歧义分级把 blocking 的问题送去反问，只有 advisory 或无歧义的问题才进生成器。生成之后也不是直接执行——先过校验节点的四道判断（白名单 / 只读 / 多语句 / LIMIT），越界走拒绝、通过才进只读连接；执行报错则回到生成做最多两次自纠错，而且每次重试都要重新过一次闸。这张图要记的是两个位置：<strong>歧义闸在生成之前，安全闸在执行之前。</strong></p>
+<h3 id="h-3-和-rag-场景的根本差别">3. 和 RAG 场景的根本差别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>场景一 RAG</th>
+<th>场景二 问数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>判定方式</td>
+<td>模型当判官（尺子本身会坏）</td>
+<td><strong>执行结果比对（零 judge）</strong></td>
+</tr>
+<tr>
+<td>主要风险</td>
+<td>编造、引用错</td>
+<td><strong>口径错、越权执行</strong></td>
+</tr>
+<tr>
+<td>该在哪设闸</td>
+<td>生成之前（阈值）</td>
+<td><strong>执行之前（白名单/只读/LIMIT）</strong></td>
+</tr>
+<tr>
+<td>失败怎么发现</td>
+<td>分桶 + 人工抽检</td>
+<td>分桶即可，不需要判官</td>
+</tr>
+</tbody></table>
+<div class="alert alert-important"><span class="alert-tag">要点</span><p><strong>能机器判定的场景，优势不是“更准”，而是“数字可信”。</strong> 我们的 EX 是 83.33%（125/150，2026-10-21 重跑；10-20 基线 84.67%，两版都未达标）——这个数字不漂亮，但它是<strong>可解释的</strong>：每一道错题都能定位到桶、到 SQL、到结果集差异。</p>
+</div>
+<hr>
+<h2 id="h-532-场景拆解客户给什么我们定什么">5.3.2 场景拆解：客户给什么，我们定什么</h2>
+<p>客户只给两行：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>客户原话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>任务范围</td>
+<td>数据库搭建；自然语言转 SQL；条件筛选；多表关联；统计图表</td>
+</tr>
+<tr>
+<td>验收指标</td>
+<td>常规业务查询语句解析准确率 ≥85%；支持 3 张以内表关联；异常语句自动纠错；响应 ≤2 秒；自动可视化</td>
+</tr>
+</tbody></table>
+<h3 id="h-1-哪些能问客户哪些必须自己定">1. 哪些能问客户，哪些必须自己定</h3>
+<table>
+<thead>
+<tr>
+<th>分界</th>
+<th>内容</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能问客户（业务取舍）</td>
+<td>“解析正确”你更看重 SQL 像不像，还是结果对不对；2 秒是硬指标还是期望；写操作要不要一律拒绝；数据能不能出域</td>
+<td>这是业务与合规判断，客户有依据</td>
+</tr>
+<tr>
+<td>必须自己定（技术口径）</td>
+<td>EX 的分母与比对规则（列序/别名/容差/NULL）；“3 表”是 JOIN 深度还是涉及表数；纠错次数上限；LIMIT 默认值；歧义分级的 blocking/advisory 边界</td>
+<td>客户答不出；问了只会得到“你们专业你们定”，或被随口定死成验收争议</td>
+</tr>
+</tbody></table>
+<p>一句话：<strong>“解析准确率 85%” 这句话里，只有“85%”是客户给的，其余全是我们定义的。</strong> 定义写在 5.3.4。</p>
+<h3 id="h-2-任务范围落到四层">2. 任务范围落到四层</h3>
+<table>
+<thead>
+<tr>
+<th>客户要的</th>
+<th>落到哪一层</th>
+<th>工程含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据库搭建</td>
+<td>前置</td>
+<td>库结构要支撑对账（账单必须挂 <code>order_id</code>，否则“应收是否算对”永远无法判定）</td>
+</tr>
+<tr>
+<td>自然语言转 SQL</td>
+<td>理解层 + 生成层</td>
+<td>意图与 SQL 分离，便于分别评测</td>
+</tr>
+<tr>
+<td>条件筛选 / 多表关联</td>
+<td>生成层</td>
+<td>限定 ≤3 表，超出就反问或拒绝</td>
+</tr>
+<tr>
+<td>异常语句自动纠错</td>
+<td>生成层</td>
+<td>重试 ≤2 次，每次重过白名单</td>
+</tr>
+<tr>
+<td>统计图表</td>
+<td>执行层</td>
+<td>图表建议由结果形状决定，不由模型猜</td>
+</tr>
+<tr>
+<td>响应 ≤2 秒</td>
+<td>全链路</td>
+<td>生成是主要耗时；执行是毫秒级</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-3-素材与起点你不是从我们的仓库开始">3. 素材与起点：你不是从我们的仓库开始</h3>
+<p>与场景一相同，<strong>学员是白手起家的</strong>。你拿到的不是跑通的代码，而是一个素材包：</p>
+<pre><code>starter-kit/
+├── db/aicoding.db      6 表 8584 行 + schema.sql + manifest.json + 10 类刻意埋点
+├── eval/               20 题评估集（14 可答 + 3 歧义 + 3 写操作）+ 口径说明 + 校验脚本
+├── contracts/契约.md    服务契约、四道闸、意图闸、EX 字段约定
+├── requirements.txt / .env.example
+└── README-素材说明.md
+</code></pre>
+<p>包里<strong>没有</strong>实现代码、语义层定义（十个业务口径按 5.3.3 的取值与 5.3.4 的口径自己写）、现成比对器。开工前先跑素材校验，对三组指纹：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>期望</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>库文件 sha256</td>
+<td><code>d1f5872e…</code> 开头</td>
+</tr>
+<tr>
+<td>表数与总行数</td>
+<td>6 表 / 8584 行</td>
+</tr>
+<tr>
+<td>三个基准值</td>
+<td>541252.34 / 57 / 35</td>
+</tr>
+<tr>
+<td>评估集</td>
+<td>20 题（14 可答 + 3 歧义 + 3 写操作）</td>
+</tr>
+</tbody></table>
+<div class="alert alert-note"><span class="alert-tag">说明</span><p><strong>指纹的意义：</strong> 库一旦被改动，“这次结果与上次不同”就永远说不清是代码变了还是数据变了。</p>
+</div>
+<hr>
+<h2 id="h-533-技术选型判据取值与替换条件">5.3.3 技术选型：判据、取值与替换条件</h2>
+<h3 id="h-1-三条总判据">1. 三条总判据</h3>
+<table>
+<thead>
+<tr>
+<th>判据</th>
+<th>怎么问</th>
+<th>决定什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>约束</td>
+<td>数据能不能出域？库多大？要不要多租户？</td>
+<td>供应商、SQLite 还是 PG、单机还是服务化</td>
+</tr>
+<tr>
+<td>替代</td>
+<td>这段判断能不能写成确定性规则？</td>
+<td>意图识别、白名单、LIMIT 全部交代码</td>
+</tr>
+<tr>
+<td>可换</td>
+<td>换掉它的代价？</td>
+<td>换模型＝重跑评测；换库＝重建 schema 链接</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-供应商与模型">2. 供应商与模型</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>判据</th>
+<th>我们的方向</th>
+<th>什么时候换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>供应商</td>
+<td>一套 key 能否覆盖生成（本场景不需要嵌入/重排）</td>
+<td>一站式平台即可</td>
+<td>数据不能出域 → 本地网关</td>
+</tr>
+<tr>
+<td>生成模型</td>
+<td>SQL 语法正确率、表列选择准确率、是否敢给多解</td>
+<td>中文强、指令跟随稳的通用模型</td>
+<td>分桶显示 JOIN 类持续偏低（能力缺口）</td>
+</tr>
+<tr>
+<td>是否上第二模型</td>
+<td>纠错是否需要“换个脑子”</td>
+<td>先靠同模型重试；连续失败再考虑</td>
+<td>纠错成功率长期 &lt;50%</td>
+</tr>
+</tbody></table>
+<p><strong>判官不需要</strong>——这是本场景最大优势；但<strong>比对器要单测</strong>（多一列、少一行、顺序不同、浮点抖动、NULL），否则 EX 数字同样会虚高。<sup class="cite"><a href="#ref-2">[2]</a></sup></p>
+<h3 id="h-3-组件取值">3. 组件取值</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>环节</th>
+<th>判据</th>
+<th>我们的取值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>理解</td>
+<td>意图识别</td>
+<td>有没有写操作词（删/改/插入/建表）</td>
+<td>意图闸先于生成，命中即拒</td>
+</tr>
+<tr>
+<td>理解</td>
+<td>歧义分级</td>
+<td>有没有默认口径</td>
+<td>有默认 → 提示后作答（advisory）；没有 → 反问（blocking）</td>
+</tr>
+<tr>
+<td>语义层</td>
+<td>口径定义</td>
+<td>同一概念是否只有一处定义</td>
+<td><code>semantic_layer.json</code> 十个概念，写进 prompt</td>
+</tr>
+<tr>
+<td>生成</td>
+<td>SQL 生成</td>
+<td>是否只读、单语句、≤3 表</td>
+<td>生成后立即解析校验，不合法就重试</td>
+</tr>
+<tr>
+<td>校验</td>
+<td>白名单</td>
+<td>表列是否命中登记清单</td>
+<td>默认拒绝，白名单放行</td>
+</tr>
+<tr>
+<td>校验</td>
+<td>只读</td>
+<td>库账号能否写</td>
+<td>只读连接（物理保证）</td>
+</tr>
+<tr>
+<td>校验</td>
+<td>结果集上限</td>
+<td>结果会不会过大</td>
+<td>强制 <code>LIMIT 1000</code>，超出标 <code>truncated</code></td>
+</tr>
+<tr>
+<td>执行</td>
+<td>超时与重试</td>
+<td>单次查询上限、纠错次数</td>
+<td>超时 10 秒；纠错 ≤2 次</td>
+</tr>
+</tbody></table>
+<h3 id="h-4-应用层与前端">4. 应用层与前端</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>判据</th>
+<th>我们的取值</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务</td>
+<td>要流式、单语言、少依赖</td>
+<td>FastAPI + uvicorn</td>
+<td>生态不如 Django 全</td>
+</tr>
+<tr>
+<td>前端</td>
+<td>展示 SQL、结果表与图表，能核对</td>
+<td>原生 HTML + JS 单页（内联 SVG 画图）</td>
+<td>图表能力有限，复杂可视化要换库</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>教学期数据量</td>
+<td>SQLite（单文件、可随包分发）</td>
+<td>并发与权限弱；生产换 PG</td>
+</tr>
+<tr>
+<td>快速验证</td>
+<td>先看效果</td>
+<td>Streamlit（仅验证）</td>
+<td>不能做验收界面</td>
+</tr>
+</tbody></table>
+<h3 id="h-5-存储按规模">5. 存储：按规模</h3>
+<table>
+<thead>
+<tr>
+<th>规模</th>
+<th>取值</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>教学 / PoC（万行级）</td>
+<td>SQLite 单文件</td>
+<td>零运维、可随素材包分发、只读连接简单</td>
+</tr>
+<tr>
+<td>多人并发 / 多租户</td>
+<td>PostgreSQL + 只读账号</td>
+<td>权限模型成熟，<code>pg_read_all_data</code> 可控</td>
+</tr>
+<tr>
+<td>分析型大表</td>
+<td>列存（DuckDB / ClickHouse）</td>
+<td>聚合快，但 schema 链接要重写</td>
+</tr>
+</tbody></table>
+<h3 id="h-6-选型卡一页带走">6. 选型卡（一页带走）</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>我们选它</th>
+<th>什么时候换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>供应商</td>
+<td>一站式（只需生成）</td>
+<td>数据不能出域</td>
+</tr>
+<tr>
+<td>生成模型</td>
+<td>中文强、指令稳</td>
+<td>JOIN 桶持续偏低</td>
+</tr>
+<tr>
+<td>语义层</td>
+<td>十个概念写进 JSON</td>
+<td>概念超过 30 个要拆域</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>SQLite 只读</td>
+<td>并发或多租户</td>
+</tr>
+<tr>
+<td>服务</td>
+<td>FastAPI + SSE</td>
+<td>需要鉴权中间件</td>
+</tr>
+<tr>
+<td>前端</td>
+<td>原生单页 + 内联 SVG</td>
+<td>需要复杂图表库</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>官方文档出处</strong>：SQLite 只读连接与 <code>PRAGMA</code>、<a href="https://fastapi.tiangolo.com/advanced/custom-response/#streamingresponse">FastAPI · StreamingResponse</a>、<a href="https://developer.mozilla.org/docs/Web/API/EventSource">MDN · EventSource</a>、各平台「模型广场」与 API 文档（模型名与限流以平台当期清单为准）。</p>
+</blockquote>
+<hr>
+<h2 id="h-534-口径确认把解析准确率改成-ex">5.3.4 口径确认：把“解析准确率”改成 EX</h2>
+<table>
+<thead>
+<tr>
+<th>客户的指标</th>
+<th>确认后的口径</th>
+<th>它倒逼出的设计</th>
+<th>我们的实测（带限定）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析准确率 ≥85%</td>
+<td><strong>EX＝执行结果一致率</strong>：分母 150 主集题；SQL 执行失败计入未通过、不剔除</td>
+<td>必须造“标准结果集”而不是“标准 SQL”；比对器要能容错</td>
+<td>EX <strong>83.33%（125/150，2026-10-21 重跑）</strong>；10-20 基线 84.67%；两版都未达 85%</td>
+</tr>
+<tr>
+<td>支持 3 张以内表关联</td>
+<td>“3 表”定义为<strong>涉及表数 ≤3</strong>；超出即反问或拒绝</td>
+<td>生成前要做表数预判；白名单要能按 JOIN 深度限制</td>
+<td>单表桶 90.0%、JOIN 桶 <strong>68%</strong>——缺口是结构性的</td>
+</tr>
+<tr>
+<td>异常语句自动纠错</td>
+<td>首次失败后 <strong>≤2 次</strong>重试，每次重过白名单；纠错成功率 ≥50%</td>
+<td>需要“错误原因 → 改写”的回路，且不能绕过闸</td>
+<td>可执行率 <strong>100%</strong>；纠错次数记在轨迹里</td>
+</tr>
+<tr>
+<td>响应 ≤2 秒</td>
+<td>拆两个数：<strong>首字（含 SQL）p50/p95</strong> 与<strong>完成 p50/p95</strong>；并发=1</td>
+<td>生成是瓶颈，执行毫秒级；要有超时熔断</td>
+<td>p50/p95 <strong>2019/2950ms</strong>（10-20 基线 2272/5244ms）；属环境依赖</td>
+</tr>
+<tr>
+<td>自动可视化</td>
+<td>图表类型由<strong>结果形状</strong>决定（单值→KPI、单维分组→柱/饼、双维→折线）；截断要显式标注</td>
+<td>后端返回 <code>chart</code> 建议，前端只渲染不猜</td>
+<td>7 类图表实测通过；类别 &gt;12 转横向条形并标注“仅显示前 15/N”</td>
+</tr>
+<tr>
+<td>—（客户没提）歧义</td>
+<td>15 条歧义题人工判：主动给口径选项＝correct；直接给数字＝wrong</td>
+<td>歧义必须在生成前分流</td>
+<td>按 expected 口径 <strong>80%</strong>；advisory 率 17.33%</td>
+</tr>
+</tbody></table>
+<p>四条判断必须讲透：</p>
+<p><strong>第一，“解析正确”这个词不能留。</strong> 它同时可以指“SQL 与标准 SQL 字面一致”和“结果一致”。前者对多解 SQL 不公平（同一题十种写法都对），后者才能判定。我们选 EX，并明确<strong>多解 SQL 都接受</strong>。<sup class="cite"><a href="#ref-3">[3]</a></sup></p>
+<p><strong>第二，比对规则要写在验收文件里，不能只在代码里。</strong> 完整八条：列数必须一致（列数不同＝聚合维度不同）；列顺序无关；列名与别名无关；行顺序无关，仅当标准 SQL 含 <code>ORDER BY</code> 时校验前 N 行顺序；浮点容差 0.01；数值类型宽容（<code>&quot;1&quot;</code> 与 <code>1</code> 视为相同）；空结果统一判为空集相等（不区分“0 行”与“全 NULL”）；多解 SQL 都接受，只看结果集。这八条每一条都曾经被当成“错误的正确”判过一次。</p>
+<p><strong>第三，分母不许挑。</strong> 执行失败算未通过，不许剔除、不许用子集判 PASS。我们踩过一次：评测器五处失真，把 EX 压低了 4 个百分点——<strong>修尺子也是工作，但不是能力提升</strong>。<sup class="cite"><a href="#ref-4">[4]</a></sup></p>
+<p><strong>第四，“2 秒”是环境依赖。</strong> 同样的代码在共享网关上能被排队拖到十几秒，所以承诺 p50/p95 两个数并附声明。</p>
+<hr>
+<h2 id="h-535-设计与排查口径怎么变成结构坏了怎么找">5.3.5 设计与排查：口径怎么变成结构，坏了怎么找</h2>
+<h3 id="h-1-口径怎么变成结构">1. 口径怎么变成结构</h3>
+<table>
+<thead>
+<tr>
+<th>客户指标</th>
+<th>判据</th>
+<th>因此的设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>要可判定</td>
+<td>对错必须由结果决定</td>
+<td>造标准结果集 + 比对器；<strong>不要</strong>让模型自评</td>
+</tr>
+<tr>
+<td>要不出界</td>
+<td>写操作代价最高</td>
+<td>意图闸先于生成；只读物理隔离；白名单默认拒绝</td>
+</tr>
+<tr>
+<td>要看分桶</td>
+<td>总分没有解释力</td>
+<td>按 SQL 结构分六桶（单表/两表/三表/聚合/时间/否定空值）</td>
+</tr>
+<tr>
+<td>要能纠错</td>
+<td>错误原因要可读</td>
+<td>执行报错回灌给生成，≤2 次，每次重过闸</td>
+</tr>
+<tr>
+<td>要看时间</td>
+<td>生成与执行耗时不同量级</td>
+<td>分开记；执行耗时应是毫秒级，超过就是库或锁的问题</td>
+</tr>
+<tr>
+<td>要能核对</td>
+<td>用户要看懂结果从哪来</td>
+<td>前端展示 SQL、行数、时间范围、用到的口径</td>
+</tr>
+</tbody></table>
+<h3 id="h-2-坏了怎么找按层排查">2. 坏了怎么找：按层排查</h3>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>属于哪一层</th>
+<th>先看什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>结果行数对但值不对</td>
+<td>语义层</td>
+<td>该概念的口径定义是否被另一处覆盖（含不含调整）</td>
+</tr>
+<tr>
+<td>JOIN 类题目普遍错</td>
+<td>生成层</td>
+<td>gold 是否要求了题面没说的列；JOIN 键是否选错</td>
+</tr>
+<tr>
+<td>所有问题都被拒</td>
+<td>校验层</td>
+<td>白名单是否过窄；LIMIT 是否把正常结果判成越界</td>
+</tr>
+<tr>
+<td>该拒绝的却执行了</td>
+<td>校验层</td>
+<td>闸是否只在文案层拦截，实际仍执行了</td>
+</tr>
+<tr>
+<td>有数据却返回空</td>
+<td>执行层</td>
+<td>时间窗口格式、<code>LIKE</code> 通配、NULL 比较</td>
+</tr>
+<tr>
+<td>EX 忽高忽低</td>
+<td>尺子</td>
+<td>比对器容差、列顺序、展示层截断是否进了评测</td>
+</tr>
+<tr>
+<td>延迟波动大</td>
+<td>环境</td>
+<td>网关排队；重试次数；是否并发跑评测</td>
+</tr>
+</tbody></table>
+<p>排查顺序：<strong>先数据与口径、再 SQL 与闸门、最后才怀疑模型。</strong></p>
+<hr>
+<h2 id="h-536-与编码智能体协作四个真拍板点">5.3.6 与编码智能体协作：四个真拍板点</h2>
+<table>
+<thead>
+<tr>
+<th>拍板点</th>
+<th>选项</th>
+<th>判据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>白名单范围</td>
+<td>全库 / 按业务域收窄</td>
+<td>能收窄就先收窄；越窄越安全，越宽越容易被问出不该问的</td>
+</tr>
+<tr>
+<td>LIMIT 与截断</td>
+<td>100 / 1000 / 不设</td>
+<td>必须设；截断要在返回里显式标注，否则用户以为看全了</td>
+</tr>
+<tr>
+<td>纠错次数</td>
+<td>1 / 2 / 3</td>
+<td>≤2；每次都要重过白名单，不许“修好就执行”</td>
+</tr>
+<tr>
+<td>歧义分级</td>
+<td>全追问 / 分级 / 不追问</td>
+<td>分级：有默认口径的提示后作答，没有的才反问</td>
+</tr>
+</tbody></table>
+<p>指令三句版：<strong>限死输入（只准读 <code>db/</code> 与 <code>eval/</code>）、限死交付（SQL+结果+轨迹三件）、限死停止（闸门与歧义点必须停下问我）。</strong> 不给停止条件的指令，等于允许它自己决定什么时候执行写操作。</p>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<ol>
+<li><strong>让模型自评 SQL 对不对。</strong> 本场景最不该做的事——明明可以机器判。</li>
+<li><strong>用标准 SQL 字面比对。</strong> 多解 SQL 全被判错，EX 虚低。</li>
+<li><strong>评测用展示层截断后的结果。</strong> 正确 SQL 也会被判错（我们因此低过 4 个百分点）。</li>
+<li><strong>闸只在提示词里。</strong> “不要执行写操作”不是闸，<code>query_only</code> 才是。<sup class="cite"><a href="#ref-1">[1]</a></sup></li>
+<li><strong>分母挑着用。</strong> 执行失败剔出去，EX 立刻“达标”。</li>
+<li><strong>口径两处定义。</strong> 语义层一份、代码里又硬编码一份，早晚对不上。</li>
+<li><strong>截断不标注。</strong> 用户以为看到全部，做出的决策是错的。</li>
+</ol>
+<p>三条红线：未达标不许写成达标；写操作必须显式拒绝、不许静默改写；截断必须显式标注。</p>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li>问数的四层：理解、语义层、生成、校验执行；语言/口径/安全三道鸿沟分别由三层解决。</li>
+<li><strong>EX 是唯一可信判定</strong>，它的可信度取决于比对规则与分母，不取决于模型。</li>
+<li>十个业务口径写在一处，同时服务 prompt、标准答案与验收解释。</li>
+<li>四道确定性闸 + 一道意图闸，默认拒绝；闸在文案层不算闸。</li>
+<li>排查从数据与口径开始，最后才怀疑模型。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能画出四层结构，并说出每层一个真实失效例子。</li>
+<li><input disabled="" type="checkbox"> 我能把“解析准确率 85%”改写成一句含分母、比对规则、样本量的 EX 定义。</li>
+<li><input disabled="" type="checkbox"> 我能列出八条比对规则，并说出哪两条最容易被误判。</li>
+<li><input disabled="" type="checkbox"> 我能写出十个口径中的至少五个计算式。</li>
+<li><input disabled="" type="checkbox"> 我能说出五道闸各自的通过判据与失败表现。</li>
+<li><input disabled="" type="checkbox"> 我能解释为什么“分母挑着用”是作弊。</li>
+<li><input disabled="" type="checkbox"> 我能按“数据 → 生成 → 闸门 → 执行”的顺序排查。</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析">基础辨析</h3>
+<ol>
+<li>EX 与“SQL 字面一致”相比，各在什么场景下会失真？各举一例。</li>
+<li>为什么写操作要“显式拒绝”而不是“静默改写成查询”？后者的风险在哪？</li>
+</ol>
+<h3 id="h-进阶分析">进阶分析</h3>
+<ol>
+<li>JOIN 桶 68%、单表桶 90%。请给出三种改法（分属语义层/生成层/评测层），并说明各自的代价。</li>
+<li>EX 83.33%，可执行率 100%，锚点 100%。这三个数同时成立说明什么？如果只报 EX 会误导谁？</li>
+</ol>
+<h3 id="h-迁移研讨">迁移研讨</h3>
+<ol>
+<li>把你手上项目的“准确率”指标改写为可执行判定；写不出来的那一项说明了什么？</li>
+<li>给你的场景设计五道闸，逐条写“失败时用户看到什么”。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>本节讲完了“能被机器判定”的场景：尺子最硬、闸门最实，但一旦口径含糊，机器会又快又错。下一节换到最后一类——<strong>主观判断</strong>的场景（合同审查）。在那里，连“什么算风险”都要先被定义，工程约束的重点会从“闸门”转到“立场与证据”。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] SQLite PRAGMA 官方文档：</strong> SQLite 官方文档，<em>PRAGMA Statements</em>（重点研读：<code>query_only</code> 一类 PRAGMA 如何把“只读”落成物理约束，本节只读闸的实现依据），<a href="https://www.sqlite.org/pragma.html">链接</a>。</li>
+<li id="ref-2"><strong>[2] Hamel Husain《Your AI Product Needs Evals》：</strong> Hamel Husain，<em>Your AI Product Needs Evals</em>（重点研读：断言优先、看数据零摩擦，本节比对器单测的方法来源），<a href="https://hamel.dev/blog/posts/evals/">链接</a>。</li>
+<li id="ref-3"><strong>[3] BIRD 与 Spider 公开基准：</strong> 两个公开 NL2SQL 基准（重点研读：它们的口径与失效类型，可用于对照自己的题库设计），<a href="https://bird-bench.github.io/">BIRD 榜单</a>、<a href="https://yale-lily.github.io/spider">Spider</a>。</li>
+<li id="ref-4"><strong>[4] 本课程单元 3.1–3.3 审查与 QA：</strong> 课程内部出处，第 5 环 review 与第 6 环 qa 的配套做法（重点研读：如何把独立评审做成制度，而不是靠个人自觉），<a href="/aicoding/units/3-1/">单元 3.1</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/5-2/">← 5.2 场景一 政企知识问答</a>
+      <a href="/aicoding/units/5-4/">5.4 场景三 合同合规审查 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-531-nl2sql-体系四层与一条链路">5.3.1 NL2SQL 体系：四层与一条链路</a></li><li class="lv3"><a href="#h-1-它解决什么问题">1. 它解决什么问题</a></li><li class="lv3"><a href="#h-2-四层结构">2. 四层结构</a></li><li class="lv3"><a href="#h-3-和-rag-场景的根本差别">3. 和 RAG 场景的根本差别</a></li><li class="lv2"><a href="#h-532-场景拆解客户给什么我们定什么">5.3.2 场景拆解：客户给什么，我们定什么</a></li><li class="lv3"><a href="#h-1-哪些能问客户哪些必须自己定">1. 哪些能问客户，哪些必须自己定</a></li><li class="lv3"><a href="#h-2-任务范围落到四层">2. 任务范围落到四层</a></li><li class="lv3"><a href="#h-3-素材与起点你不是从我们的仓库开始">3. 素材与起点：你不是从我们的仓库开始</a></li><li class="lv2"><a href="#h-533-技术选型判据取值与替换条件">5.3.3 技术选型：判据、取值与替换条件</a></li><li class="lv3"><a href="#h-1-三条总判据">1. 三条总判据</a></li><li class="lv3"><a href="#h-2-供应商与模型">2. 供应商与模型</a></li><li class="lv3"><a href="#h-3-组件取值">3. 组件取值</a></li><li class="lv3"><a href="#h-4-应用层与前端">4. 应用层与前端</a></li><li class="lv3"><a href="#h-5-存储按规模">5. 存储：按规模</a></li><li class="lv3"><a href="#h-6-选型卡一页带走">6. 选型卡（一页带走）</a></li><li class="lv2"><a href="#h-534-口径确认把解析准确率改成-ex">5.3.4 口径确认：把“解析准确率”改成 EX</a></li><li class="lv2"><a href="#h-535-设计与排查口径怎么变成结构坏了怎么找">5.3.5 设计与排查：口径怎么变成结构，坏了怎么找</a></li><li class="lv3"><a href="#h-1-口径怎么变成结构">1. 口径怎么变成结构</a></li><li class="lv3"><a href="#h-2-坏了怎么找按层排查">2. 坏了怎么找：按层排查</a></li><li class="lv2"><a href="#h-536-与编码智能体协作四个真拍板点">5.3.6 与编码智能体协作：四个真拍板点</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析">基础辨析</a></li><li class="lv3"><a href="#h-进阶分析">进阶分析</a></li><li class="lv3"><a href="#h-迁移研讨">迁移研讨</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

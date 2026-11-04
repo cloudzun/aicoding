@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.1 从工具到方法 · 通用 AI Coding 教材</title>
+<meta name="description" content="三个 FDE 典型场景与三类判定方式">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0 active"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/4-3/">← 4.3 第 8 环 /retro + /learn</a></span>
+      <span><a href="/aicoding/units/5-2/">5.2 场景一 政企知识问答 →</a></span>
+    </div>
+    <h1>5.1　从工具到方法</h1>
+    <p class="lede">三个 FDE 典型场景与三类判定方式</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五篇的入口。单元 1.1–4.3 在确定性应用上把<strong>工具与流程</strong>练熟了；本节把这两级台阶往上推一级，进入<strong>方法层</strong>，并引出本篇要讲的三个 FDE 典型场景。本节不讲任何单个场景的实现细节，只回答“为什么要再上一级、上来之后看什么”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">已完成前两天课程、准备把 GStack 用到真实 AI 应用项目上的工程师与交付负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1–4.3（会用八环、看得懂门禁与产物）；能独立开一次 GStack 会话。新增术语在首次出现处就地解释。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:5.1"><blockquote>
+<p><strong>说明：</strong> 本篇是进阶篇，不占两天主线课时；编号从 4.3 跳到 5.1 是换教学段，不是漏内容。</p>
+</blockquote>
+<p class="goal-cap">本节学习目标</p>
+<ol>
+<li>能区分工具层、流程层、方法层三级台阶，并说出一件事在三级的问法差异。</li>
+<li>能说出八环搬到 AI 应用上缺的三样东西，以及它们各自对应的失败现象。</li>
+<li>能用一条判据判断“这是方法还是经验”。</li>
+<li>能用场景判型卡把自己的场景归到某一类约束，并指出主闸该放哪里。</li>
+<li>能说清三个场景为什么按“答对 → 算对 → 判准”的顺序排列。</li>
+</ol>
+<div class="concl"><span class="concl-tag">一句话结论</span>工具让你把活干完，流程让活可复现，<strong>方法让你换一个陌生场景还能证明活干对了</strong>。</div>
+<hr>
+<h2 id="h-511-三级台阶工具流程方法">5.1.1 三级台阶：工具、流程、方法</h2>
+<p>前两天课程其实分了两级：<strong>工具层</strong>（单元 1.3 的三层工具选型与四大交互原语）和<strong>流程层</strong>（单元 1.2 的八环全景，2.1–4.3 逐环实操）<sup class="cite"><a href="#ref-1">[1]</a></sup>。两级解决的是不同的问题：</p>
+<table>
+<thead>
+<tr>
+<th>台阶</th>
+<th>核心问题</th>
+<th>在课程里的位置</th>
+<th>掌握方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工具层</td>
+<td>用什么工具、怎么把话说清楚</td>
+<td>1.3 工具选型与交互原语；2.2、3.3 的上下文与规则治理</td>
+<td>照着做</td>
+</tr>
+<tr>
+<td>流程层</td>
+<td>一件事按什么顺序干、每环交什么工件</td>
+<td>1.2 八环全景；2.1–4.3 逐环实操</td>
+<td>照着走几遍</td>
+</tr>
+<tr>
+<td>方法层</td>
+<td>换一个<strong>没人做过的场景</strong>，先定什么、在哪设闸、什么算过</td>
+<td>本篇（5.1–5.5）</td>
+<td>只能靠独立判断</td>
+</tr>
+</tbody></table>
+<p>同一件事，在三级台阶上的问法完全不同：</p>
+<table>
+<thead>
+<tr>
+<th>同一件事</th>
+<th>工具层问法</th>
+<th>流程层问法</th>
+<th>方法层问法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>让 AI 写代码</td>
+<td>用哪个模型、提示词怎么写</td>
+<td>先 <code>/spec</code> 再 Build，产物落哪</td>
+<td>这个需求的“可判定”标准是什么，写不出标准该不该开工</td>
+</tr>
+<tr>
+<td>验收</td>
+<td>跑一下看看</td>
+<td>第 6 环 <code>/qa</code> 跑一遍</td>
+<td>指标的分母是什么、谁来判、判的人会不会错</td>
+</tr>
+<tr>
+<td>出错</td>
+<td>看报错、再问一遍</td>
+<td><code>/investigate</code> 五阶段排查</td>
+<td>这个错属于尺子、题库、闸门、模型还是环境</td>
+</tr>
+</tbody></table>
+<div class="alert alert-important"><span class="alert-tag">要点</span><p><strong>为什么必须再上一级。</strong> 工具与流程可以“照着做”学会，方法不能——因为它没有固定步骤，只有判断依据。所以本篇不写“第几步做什么”，只写“判断什么、凭什么判断”。</p>
+</div>
+<hr>
+<h2 id="h-512-八环搬到-ai-应用上缺了三个环">5.1.2 八环搬到 AI 应用上，缺了三个环</h2>
+<p>前面练手的是确定性应用（字段、校验、流程都清楚）。换成 AI 应用，同一套八环会遇到四类新情况：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>确定性应用</th>
+<th>AI 应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需求</td>
+<td>客户能说清字段与流程</td>
+<td>客户只说“要准、要快、别瞎答”</td>
+</tr>
+<tr>
+<td>验收</td>
+<td>测试通过即通过</td>
+<td>需要一个可判定的指标 + 口径 + 样本量</td>
+</tr>
+<tr>
+<td>失败</td>
+<td>崩溃、报错、结果错</td>
+<td><strong>链路全绿但结论错</strong>（静默失败）</td>
+</tr>
+<tr>
+<td>证据</td>
+<td>测试报告</td>
+<td>固定评测集 + 多次运行 + 版本三元组</td>
+</tr>
+</tbody></table>
+<p>由此缺三样东西，它们不在原八环里：</p>
+<table>
+<thead>
+<tr>
+<th>缺的</th>
+<th>它解决什么</th>
+<th>缺了会怎样（我们的实测）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>环 0：数据与口径</strong></td>
+<td>把客户那句“要准”改写成含分母、判定方式、样本量的口径</td>
+<td>六个指标全部缺口径；“召回 90%”没有分母，改口径后正确率一次性 +10.65pp</td>
+</tr>
+<tr>
+<td><strong>题库工程</strong></td>
+<td>出题本身是工程：不变量、配额、分桶</td>
+<td>题料同源导致召回虚高；“有 LIMIT 必须有 ORDER BY”这类不变量只能写进断言</td>
+</tr>
+<tr>
+<td><strong>测量自检</strong></td>
+<td>尺子自己要先被量：判官自检集、比对器单测、空返回判失败</td>
+<td>判官失败率 42.5% 时数字照样算得出来，但那个数字是废的；比对器五处失真让 EX 低了 4pp</td>
+</tr>
+</tbody></table>
+<div class="alert alert-note"><span class="alert-tag">说明</span><p><strong>一个容易误读的现象：</strong> 门禁在低复杂度阶段抓到 0 个问题，<strong>不等于门禁没用</strong>。要分清“门禁没报问题”和“没有问题”——前者可能是它没覆盖到，后者需要证据。这条判断在 AI 应用里尤其重要，因为静默失败不会自己喊出来<sup class="cite"><a href="#ref-4">[4]</a></sup>。</p>
+</div>
+<figure class="fig" id="fig-5-1"><div class="fig-scroll"><svg id="svg-5-1" width="850.03125" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="414.5" viewBox="0 0 850.03125 414.5" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-5-1{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-5-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-5-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-5-1 .error-icon{fill:#eceff1;}#svg-5-1 .error-text{fill:#13100e;stroke:#13100e;}#svg-5-1 .edge-thickness-normal{stroke-width:1px;}#svg-5-1 .edge-thickness-thick{stroke-width:3.5px;}#svg-5-1 .edge-pattern-solid{stroke-dasharray:0;}#svg-5-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-5-1 .edge-pattern-dashed{stroke-dasharray:3;}#svg-5-1 .edge-pattern-dotted{stroke-dasharray:2;}#svg-5-1 .marker{fill:#607d8b;stroke:#607d8b;}#svg-5-1 .marker.cross{stroke:#607d8b;}#svg-5-1 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-5-1 p{margin:0;}#svg-5-1 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-5-1 .cluster-label text{fill:#13100e;}#svg-5-1 .cluster-label span{color:#13100e;}#svg-5-1 .cluster-label span p{background-color:transparent;}#svg-5-1 .label text,#svg-5-1 span{fill:#17324d;color:#17324d;}#svg-5-1 .node rect,#svg-5-1 .node circle,#svg-5-1 .node ellipse,#svg-5-1 .node polygon,#svg-5-1 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-5-1 .rough-node .label text,#svg-5-1 .node .label text,#svg-5-1 .image-shape .label,#svg-5-1 .icon-shape .label{text-anchor:middle;}#svg-5-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-5-1 .rough-node .label,#svg-5-1 .node .label,#svg-5-1 .image-shape .label,#svg-5-1 .icon-shape .label{text-align:center;}#svg-5-1 .node.clickable{cursor:pointer;}#svg-5-1 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-5-1 .arrowheadPath{fill:#0b0b0b;}#svg-5-1 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-5-1 .flowchart-link{stroke:#607d8b;fill:none;}#svg-5-1 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-1 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-1 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-1 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-5-1 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-5-1 .cluster text{fill:#13100e;}#svg-5-1 .cluster span{color:#13100e;}#svg-5-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-5-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-5-1 rect.text{fill:none;stroke-width:0;}#svg-5-1 .icon-shape,#svg-5-1 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-5-1 .icon-shape p,#svg-5-1 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-5-1 .icon-shape .label rect,#svg-5-1 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-5-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-5-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-5-1 .node .neo-node{stroke:#1976d2;}#svg-5-1 [data-look="neo"].node rect,#svg-5-1 [data-look="neo"].cluster rect,#svg-5-1 [data-look="neo"].node polygon{stroke:url(#svg-5-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-1 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-5-1 [data-look="neo"].node path{stroke:url(#svg-5-1-gradient);stroke-width:1px;}#svg-5-1 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-1 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-5-1 [data-look="neo"].node circle{stroke:url(#svg-5-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-1 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-5-1 [data-look="neo"].icon-shape .icon{fill:url(#svg-5-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-1 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-5-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-5-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-5-1 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-1 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-5-1 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-5-1 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-1 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-5-1 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-5-1 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-1 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-5-1 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-5-1 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-1 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-5-1 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-5-1 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-1 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-5-1 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-5-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-1_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-1_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-5-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-1_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-1_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-5-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-5-1_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-5-1_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M417.516,60.5L417.516,63.333C417.516,66.167,417.516,71.833,417.516,76.833C417.516,81.833,417.516,86.167,417.516,88.333L417.516,90.5" id="svg-5-1-L_T_P_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_T_P_0" data-points="W3sieCI6NDE3LjUxNTYyNSwieSI6NjAuNX0seyJ4Ijo0MTcuNTE1NjI1LCJ5Ijo3Ny41fSx7IngiOjQxNy41MTU2MjUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M417.516,147L417.516,149.833C417.516,152.667,417.516,158.333,417.516,163.333C417.516,168.333,417.516,172.667,417.516,174.833L417.516,177" id="svg-5-1-L_P_M_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P_M_0" data-points="W3sieCI6NDE3LjUxNTYyNSwieSI6MTQ3fSx7IngiOjQxNy41MTU2MjUsInkiOjE2NH0seyJ4Ijo0MTcuNTE1NjI1LCJ5IjoxODF9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M282.516,228.715L259.681,232.346C236.846,235.977,191.177,243.238,168.342,249.036C145.508,254.833,145.508,259.167,145.508,261.333L145.508,263.5" id="svg-5-1-L_M_S1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_S1_0" data-points="W3sieCI6MjgyLjUxNTYyNSwieSI6MjI4LjcxNTM3NjEwOTM3MTg1fSx7IngiOjE0NS41MDc4MTI1LCJ5IjoyNTAuNX0seyJ4IjoxNDUuNTA3ODEyNSwieSI6MjY3LjV9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M417.516,233.5L417.516,236.333C417.516,239.167,417.516,244.833,417.516,249.833C417.516,254.833,417.516,259.167,417.516,261.333L417.516,263.5" id="svg-5-1-L_M_S2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_S2_0" data-points="W3sieCI6NDE3LjUxNTYyNSwieSI6MjMzLjV9LHsieCI6NDE3LjUxNTYyNSwieSI6MjUwLjV9LHsieCI6NDE3LjUxNTYyNSwieSI6MjY3LjV9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M552.516,228.139L576.6,231.866C600.685,235.593,648.854,243.046,672.939,248.94C697.023,254.833,697.023,259.167,697.023,261.333L697.023,263.5" id="svg-5-1-L_M_S3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_M_S3_0" data-points="W3sieCI6NTUyLjUxNTYyNSwieSI6MjI4LjEzOTM5ODIxNjczMTQyfSx7IngiOjY5Ny4wMjM0Mzc1LCJ5IjoyNTAuNX0seyJ4Ijo2OTcuMDIzNDM3NSwieSI6MjY3LjV9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M145.508,320L145.508,322.833C145.508,325.667,145.508,331.333,145.508,336.333C145.508,341.333,145.508,345.667,145.508,347.833L145.508,350" id="svg-5-1-L_S1_J1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S1_J1_0" data-points="W3sieCI6MTQ1LjUwNzgxMjUsInkiOjMyMH0seyJ4IjoxNDUuNTA3ODEyNSwieSI6MzM3fSx7IngiOjE0NS41MDc4MTI1LCJ5IjozNTR9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M417.516,320L417.516,322.833C417.516,325.667,417.516,331.333,417.516,336.333C417.516,341.333,417.516,345.667,417.516,347.833L417.516,350" id="svg-5-1-L_S2_J2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S2_J2_0" data-points="W3sieCI6NDE3LjUxNTYyNSwieSI6MzIwfSx7IngiOjQxNy41MTU2MjUsInkiOjMzN30seyJ4Ijo0MTcuNTE1NjI1LCJ5IjozNTR9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path><path d="M697.023,320L697.023,322.833C697.023,325.667,697.023,331.333,697.023,336.333C697.023,341.333,697.023,345.667,697.023,347.833L697.023,350" id="svg-5-1-L_S3_J3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_S3_J3_0" data-points="W3sieCI6Njk3LjAyMzQzNzUsInkiOjMyMH0seyJ4Ijo2OTcuMDIzNDM3NSwieSI6MzM3fSx7IngiOjY5Ny4wMjM0Mzc1LCJ5IjozNTR9XQ==" data-look="classic" marker-end="url(#svg-5-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_T_P_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P_M_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_M_S1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_M_S2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_M_S3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S1_J1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S2_J2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_S3_J3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-5-1-flowchart-T-0" data-look="classic" transform="translate(417.515625, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-127.5" y="-26.25" width="255" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-97.5, -11.25)"><rect></rect><foreignObject width="195" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>工具层：会用工具、会下指令</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-5-1-flowchart-P-1" data-look="classic" transform="translate(417.515625, 120.75)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-112.5" y="-26.25" width="225" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-82.5, -11.25)"><rect></rect><foreignObject width="165" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>流程层：八环与产物契约</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-5-1-flowchart-M-3" data-look="classic" transform="translate(417.515625, 207.25)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-135" y="-26.25" width="270" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-105, -11.25)"><rect></rect><foreignObject width="210" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>方法层：判断口径、闸位与验收</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-1-flowchart-S1-5" data-look="classic" transform="translate(145.5078125, 293.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-84.7265625" y="-26.25" width="169.453125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-54.7265625, -11.25)"><rect></rect><foreignObject width="109.453125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>场景一 知识问答</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-1-flowchart-S2-7" data-look="classic" transform="translate(417.515625, 293.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-99.7265625" y="-26.25" width="199.453125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-69.7265625, -11.25)"><rect></rect><foreignObject width="139.453125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>场景二 经营数据问数</p></span></div></foreignObject></g></g><g class="node default green" id="svg-5-1-flowchart-S3-9" data-look="classic" transform="translate(697.0234375, 293.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-99.7265625" y="-26.25" width="199.453125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-69.7265625, -11.25)"><rect></rect><foreignObject width="139.453125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>场景三 合同合规审查</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-1-flowchart-J1-11" data-look="classic" transform="translate(145.5078125, 380.25)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-137.5078125" y="-26.25" width="275.015625" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-107.5078125, -11.25)"><rect></rect><foreignObject width="215.015625" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>判定方式：模型判定 + 人工锚点</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-1-flowchart-J2-13" data-look="classic" transform="translate(417.515625, 380.25)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-112.5" y="-26.25" width="225" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-82.5, -11.25)"><rect></rect><foreignObject width="165" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>判定方式：执行结果比对</p></span></div></foreignObject></g></g><g class="node default gray" id="svg-5-1-flowchart-J3-15" data-look="classic" transform="translate(697.0234375, 380.25)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-145.0078125" y="-26.25" width="290.015625" height="52.5"></rect><g class="label" style="color:#263238 !important" transform="translate(-115.0078125, -11.25)"><rect></rect><foreignObject width="230.015625" height="22.5"><div style="color: rgb(38, 50, 56) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>判定方式：确定性规则 + 语义约束</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-5-1-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-5-1-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-5-1-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-5-1.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 5-1 ↗</a>：三级台阶与三个场景的落点——三个场景的差别不在难度，在判定方式</figcaption></figure>
+<p>如图 5-1 所示，三个场景并不是并列摆在同一层，而是都从“方法层”这一级台阶分出去：先有台阶，才谈场景。三条支路末端各挂一种判定方式——模型判定加人工锚点、执行结果比对、确定性规则加语义约束，<strong>这一层才是场景之间真正的差别，难度不是。</strong> 读这张图只要抓两件事：台阶每上一级，能照着做的成分就少一分；判定方式每换一种，闸门该放的位置也跟着换。</p>
+<hr>
+<h3 id="h-八环在-ai-应用上的逐环改编">八环在 AI 应用上的逐环改编</h3>
+<p>八环不变，但每一环在 AI 应用里都要多问一句。下表是本篇三个场景的实测归纳：</p>
+<table>
+<thead>
+<tr>
+<th>环</th>
+<th>原意</th>
+<th>AI 应用必须补的东西</th>
+<th>三个场景的实证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>环 0 数据与口径</td>
+<td>原八环无此环</td>
+<td>可判定口径、分母、样本量、尺子自检</td>
+<td>场景一六个指标全部缺口径；改口径后正确率 +10.65pp</td>
+</tr>
+<tr>
+<td>1 <code>/office-hours</code></td>
+<td>逼问需求</td>
+<td>可压缩，但“不做清单”必须写、且写代价</td>
+<td>三案例各有 5–7 条不做项</td>
+</tr>
+<tr>
+<td>2 <code>/spec</code></td>
+<td>规格与验收</td>
+<td>每条 AC 加测量方式、分母、证据文件</td>
+<td>三案例分别 10 / 10 / 14 条 AC</td>
+</tr>
+<tr>
+<td>3 <code>/autoplan</code></td>
+<td>多角色会审</td>
+<td>必须加“数据合规”与“领域立场”两个声音</td>
+<td>场景三未做法务会审 → 规则无立场 → 20/27 语义误报</td>
+</tr>
+<tr>
+<td>4 Build</td>
+<td>按规格编码</td>
+<td>先做“可判定性”：主键/外键能否支撑对账</td>
+<td>场景二账单不挂 <code>order_id</code> → 应收无法逐笔对账</td>
+</tr>
+<tr>
+<td>5 <code>/review</code> + <code>/cso</code></td>
+<td>找隐患</td>
+<td>评审清单要包含“数据坏了但链路活着”</td>
+<td>场景一标题行入库致元数据全空；场景二比对器五处失真</td>
+</tr>
+<tr>
+<td>6 <code>/qa</code></td>
+<td>实机探索</td>
+<td>评测工具本身要自检</td>
+<td>场景一判官失败率 42.5%（第 2 轮）；场景三语义 JSON 截断致召回假低</td>
+</tr>
+<tr>
+<td>7 <code>/ship</code></td>
+<td>发版门禁</td>
+<td>发布不等于达标，Known issues 必须单列</td>
+<td>三个场景均为“功能全绿 + 指标未达标或不可判定”发布</td>
+</tr>
+<tr>
+<td>8 <code>/retro</code></td>
+<td>量化回看</td>
+<td>把坏数字拆成尺子 / 题库 / 闸门 / 模型 / 环境</td>
+<td>场景三 47.62% 定位率是分母问题；延迟类是环境问题</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>这张表是 5.2–5.4 的索引。</strong> 每一行的“必须补的东西”，就是对应那一节要展开的判断。<sup class="cite"><a href="#ref-2">[2]</a></sup></p>
+</blockquote>
+<hr>
+<h2 id="h-513-什么叫方法">5.1.3 什么叫“方法”</h2>
+<p>判断一样东西是不是方法，只用一条标准：</p>
+<blockquote>
+<p><strong>它能脱离具体场景被复制吗？</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>能复制（方法）</th>
+<th>不能复制（经验/配置）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>口径先行：任何指标都要写成“测量对象 + 分母 + 方法 + 阈值 + 置信条件”</td>
+<td>“RAG 要用混合检索”（只对这类语料成立）</td>
+</tr>
+<tr>
+<td>双闸原则：能确定性判的，绝不交给模型</td>
+<td>“judge 的 max_tokens 设 2500”（是配置值，会随模型变）</td>
+</tr>
+<tr>
+<td>四类契约：输入 / 中间产物 / 输出 / 可追溯</td>
+<td>“用 SSE 做流式”（是技术选择）</td>
+</tr>
+<tr>
+<td>分层评测：便宜指标全量、贵指标子集、子集覆盖难例</td>
+<td>“召回要 ≥90%”（是一个阈值，不是方法）</td>
+</tr>
+<tr>
+<td>变量隔离：一次只改一个变量，否则归因不成立</td>
+<td>“多跑几次取平均”（要看跑的是什么）</td>
+</tr>
+</tbody></table>
+<p>方法通常长成两种句式：<strong>“如果……则……”</strong> 和 <strong>“先……再……”</strong>。只有结论、没有条件的，叫经验；经验也值钱，但它不保证换个场景还成立。</p>
+<p><strong>这条判据也是读本篇的方法：</strong> 5.2–5.4 里每一条具体做法，你都可以问一句“这条能脱离它那个场景吗”——能，就收进你的方法箱；不能，就只当参考。</p>
+<hr>
+<h2 id="h-514-三个-fde-典型场景与三类判定方式">5.1.4 三个 FDE 典型场景与三类判定方式</h2>
+<p>本篇的三个场景不是三个 demo，是<strong>三种判定方式</strong>的代表：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>场景一 政企知识问答</th>
+<th>场景二 经营数据问数</th>
+<th>场景三 合同合规审查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一句话</td>
+<td>答得出、指得准、答不了敢拒</td>
+<td>问一句中文，出可核对的结果</td>
+<td>按清单查风险，给位置与证据</td>
+</tr>
+<tr>
+<td>约束类型</td>
+<td>语义不可判定</td>
+<td>必须机器可判</td>
+<td>主观判断需被工程约束</td>
+</tr>
+<tr>
+<td>判定方式</td>
+<td>模型判定 + 人工锚点</td>
+<td>执行结果比对（零 judge）</td>
+<td>确定性规则 + 语义约束</td>
+</tr>
+<tr>
+<td>最容易翻车的台阶</td>
+<td>验收（尺子会坏）</td>
+<td>口径（分母一错全错）</td>
+<td>决策（立场与证据未定）</td>
+</tr>
+<tr>
+<td>学员带走的一句话</td>
+<td>不知道就要敢说不知道</td>
+<td>对错必须交给机器判</td>
+<td>判断要有立场，结论要有证据</td>
+</tr>
+</tbody></table>
+<p><strong>为什么是这三个：</strong> 它们覆盖了 AI 应用在 FDE 现场最常遇到的三种诉求（查资料、查数据、审文档），也正好覆盖三种判定方式。学完三个，遇到第四个场景时你不是“再学一遍”，而是<strong>先判型</strong><sup class="cite"><a href="#ref-3">[3]</a></sup>。</p>
+<h3 id="h-场景判型卡四问三判">场景判型卡（四问三判）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>问</th>
+<th>答</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>我要的结论（数字 / 判断 / 等级）能被机器比对吗？</td>
+<td>能 / 部分 / 不能</td>
+</tr>
+<tr>
+<td>2</td>
+<td>手上有没有可枚举的规则清单（谁写的、能否冻结版本）？</td>
+<td>有 / 无</td>
+</tr>
+<tr>
+<td>3</td>
+<td>同一句结论，换个立场会不会反转？</td>
+<td>会 / 不会</td>
+</tr>
+<tr>
+<td>4</td>
+<td>语料与数据能不能版本冻结（重建可复现）？</td>
+<td>能 / 不能</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>约束类型</th>
+<th>判定方式</th>
+<th>主闸放哪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 能 + 3 不会</td>
+<td>可自动判定型（场景二）</td>
+<td>执行结果比对</td>
+<td>上游限域 + 白名单 + 只读</td>
+</tr>
+<tr>
+<td>1 不能 + 2 无 + 3 不会</td>
+<td>语义不可判定型（场景一）</td>
+<td>模型判定 + 人工锚点</td>
+<td>生成之前的阈值闸</td>
+</tr>
+<tr>
+<td>1 不能 + 2 有 + 3 会</td>
+<td>规则约束型（场景三）</td>
+<td>确定性为主，语义受证据与立场约束</td>
+<td>立场声明 + 证据主题守备</td>
+</tr>
+<tr>
+<td>1 部分（混合）</td>
+<td><strong>先拆，不许整包套型</strong></td>
+<td>按子任务分别套上面三种</td>
+<td>各子任务各设闸</td>
+</tr>
+<tr>
+<td>4 = 不能</td>
+<td>评测不可复现</td>
+<td>先冻结或声明“不可复现”，否则不许开工</td>
+<td>版本与指纹</td>
+</tr>
+</tbody></table>
+<p>两条红线：</p>
+<ul>
+<li><strong>拆不开的混合型，禁止开工。</strong> 先做可判定性预检（把每个结论逐条问“靠哪张表、哪段原文”），拆出子任务再回来判型。</li>
+<li><strong>判错型的代价要能看见。</strong> 把合同审查误判成“纯语义问答”，结果就是用模型当尺子、不要求原文证据——误报会堆到不可用（我们实测过：精确率 51.79%，27 个误报里 20 个来自同一条规则）。</li>
+</ul>
+<p>判完型再读对应那一节：场景一读 5.2，场景二读 5.3，场景三读 5.4。混合型先拆，别急着选。</p>
+<hr>
+<h2 id="h-515-一条主线">5.1.5 一条主线</h2>
+<p>三个场景连着读，是一条能力递进线：</p>
+<table>
+<thead>
+<tr>
+<th>台阶</th>
+<th>场景</th>
+<th>能力要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一是</td>
+<td>5.2 知识问答</td>
+<td><strong>答对</strong>：能给出有依据的回答，并在没有依据时承认</td>
+</tr>
+<tr>
+<td>二是</td>
+<td>5.3 数据问数</td>
+<td><strong>算对且不出界</strong>：结果可核对，且不会碰到不该碰的数据</td>
+</tr>
+<tr>
+<td>三是</td>
+<td>5.4 合同审查</td>
+<td><strong>判得准且可追溯</strong>：结论有立场、有证据、能复核</td>
+</tr>
+<tr>
+<td>收口</td>
+<td>5.5 方法沉淀</td>
+<td><strong>搬得走</strong>：把上面的做法改成你自己场景的版本</td>
+</tr>
+</tbody></table>
+<p>读法建议：先按判型卡找到自己场景对应的那一节精读，其余两节通读；5.5 最后读——它要等你读完后才会显得有用。</p>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<ol>
+<li><strong>把工具当方法。</strong> 学了一堆命令与提示词，换一个陌生场景仍然不知道先定什么。</li>
+<li><strong>用“跑通了”当“做对了”。</strong> 链路全绿而数据是坏的，这是 AI 应用最常见的静默失败。</li>
+<li><strong>门禁抓 0 就当没用。</strong> 要分清“没报问题”与“没有问题”。</li>
+<li><strong>只学结论不学条件。</strong> 记住“要用混合检索”，却不知道该条件什么时候不成立。</li>
+<li><strong>跳过判型直接抄方案。</strong> 拿场景一的拒答逻辑去做场景二，会得到一堆误拒。</li>
+</ol>
+<p>三条红线：不判型不开工；结论必须能被判定；未达标不许写成达标。</p>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li>三级台阶：工具解决“怎么干”，流程解决“按什么顺序干”，方法解决“换个场景怎么判断”。</li>
+<li>八环搬到 AI 应用上缺三样：环 0 数据与口径、题库工程、测量自检。</li>
+<li>判断“是不是方法”只有一条标准：能不能脱离场景被复制。</li>
+<li>三个场景的差别不在难度，在判定方式；先用判型卡归类，再读对应小节。</li>
+<li>能力递进：答对 → 算对且不出界 → 判得准可追溯 → 搬得走。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能说出同一件事在工具层、流程层、方法层的三种问法。</li>
+<li><input disabled="" type="checkbox"> 我能列出八环在 AI 应用上缺的三样东西，并各举一个失败现象。</li>
+<li><input disabled="" type="checkbox"> 我能用“能脱离场景被复制”这条标准，判断一条经验是不是方法。</li>
+<li><input disabled="" type="checkbox"> 我能用自己的话复述判型卡四问，并给出自己场景的判型结论。</li>
+<li><input disabled="" type="checkbox"> 我能说出三个场景各自的判定方式与主闸位置。</li>
+<li><input disabled="" type="checkbox"> 我知道自己接下来该精读 5.2、5.3 还是 5.4。</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析">基础辨析</h3>
+<ol>
+<li>“门禁抓到 0 个问题”有哪两种可能的解释？各需要什么证据才能区分？</li>
+<li>“召回率 90%”是方法还是指标？如果把它改造成方法，应该怎么表述？</li>
+</ol>
+<h3 id="h-进阶分析">进阶分析</h3>
+<ol>
+<li>你的项目同时有“知识问答”和“数据统计”两种诉求。按判型卡会得到什么结论？为什么不能整包套一个型？</li>
+<li>判型错了的代价是可观测的。请举一个你见过的“类型判错导致返工”的例子。</li>
+</ol>
+<h3 id="h-迁移研讨">迁移研讨</h3>
+<ol>
+<li>用判型卡给你手上的场景判型，写出四问的答案与三判结论。</li>
+<li>从 5.2–5.4 里任选一节，挑出三条你认为可迁移的做法，逐条写出“它在什么条件下不成立”。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>判完型，就可以进具体场景了。下一节从最“不可判定”的那一类开始——知识问答。它的成绩单要靠证据与判官来写，所以你会看到闸门与尺子在那里格外重要。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] 本课程单元 1.2 八环全景：</strong> 课程内部出处，八环全景与门禁真相（重点研读：每环交什么工件、门禁设在哪一环，本节“流程层”的出处），<a href="/aicoding/units/1-2/">单元 1.2</a>。</li>
+<li id="ref-2"><strong>[2] 本课程单元 2.1–4.3 逐环实操：</strong> 课程内部出处，前四环到第八环的逐环实操（重点研读：每一环的产物契约与真实踩坑，本节“工具层与流程层”的实证来源），<a href="/aicoding/units/2-1/">单元 2.1</a>。</li>
+<li id="ref-3"><strong>[3] Anthropic《Building Effective Agents》：</strong> Anthropic 工程博客，<em>Building Effective Agents</em>（重点研读：什么时候不该用复杂编排，与本篇的“能力阶梯”判断同源），<a href="https://www.anthropic.com/research/building-effective-agents">链接</a>。</li>
+<li id="ref-4"><strong>[4] Hamel Husain《Your AI Product Needs Evals》：</strong> Hamel Husain，<em>Your AI Product Needs Evals</em>（重点研读：评估体系为何是 AI 产品的起点，本节“测量自检”的外部依据），<a href="https://hamel.dev/blog/posts/evals/">链接</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/4-3/">← 4.3 第 8 环 /retro + /learn</a>
+      <a href="/aicoding/units/5-2/">5.2 场景一 政企知识问答 →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-511-三级台阶工具流程方法">5.1.1 三级台阶：工具、流程、方法</a></li><li class="lv2"><a href="#h-512-八环搬到-ai-应用上缺了三个环">5.1.2 八环搬到 AI 应用上，缺了三个环</a></li><li class="lv3"><a href="#h-八环在-ai-应用上的逐环改编">八环在 AI 应用上的逐环改编</a></li><li class="lv2"><a href="#h-513-什么叫方法">5.1.3 什么叫“方法”</a></li><li class="lv2"><a href="#h-514-三个-fde-典型场景与三类判定方式">5.1.4 三个 FDE 典型场景与三类判定方式</a></li><li class="lv3"><a href="#h-场景判型卡四问三判">场景判型卡（四问三判）</a></li><li class="lv2"><a href="#h-515-一条主线">5.1.5 一条主线</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析">基础辨析</a></li><li class="lv3"><a href="#h-进阶分析">进阶分析</a></li><li class="lv3"><a href="#h-迁移研讨">迁移研讨</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>

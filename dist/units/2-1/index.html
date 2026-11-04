@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.1 GStack 规划三环连击 · 通用 AI Coding 教材</title>
+<meta name="description" content="/office-hours 痛点重构、/spec 规格精炼与 /autoplan 四方评审">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b63b8'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' fill='%23ffffff' text-anchor='middle'%3E%E6%95%99%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/aicoding/assets/global.css">
+<link rel="stylesheet" href="/aicoding/assets/theme.css">
+<link rel="stylesheet" href="/aicoding/assets/proto.css">
+</head>
+<body class="">
+<header class="topbar">
+  <a class="brand" href="/aicoding/">
+    <span class="brand-mark">教</span>
+    <span class="brand-text"><strong>通用 AI Coding 现代软件工程实战</strong><em>教材 · 7 章 21 单元</em></span>
+  </a>
+  <nav class="top-links">
+    <a href="/aicoding/">目录</a>
+    <a href="/aicoding/search/">检索</a>
+    <a href="/aicoding/print/">打印</a>
+    <a class="pill" href="https://www.cloudzun.com/mingzhou/">实验手册 ↗</a>
+  </nav>
+</header>
+
+<div class="layout layout-3">
+  <nav class="sidenav" data-pagefind-ignore>
+    <div class="nav-cap">教材正文</div>
+    <details class="nav-group">
+<summary><span class="chap-no">第 1 章</span>认知与工具</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/1-1/"><span class="dot"></span><span class="no">1.1</span>AI Coding 专题分享</a></li><li class="nav-item c0"><a href="/aicoding/units/1-2/"><span class="dot"></span><span class="no">1.2</span>从 Vibe Coding 到规范驱动开发</a></li><li class="nav-item c0"><a href="/aicoding/units/1-3/"><span class="dot"></span><span class="no">1.3</span>AI Coding 三层工具选型</a></li></ul>
+</details><details class="nav-group" open>
+<summary><span class="chap-no">第 2 章</span>规划与施工</summary>
+<ul class="nav-list"><li class="nav-item c1 active"><a href="/aicoding/units/2-1/"><span class="dot"></span><span class="no">2.1</span>GStack 规划三环连击</a></li><li class="nav-item c1"><a href="/aicoding/units/2-2/"><span class="dot"></span><span class="no">2.2</span>GStack 第 4 环受控编码施工（Build）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 3 章</span>审查与上下文治理</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/3-1/"><span class="dot"></span><span class="no">3.1</span>第 5 环 /review 结构排雷</a></li><li class="nav-item c2"><a href="/aicoding/units/3-2/"><span class="dot"></span><span class="no">3.2</span>一次真实迭代实践</a></li><li class="nav-item c2"><a href="/aicoding/units/3-3/"><span class="dot"></span><span class="no">3.3</span>AI Coding 上下文工程（Context Engineering）</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 4 章</span>发布排障与复盘</summary>
+<ul class="nav-list"><li class="nav-item c3"><a href="/aicoding/units/4-1/"><span class="dot"></span><span class="no">4.1</span>第 7 环 /ship 发布工程师流水线</a></li><li class="nav-item c3"><a href="/aicoding/units/4-2/"><span class="dot"></span><span class="no">4.2</span>/investigate 五阶段排障</a></li><li class="nav-item c3"><a href="/aicoding/units/4-3/"><span class="dot"></span><span class="no">4.3</span>第 8 环 /retro + /learn</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 5 章</span>从工具到方法</summary>
+<ul class="nav-list"><li class="nav-item c0"><a href="/aicoding/units/5-1/"><span class="dot"></span><span class="no">5.1</span>从工具到方法</a></li><li class="nav-item c0"><a href="/aicoding/units/5-2/"><span class="dot"></span><span class="no">5.2</span>场景一 政企知识问答</a></li><li class="nav-item c0"><a href="/aicoding/units/5-3/"><span class="dot"></span><span class="no">5.3</span>场景二 经营数据问数</a></li><li class="nav-item c0"><a href="/aicoding/units/5-4/"><span class="dot"></span><span class="no">5.4</span>场景三 合同合规审查</a></li><li class="nav-item c0"><a href="/aicoding/units/5-5/"><span class="dot"></span><span class="no">5.5</span>方法沉淀</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 6 章</span>受控行动与生产飞轮</summary>
+<ul class="nav-list"><li class="nav-item c1"><a href="/aicoding/units/6-1/"><span class="dot"></span><span class="no">6.1</span>场景四 受控行动智能体</a></li><li class="nav-item c1"><a href="/aicoding/units/6-2/"><span class="dot"></span><span class="no">6.2</span>Day-2 生产数据飞轮</a></li></ul>
+</details><details class="nav-group">
+<summary><span class="chap-no">第 7 章</span>运营商内网与三日演练</summary>
+<ul class="nav-list"><li class="nav-item c2"><a href="/aicoding/units/7-1/"><span class="dot"></span><span class="no">7.1</span>运营商内网研发安全红线</a></li><li class="nav-item c2"><a href="/aicoding/units/7-2/"><span class="dot"></span><span class="no">7.2</span>迈向自智网络 L4</a></li><li class="nav-item c2"><a href="/aicoding/units/7-3/"><span class="dot"></span><span class="no">7.3</span>三天实战演练</a></li></ul>
+</details>
+    <div class="nav-foot"><span class="badge">v0.1</span> 2026-11-04</div>
+  </nav>
+  <main class="content">
+    <div class="crumb">
+      <span><a href="/aicoding/units/1-3/">← 1.3 AI Coding 三层工具选型</a></span>
+      <span><a href="/aicoding/units/2-2/">2.2 GStack 第 4 环受控编码施工（Build） →</a></span>
+    </div>
+    <h1>2.1　GStack 规划三环连击</h1>
+    <p class="lede"><code>/office-hours</code> 痛点重构、<code>/spec</code> 规格精炼与 <code>/autoplan</code> 四方评审</p>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第一天下午“规划与施工篇”的开篇核心单元，也是 GStack 八环工程方法论的前三环机制总解（对应第 1 环至第 3 环）。本节承接上午确立的规范驱动开发（SDD）理念与只读规划模式（<code>Ask / Plan Mode</code>），深入拆解 GStack 前三环本身的作用、内部执行阶段、强制门禁（Hard Gates）与标准工件结构：首先解析第 1 环 <code>/office-hours</code> 如何通过双模式路由、YC 六大逼问式问题、痛点重构（The Reframe）、可证伪前提挑战与备选方案比选产出设计文档（<code>*-design-*.md</code>）；进而解析第 2 环 <code>/spec</code> 如何通过五阶段精炼、显式 <code>NOT in scope</code> 负面清单、强制先读代码库与跨模型 <code>7/10</code> 分外部评分门禁产出可执行规格（<code>spec.md</code>）；最后拆解第 3 环 <code>/autoplan</code> 如何一键串行跑完 <code>CEO → Design → DX → Eng</code> 四方专家评审，输出 ASCII 架构图、失败自救注册表与落盘测试计划（<code>Test Plan</code>）。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">产品经理、技术负责人、架构师、全栈与前后端研发工程师、UI/UX 设计师、测试工程师。本节阐明的前三环机制与门禁规范，是从根源上消灭“需求拍脑袋、施工瞎返工”的标准作业骨架。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成第一天上午单元 1.1～1.3 学习，掌握 CodeBuddy / TRAE / OpenCode 只读规划模式切换与 <code>@Files</code> 上下文投喂机制。</span></div></div>
+    <article class="prose" data-pagefind-body data-pagefind-meta="单元:2.1"><p class="goal-cap">本节学习目标</p>
+<ol>
+<li>解释第 1 环 <code>/office-hours</code> 的“严禁写代码”硬门禁与双模式路由机制，核验 YC 六大逼问式问题、痛点重构（The Reframe）、三层行业认知检索、可证伪前提挑战及备选方案比选（双尺度工时与完整度评分）的执行流程与产出结构。</li>
+<li>阐述第 2 环 <code>/spec</code> 五阶段规格精炼的工作流，说明为何必须显式定义 <code>NOT in scope</code>（明确不做什么）与执行“强制先读现有代码库（Mandatory Code-Reading）”，以及跨模型 <code>7/10</code> 分外部审查门禁与故障安全型密钥脱敏的拦截逻辑。</li>
+<li>说明第 3 环 <code>/autoplan</code> 智能范围探测与强制按 <code>CEO → Design → DX → Eng</code> 串行执行（且工程经理殿后把关）的设计原理，核验四棒专家评审各自的核心检查维度（四种范围缩放模式、交互 5 状态与去 AI 模板感、TTHW 开发者体验、ASCII 图表与失败自救注册表）。</li>
+<li>运用 <code>/autoplan</code> 的六大编码决策原则解释机械性问题、品味权衡与方向异议的三类分流机制，对照最终审批门禁（<code>Final Approval Gate</code>）与评审就绪仪表盘（<code>Review Readiness Dashboard</code>）的核验标准逐一作出判断。</li>
+</ol>
+<hr>
+<h2 id="h-211-第-1-环-office-hours-核心功能与内部机制从表象请求到设计文档">2.1.1 第 1 环 <code>/office-hours</code> 核心功能与内部机制：从表象请求到设计文档</h2>
+<p>在单元 1.1 中我们已经证明：当编码环节被智能体压缩 30 到 100 倍后，软件工程最大的风险不再是“代码写得慢”，而是**“带着错误的业务假设，以 50 倍的速度写出几千行偏离真实痛点的代码”**。</p>
+<p>GStack 的第 1 环 <strong><code>/office-hours</code></strong>，正是为了在动第一行代码之前彻底厘清产品价值与架构切口而设立的头道防线<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>。它的具身化专家角色是 <strong>Y Combinator 创业合伙人 / 架构共创伙伴</strong>。</p>
+<h3 id="h-1-硬门禁纪律与双模式路由startup-模式-vs-builder-模式">1. 硬门禁纪律与双模式路由（Startup 模式 vs Builder 模式）</h3>
+<p>在 CodeBuddy（切换至 <code>Ask</code> 或 <code>Plan</code> 模式）、TRAE（切换至只读 <code>Chat</code> 模式）或 OpenCode（按 <code>Tab</code> 键切至 <code>Plan</code> 模式）中触发 <code>/office-hours</code> 时，该技能首先执行两条刚性交互纪律<sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<ul>
+<li><strong>硬门禁（Hard Gate——严禁写代码）</strong>：在 <code>/office-hours</code> 全过程中，<strong>严禁调用文件写入工具创建任何业务代码或初始化项目脚手架</strong>。它的职责纯粹聚焦于问题诊断、方向挑战与架构比选，唯一合法的落盘产出物是保存在 <code>~/.gstack/projects/$SLUG/*-design-*.md</code>（或项目 <code>docs/designs/</code> 目录）下的结构化设计文档。</li>
+<li><strong>单次单问纪律（One Question at a Time）</strong>：普通大模型面对模糊需求时，习惯一次性罗列十几个宽泛问题，导致人类开发者疲于应付、草率作答。<code>/office-hours</code> 强制采用苏格拉底式追问，每次只提出一个最关键的诊断问题，根据人类的回答再动态决定下一层追问方向。</li>
+</ul>
+<p>针对不同类型的软件研发项目，<code>/office-hours</code> 在启动阶段提供两条差异化的路由模式<sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<ol>
+<li><strong>Startup / Intrapreneurship 模式（商业产品与企业核心内创项目）</strong>：
+智能体化身为严厉而敏锐的 YC 创业合伙人，运行提炼自 YC 评估体系的<strong>六大逼问式问题（Six Forcing Questions）</strong>，专门刺破“伪需求”与“大而全的空想方案”。</li>
+<li><strong>Builder 模式（黑客松、开源项目、技术实验、内部轻量效率小工具）</strong>：
+智能体切换为热情的设计与架构共创伙伴，跳过商业化盘问，通过生成式头脑风暴寻找最快能跑通、最具创造力的核心切入点（即官方所称的“Whoa”时刻）。</li>
+</ol>
+<p>在企业研发与商业软件场景下，Startup 模式的**六大逼问式问题（Six Forcing Questions）**构成了需求定界的标准筛网：</p>
+<table>
+<thead>
+<tr>
+<th>逼问序号与官方维度</th>
+<th>核心审视目标</th>
+<th>针对需求方的标准追问方向</th>
+<th>该问题产出的核心工程约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 需求真实性</strong>（Demand Reality）</td>
+<td>区分“拍脑袋假想需求”与“火烧眉毛的真实痛点”。</td>
+<td>这个问题今天真实发生过吗？如果不开发这套系统，业务方或客户每个月承受的具体损失是什么？</td>
+<td>过滤掉无实质业务价值的表面包装需求，锁定可量化的业务痛点基线。</td>
+</tr>
+<tr>
+<td><strong>2. 现状凑合方案</strong>（Status Quo）</td>
+<td>摸清用户当前正在用什么替代办法或手工流程凑合解决。</td>
+<td>用户现在靠什么工具（如表格、脚本、人工审批）处理这件事？现有流程最卡壳、最易出错的一步在哪？</td>
+<td>明确新系统必须替代的旧流程瓶颈，确保新方案的复杂度低于手工凑合成本。</td>
+</tr>
+<tr>
+<td><strong>3. 极致具象用户</strong>（Desperate Specificity）</td>
+<td>拒绝泛泛而谈“广大用户”，锁定具象的第一个高频使用者。</td>
+<td>不要说抽象的“部门”或“用户群”，请点名一个具体岗位角色：上线第一天，是谁在什么终端环境下操作它？</td>
+<td>决定前端交互形态（桌面高密度键鼠、移动端单手操作、或命令行终端）与鉴权粒度。</td>
+</tr>
+<tr>
+<td><strong>4. 最窄切入点</strong>（Narrowest Wedge）</td>
+<td>砍掉周边枝蔓，找到本迭代就能上线创造价值的最小闭环。</td>
+<td>如果砍掉 80% 的外围功能，最快能跑通核心价值闭环的最小切口是什么？什么功能看似重要其实可以延后？</td>
+<td>直接划定首期研发的最小可行边界，并为下一环 <code>/spec</code> 的 <code>NOT in scope</code> 提供依据。</td>
+</tr>
+<tr>
+<td><strong>5. 观察与反直觉发现</strong>（Observation &amp; Surprise）</td>
+<td>挖掘领域内违背外行直觉的真实业务规则与特殊约束。</td>
+<td>在这个业务领域里，有哪些规则是外行容易想当然搞错、但在实际生产中属于铁律的？</td>
+<td>提前捕获领域特有的状态流转限制与业务不变量，防止模型犯“错误假设（Wrong Assumptions）”。</td>
+</tr>
+<tr>
+<td><strong>6. 未来演进适配</strong>（Future-Fit）</td>
+<td>确保当前极简切口不会把未来的核心演进路径堵死。</td>
+<td>当业务规模从单点扩展到多团队、多租户或十倍数据量时，今天的数据模型需要提前预留什么扩展锚点？</td>
+<td>指导底层数据库 Schema 与接口契约预留租户隔离字段、幂等键或状态扩展位。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="h-2-三大核心认知动作痛点重构三层认知检索与可证伪前提挑战">2. 三大核心认知动作：痛点重构、三层认知检索与可证伪前提挑战</h3>
+<p>完成六大问题盘问后，<code>/office-hours</code> 并不会直接顺着用户的原始描述写文档，而是依次执行三项高价值的认知加工动作<sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<figure class="fig" id="fig-2-1"><div class="fig-scroll"><svg id="svg-2-1" width="596" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="655" viewBox="0 0 596 655" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-2-1{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-2-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-2-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-2-1 .error-icon{fill:#eceff1;}#svg-2-1 .error-text{fill:#13100e;stroke:#13100e;}#svg-2-1 .edge-thickness-normal{stroke-width:1px;}#svg-2-1 .edge-thickness-thick{stroke-width:3.5px;}#svg-2-1 .edge-pattern-solid{stroke-dasharray:0;}#svg-2-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-2-1 .edge-pattern-dashed{stroke-dasharray:3;}#svg-2-1 .edge-pattern-dotted{stroke-dasharray:2;}#svg-2-1 .marker{fill:#607d8b;stroke:#607d8b;}#svg-2-1 .marker.cross{stroke:#607d8b;}#svg-2-1 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-2-1 p{margin:0;}#svg-2-1 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-2-1 .cluster-label text{fill:#13100e;}#svg-2-1 .cluster-label span{color:#13100e;}#svg-2-1 .cluster-label span p{background-color:transparent;}#svg-2-1 .label text,#svg-2-1 span{fill:#17324d;color:#17324d;}#svg-2-1 .node rect,#svg-2-1 .node circle,#svg-2-1 .node ellipse,#svg-2-1 .node polygon,#svg-2-1 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-2-1 .rough-node .label text,#svg-2-1 .node .label text,#svg-2-1 .image-shape .label,#svg-2-1 .icon-shape .label{text-anchor:middle;}#svg-2-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-2-1 .rough-node .label,#svg-2-1 .node .label,#svg-2-1 .image-shape .label,#svg-2-1 .icon-shape .label{text-align:center;}#svg-2-1 .node.clickable{cursor:pointer;}#svg-2-1 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-2-1 .arrowheadPath{fill:#0b0b0b;}#svg-2-1 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-2-1 .flowchart-link{stroke:#607d8b;fill:none;}#svg-2-1 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-1 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-1 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-1 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-2-1 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-2-1 .cluster text{fill:#13100e;}#svg-2-1 .cluster span{color:#13100e;}#svg-2-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-2-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-2-1 rect.text{fill:none;stroke-width:0;}#svg-2-1 .icon-shape,#svg-2-1 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-1 .icon-shape p,#svg-2-1 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-2-1 .icon-shape .label rect,#svg-2-1 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-2-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-2-1 .node .neo-node{stroke:#1976d2;}#svg-2-1 [data-look="neo"].node rect,#svg-2-1 [data-look="neo"].cluster rect,#svg-2-1 [data-look="neo"].node polygon{stroke:url(#svg-2-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-1 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-2-1 [data-look="neo"].node path{stroke:url(#svg-2-1-gradient);stroke-width:1px;}#svg-2-1 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-1 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-2-1 [data-look="neo"].node circle{stroke:url(#svg-2-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-1 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-2-1 [data-look="neo"].icon-shape .icon{fill:url(#svg-2-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-1 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-2-1-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-1 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-2-1 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-1 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-1 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-2-1 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-1 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-1 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-2-1 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-1 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-1 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-2-1 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-1 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-1 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-2-1 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-1 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-1 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-2-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-1_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-1_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-2-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-1_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-1_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-1_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-2-1_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M298,60.5L298,63.333C298,66.167,298,71.833,298,76.833C298,81.833,298,86.167,298,88.333L298,90.5" id="svg-2-1-L_Input_Reframe_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Input_Reframe_0" data-points="W3sieCI6Mjk4LCJ5Ijo2MC41fSx7IngiOjI5OCwieSI6NzcuNX0seyJ4IjoyOTgsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path><path d="M298,147L298,149.833C298,152.667,298,158.333,298,163.333C298,168.333,298,172.667,298,174.833L298,177" id="svg-2-1-L_Reframe_Search_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Reframe_Search_0" data-points="W3sieCI6Mjk4LCJ5IjoxNDd9LHsieCI6Mjk4LCJ5IjoxNjR9LHsieCI6Mjk4LCJ5IjoxODF9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path><path d="M298,256L298,258.833C298,261.667,298,267.333,298,272.333C298,277.333,298,281.667,298,283.833L298,286" id="svg-2-1-L_Search_Premise_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Search_Premise_0" data-points="W3sieCI6Mjk4LCJ5IjoyNTZ9LHsieCI6Mjk4LCJ5IjoyNzN9LHsieCI6Mjk4LCJ5IjoyOTB9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path><path d="M298,365L298,367.833C298,370.667,298,376.333,298,381.333C298,386.333,298,390.667,298,392.833L298,395" id="svg-2-1-L_Premise_Second_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Premise_Second_0" data-points="W3sieCI6Mjk4LCJ5IjozNjV9LHsieCI6Mjk4LCJ5IjozODJ9LHsieCI6Mjk4LCJ5IjozOTl9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path><path d="M298,451.5L298,454.333C298,457.167,298,462.833,298,467.833C298,472.833,298,477.167,298,479.333L298,481.5" id="svg-2-1-L_Second_Alt_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Second_Alt_0" data-points="W3sieCI6Mjk4LCJ5Ijo0NTEuNX0seyJ4IjoyOTgsInkiOjQ2OC41fSx7IngiOjI5OCwieSI6NDg1LjV9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path><path d="M298,560.5L298,563.333C298,566.167,298,571.833,298,576.833C298,581.833,298,586.167,298,588.333L298,590.5" id="svg-2-1-L_Alt_Doc_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Alt_Doc_0" data-points="W3sieCI6Mjk4LCJ5Ijo1NjAuNX0seyJ4IjoyOTgsInkiOjU3Ny41fSx7IngiOjI5OCwieSI6NTk0LjV9XQ==" data-look="classic" marker-end="url(#svg-2-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Input_Reframe_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Reframe_Search_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Search_Premise_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Premise_Second_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Second_Alt_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Alt_Doc_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-2-1-flowchart-Input-0" data-look="classic" transform="translate(298, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-222.2265625" y="-26.25" width="444.453125" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-192.2265625, -11.25)"><rect></rect><foreignObject width="384.453125" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>用户输入初始需求想法 · 完成 YC 六问或 Builder 共创问答</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-1-flowchart-Reframe-1" data-look="classic" transform="translate(298, 120.75)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-287.625" y="-26.25" width="575.25" height="52.5"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-257.625, -11.25)"><rect></rect><foreignObject width="515.25" height="22.5"><div style="color: rgb(74, 53, 37) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 2 痛点重构 (The Reframe): 推翻表象功能堆砌 · 提炼底层真实系统定位</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-2-1-flowchart-Search-3" data-look="classic" transform="translate(298, 218.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 2.75 三层行业认知检索 (Landscape Awareness): Layer 1 标准解法 + Layer 2 警惕炒作 + Layer 3 Eureka 突破</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-1-flowchart-Premise-5" data-look="classic" transform="translate(298, 327.5)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 3 可证伪前提挑战 (Premise Challenge): 列出 3~4 条核心前提声明 · 交由人类逐条确认同意或否定</p></span></div></foreignObject></g></g><g class="node default red" id="svg-2-1-flowchart-Second-7" data-look="classic" transform="translate(298, 425.25)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-286.3671875" y="-26.25" width="572.734375" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-256.3671875, -11.25)"><rect></rect><foreignObject width="512.734375" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>Phase 3.5 跨模型冷读第二意见 (Second Opinion): 独立模型无偏见挑刺 4 问</p></span></div></foreignObject></g></g><g class="node default green" id="svg-2-1-flowchart-Alt-9" data-look="classic" transform="translate(298, 523)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>Phase 4 强制生成 2~3 套备选方案: 标注双尺度工时与完整度评分 -&gt; 触发 STOP 门禁等待人类拍板</p></span></div></foreignObject></g></g><g class="node default green" id="svg-2-1-flowchart-Doc-11" data-look="classic" transform="translate(298, 620.75)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-262.890625" y="-26.25" width="525.78125" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-232.890625, -11.25)"><rect></rect><foreignObject width="465.78125" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>落盘输出结构化设计文档: ~/.gstack/projects/$SLUG/*-design-*.md</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-2-1-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-2-1-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-2-1-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-2-1.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 2-1 ↗</a>：第 1 环 `/office-hours` 内部阶段演进与强制门禁控制流</figcaption></figure>
+<p>顺着图 2-1 的控制流，我们拆解其中最关键的三个机制：</p>
+<h4 id="h-1phase-2痛点重构the-reframe——推翻表象框架">（1）Phase 2：痛点重构（The Reframe——推翻表象框架）</h4>
+<p>用户提出的初始想法往往是“解决方案的表象（我想做一个带 A、B、C 功能的页面）”，而非“问题的本质”。<code>/office-hours</code> 的核心价值在于敢于向用户说“不”，重构问题定义。
+例如在 GStack 官方文档记载的经典案例中<sup class="cite"><a href="#ref-2">[2]</a></sup>，用户最初提出：“我想做一个聚合多个日历的每日简报应用。”经过六问深挖用户真正痛苦的场景（信息过期、会议室地点变更未同步、会前调查参会人背景耗时）后，<code>/office-hours</code> 直接推翻原框架：<em>“我要反驳你最初的定位——你真正描述的不是一个日历查看器，而是一个具备主动情报核验能力的‘个人幕僚长 AI（Personal Chief of Staff AI）’。”</em> 这种痛点重构能直接将平庸的功能堆砌升级为直击本质的架构定位。</p>
+<h4 id="h-2phase-275三层行业认知检索landscape-awareness">（2）Phase 2.75：三层行业认知检索（Landscape Awareness）</h4>
+<p>在征得用户隐私授权后，系统使用脱敏后的通用领域词检索行业技术现状，按照我们在单元 1.2 学过的三层知识模型进行合成：</p>
+<ul>
+<li><strong>第一层（Layer 1 行业常识与标准做法）</strong>：识别该领域已有定论的成熟设计（如标准鉴权协议、标准事务隔离机制），直接拿来复用，避免闭门造车；</li>
+<li><strong>第二层（Layer 2 当前流行趋势与过度设计陷阱）</strong>：识别社区正在炒作但超出当前阶段需求的重型架构，防止盲目跟风引入不必要的复杂度；</li>
+<li><strong>第三层（Layer 3 第一性原理突破 / Eureka 时刻）</strong>：寻找能够大幅简化系统复杂度的第一性原理洞察，并将其作为架构闪光点记录进设计文档。</li>
+</ul>
+<h4 id="h-3phase-3可证伪前提挑战premise-challenge">（3）Phase 3：可证伪前提挑战（Premise Challenge）</h4>
+<p>接着，智能体将前面达成的设计共识提炼为 <strong>3～4 条明确、可证伪的前提声明（Falsifiable Premises）</strong>，要求人类工程师逐条表态“同意”或“不同意”（例如：“前提 1：首期最窄切入点仅解决单租户核心闭环，不建设跨组织权限继承——同意/不同意？”）。每一条经人类确认的前提，都将成为后续设计文档与技术规格的<strong>承重墙（Load-bearing Premises）</strong>。</p>
+<hr>
+<h3 id="h-3-跨模型冷读第二意见与强制-2～3-套备选方案比选">3. 跨模型冷读第二意见与强制 2～3 套备选方案比选</h3>
+<p>为了防止主对话模型与用户在多轮聊天中陷入“相互顺从的回音室效应”，<code>/office-hours</code> 在生成最终文档前设置了两道机制<sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<ol>
+<li><strong>Phase 3.5：跨模型冷读第二意见（Second Opinion）</strong>
+系统可选调用一个完全独立的外部模型（如通过 <code>/codex</code> 或独立无偏见子代理），在不传入前期聊天寒暄过程的情况下，仅凭结构化痛点摘要进行“冷读挑刺”，强制回答四个尖锐问题：<ul>
+<li>这个产品的最强形态应该是什么？</li>
+<li>用户前面的哪一句话最暴露其真实核心诉求？</li>
+<li><strong>前面已经同意的哪一条承重墙前提，在实际生产中最可能是错的？</strong></li>
+<li>如果只有 48 小时和 1 名工程师，应该怎么切入？</li>
+</ul>
+</li>
+<li><strong>Phase 4：强制生成 2～3 套实现方案比选与 STOP 门禁</strong>
+<code>/office-hours</code> 严禁只给出一套方案让人“走形式点头”。它必须同时生成 <strong>2～3 套差异化备选方案</strong>供人类权衡：<ul>
+<li><strong>方案 A：Minimal Viable（最小可行方案）</strong>——改动文件最少、依赖最轻、最快可上线验证的基线方案；</li>
+<li><strong>方案 B：Ideal Architecture（理想长期架构方案）</strong>——边界覆盖最完整、扩展性最好、符合“把海煮沸（10/10 完整度）”原则的生产级方案；</li>
+<li><strong>方案 C：Creative / Lateral（横向创新方案，可选）</strong>——跳出常规套路，采用不同技术范式解决问题的思路。</li>
+</ul>
+</li>
+</ol>
+<p>每套备选方案都必须统一标注四项量化对比指标：<strong>双尺度工时估算（<code>Effort: human team vs CC+GStack</code>）</strong>、<strong>风险等级（<code>Risk</code>）</strong>、<strong>优缺点对照（<code>Pros / Cons</code>）</strong>、<strong>复用的仓库既有资产</strong>，以及 <strong><code>Completeness: X/10</code> 完整度评分</strong>。即使其中某一套方案明显占优，系统也必须在此触发 <strong>STOP 强制门禁</strong>，等待人类行使主权明确拍板选定方案后，才将完整设计写入 <code>*-design-*.md</code>，完成第 1 环向第 2 环的交接。</p>
+<hr>
+<h2 id="h-212-第-2-环-spec-实战五阶段可执行规格精炼与-710-外部评分门禁">2.1.2 第 2 环 <code>/spec</code> 实战：五阶段可执行规格精炼与 7/10 外部评分门禁</h2>
+<p>当第 1 环产出了 <code>*-design-*.md</code> 设计文档后，为什么还要专门运行第 2 环 <strong><code>/spec</code></strong>？</p>
+<p>因为设计文档（Design Doc）回答的是“为什么要做、痛点是什么、选哪条技术路线”，属于产品与宏观架构意图；而编码智能体在第 4 环施工时需要的是一份<strong>精确到真实文件路径、现有函数复用名、数据表字段约束、接口返回码与负面边界的可执行契约（Executable Specification）</strong><sup class="cite"><a href="#ref-5">[5]</a></sup>。在 GStack 中，<code>/spec</code> 扮演<strong>可执行规格说明书作者（Spec Author）</strong>，严格按五阶段工作流运行<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
+<figure class="fig" id="fig-2-2"><div class="fig-scroll"><svg id="svg-2-2" width="1051.375" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="899.109375" viewBox="0 0 1051.375 899.109375" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-2-2{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-2-2 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-2-2 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-2-2 .error-icon{fill:#eceff1;}#svg-2-2 .error-text{fill:#13100e;stroke:#13100e;}#svg-2-2 .edge-thickness-normal{stroke-width:1px;}#svg-2-2 .edge-thickness-thick{stroke-width:3.5px;}#svg-2-2 .edge-pattern-solid{stroke-dasharray:0;}#svg-2-2 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-2-2 .edge-pattern-dashed{stroke-dasharray:3;}#svg-2-2 .edge-pattern-dotted{stroke-dasharray:2;}#svg-2-2 .marker{fill:#607d8b;stroke:#607d8b;}#svg-2-2 .marker.cross{stroke:#607d8b;}#svg-2-2 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-2-2 p{margin:0;}#svg-2-2 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-2-2 .cluster-label text{fill:#13100e;}#svg-2-2 .cluster-label span{color:#13100e;}#svg-2-2 .cluster-label span p{background-color:transparent;}#svg-2-2 .label text,#svg-2-2 span{fill:#17324d;color:#17324d;}#svg-2-2 .node rect,#svg-2-2 .node circle,#svg-2-2 .node ellipse,#svg-2-2 .node polygon,#svg-2-2 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-2-2 .rough-node .label text,#svg-2-2 .node .label text,#svg-2-2 .image-shape .label,#svg-2-2 .icon-shape .label{text-anchor:middle;}#svg-2-2 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-2-2 .rough-node .label,#svg-2-2 .node .label,#svg-2-2 .image-shape .label,#svg-2-2 .icon-shape .label{text-align:center;}#svg-2-2 .node.clickable{cursor:pointer;}#svg-2-2 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-2-2 .arrowheadPath{fill:#0b0b0b;}#svg-2-2 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-2-2 .flowchart-link{stroke:#607d8b;fill:none;}#svg-2-2 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-2 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-2 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-2 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-2-2 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-2-2 .cluster text{fill:#13100e;}#svg-2-2 .cluster span{color:#13100e;}#svg-2-2 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-2-2 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-2-2 rect.text{fill:none;stroke-width:0;}#svg-2-2 .icon-shape,#svg-2-2 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-2 .icon-shape p,#svg-2-2 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-2-2 .icon-shape .label rect,#svg-2-2 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-2 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-2-2 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-2-2 .node .neo-node{stroke:#1976d2;}#svg-2-2 [data-look="neo"].node rect,#svg-2-2 [data-look="neo"].cluster rect,#svg-2-2 [data-look="neo"].node polygon{stroke:url(#svg-2-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-2 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-2-2 [data-look="neo"].node path{stroke:url(#svg-2-2-gradient);stroke-width:1px;}#svg-2-2 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-2 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-2-2 [data-look="neo"].node circle{stroke:url(#svg-2-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-2 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-2-2 [data-look="neo"].icon-shape .icon{fill:url(#svg-2-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-2 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-2-2-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-2 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-2-2 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-2 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-2 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-2-2 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-2 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-2 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-2-2 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-2 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-2 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-2-2 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-2 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-2 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-2-2 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-2 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-2 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-2-2_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-2_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-2_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-2_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-2-2_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-2_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-2_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-2_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-2_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-2_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-2_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-2-2_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M521.453,60.5L521.453,63.333C521.453,66.167,521.453,71.833,521.453,76.833C521.453,81.833,521.453,86.167,521.453,88.333L521.453,90.5" id="svg-2-2-L_P1_P2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P1_P2_0" data-points="W3sieCI6NTIxLjQ1MzEyNSwieSI6NjAuNX0seyJ4Ijo1MjEuNDUzMTI1LCJ5Ijo3Ny41fSx7IngiOjUyMS40NTMxMjUsInkiOjk0LjV9XQ==" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M521.453,169.5L521.453,172.333C521.453,175.167,521.453,180.833,521.453,185.833C521.453,190.833,521.453,195.167,521.453,197.333L521.453,199.5" id="svg-2-2-L_P2_P3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P2_P3_0" data-points="W3sieCI6NTIxLjQ1MzEyNSwieSI6MTY5LjV9LHsieCI6NTIxLjQ1MzEyNSwieSI6MTg2LjV9LHsieCI6NTIxLjQ1MzEyNSwieSI6MjAzLjV9XQ==" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M521.453,278.5L521.453,281.333C521.453,284.167,521.453,289.833,521.453,294.833C521.453,299.833,521.453,304.167,521.453,306.333L521.453,308.5" id="svg-2-2-L_P3_P4_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P3_P4_0" data-points="W3sieCI6NTIxLjQ1MzEyNSwieSI6Mjc4LjV9LHsieCI6NTIxLjQ1MzEyNSwieSI6Mjk1LjV9LHsieCI6NTIxLjQ1MzEyNSwieSI6MzEyLjV9XQ==" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M634.813,387.5L643.378,390.333C651.943,393.167,669.073,398.833,677.638,403.833C686.203,408.833,686.203,413.167,686.203,415.333L686.203,417.5" id="svg-2-2-L_P4_Gate_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_P4_Gate_0" data-points="W3sieCI6NjM0LjgxMzIxNjc0MzExOTMsInkiOjM4Ny41fSx7IngiOjY4Ni4yMDMxMjUsInkiOjQwNC41fSx7IngiOjY4Ni4yMDMxMjUsInkiOjQyMS41fV0=" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M591.704,665.11L563.396,687.443C535.089,709.777,478.474,754.443,434.29,783.112C390.106,811.782,358.353,824.454,342.476,830.791L326.599,837.127" id="svg-2-2-L_Gate_Block_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Gate_Block_0" data-points="W3sieCI6NTkxLjcwMzg2OTk2OTUxOTcsInkiOjY2NS4xMTAxMTk5Njk1MTk3fSx7IngiOjQyMS44NTkzNzUsInkiOjc5OS4xMDkzNzV9LHsieCI6MzIyLjg4NDA4OTgyODg5NzM0LCJ5Ijo4MzguNjA5Mzc1fV0=" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M233.155,838.609L227.147,832.026C221.14,825.443,209.125,812.276,203.117,770.934C197.109,729.591,197.109,660.073,197.109,594.305C197.109,528.536,197.109,466.518,213.314,432.786C229.518,399.054,261.927,393.609,278.132,390.886L294.336,388.163" id="svg-2-2-L_Block_P4_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Block_P4_0" data-points="W3sieCI6MjMzLjE1NTAwMjM3NjQyNTg0LCJ5Ijo4MzguNjA5Mzc1fSx7IngiOjE5Ny4xMDkzNzUsInkiOjc5OS4xMDkzNzV9LHsieCI6MTk3LjEwOTM3NSwieSI6NTkwLjU1NDY4NzV9LHsieCI6MTk3LjEwOTM3NSwieSI6NDA0LjV9LHsieCI6Mjk4LjI4MDgxOTk1NDEyODQ1LCJ5IjozODcuNX1d" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path><path d="M740.842,704.971L748.334,720.661C755.827,736.35,770.812,767.73,778.304,789.336C785.797,810.943,785.797,822.776,785.797,828.693L785.797,834.609" id="svg-2-2-L_Gate_P5_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Gate_P5_0" data-points="W3sieCI6NzQwLjg0MTY5NjAwNzUyOTksInkiOjcwNC45NzA4MDM5OTI0NzAxfSx7IngiOjc4NS43OTY4NzUsInkiOjc5OS4xMDkzNzV9LHsieCI6Nzg1Ljc5Njg3NSwieSI6ODM4LjYwOTM3NX1d" data-look="classic" marker-end="url(#svg-2-2_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_P1_P2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P2_P3_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P3_P4_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_P4_Gate_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(464.95003, 765.11289)"><g class="label" data-id="L_Gate_Block_0" transform="translate(-100, -22.5)"><foreignObject width="200" height="45"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>评分 &lt; 7/10 或含模糊边界/疑似密钥</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Block_P4_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(785.796875, 799.109375)"><g class="label" data-id="L_Gate_P5_0" transform="translate(-79.1875, -11.25)"><foreignObject width="158.375" height="22.5"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>评分 &gt;= 7/10 通过门禁</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default blue" id="svg-2-2-flowchart-P1-0" data-look="classic" transform="translate(521.453125, 34.25)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-279.8828125" y="-26.25" width="559.765625" height="52.5"></rect><g class="label" style="color:#17324d !important" transform="translate(-249.8828125, -11.25)"><rect></rect><foreignObject width="499.765625" height="22.5"><div style="color: rgb(23, 50, 77) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 1 Why (背景与度量): 锁定业务价值 · 目标用户角色 · 可量化成功指标</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-2-2-flowchart-P2-1" data-look="classic" transform="translate(521.453125, 132)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 2 Scope (正负范围边界): 明列 In-Scope 功能清单 + 显式声明 NOT in scope 负面清单</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-2-flowchart-P3-3" data-look="classic" transform="translate(521.453125, 241)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 3 Technical with Mandatory Code-Reading: 强制先调用 Read/Grep/Glob 扫描现有代码库再写技术方案</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-2-flowchart-P4-5" data-look="classic" transform="translate(521.453125, 350)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 4 Draft &amp; Outside-Review Gate: 起草完整规格 + 独立模型外部打分 + Fail-Closed 密钥脱敏</p></span></div></foreignObject></g></g><g class="node default red" id="svg-2-2-flowchart-Gate-7" data-look="classic" transform="translate(686.203125, 590.5546875)"><polygon points="169.0546875,0 338.109375,-169.0546875 169.0546875,-338.109375 0,-169.0546875" class="label-container" transform="translate(-168.5546875, 169.0546875)" style="fill:#fdecea !important;stroke:#d94f4f !important"></polygon><g class="label" style="color:#5c1d1d !important" transform="translate(-142.8046875, -11.25)"><rect></rect><foreignObject width="285.609375" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>外部审查评分是否 &gt;= 7/10 且零敏感凭据?</p></span></div></foreignObject></g></g><g class="node default red" id="svg-2-2-flowchart-Block-9" data-look="classic" transform="translate(257.109375, 864.859375)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-249.109375" y="-26.25" width="498.21875" height="52.5"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-219.109375, -11.25)"><rect></rect><foreignObject width="438.21875" height="22.5"><div style="color: rgb(92, 29, 29) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>硬性阻断打回 (Blocks below 7/10): 强制补齐缺失契约与异常边界</p></span></div></foreignObject></g></g><g class="node default green" id="svg-2-2-flowchart-P5-13" data-look="classic" transform="translate(785.796875, 864.859375)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-257.578125" y="-26.25" width="515.15625" height="52.5"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-227.578125, -11.25)"><rect></rect><foreignObject width="455.15625" height="22.5"><div style="color: rgb(27, 67, 50) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 520px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>Phase 5 File &amp; Archive: 归档至 specs/ 目录 · 查重并创建跟踪 Issue</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-2-2-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-2-2-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-2-2-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-2-2.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 2-2 ↗</a>：第 2 环 `/spec` 五阶段规格精炼与 7/10 外部审查拦截门禁闭环</figcaption></figure>
+<h3 id="h-1-五阶段推进中的两大防失控核心机制">1. 五阶段推进中的两大防失控核心机制</h3>
+<p>在图 2-2 的五阶段流程中，Phase 2 与 Phase 3 内置了两项专门针对编码智能体常见顽疾的硬性机制<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
+<h4 id="h-1phase-2显式声明-not-in-scope明确不做什么的负面清单">（1）Phase 2：显式声明 <code>NOT in scope</code>（明确不做什么的负面清单）</h4>
+<p>大模型在编码时具有强烈的“发散扩圈”倾向——当你只告诉它“要做一个用户管理模块”，它往往会顺着训练语料里的常见模式，自行脑补并生成找回密码邮件发送、第三方 OAuth 登录甚至双因素认证代码，不仅拖慢进度，还会引入大量未经评审的依赖与报错。</p>
+<p>因此，<code>/spec</code> 在第 2 阶段强制要求：除了列出本期必做的 <code>In-Scope</code> 清单外，<strong>必须专门开辟 <code>NOT in scope</code> 章节，用毫不含糊的语言列出本期坚决不触碰的功能、模块与外部集成</strong>。这相当于为后续的方案评审与代码施工划定了不可逾越的物理边界<sup class="cite"><a href="#ref-4">[4]</a></sup>。</p>
+<h4 id="h-2phase-3强制先读现有代码库的技术设计technical-with-mandatory-code-read">（2）Phase 3：强制先读现有代码库的技术设计（Technical with Mandatory Code-Reading）</h4>
+<p>在传统开发或粗糙的提示词工程中，人们常让 AI 在不读取项目源码的情况下“凭空写一份技术设计文档”。结果 AI 在文档里编造出来的目录路径、数据库连接方式、错误基类和工具函数名，与仓库里的真实代码完全对不上，到了施工阶段根本无法执行。</p>
+<p>GStack 的 <code>/spec</code> 在第 3 阶段立下铁律：<strong>在起草 <code>Technical</code>（技术方案）章节的任何一句话之前，智能体必须先强制调用 <code>Glob</code>、<code>Grep</code> 与 <code>Read</code> 工具阅读当前代码库</strong>！智能体必须先查清：</p>
+<ul>
+<li>仓库当前的真实目录结构与模块划分是什么？</li>
+<li>有哪些已经写好的公共函数、中间件、数据模型和错误处理类可以直接复用（落实“先查后建 Search Before Building”）？</li>
+<li>新增或修改的代码具体落在哪几个真实文件路径上？</li>
+</ul>
+<p>只有把这些真实的代码库扫描结论写入技术方案，规格说明书才能真正具备“可执行性（Executable）”。</p>
+<hr>
+<h3 id="h-2-双重安全与质量硬件闸门跨模型-710-分拦截与-fail-closed-密钥脱敏">2. 双重安全与质量硬件闸门：跨模型 <code>7/10</code> 分拦截与 Fail-Closed 密钥脱敏</h3>
+<p>当智能体在 Phase 4 完成规格草稿后，<code>/spec</code> 绝不允许直接归档，而是必须连续通过三道自动化闸门<sup class="cite"><a href="#ref-1">[1]</a></sup>。<strong>这三道闸门有严格的先后顺序</strong>：前一道不通过，后一道根本不会被触发。</p>
+<ol>
+<li><p><strong>语义内容审查（Semantic Content Review——最先执行）</strong>：
+在规格进入任何外部流转之前，先做一遍面向内容的语义审查，检查规格自身是否存在内部矛盾、前后不一致、术语混用或结论与论据脱节。这一层不依赖外部模型，是全部门禁的第一道基础筛查。</p>
+</li>
+<li><p><strong>跨模型外部审查质量门禁（Outside-Review Gate——低于 <code>7/10</code> 分硬性阻断）</strong>：
+系统自动调用一个独立的外部审查模型（Outside Reviewer）对规格草稿进行对抗性质量评估（0–10 分制）。外部审查重点核查：需求范围是否存在自相矛盾？数据模型与接口入参出参是否缺少类型定义？并发、超时与权限边界是否交代清楚？所引用的现有代码路径是否真实存在？
+<strong>一旦外部评分低于 <code>7/10</code> 分，系统立即执行硬性阻断（Blocks below 7/10）</strong>，将具体扣分项与缺失契约清单打回给规格作者进行修订，直至复审得分达到 <code>7/10</code> 分及以上方可进入归档阶段。
+<strong>一个必须理解的前置条件</strong>：这道门禁依赖外部模型端点真实可用。当端点因认证、路由或策略原因不可用（例如企业内网的自定义模型网关未提供该审查模型）时，正确的处置是<strong>如实标记为“不可用（unavailable）”并保留本土审查结论</strong>，绝不允许偷偷换一个别的模型打分充数——<strong>那样得到的是一个冒用他人之名的假结论</strong>。</p>
+</li>
+<li><p><strong>故障安全型密钥自动脱敏（Fail-Closed Secret Redaction）</strong>：
+在将规格文件写入磁盘或同步创建 GitHub/GitLab 跟踪议题（Issue）前，内置脱敏引擎会扫描全文是否意外包含了真实的 API Key、数据库密码、Token 或私钥片段。之所以称为 <strong>Fail-Closed（故障关闭/故障安全）</strong>，是因为一旦扫描检测到疑似敏感凭据，或者脱敏扫描器自身发生运行异常，系统默认采取最严格的<strong>拒绝落盘与拒绝外发</strong>策略，强制清除敏感内容后才允许在 Phase 5 归档至 <code>$GSTACK_STATE_ROOT/projects/$SLUG/specs/</code> 目录（同时执行已有 Issue 查重，避免重复建单）。</p>
+<p>脱敏引擎的规则按<strong>凭据、个人信息、法务合规</strong>三个层级组织，覆盖约三十条具体模式。其中有一类规则对企业内网研发场景尤其关键——<strong>内网主机名与私有域检测</strong>，它会拦截 <code>.internal</code>、<code>.corp</code>、<code>.local</code>、<code>.prod</code>、<code>.staging</code> 等域名形态的书写。原因是这类信息一旦随规格外泄，暴露的不是单条凭据，而是<strong>整个内网拓扑结构</strong>：主机命名规律、环境划分方式、服务部署位置都可能被反推出来。对运营商、金融、政企这类对内网信息高度敏感的客户，这一条往往是合规审查的必查项。</p>
+<blockquote>
+<p>[!CAUTION]
+<strong>脱敏门禁具有一票否决权，且没有跳过开关。</strong>
+一旦检出高等级（HIGH）敏感项，系统不仅会打印发现项、阻止规格进入外部评审，还会<strong>阻止该规格的原始字节被写入任何归档位置</strong>——包括本地归档。也就是说，<strong>在敏感内容被清理并复扫通过之前，这份规格连一次落盘都不允许</strong>。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>三道闸门的递进关系可以概括为：先查规格自己讲不讲得通，再查别人认不认可，最后查它有没有夹带不该带出去的东西。</strong></p>
+<h3 id="h-3-可执行规格说明书specmd的标准工件结构表">3. 可执行规格说明书（<code>spec.md</code>）的标准工件结构表</h3>
+<p>一份通过第 2 环门禁的 <code>spec.md</code> 标准落盘工件，必须完整包含以下五个结构化章节：</p>
+<table>
+<thead>
+<tr>
+<th><code>spec.md</code> 标准章节</th>
+<th>必填核心内容要素</th>
+<th>下游消费环节与作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. Why（背景与度量指标）</strong></td>
+<td>关联的上游 <code>*-design-*.md</code> 路径、解决的具体业务痛点、可量化验收的成功指标（Success Metrics）。</td>
+<td>供第 3 环 <code>/plan-ceo-review</code> 核验范围是否偏离初心。</td>
+</tr>
+<tr>
+<td><strong>2. Scope（范围与负面清单）</strong></td>
+<td><strong><code>In-Scope</code></strong>（本期交付功能点清单）与显式的 <strong><code>NOT in scope</code></strong>（本期坚决不做的负面边界清单）。</td>
+<td>防止第 4 环构建代理自我发散扩圈，作为第 5 环 <code>/review</code> 越界检查依据。</td>
+</tr>
+<tr>
+<td><strong>3. Technical（基于代码审计的技术方案）</strong></td>
+<td><strong>现有代码库扫描结论（复用文件与函数路径）</strong>、新增/修改文件清单、数据表结构变更（Schema）、接口契约（入参/出参/状态码）。</td>
+<td>指导第 4 环受控施工按准确路径和四级复用阶梯编写代码。</td>
+</tr>
+<tr>
+<td><strong>4. Edge Cases &amp; Security（边缘与安全约束）</strong></td>
+<td>鉴权与数据归属校验规则（防 IDOR）、输入合法性边界、并发与幂等处理约定。</td>
+<td>供第 3 环 <code>/plan-eng-review</code> 完善失败自救表及第 5 环 <code>/cso</code> 安全核对。</td>
+</tr>
+<tr>
+<td><strong>5. Verification &amp; Issue Tracking（验证与跟踪）</strong></td>
+<td>核心验收条件、外部审查得分记录（<code>&gt;= 7/10</code>）、关联的跟踪 Issue 编号（供第 7 环 <code>/ship</code> 发布时自动核销关闭）。</td>
+<td>串联第 6 环 <code>/qa</code> 实机测试与第 7 环 <code>/ship</code> 自动发布闭环。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="h-213-第-3-环-autoplan-实战一键串行执行-ceo-→-design-→-dx-→-eng-四方评审">2.1.3 第 3 环 <code>/autoplan</code> 实战：一键串行执行 <code>CEO → Design → DX → Eng</code> 四方评审流水线</h2>
+<p>当第 1 环的设计文档与第 2 环的可执行规格就绪后，我们进入规划阶段最核心的把关环节——第 3 环 <strong><code>/autoplan</code>（四合一全自动方案评审流水线）</strong><sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。</p>
+<h3 id="h-1-autoplan-的架构原理智能范围探测与为什么工程经理必须排在最后">1. <code>/autoplan</code> 的架构原理：智能范围探测与“为什么工程经理必须排在最后”？</h3>
+<p>在 GStack 工程体系中，原本设有四个职责高度分离的计划评审专家角色：<code>/plan-ceo-review</code>（产品创始人）、<code>/plan-design-review</code>（资深 UI/UX 设计师）、<code>/plan-devex-review</code>（开发者体验 DX 专家）与 <code>/plan-eng-review</code>（工程经理）。如果由人工依次手动调用这四个命令，开发者需要回答 15 到 30 个中间问题，流程繁琐且容易中断。</p>
+<p><code>/autoplan</code> 的核心功能，是将这四位专家串联为一条**“一条命令输入、四方会审完备计划输出（One command, fully reviewed plan out）”**的自动化流水线<sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<figure class="fig" id="fig-2-3"><div class="fig-scroll"><svg id="svg-2-3" width="596" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="745" viewBox="0 0 596 745" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-2-3{font-family:Microsoft YaHei,sans-serif;font-size:15px;fill:#17324d;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-2-3 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-2-3 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-2-3 .error-icon{fill:#eceff1;}#svg-2-3 .error-text{fill:#13100e;stroke:#13100e;}#svg-2-3 .edge-thickness-normal{stroke-width:1px;}#svg-2-3 .edge-thickness-thick{stroke-width:3.5px;}#svg-2-3 .edge-pattern-solid{stroke-dasharray:0;}#svg-2-3 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-2-3 .edge-pattern-dashed{stroke-dasharray:3;}#svg-2-3 .edge-pattern-dotted{stroke-dasharray:2;}#svg-2-3 .marker{fill:#607d8b;stroke:#607d8b;}#svg-2-3 .marker.cross{stroke:#607d8b;}#svg-2-3 svg{font-family:Microsoft YaHei,sans-serif;font-size:15px;}#svg-2-3 p{margin:0;}#svg-2-3 .label{font-family:Microsoft YaHei,sans-serif;color:#17324d;}#svg-2-3 .cluster-label text{fill:#13100e;}#svg-2-3 .cluster-label span{color:#13100e;}#svg-2-3 .cluster-label span p{background-color:transparent;}#svg-2-3 .label text,#svg-2-3 span{fill:#17324d;color:#17324d;}#svg-2-3 .node rect,#svg-2-3 .node circle,#svg-2-3 .node ellipse,#svg-2-3 .node polygon,#svg-2-3 .node path{fill:#e3f2fd;stroke:#1976d2;stroke-width:1px;}#svg-2-3 .rough-node .label text,#svg-2-3 .node .label text,#svg-2-3 .image-shape .label,#svg-2-3 .icon-shape .label{text-anchor:middle;}#svg-2-3 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-2-3 .rough-node .label,#svg-2-3 .node .label,#svg-2-3 .image-shape .label,#svg-2-3 .icon-shape .label{text-align:center;}#svg-2-3 .node.clickable{cursor:pointer;}#svg-2-3 .root .anchor path{fill:#607d8b!important;stroke-width:0;stroke:#607d8b;}#svg-2-3 .arrowheadPath{fill:#0b0b0b;}#svg-2-3 .edgePath .path{stroke:#607d8b;stroke-width:1px;}#svg-2-3 .flowchart-link{stroke:#607d8b;fill:none;}#svg-2-3 .edgeLabel{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-3 .edgeLabel p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-3 .edgeLabel rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-3 .labelBkg{background-color:rgba(242, 253, 226.9999999999, 0.5);}#svg-2-3 .cluster rect{fill:#eceff1;stroke:hsl(204, 0%, 83.5294117647%);stroke-width:1px;}#svg-2-3 .cluster text{fill:#13100e;}#svg-2-3 .cluster span{color:#13100e;}#svg-2-3 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Microsoft YaHei,sans-serif;font-size:12px;background:#eceff1;border:1px solid hsl(204, 0%, 83.5294117647%);border-radius:2px;pointer-events:none;z-index:100;}#svg-2-3 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#17324d;}#svg-2-3 rect.text{fill:none;stroke-width:0;}#svg-2-3 .icon-shape,#svg-2-3 .image-shape{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);text-align:center;}#svg-2-3 .icon-shape p,#svg-2-3 .image-shape p{background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);padding:2px;}#svg-2-3 .icon-shape .label rect,#svg-2-3 .image-shape .label rect{opacity:0.5;background-color:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);fill:hsl(85.3846153846, 86.6666666667%, 94.1176470588%);}#svg-2-3 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-2-3 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-2-3 .node .neo-node{stroke:#1976d2;}#svg-2-3 [data-look="neo"].node rect,#svg-2-3 [data-look="neo"].cluster rect,#svg-2-3 [data-look="neo"].node polygon{stroke:url(#svg-2-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-3 [data-look="neo"].swimlane.cluster rect{filter:none;}#svg-2-3 [data-look="neo"].node path{stroke:url(#svg-2-3-gradient);stroke-width:1px;}#svg-2-3 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-3 [data-look="neo"].node .neo-line path{stroke:#1976d2;filter:none;}#svg-2-3 [data-look="neo"].node circle{stroke:url(#svg-2-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-3 [data-look="neo"].node circle .state-start{fill:#000000;}#svg-2-3 [data-look="neo"].icon-shape .icon{fill:url(#svg-2-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-3 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#svg-2-3-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#svg-2-3 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#svg-2-3 .blue&gt;*{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-3 .blue span{fill:rgb(227, 242, 253)!important;stroke:rgb(25, 118, 210)!important;color:rgb(23, 50, 77)!important;}#svg-2-3 .blue tspan{fill:rgb(23, 50, 77)!important;}#svg-2-3 .green&gt;*{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-3 .green span{fill:rgb(232, 245, 233)!important;stroke:rgb(56, 142, 60)!important;color:rgb(27, 67, 50)!important;}#svg-2-3 .green tspan{fill:rgb(27, 67, 50)!important;}#svg-2-3 .red&gt;*{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-3 .red span{fill:rgb(253, 236, 234)!important;stroke:rgb(217, 79, 79)!important;color:rgb(92, 29, 29)!important;}#svg-2-3 .red tspan{fill:rgb(92, 29, 29)!important;}#svg-2-3 .warm&gt;*{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-3 .warm span{fill:rgb(245, 236, 224)!important;stroke:rgb(168, 137, 95)!important;color:rgb(74, 53, 37)!important;}#svg-2-3 .warm tspan{fill:rgb(74, 53, 37)!important;}#svg-2-3 .gray&gt;*{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-3 .gray span{fill:rgb(236, 239, 241)!important;stroke:rgb(96, 125, 139)!important;color:rgb(38, 50, 56)!important;}#svg-2-3 .gray tspan{fill:rgb(38, 50, 56)!important;}</style><g><marker id="svg-2-3_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-3_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-3_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-3_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="svg-2-3_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-3_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-3_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-3_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-2-3_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-3_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-2-3_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="svg-2-3_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M298,83L298,85.833C298,88.667,298,94.333,298,99.333C298,104.333,298,108.667,298,110.833L298,113" id="svg-2-3-L_Init_CEO_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Init_CEO_0" data-points="W3sieCI6Mjk4LCJ5Ijo4M30seyJ4IjoyOTgsInkiOjEwMH0seyJ4IjoyOTgsInkiOjExN31d" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path><path d="M298,192L298,194.833C298,197.667,298,203.333,298,208.333C298,213.333,298,217.667,298,219.833L298,222" id="svg-2-3-L_CEO_Design_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_CEO_Design_0" data-points="W3sieCI6Mjk4LCJ5IjoxOTJ9LHsieCI6Mjk4LCJ5IjoyMDl9LHsieCI6Mjk4LCJ5IjoyMjZ9XQ==" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path><path d="M298,301L298,303.833C298,306.667,298,312.333,298,317.333C298,322.333,298,326.667,298,328.833L298,331" id="svg-2-3-L_Design_DX_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Design_DX_0" data-points="W3sieCI6Mjk4LCJ5IjozMDF9LHsieCI6Mjk4LCJ5IjozMTh9LHsieCI6Mjk4LCJ5IjozMzV9XQ==" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path><path d="M298,410L298,412.833C298,415.667,298,421.333,298,426.333C298,431.333,298,435.667,298,437.833L298,440" id="svg-2-3-L_DX_Eng_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_DX_Eng_0" data-points="W3sieCI6Mjk4LCJ5Ijo0MTB9LHsieCI6Mjk4LCJ5Ijo0Mjd9LHsieCI6Mjk4LCJ5Ijo0NDR9XQ==" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path><path d="M298,519L298,521.833C298,524.667,298,530.333,298,535.333C298,540.333,298,544.667,298,546.833L298,549" id="svg-2-3-L_Eng_Triage_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Eng_Triage_0" data-points="W3sieCI6Mjk4LCJ5Ijo1MTl9LHsieCI6Mjk4LCJ5Ijo1MzZ9LHsieCI6Mjk4LCJ5Ijo1NTN9XQ==" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path><path d="M298,628L298,630.833C298,633.667,298,639.333,298,644.333C298,649.333,298,653.667,298,655.833L298,658" id="svg-2-3-L_Triage_Gate_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Triage_Gate_0" data-points="W3sieCI6Mjk4LCJ5Ijo2Mjh9LHsieCI6Mjk4LCJ5Ijo2NDV9LHsieCI6Mjk4LCJ5Ijo2NjJ9XQ==" data-look="classic" marker-end="url(#svg-2-3_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Init_CEO_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_CEO_Design_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Design_DX_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_DX_Eng_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Eng_Triage_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Triage_Gate_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default gray" id="svg-2-3-flowchart-Init-0" data-look="classic" transform="translate(298, 45.5)"><rect class="basic label-container" style="fill:#eceff1 !important;stroke:#607d8b !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#263238 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(38, 50, 56) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#263238 !important" class="nodeLabel"><p>Phase 0 范围探测与快照备份: 备份原计划至 RESTORE_PATH · 自动扫描探测 UI Scope 与 DX Scope</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-3-flowchart-CEO-1" data-look="classic" transform="translate(298, 154.5)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>Phase 1 CEO Review (必跑): 四种范围缩放模式 · 挑战产品价值与错误自救基线</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-2-3-flowchart-Design-3" data-look="classic" transform="translate(298, 263.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 2 Design Review (命中UI Scope时跑): 7维0-10打分 · 强制补齐交互5状态 · 消除 AI Slop 模板感</p></span></div></foreignObject></g></g><g class="node default blue" id="svg-2-3-flowchart-DX-5" data-look="classic" transform="translate(298, 372.5)"><rect class="basic label-container" style="fill:#e3f2fd !important;stroke:#1976d2 !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#17324d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(23, 50, 77) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#17324d !important" class="nodeLabel"><p>Phase 2.5 DX Review (命中DX Scope时跑): 评估 TTHW 耗时 · 打磨 CLI/API/SDK 接入摩擦点</p></span></div></foreignObject></g></g><g class="node default red" id="svg-2-3-flowchart-Eng-7" data-look="classic" transform="translate(298, 481.5)"><rect class="basic label-container" style="fill:#fdecea !important;stroke:#d94f4f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#5c1d1d !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(92, 29, 29) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#5c1d1d !important" class="nodeLabel"><p>Phase 3 Eng Review (必跑且强制殿后 Always Last): 审查八大工程支柱 · 强制画 ASCII 架构/状态图 · 落盘 Test Plan</p></span></div></foreignObject></g></g><g class="node default warm" id="svg-2-3-flowchart-Triage-9" data-look="classic" transform="translate(298, 590.5)"><rect class="basic label-container" style="fill:#f5ece0 !important;stroke:#a8895f !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#4a3525 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(74, 53, 37) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#4a3525 !important" class="nodeLabel"><p>六大原则自动决策分流: 机械问题自动拍板记入 Audit Trail · 仅提炼品味权衡与方向异议</p></span></div></foreignObject></g></g><g class="node default green" id="svg-2-3-flowchart-Gate-11" data-look="classic" transform="translate(298, 699.5)"><rect class="basic label-container" style="fill:#e8f5e9 !important;stroke:#388e3c !important" x="-290" y="-37.5" width="580" height="75"></rect><g class="label" style="color:#1b4332 !important" transform="translate(-260, -22.5)"><rect></rect><foreignObject width="520" height="45"><div style="color: rgb(27, 67, 50) !important; display: table; white-space: break-spaces; line-height: 1.5; max-width: 520px; text-align: center; width: 520px;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1b4332 !important" class="nodeLabel"><p>Phase 4 Final Approval Gate: 人类工程师一次性集中拍板 · 生成 Review Readiness Dashboard</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="svg-2-3-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="svg-2-3-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><linearGradient id="svg-2-3-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1976d2" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(85.3846153846, 46.6666666667%, 84.1176470588%)" stop-opacity="1"></stop></linearGradient></svg></div><figcaption><a class="figno" href="/aicoding/figs/fig-2-3.svg" target="_blank" rel="noopener" title="在新窗口打开原图">图 2-3 ↗</a>：第 3 环 `/autoplan` 四方专家串行评审与三类决策分流管线</figcaption></figure>
+<p>要真正用好 <code>/autoplan</code>，必须理解图 2-3 中的两个底层机制<sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<ol>
+<li><strong>Phase 0 智能范围探测与快照备份（Smart Scope Detection &amp; Backup）</strong>：
+启动时，<code>/autoplan</code> 首先将当前计划完整备份至 <code>RESTORE_PATH</code>（以便用户对自动修改不满意时随时一键还原）。随后，它会自动扫描计划文本：<ul>
+<li>若文本中命中 2 个以上前端视图、页面或样式组件相关词汇，自动激活 <strong><code>UI Scope</code>（触发 Phase 2 设计评审）</strong>；</li>
+<li>若文本涉及命令行工具（CLI）、公开 API、SDK、配置文件或开发者工具，自动激活 <strong><code>DX Scope</code>（触发 Phase 2.5 开发者体验评审）</strong>；</li>
+<li>而 <strong>Phase 1（CEO 评审）</strong> 与 <strong>Phase 3（工程经理评审）</strong> 则是任何软件项目都必须执行的强制环节。</li>
+</ul>
+</li>
+<li><strong>强制串行执行且工程经理永远殿后（Sequential Execution &amp; Eng Review Always Last）</strong>：
+为什么 <code>/autoplan</code> 严禁将四个评审并行跑，而且规定 <strong><code>Phase 3: Eng Review</code> 必须排在最后一棒（Always Last）</strong>？
+因为第 1 棒 CEO 可能会增删功能范围，第 2 棒设计师会要求增加前端异常降级状态与骨架屏数据字段，第 2.5 棒 DX 专家会要求为 CLI 增加新的命令行参数或退出码。这些上游评审全部会改变最终的技术实现！只有让工程经理排在最后一棒，他所审查的系统架构、绘制的 ASCII 状态机图、构建的失败自救表以及落盘的 <code>Test Plan</code>，才能 100% 吸收并覆盖前面所有专家的修改意见，从而成为真正可靠的<strong>发版硬门禁（Shipping Gate）</strong><sup class="cite"><a href="#ref-3">[3]</a></sup>。</li>
+</ol>
+<hr>
+<h3 id="h-2-前三棒专家评审机制详解ceo-范围缩放design-去-ai-模板感与-dx-开发者体验">2. 前三棒专家评审机制详解：CEO 范围缩放、Design 去 AI 模板感与 DX 开发者体验</h3>
+<p>我们依次拆解前三棒专家在 <code>/autoplan</code> 内部执行的核心审视功能<sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<h4 id="h-1phase-1ceo-评审plan-ceo-review——四种范围缩放模式">（1）Phase 1：CEO 评审（<code>/plan-ceo-review</code>——四种范围缩放模式）</h4>
+<p>扮演创始人的智能体以“寻找请求背后隐藏的 10 星级产品（Brian Chesky Mode）”为视角，根据项目所处阶段提供<strong>四种范围缩放模式（Four Scope Modes）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>CEO 范围缩放模式</th>
+<th>核心动作与适用场景判据</th>
+<th>对实施计划的具体改变</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. <code>SCOPE EXPANSION</code></strong>（大胆扩圈模式）</td>
+<td>适用于新产品孵化或寻求差异化突破。挑战过于保守的平庸方案，寻找极具感染力的完整产品体验。</td>
+<td>主动提议高价值的增量特性，扩展产品上限。</td>
+</tr>
+<tr>
+<td><strong>2. <code>SELECTIVE EXPANSION</code></strong>（选择性扩圈模式）</td>
+<td><strong>日常迭代最常用模式</strong>。严格守住当前已定基线范围，同时识别出边际成本极低（AI 几分钟可写完）的高价值亮点扩展。</td>
+<td>基线计划直接放行；将高性价比扩展项列为可选提案交人类挑选。</td>
+</tr>
+<tr>
+<td><strong>3. <code>HOLD SCOPE</code></strong>（严守范围模式）</td>
+<td>适用于范围已高度明确、工期紧迫或高风险模块重构。一寸不扩，拒绝任何新增功能请求。</td>
+<td>100% 锁定现有范围，将全部精力集中于架构稳健性与异常兜底。</td>
+</tr>
+<tr>
+<td><strong>4. <code>SCOPE REDUCTION</code></strong>（强力缩减模式）</td>
+<td>适用于计划过度膨胀（Overbuilt）或偏离核心痛点时。毫不留情地砍掉一切非核心枝蔓。</td>
+<td>剥离次要功能，只保留跑通最小价值闭环（Narrowest Wedge）的核心骨架。</td>
+</tr>
+</tbody></table>
+<h4 id="h-2phase-2设计评审plan-design-review——七维打分交互-5-状态与猎杀-ai-模板感">（2）Phase 2：设计评审（<code>/plan-design-review</code>——七维打分、交互 5 状态与猎杀 AI 模板感）</h4>
+<p>当项目包含用户界面时，资深设计师角色在写任何一行前端代码前，对计划进行 <strong>7 个维度的 0–10 分评估</strong>，并将任何低于 8 分的维度直接在计划中改写补强至 8 分以上<sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<ol>
+<li><strong>信息架构（Information Architecture）</strong>：明确每个屏幕的主次信息层级（Primary / Secondary / Tertiary），防止页面信息平铺直叙；</li>
+<li><strong>交互状态全覆盖（Interaction State Coverage）</strong>：这是消灭脆弱前端最关键的一条规则——<strong>强制要求计划中的每一个 UI 视图或组件，必须完整定义全部 5 种交互状态</strong>：<ul>
+<li><strong><code>Loading</code>（加载中）</strong>：严禁白屏闪烁，必须规定与真实内容等高的骨架屏（Skeleton）或加载指示器；</li>
+<li><strong><code>Empty</code>（空状态）</strong>：严禁只打印一行冰冷的 <code>&quot;No items found&quot;</code>，必须设计空状态说明与引导用户下一步操作的行动按钮（Call-to-Action）；</li>
+<li><strong><code>Error</code>（错误态）</strong>：严禁直接弹窗报错或崩溃白屏，必须保留用户已输入的数据现场，并提供明确的原因说明与一键重试入口；</li>
+<li><strong><code>Success</code>（成功态）</strong>：定义正常数据展示及操作完成后的即时视觉反馈（如轻量提示或状态平滑流转）；</li>
+<li><strong><code>Partial</code>（部分数据/降级态）</strong>：当非核心子接口响应超时或返回部分数据时，规定主界面如何正常可用、局部区域如何优雅降级提示。</li>
+</ul>
+</li>
+<li><strong>用户旅程连贯性（User Journey）</strong>：检查跨页面跳转、返回与状态保持是否顺畅；</li>
+<li><strong>消除 AI 廉价模板感（AI Slop Risk）</strong>：精准识别并明令禁止大模型最喜欢生成的俗套设计——例如<strong>蓝紫科技渐变大标题（Gradient Hero）</strong>、<strong>千篇一律的三列居中圆圈图标卡片（3-Column Icon Grid）</strong>、全页面无差别的胶囊大圆角与居中正文，强制确立符合产品业务属性的色彩、排版与布局密度；</li>
+<li><strong>设计系统对齐（Design System Alignment）</strong>：检查是否与项目 <code>DESIGN.md</code> 的色彩、字体与间距词元保持一致；</li>
+<li><strong>响应式与无障碍支持（Responsive &amp; Accessibility）</strong>：明确手机（<code>375px</code>）、平板（<code>768px</code>）与桌面（<code>1440px</code>）三视口的布局适配规则及键盘导航、对比度要求；</li>
+<li><strong>未决设计权衡提取（Unresolved Design Decisions）</strong>：将涉及审美偏好的取舍提炼出来，交由最终门禁拍板。</li>
+</ol>
+<h4 id="h-3phase-25开发者体验评审plan-devex-review——打磨-tthw-与接入摩擦点">（3）Phase 2.5：开发者体验评审（<code>/plan-devex-review</code>——打磨 TTHW 与接入摩擦点）</h4>
+<p>当项目包含 CLI 命令行工具、REST/GraphQL API、SDK 或配置脚本时，DX 专家角色会模拟一名初次接触该工具的真实开发者，重点审视 <strong>TTHW（Time-to-Hello-World，从安装/拿到工具到成功跑通第一个核心调用的耗时）</strong><sup class="cite"><a href="#ref-2">[2]</a></sup>，在 <code>DX EXPANSION</code>、<code>DX POLISH</code> 或 <code>DX TRIAGE</code> 模式下优化以下细节：</p>
+<ul>
+<li>命令参数与接口字段命名是否符合直觉？<code>--help</code> 帮助输出是否直接附带可复制运行的示例？</li>
+<li>是否支持 <code>--dry-run</code>（安全预演不落库）与 <code>--format json</code>（方便下游脚本管道解析）？</li>
+<li>当缺少环境变量或配置错误时，是否给出了可直接复制执行的修复命令提示，而不是抛出晦涩的底层运行堆栈？</li>
+</ul>
+<hr>
+<h3 id="h-3-第四棒压轴把关工程经理评审plan-eng-review——八大工程支柱ascii-图表与落盘-test-p">3. 第四棒压轴把关：工程经理评审（<code>/plan-eng-review</code>——八大工程支柱、ASCII 图表与落盘 <code>Test Plan</code>）</h3>
+<p>在吸收了 CEO、设计师与 DX 专家的全部修改后，<strong>Phase 3：工程经理评审（<code>/plan-eng-review</code>）</strong> 作为压轴大闸启动<sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。</p>
+<p>工程经理围绕<strong>八大必审工程支柱</strong>对实施计划展开全面核验：<strong>1. 系统整体架构、2. 模块职责边界、3. 数据流向、4. 状态机转换、5. 失败模式与自救注册表（Error &amp; Rescue Registry）、6. 并发与边界情况（Edge Cases）、7. 信任与安全边界（Trust Boundaries）、8. 测试覆盖计划（Test Plan）</strong>。</p>
+<p>在这一阶段，GStack 执行四项极具特色的强制产出动作：</p>
+<ol>
+<li><p><strong>强制绘制纯文本 ASCII 架构图、状态机流转图与时序图</strong>：
+为什么 <code>/plan-eng-review</code> 强制要求大模型必须用纯文本字符画出 <strong>ASCII 系统架构图、状态机流转图（State Diagrams）、时序图（Sequence Diagrams）与数据流图</strong>？
+因为自然语言具有天然的模糊性——大模型写一句“下单后妥善更新订单状态并处理库存”可以轻易掩盖逻辑漏洞；但<strong>当强制要求画出每一个节点、每一根流转箭头、每一把并发锁以及每一个状态允许或禁止转换的条件时，所有隐含的逻辑断层都会被逼到明面上（Diagrams force hidden assumptions into the open）</strong><sup class="cite"><a href="#ref-2">[2]</a></sup>！而且纯文本 ASCII 图可直接嵌入 Markdown 计划文件与代码注释中，在任何终端和 Git Diff 视图下均零依赖、清晰可读。</p>
+</li>
+<li><p><strong>强制构建《失败模式与自救注册表（Error &amp; Rescue Registry）》</strong>：
+工程经理逐一扫描计划中的每一次数据库写操作、每一次外部接口调用与每一处并发竞争点，强制建立结构化的失败自救表（包含：<strong>操作场景 → 可能触发的异常/竞态 → 服务端事务回滚或兜底自救动作 → 客户端可见的明确反馈</strong>），严禁出现捕获异常后什么都不做的静默吞错（Silent Failures）。</p>
+</li>
+<li><p><strong>自动将结构化《测试计划（<code>Test Plan</code>）》写入磁盘</strong>：
+工程经理根据上述正常路径、5 种交互状态与失败自救注册表，生成一份详尽的测试矩阵，并<strong>自动将其作为独立工件写入磁盘（保存在 <code>~/.gstack/projects/$SLUG/</code> 或项目 <code>.gstack/</code> 目录下）</strong>。这份落盘的 <code>Test Plan</code> 将在第 6 环运行 <code>/qa</code> 时被测试负责人自动读取，实现“规划期定的每一条测试项，在测试期逐条实机核销”的严密闭环！</p>
+</li>
+<li><p><strong>强制执行“真实性行”核验（Reality Rows——反幻觉的硬性抓手）</strong>：
+这是 <code>/plan-eng-review</code>（以及 CEO 评审）最容易被忽视、却最能防止大模型“凭空断言”的一项机制。规划阶段的大模型极易写出“仓库里已有类似的工具函数，直接复用即可”“这个接口早就在项目里了”这类听起来合理、实际未经核实的陈述。<strong>真实性行机制把这类陈述从“描述性语言”变成了“必须附凭据的校验项”<sup class="cite"><a href="#ref-2">[2]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。</strong></p>
+<p>机制要求每一阶段必须逐条完成 <strong>7 条第一梯队（无条件必做）校验行</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>校验行</th>
+<th>必须回答的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><code>premise-table</code></td>
+<td>计划中每一条<strong>事实性主张</strong>，能否给出 <code>文件:行号</code> 凭据？<strong>没有凭据的主张即记为 <code>unverified</code>（未核实），且该数量会被计入最终完成度评分</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>already-done</code></td>
+<td>计划要做的改动，<strong>仓库历史里是否已经有人做过</strong>？（须检索提交历史与关键符号，在写任务前先报告命中情况）</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>surface-check</code></td>
+<td>计划中点名的<strong>每一个 CLI 命令、参数或 HTTP 路由</strong>，是否都对照过注册表或 <code>--help</code> 实际验证存在？<strong>查不到即记为发现项</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>binding-decisions</code></td>
+<td>是否读过<strong>既往已生效的决策记录</strong>？已被否决的默认做法若被重新引入，即记为发现项</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>numbers</code></td>
+<td>计划中出现的<strong>每一个数字</strong>，是否都从原始数据重新推导过，并标注为「实测」或「估算」？引用的旧基线须标注「门禁前需重测」</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>deferred-asks</code></td>
+<td>关联需求中<strong>本计划未覆盖的部分</strong>，是否逐条给出了理由？</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>pr-count</code></td>
+<td>交付如何切分？若拆成多个合并请求，是否评估了<strong>每个额外请求带来的队列成本</strong>？</td>
+</tr>
+</tbody></table>
+<p>这 7 行的强制力来自一个<strong>机器校验工具</strong>，它会直接判定通过与否，例如未完成时的原始输出形态为：</p>
+<pre><code class="language-text">PLAN_REALITY: phase=ceo rows=0/7 missing=premise-table,already-done,surface-check,
+binding-decisions,numbers,deferred-asks,pr-count verdict=repair
+</code></pre>
+<p><code>verdict=repair</code> 即表示<strong>未通过，必须补齐</strong>。这套校验有三条容易被踩中的精确规则：</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一梯队的行不许标「不适用」</strong></td>
+<td>把 7 行中任何一行标为 <code>n/a</code>，它会被直接计入 <code>missing</code>，等同于没写——<strong>不能用“这条不适用”来绕过必做校验</strong></td>
+</tr>
+<tr>
+<td><strong>没有凭据的行不算行</strong></td>
+<td>工具原文的表述是“a row without a receipt is a claim, not a row”（没有凭据的行是主张，不是行）。凭据必须是 <code>路径:行号</code> 或提交短哈希</td>
+</tr>
+<tr>
+<td><strong>只有「通过」与「待修」两种结果</strong></td>
+<td>没有“警告后放行”的中间态。而在无人值守运行中，<strong>未完成即为未完成</strong>，不会被降级为提醒</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>[!WARNING]
+<strong>一个会误导人的细节：校验失败时命令行退出码可能仍为 0。</strong>
+因此判断门禁是否通过，<strong>必须读取 <code>PLAN_REALITY:</code> 这一行的 <code>verdict</code> 字段，而不能依赖退出码</strong>。这条坑在真实工程中极容易被忽略——脚本“看起来跑成功了”，实际门禁判的是未通过。</p>
+</blockquote>
+<p><strong>为什么这条机制值得写进教材</strong>：它示范了“反幻觉”从<strong>道德要求</strong>变成<strong>工程机制</strong>的完整路径。与其反复叮嘱模型“不要编造”，不如设计出一张每行都必须附凭据的表格，再用工具去校验它。<strong>约束落在结构上，比约束落在自觉上可靠得多。</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="h-4-六大编码决策原则三类问题分流与-final-approval-gate">4. 六大编码决策原则、三类问题分流与 <code>Final Approval Gate</code></h3>
+<p>在四位专家串行评审的过程中，往往会识别出 15 到 30 个大大小小的技术与设计决策点。为了既保证评审深度、又不让人类工程师被几十个琐碎问题淹没，<code>/autoplan</code> 引入了<strong>基于六大编码决策原则（Six Decision Principles）的自动决策分流机制</strong><sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<table>
+<thead>
+<tr>
+<th>原则编号与官方名称</th>
+<th>核心判断准则</th>
+<th>在自动评审中的拍板逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>原则 P1：<code>Choose completeness</code></strong>（选完整方案）</td>
+<td>践行“把海煮沸”信条，优先选择边缘覆盖完整（10/10）的方案。</td>
+<td>当完整处理异常回滚的方案比简陋方案仅多花 AI 几分钟时，自动拍板选完整方案。</td>
+</tr>
+<tr>
+<td><strong>原则 P2：<code>Boil lakes</code></strong>（顺手修完爆炸半径）</td>
+<td>发现与当前改动直接关联的邻近缺陷时，在可控半径内一并彻底解决。</td>
+<td>只要修复关联问题的 AI 耗时 <code>&lt; 1 天</code> 且涉及修改 <code>&lt; 5 个文件</code>，自动批准纳入本期范围。</td>
+</tr>
+<tr>
+<td><strong>原则 P3：<code>Pragmatic</code></strong>（务实从简）</td>
+<td>拒绝脱离当前业务规模的过度工程化。</td>
+<td>在同样能满足完整度要求的前提下，自动否决引入重型外部中间件的复杂方案，选原生轻量方案。</td>
+</tr>
+<tr>
+<td><strong>原则 P4：<code>DRY</code></strong>（拒绝重复造轮子）</td>
+<td>严格遵循四级复用阶梯，消除重复逻辑。</td>
+<td>发现计划中试图新建与仓库既有工具功能重叠的模块时，自动改写为复用既有模块。</td>
+</tr>
+<tr>
+<td><strong>原则 P5：<code>Explicit over clever</code></strong>（显式胜过炫技）</td>
+<td>10 行直观易读的显式代码，永远胜过 200 行炫技抽象的设计模式包装。</td>
+<td>自动砍掉不必要的抽象工厂、深层继承与复杂元编程，强制采用平直清晰的代码结构。</td>
+</tr>
+<tr>
+<td><strong>原则 P6：<code>Bias toward action</code></strong>（行动优先）</td>
+<td>在安全边界与规格范围内果断推进，不因无实质影响的次要分歧卡壳。</td>
+<td>对命名风格、目录微调等机械性事项按仓库惯例直接拍板，不中断流水线。</td>
+</tr>
+</tbody></table>
+<p>依托 P1～P6 六大原则，<code>/autoplan</code> 将四棒评审发现的所有问题自动划分为三类<sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<ol>
+<li><strong>机械性决策（Mechanical Decisions）</strong>：完全可由 P1～P6 原则推导出唯一最优解的问题（通常占总数的 80% 以上）。系统静默自动拍板修改计划，并将每一项决断的“所属阶段、问题内容、依据原则、采纳结论”完整记录进**决策审计轨迹表（<code>Decision Audit Trail</code>）**供人类事后查阅。</li>
+<li><strong>品味权衡项（Taste Decisions）</strong>：涉及产品体验取舍、视觉风格偏好，或两套备选方案评分相差在 1 分以内、跨模型存在合理分歧的事项。系统不替人类做主，而是提炼出简明选项汇总至最终门禁。</li>
+<li><strong>方向异议项（User Challenges）</strong>：当评审模型（或跨模型第二意见）一致认为用户最初设定的某条核心前提存在严重风险、建议改变产品方向时，系统严格遵守**人类主权（User Sovereignty）**信条，绝不私自篡改计划，而是将其单独高亮列为方向异议项。</li>
+</ol>
+<p>最后，流水线停在 <strong>Phase 4：最终审批门禁（<code>Final Approval Gate</code>）</strong>，向人类集中展示三部分内容：<strong><code>Decision Audit Trail</code>（自动拍板审计表）</strong>、需人工裁决的少量 <strong><code>Taste Decisions / User Challenges</code></strong>，以及汇总四棒通过状态的 <strong><code>Review Readiness Dashboard</code>（评审就绪仪表盘，其中 <code>Eng Review</code> 为唯一硬性必过门禁）</strong>。人类只需花一两分钟集中拍板这几个关键权衡项，一份经过四位顶尖专家千锤百炼的工程蓝图便正式定稿落盘！</p>
+<hr>
+<h2 id="h-反模式与红线" class="sec-fixed">反模式与红线</h2>
+<p>在执行 GStack 前三环规划时，团队必须严防以下五类反模式与违规操作：</p>
+<ol>
+<li><strong>违反 <code>/office-hours</code> 硬门禁，一边聊需求一边让 AI 生代码</strong>：在痛点尚未重构、备选方案尚未拍板时，就允许智能体创建数据表和业务文件，导致后续一旦调整产品切口，前期生成的代码全部变成污染上下文的历史包袱。</li>
+<li><strong>写 <code>spec.md</code> 时只写“要做什么”，漏写 <code>NOT in scope</code>（不做什么）</strong>：缺少显式的负面边界约束，导致智能体在第 4 环编码施工时自行脑补并发散出大量未经评审的周边功能。</li>
+<li><strong>跳过“强制先读现有代码库”，闭门造车写技术方案</strong>：在起草 <code>spec.md</code> 的技术章节时不扫描现有仓库结构，导致规格书里发明出一套全新的数据库连接、错误类和工具函数，与存量代码严重冲突。</li>
+<li><strong>用含糊的自然语言代替 <code>/plan-eng-review</code> 的 ASCII 架构图与状态机图</strong>：在工程评审阶段省略画图与失败自救注册表（Error &amp; Rescue Registry），把并发锁、超时回滚和状态拦截留到写代码时“边写边猜”，埋下严重的生产隐患。</li>
+<li><strong>跳过 <code>/autoplan</code> 或颠倒评审顺序（未让 <code>Eng Review</code> 最后把关）</strong>：在设计师或 CEO 修改了交互状态与功能范围后，未重新经过工程经理最终核验就匆忙进入编码施工，导致前后端契约脱节与测试计划漏项。</li>
+</ol>
+<hr>
+<h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
+<ol>
+<li><strong>第 1 环 <code>/office-hours</code> 用 YC 六问刺破伪需求</strong>：严守“绝不写代码”硬门禁，通过需求真实性、现状凑合方案、极致具象用户、最窄切入点（Narrowest Wedge）、反直觉观察与未来演进六大逼问，完成痛点重构（The Reframe）与可证伪前提确认，并在双尺度工时与完整度评分下比选 2～3 套方案，产出 <code>*-design-*.md</code>。</li>
+<li><strong>第 2 环 <code>/spec</code> 将设计意图铸造为可执行契约</strong>：按“Why → Scope（含显式 <code>NOT in scope</code>）→ Technical（强制先读现有代码库）→ Draft（跨模型 <code>7/10</code> 分外部审查门禁与 Fail-Closed 密钥脱敏）→ File”五阶段推进，产出全团队唯一真相源 <code>spec.md</code>。</li>
+<li><strong>第 3 环 <code>/autoplan</code> 一键串联四方专家会审</strong>：按 <code>CEO → Design → DX → Eng</code> 严格串行推进；设计师强制补齐<strong>交互 5 状态</strong>并消灭 <strong>AI 模板感（AI Slop）</strong>，DX 专家打磨 CLI/API 接入体验，工程经理强制最后把关并输出 <strong>ASCII 架构图、状态机流转图、失败自救注册表与落盘 <code>Test Plan</code></strong>。</li>
+<li><strong>六大原则自动分流，人类主权高效拍板</strong>：利用六大编码决策原则将几十个机械性问题自动拍板并记入 <code>Decision Audit Trail</code>，仅将品味权衡（Taste Decisions）与方向异议（User Challenges）呈送 <code>Final Approval Gate</code> 由人类一次性裁决。</li>
+</ol>
+<hr>
+<h2 id="h-自检清单" class="sec-fixed">自检清单</h2>
+<ul>
+<li><input disabled="" type="checkbox"> 我能在只读模式下启动 <code>/office-hours</code>，运用 YC 六大逼问式问题将业务方模糊的“大而全需求”收敛为高价值的“最窄切入点（Narrowest Wedge）”，并列出 3～4 条可证伪前提吗？</li>
+<li><input disabled="" type="checkbox"> 我能在编写 <code>spec.md</code> 时清晰列出 <code>NOT in scope</code> 负面边界，督促智能体先扫描现有代码库再写技术方案，并理解为什么低于 <code>7/10</code> 分的规格必须被外部审查门禁拦截吗？</li>
+<li><input disabled="" type="checkbox"> 我能解释为什么 <code>/autoplan</code> 必须把 <code>Eng Review</code> 放在最后一棒，并能独立检查一份评审报告是否完整包含了交互 5 状态、去 AI Slop 约束、ASCII 架构/状态图、失败自救表与落盘 <code>Test Plan</code> 吗？</li>
+<li><input disabled="" type="checkbox"> 我能完整说出 <code>/autoplan</code> 的六大自动决策原则（选完整方案、顺手修完爆炸半径、务实从简、DRY、显式胜过炫技、行动优先），并分清机械性决策与品味权衡的边界吗？</li>
+</ul>
+<hr>
+<h2 id="h-练习与思考" class="sec-fixed">练习与思考</h2>
+<h3 id="h-基础辨析前三环职责边界与评审串行机制">基础辨析：前三环职责边界与评审串行机制</h3>
+<ol>
+<li><strong><code>/office-hours</code> 与 <code>/spec</code> 的分工辨析</strong>：某工程师认为：“既然第 2 环 <code>/spec</code> 也会写背景（Why）和范围（Scope），那第 1 环 <code>/office-hours</code> 纯属多此一举，以后接到需求直接跑 <code>/spec</code> 就行了。”请结合本节拆解的机制，说明如果直接跳过 <code>/office-hours</code> 的痛点重构（The Reframe）、六问逼问与 2～3 套备选方案比选，直接按照业务方最初的表象描述去写 <code>spec.md</code>，会导致什么工程后果？</li>
+<li><strong>评审串行顺序分析</strong>：在 <code>/autoplan</code> 流水线中，如果把 <code>Phase 3: Eng Review</code>（工程经理评审）调到第一位执行，把 <code>Phase 1: CEO Review</code> 和 <code>Phase 2: Design Review</code> 放在后面执行，会对最终落盘的 ASCII 状态机图和 <code>Test Plan</code> 造成什么具体破坏？</li>
+</ol>
+<h3 id="h-进阶分析规格门禁拦截诊断与交互-5-状态设计">进阶分析：规格门禁拦截诊断与交互 5 状态设计</h3>
+<p>某研发小组在使用第 2 环 <code>/spec</code> 起草一份内部系统的规格说明书时，其初稿在 Phase 4 被外部审查门禁打了 <code>5.0 / 10</code> 分并触发了硬性阻断。经检查发现，其初稿存在以下四处特征：</p>
+<ul>
+<li>特征 A：只写了本期要开发的 4 个正面功能，未包含 <code>NOT in scope</code> 章节；</li>
+<li>特征 B：在编写 <code>Technical</code> 章节前未调用 <code>Read / Grep</code> 扫描现有仓库，直接在方案里写“新建一套全局数据库连接池与自定义日志工具”，而实际上仓库的 <code>src/common/</code> 目录下早已存在成熟的连接池与日志组件；</li>
+<li>特征 C：为了举例说明接口调试方法，在规格文档的示例请求中直接粘贴了一串真实有效的内部测试环境管理员 Bearer Token；</li>
+<li>特征 D：前端部分只写了一句“调用列表接口展示数据表格”，未定义任何异常或空数据状态。</li>
+</ul>
+<p>请回答：</p>
+<ol>
+<li>特征 A、B、C 分别违反了 <code>/spec</code> 第 2、第 3、第 4 阶段的哪一条核心机制？</li>
+<li>当该计划随后进入 <code>/autoplan</code> 的 <code>Phase 2: Design Review</code> 时，针对特征 D，设计师角色会强制要求补齐哪 <strong>5 种交互状态</strong>？请逐一说明每种状态的设计要求。</li>
+</ol>
+<h3 id="h-迁移研讨为你的待开发模块制定前三环检查表">迁移研讨：为你的待开发模块制定前三环检查表</h3>
+<p>选择你所在团队即将启动的一个真实业务模块：</p>
+<ol>
+<li>尝试用 YC 六大逼问式问题中的“现状凑合方案（Status Quo）”与“最窄切入点（Narrowest Wedge）”对该模块做一次审视，写出至少 3 条属于 <strong><code>NOT in scope</code>（本期坚决不做）</strong> 的负面边界；</li>
+<li>梳理该模块中最关键的一条业务状态流转链，列出在进入编码施工前必须由 <code>/plan-eng-review</code> 产出的两张核心 ASCII 图表名称及 3 个需要填入《失败模式与自救注册表》的异常场景。</li>
+</ol>
+<hr>
+<h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
+<p>经过本节对 GStack 前三环（<code>/office-hours</code> → <code>/spec</code> → <code>/autoplan</code>）的深度拆解，我们已经清晰掌握了如何将模糊的初始需求转化为包含 <code>*-design-*.md</code>、<code>spec.md</code>、ASCII 架构/状态图、失败自救注册表与落盘 <code>Test Plan</code> 的完整工程蓝图。</p>
+<p>在下一节**【单元 2.2】《GStack 第 4 环受控编码施工（Build）：去“AI 模板感”的 UI 工程示范》<strong>中，我们将解析拿到这份获批蓝图后，如何通过 <code>/design-consultation</code> 与 <code>/design-shotgun</code> 建立开放标准 <code>DESIGN.md</code> 设计系统，如何在 <code>/guard</code>（<code>/careful</code> + <code>/freeze</code>）运行时护栏与四级复用阶梯约束下推进第 4 环受控施工，以及当施工中途遭遇规格未覆盖边缘时，如何通过 <strong>Confusion Protocol（困惑叫停）</strong>、</strong><code>gstack-shortcut</code> 妥协标记**与 <strong><code>gstack-verify-gate</code> 验证停止钩子</strong>守住工程交付质量。</p>
+<hr>
+<h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
+<ol>
+<li id="ref-1"><strong>[1] GStack 官方八环与 <code>/spec</code> 五阶段文档：</strong> Garry Tan (Y Combinator), <em>gstack README.md: <code>/office-hours</code>, <code>/spec</code> Five Phases &amp; Outside-Review Gate</em>（研读五阶段可执行规格精炼机制与 7/10 分外部评分门禁），<a href="https://github.com/garrytan/gstack/blob/main/README.md">GitHub 官方仓库</a>。</li>
+<li id="ref-2"><strong>[2] GStack 专家技能深潜手册（Office Hours / CEO / Design / DX / Eng Review）：</strong> Garry Tan, <em>gstack Skill Deep Dives (docs/skills.md)</em>（重点研读 YC 六大逼问问题、痛点重构经典案例、交互 5 状态、去 AI Slop 7 维评分以及为什么强制画 ASCII 图），<a href="https://github.com/garrytan/gstack/blob/main/docs/skills.md">GitHub 技能深潜指南</a>。</li>
+<li id="ref-3"><strong>[3] <code>/autoplan</code> 全自动四方评审流水线源码与规则：</strong> Garry Tan, <em>autoplan/SKILL.md: One Command, Fully Reviewed Plan Out</em>（查阅 Phase 0 智能范围探测、强制串行顺序、六大编码决策原则与三类决策分流逻辑），<a href="https://github.com/garrytan/gstack/blob/main/autoplan/SKILL.md">GitHub 源码规范</a>。</li>
+<li id="ref-4"><strong>[4] 如何为编码智能体编写高质量规格说明：</strong> Addy Osmani, <em>How to Write a Good Spec for AI Agents</em>（深入讲解 <code>NOT in scope</code> 负面清单、文件级契约与可验证验收标准），<a href="https://addyosmani.com/blog/good-spec/">技术专栏原文</a>。</li>
+<li id="ref-5"><strong>[5] 规范驱动开发（SDD）工程范式研究：</strong> Deepak Babu Piskala, <em>Spec-Driven Development: From Code to Contract in the Age of AI Coding Assistants (arXiv:2602.00180)</em>（理解从自然语言对话向可执行规格契约演进的理论体系），<a href="https://arxiv.org/html/2602.00180v1">arXiv 论文原文</a>。</li>
+</ol>
+</article>
+    <div class="pager">
+      <a href="/aicoding/units/1-3/">← 1.3 AI Coding 三层工具选型</a>
+      <a href="/aicoding/units/2-2/">2.2 GStack 第 4 环受控编码施工（Build） →</a>
+    </div>
+  </main>
+  <aside class="toc" data-pagefind-ignore>
+    <div class="nav-cap">本页目录</div>
+    <ul class="toc-list"><li class="lv2"><a href="#h-211-第-1-环-office-hours-核心功能与内部机制从表象请求到设计文档">2.1.1 第 1 环 /office-hours 核心功能与内部机制：从表象请求到设计文档</a></li><li class="lv3"><a href="#h-1-硬门禁纪律与双模式路由startup-模式-vs-builder-模式">1. 硬门禁纪律与双模式路由（Startup 模式 vs Builder 模式）</a></li><li class="lv3"><a href="#h-2-三大核心认知动作痛点重构三层认知检索与可证伪前提挑战">2. 三大核心认知动作：痛点重构、三层认知检索与可证伪前提挑战</a></li><li class="lv3"><a href="#h-3-跨模型冷读第二意见与强制-2～3-套备选方案比选">3. 跨模型冷读第二意见与强制 2～3 套备选方案比选</a></li><li class="lv2"><a href="#h-212-第-2-环-spec-实战五阶段可执行规格精炼与-710-外部评分门禁">2.1.2 第 2 环 /spec 实战：五阶段可执行规格精炼与 7/10 外部评分门禁</a></li><li class="lv3"><a href="#h-1-五阶段推进中的两大防失控核心机制">1. 五阶段推进中的两大防失控核心机制</a></li><li class="lv3"><a href="#h-2-双重安全与质量硬件闸门跨模型-710-分拦截与-fail-closed-密钥脱敏">2. 双重安全与质量硬件闸门：跨模型 7/10 分拦截与 Fail-Closed 密钥脱敏</a></li><li class="lv3"><a href="#h-3-可执行规格说明书specmd的标准工件结构表">3. 可执行规格说明书（spec.md）的标准工件结构表</a></li><li class="lv2"><a href="#h-213-第-3-环-autoplan-实战一键串行执行-ceo-→-design-→-dx-→-eng-四方评审">2.1.3 第 3 环 /autoplan 实战：一键串行执行 CEO → Design → DX → Eng 四方评审流水线</a></li><li class="lv3"><a href="#h-1-autoplan-的架构原理智能范围探测与为什么工程经理必须排在最后">1. /autoplan 的架构原理：智能范围探测与“为什么工程经理必须排在最后”？</a></li><li class="lv3"><a href="#h-2-前三棒专家评审机制详解ceo-范围缩放design-去-ai-模板感与-dx-开发者体验">2. 前三棒专家评审机制详解：CEO 范围缩放、Design 去 AI 模板感与 DX 开发者体验</a></li><li class="lv3"><a href="#h-3-第四棒压轴把关工程经理评审plan-eng-review——八大工程支柱ascii-图表与落盘-test-p">3. 第四棒压轴把关：工程经理评审（/plan-eng-review——八大工程支柱、ASCII 图表与落盘 Test Plan）</a></li><li class="lv3"><a href="#h-4-六大编码决策原则三类问题分流与-final-approval-gate">4. 六大编码决策原则、三类问题分流与 Final Approval Gate</a></li><li class="lv2"><a href="#h-反模式与红线">反模式与红线</a></li><li class="lv2"><a href="#h-本节小结">本节小结</a></li><li class="lv2"><a href="#h-自检清单">自检清单</a></li><li class="lv2"><a href="#h-练习与思考">练习与思考</a></li><li class="lv3"><a href="#h-基础辨析前三环职责边界与评审串行机制">基础辨析：前三环职责边界与评审串行机制</a></li><li class="lv3"><a href="#h-进阶分析规格门禁拦截诊断与交互-5-状态设计">进阶分析：规格门禁拦截诊断与交互 5 状态设计</a></li><li class="lv3"><a href="#h-迁移研讨为你的待开发模块制定前三环检查表">迁移研讨：为你的待开发模块制定前三环检查表</a></li><li class="lv2"><a href="#h-节末过渡">节末过渡</a></li><li class="lv2"><a href="#h-延伸阅读">延伸阅读</a></li></ul>
+  </aside>
+</div>
+<script>
+document.querySelectorAll('.prose pre').forEach(function(p){
+  var w=document.createElement('div'); w.className='code-wrap';
+  p.parentNode.insertBefore(w,p); w.appendChild(p);
+  var b=document.createElement('button'); b.className='copy-btn'; b.textContent='复制';
+  b.onclick=function(){ var t=p.innerText;
+    var done=function(){ b.textContent='已复制'; setTimeout(function(){b.textContent='复制';},1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(fallback); } else { fallback(); }
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select();
+      try{document.execCommand('copy'); done();}catch(e){ b.textContent='复制失败'; } document.body.removeChild(a); }
+  };
+  w.appendChild(b);
+});
+</script>
+</body>
+</html>
