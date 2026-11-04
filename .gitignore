@@ -1,0 +1,13 @@
+# 依赖与构建缓存
+node_modules/
+.astro/
+.npm/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.swp
+
+# 注意：M0 阶段 dist/ 里是手写占位页，故意入库以验证发布链路。
+# M1 接入 Astro 后把下面一行打开，dist 改由构建生成。
+# dist/

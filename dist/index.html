@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>通用 AI Coding 现代软件工程实战 · 教材</title>
+<meta name="description" content="教材网站建设中：21 个单元、7 章，按章分组，与配套实验手册双向互链。">
+<style>
+  :root{
+    --brand:#0b63b8; --cyan:#00a6c0; --violet:#6b4ce6; --amber:#d97706;
+    --ink:#0f1a24; --sub:#5b6b7a; --line:#e3e9ef; --soft:#f5f8fb; --card:#fff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#e8eef4; --sub:#9fb0c0; --line:#26323d; --soft:#151d25; --card:#1b242d; }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--soft); color:var(--ink);
+    font:15px/1.75 "Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+  }
+  header{
+    position:sticky; top:0; z-index:9; display:flex; align-items:center; gap:10px;
+    padding:14px 22px; background:color-mix(in srgb,var(--card) 88%,transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .mark{
+    width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--brand),var(--cyan)); color:#fff; font-weight:700;
+  }
+  .brand{font-weight:700; letter-spacing:.02em}
+  .brand small{display:block; font-weight:400; font-size:11.5px; color:var(--sub); letter-spacing:.08em}
+  main{max-width:820px; margin:0 auto; padding:56px 22px 96px}
+  .hero{
+    background:linear-gradient(135deg,#072b4d,#0b3e6b 55%,#0a2f52); color:#fff;
+    border-radius:20px; padding:40px 36px; box-shadow:0 18px 40px rgba(7,43,77,.18);
+  }
+  .hero h1{margin:0 0 10px; font-size:27px; line-height:1.35}
+  .hero p{margin:0; color:#cfe2f2; font-size:14.5px}
+  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:20px}
+  .tag{
+    font-size:12.5px; padding:5px 12px; border-radius:999px;
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22);
+  }
+  .card{
+    margin-top:26px; background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:22px 24px; box-shadow:0 2px 6px rgba(15,26,36,.05);
+  }
+  .card h2{margin:0 0 10px; font-size:16px; letter-spacing:.02em}
+  .card p{margin:0; color:var(--sub); font-size:14px}
+  .dot{width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:7px; vertical-align:middle}
+  .c0{background:var(--brand)} .c1{background:var(--cyan)} .c2{background:var(--violet)} .c3{background:var(--amber)}
+  footer{max-width:820px; margin:0 auto; padding:0 22px 48px; color:var(--sub); font-size:12.5px}
+  code{background:color-mix(in srgb,var(--brand) 8%,var(--soft)); padding:1px 5px; border-radius:4px; font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <span class="mark">教</span>
+  <span class="brand">通用 AI Coding 现代软件工程实战
+    <small>教材 · 7 章 21 单元</small>
+  </span>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>教材网站 · 建设中</h1>
+    <p>这里将承载教材正文全部 21 个单元：为什么这样判断、八环的门禁与判据、三个典型场景的原理与图例。与配套实验手册双站互链——教材讲为什么，手册讲怎么做。</p>
+    <div class="tags">
+      <span class="tag">7 章 · 21 单元</span>
+      <span class="tag">30 张架构图</span>
+      <span class="tag">按章分组导航</span>
+      <span class="tag">站内全文检索</span>
+    </div>
+  </section>
+
+  <div class="card">
+    <h2><span class="dot c0"></span>当前状态：M0 链路验证</h2>
+    <p>仓库与发布链路已打通，正文尚未上线。下一步（M1）接入教材正文与两级导航。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot c1"></span>配套实验手册已上线</h2>
+    <p>三篇实操正文 + 五套向导 + 三套素材包：<a href="https://www.cloudzun.com/mingzhou/">www.cloudzun.com/mingzhou/</a></p>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot c2"></span>本页是占位页</h2>
+    <p>仅用于验证 <code>/aicoding/</code> 子路径、Actions 构建与 Pages 部署。上线正文时整页替换。</p>
+  </div>
+</main>
+
+<footer>内容版本：M0 占位 ｜ 正文上线后此页由构建脚本生成</footer>
+</body>
+</html>

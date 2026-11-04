@@ -1,0 +1,67 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # M0：占位页直接产物。M1 起改为 npm ci + astro build && pagefind --site dist
+      - name: 构建产物
+        run: |
+          echo "M0 占位构建：直接使用 dist/"
+          ls -la dist/
+
+      - name: 敏感词扫描
+        run: |
+          python3 - <<'PY'
+          import re, sys, pathlib
+          PATTERNS = [r'浙江移动', r'zhejiang', r'移动公司', r'sk-[A-Za-z0-9]{16,}',
+                      r'10\.\d+\.\d+\.\d+', r'192\.168\.',
+                      r'[\w.]+@(?!example)[\w.]+\.(com|cn|net)']
+          # 允许的标准文档/私有网段（教学正文要引用，属正当内容）
+          ALLOW = {'10.0.0.0', '10.0.0.1', '172.16.0.0', '192.168.0.0', '192.168.1.1'}
+          hits = []
+          for f in pathlib.Path('dist').rglob('*'):
+              if 'pagefind' in str(f) or not f.is_file(): continue
+              if f.suffix not in ('.html', '.md', '.js', '.css', '.json', '.txt'): continue
+              t = f.read_text(encoding='utf-8', errors='ignore')
+              for pat in PATTERNS:
+                  for m in re.finditer(pat, t):
+                      if m.group(0) in ALLOW: continue
+                      hits.append((str(f), pat, m.group(0)[:40]))
+          if hits:
+              print('敏感词命中', len(hits))
+              for h in hits[:20]: print(' ', h)
+              sys.exit(1)
+          print('敏感词扫描：0 命中')
+          PY
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
