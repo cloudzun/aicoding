@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 产物由本地构建脚本生成后入库（含 mermaid 预渲染的 30 张 SVG），CI 只校验与发布。
+      # 产物由本地构建脚本生成后入库（含 mermaid 预渲染的 30 张 SVG），CI 只做校验与发布。
       # 构建工具在文档仓 project/aicoding/proto/：build-all.ps1（生成 + Pagefind 索引）。
       - name: 校验产物
         run: |
@@ -32,6 +32,19 @@ jobs:
 
       - name: 敏感词扫描
         run: python3 scripts/scan_sensitive.py
+
+      # QA 第 1 关：静态结构（秒级，无依赖）——路由自动发现，不靠手写列表
+      - name: QA · 静态结构
+        run: python3 scripts/qa_pages.py local
+
+      # QA 第 2 关：真浏览器（控制台/404/图渲染/搜索可点/横向溢出/移动端）
+      - name: QA · 真浏览器
+        run: |
+          node scripts/serve-dist.cjs 4330 &
+          sleep 2
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+          python3 scripts/qa_pages.py browser http://127.0.0.1:4330/aicoding
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

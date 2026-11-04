@@ -194,3 +194,10 @@
   .top-links a[href$="/print/"]{display:none}
   .top-links .pill{padding:5px 10px;font-size:12px;border-radius:999px}
 }
+
+/* 双站互链提示条 */
+.xref{margin:0 0 22px;padding:8px 13px;border-radius:10px;font-size:13px;color:var(--muted);
+  background:color-mix(in srgb,var(--brand) 6%,transparent);border-left:3px solid var(--brand)}
+.xref-k{margin-right:8px;color:var(--brand);font-weight:700}
+.xref a{color:var(--fg-soft);text-decoration:none;font-weight:600}
+.xref a:hover{color:var(--brand);text-decoration:underline}

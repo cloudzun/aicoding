@@ -64,6 +64,7 @@
     <h1>3.1　第 5 环 <code>/review</code> 结构排雷</h1>
     <p class="lede">偏执首席工程师与 <code>/cso</code> 全栈安全审计</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天上午“审查排雷、真实迭代 QA 与上下文/运行支撑机制（Harness）工程规范篇”的开篇单元，对应 GStack 八环中的第 5 环 <strong>偏执代码审查与安全审计（Review &amp; Security）</strong>。本节承接第一天下午第 4 环受控编码施工完成后的特性分支，立下现代 AI 软件工程的核心质量铁律：<strong>“本地功能跑通且基础单元测试变绿，绝不代表代码已经具备上线生产环境的资格。”</strong> 本节将系统拆解 <code>/review</code>（偏执首席工程师）猎杀的 9 类生产级结构性缺陷与三大内建治理机制（<code>Fix-First</code>、<code>Completeness Gaps</code>、<code>Gate Integrity</code>），深入剖析 <code>/cso</code>（首席安全官）基于 OWASP 与 STRIDE 模型开展的全栈安全审计及五大高危漏洞根治标准，并讲解如何运用 <code>/codex</code>（跨模型对抗审查）与 <code>gstack-wtree</code>（工作树内容指纹）构建不可篡改的代码准出门禁。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、后端架构师、安全工程师、Tech Lead、代码审查负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成第一天（单元 1.1 ～ 2.2）学习，掌握第 4 环受控施工规范、<code>gstack-shortcut</code> 技术债登记协议与 <code>gstack-verify-gate</code> 验证停止钩子。</span></div></div>
+    
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:3.1"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>解释为什么传统语法级 Linter 与基础单元测试无法拦截生产级故障，列出 <code>/review</code>（偏执首席工程师模式）猎杀的 9 类生产级结构性缺陷清单。</li>

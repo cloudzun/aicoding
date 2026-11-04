@@ -64,6 +64,7 @@
     <h1>4.1　第 7 环 <code>/ship</code> 发布工程师流水线</h1>
     <p class="lede">文档同步与远端部署金丝雀验证</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天下午“发布部署交付、系统化根因排障、量化复盘与多场景迁移篇”的开篇单元，对应 GStack 八环中的第 7 环 <strong>自动化发布与远端部署监控（Ship &amp; Deploy）</strong>。在传统软件工程与早期 AI 编程中，开发者往往把“本地代码写完提交”当成终点，结果导致测试覆盖率不足、仓库文档与最新代码严重脱节、以及“本地 <code>localhost</code> 能跑但远端生产环境报错”的交付断层。本节将系统拆解第 7 环上半程 <code>/ship</code>（发布工程师流水线）的测试框架冷启动（Test Bootstrap）、ASCII 覆盖率星级审计（Coverage Audit）与准出凭据核验；深入讲解内嵌的 <code>/document-release</code> 如何自动对齐代码差异与六大核心文档，以及 <code>/document-generate</code> 如何基于国际公认的 <strong>Diataxis 四象限框架</strong> 生成 100% 忠于源码的文档体系；最后完整打通下半程 <code>/setup-deploy</code> → <code>/land-and-deploy</code> → <code>/canary</code>（SRE 金丝雀巡检）与 <code>/benchmark</code>（Core Web Vitals 性能基线比对）的远端生产交付闭环。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、DevOps 与发布工程师、SRE 站点可靠性工程师、技术文档工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 3.3 学习，掌握第 5 环 <code>gstack-wtree</code> 审查凭据与第 6 环 <code>/qa</code> 实机验收流程。</span></div></div>
+    
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:4.1"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>说明 <code>/ship</code> 发布工程师流水线的核心步骤：解释测试框架冷启动（Test Bootstrap）、基于 <code>git diff</code> 的执行路径分析与 ASCII 覆盖率星级审计（<code>★★★ / ★★☆ / ★☆☆</code>）、准出仪表盘（<code>Review Readiness Dashboard</code>）鲜活度核验以及 PR 审查评论自动分诊机制各自拦截什么风险。</li>

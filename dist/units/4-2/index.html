@@ -64,6 +64,7 @@
     <h1>4.2　<code>/investigate</code> 五阶段排障</h1>
     <p class="lede">系统化根因定位与受控修复</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天下午的专项工程排障单元，聚焦 AI 编程时代最容易失控的痛点场景——<strong>复杂线上与联调故障排查（Systematic Root-Cause Debugging）</strong>。在使用普通编码智能体时，一旦遇到“本地开发环境正常、远端环境报错”或偶发的深层逻辑异常，开发者最常见的错误做法是直接把报错日志丢给 AI 说“帮我修好它”。这往往会诱发智能体跳过根因分析、在表象位置盲目叠加防御补丁（如到处乱加 <code>try/catch</code> 或空值吞没），导致“修一个表象 Bug、掩盖真实根因、同时引出三个新 Bug”的恶性死循环。本节将深入拆解 GStack 的 <strong><code>/investigate</code>（系统化根因调试器）</strong>：立下 <strong>“未查明根因前严禁写一行修复代码”</strong> 的最高铁律，详解五阶段标准排障工作流、六大生产故障模式匹配、自动 <code>/freeze</code> 目录锁定、<strong>“三振停机铁律（3-Strike Rule）”</strong> 以及 <strong>“5 文件爆炸半径门禁”</strong>。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、后端与基础架构工程师、SRE 运维工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 4.1 学习，掌握 <code>/freeze</code> 目录编辑半径锁与第 6 环 Fail-Before-Repair 回归测试铁律。</span></div></div>
+    
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:4.2"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>深刻剖析 AI 盲目修 Bug 导致“打地鼠式越改越乱”的机理，牢固树立 <code>/investigate</code> 的最高调试铁律（<code>NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST</code>）。</li>

@@ -64,6 +64,7 @@
     <h1>3.2　一次真实迭代实践</h1>
     <p class="lede">第 6 环 <code>/qa</code> 全表面实机探索与回归测试闭环</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天上午的核心实机验证单元，对应 GStack 八环中的第 6 环 <strong>真实浏览器与全表面功能验收（QA）</strong>。在真实软件工程中，从零搭建新系统往往只占 20% 的时间，剩下 80% 的时间都是在已跑通的存量代码库上引入增量迭代（如新增分级权限体系、叠加复杂促销折扣或变更数据表结构）——而这恰恰是 AI 编程最容易发生“修新功能、搞崩老功能（回归破坏 Regression）”的高危阶段。本节将首先拆解存量项目引入破坏性迭代时的受控变更流、Diff-aware 靶向审查与 <code>/design-review</code> 80 项实机视觉走查；进而全面剖析第 6 环 <code>/qa</code> 如何打通有界面浏览器（<code>/browse</code> 双引擎、<code>$B handoff</code> 人工接管与四层防注入护盾）与无界面本地隔离夹具（API / CLI / Webhook）；最后重点建立 <code>exploration-NNN.json</code> 科学探索证据链、<strong>“先写失败回归测试再修代码（Fail-Before-Repair）”</strong> 的核心铁律以及 <code>/test-audit</code> 低价值测试清理机制。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、QA 测试开发工程师、前后端开发工程师、技术负责人。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 3.1 学习，掌握第 5 环 <code>/review</code>、<code>/cso</code> 审计流程与 <code>gstack-wtree</code> 审查凭据状态机。</span></div></div>
+    
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:3.2"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>复述存量项目引入增量业务迭代的标准作业规程：解释源码改动如何触发 <code>gstack-wtree</code> 凭据自动降级为 <code>STALE</code>，如何基于 <code>git diff</code> 开展 Diff-aware 靶向审查，以及如何用 <code>/design-review</code> 完成上线前 80 项视觉走查与样式单问题原子提交。</li>

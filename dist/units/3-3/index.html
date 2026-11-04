@@ -64,6 +64,7 @@
     <h1>3.3　AI Coding 上下文工程（Context Engineering）</h1>
     <p class="lede">Harness 规则治理与子代理/MCP 生态</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第二天上午的压轴方法论与工具治理单元。在亲历了 GStack 前六环的完整开发与质量验证后，本节从“如何使用技能”上升到“如何构建驯服大模型的运行支撑机制（Harness）”：首先剖析为什么单次提示词工程（Prompt Engineering）在长周期工程中必然失效，建立基于 Anthropic 四大支柱的 <strong>上下文工程（Context Engineering）</strong> 与 Token 经济学审计体系（TRAE <code>Context Compaction</code> 与 <code>gstack-context-bill</code>）；进而详解项目规则（Project Rules）的四大激活模式、3 层递归目录与跨工具通用标准 <code>AGENTS.md</code> / <code>CLAUDE.md</code>；随后系统拆解模块化技能（Skills）、独立上下文子代理（Subagents）、确定性运行时钩子（Runtime Hooks）与五大 MCP 全栈连接场景，并提供 GStack 在主流工具中的三种标准移植方案与 Harness 赋能对照分析。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">全栈研发工程师、AI 平台架构师、研发效能负责人、Tech Lead。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已完成单元 1.1 ～ 3.2 学习，熟悉四大通用交互原语与 GStack 前六环工作流。</span></div></div>
+    
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:3.3"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>区分从“提示词工程”向“上下文工程（Context Engineering）”的范式跃迁，解释上下文腐化（Context Rot）的成因与 Anthropic 上下文治理四大支柱，并配置 TRAE <code>Compact</code> 与 <code>gstack-context-bill</code> 完成一次上下文压缩与词元成本审计。</li>

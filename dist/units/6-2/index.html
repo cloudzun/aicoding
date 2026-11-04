@@ -64,6 +64,7 @@
     <h1>6.2　实现生产数据飞轮</h1>
     <p class="lede">企业级 AI 研发治理</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第六章的收官单元，也是全书通用工程方法论从“单点项目交付（Day-1）”走向“持续生产运营与百人团队规模化治理（Day-2）”的总收口。前五章与 <code>单元 6.1</code> 解决了四大类 AI 场景如何从 0 到 1 做出可判定、不闯祸的系统；本节回答系统上线与团队推广后最痛的四个工程与管理问题：<strong>线上出现评测集之外的坏样本怎么自动回流？全量调用旗舰大模型太贵太慢怎么降本提速？几十个小组各自写规则怎么收拢成部门级共享资产？研发主管到底该用什么指标考核 AI Coding 的真实效能？</strong></span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">技术负责人、架构师、研发效能主管，以及需要将原型推向生产环境的交付工程师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">熟悉 GStack 八环流程（特别是第 8 环 <code>/retro</code> 与环 0 <code>/eval-plan</code>）及第五章的五类归因法（<code>5.5.4</code>）。</span></div><div class="guide-row"><span class="guide-k">定制定位</span><span class="guide-v">第 7 章为通用版教材的行业定制派生分支，仅替换表层业务实体名词（运营商网元、政企专线、自智网络等），底层 GStack 八环方法论与第 1-6 章 100% 一致。</span></div></div>
+    <p class="xref"><span class="xref-k">配套手册</span>这一节的"怎么做"在<a href="https://www.cloudzun.com/mingzhou/handbook/03/" target="_blank" rel="noopener">3. 适配自选案例 ↗</a></p>
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:6.2"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>能区分生产环境的三大漂移（提问漂移、标准漂移、模型漂移），并画出从线上 <code>trace.jsonl</code> 采集到黄金评估集扩充的 Day-2 数据飞轮（图 6-2）。</li>

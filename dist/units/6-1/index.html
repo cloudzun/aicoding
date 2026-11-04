@@ -64,6 +64,7 @@
     <h1>6.1　受控行动智能体</h1>
     <p class="lede">工具调用、干跑预演闸与轨迹评测</p>
     <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）<strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过</strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
+    <p class="xref"><span class="xref-k">配套手册</span>这一节的"怎么做"在<a href="https://www.cloudzun.com/mingzhou/handbook/03/" target="_blank" rel="noopener">3. 适配自选案例 ↗</a></p>
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:6.1"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>能画出受控行动智能体的四层结构与读写分流链路，说清每层的输入、输出与特有失效点。</li>
