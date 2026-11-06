@@ -167,7 +167,7 @@
 <p>当根因在 Phase 3 被 100% 证实（例如：证实是因为远端容器默认时区为 <code>UTC</code> 且某处日期解析函数未显式指定时区偏移，叠加空值未初始化导致跨日切分报表报错）后，才正式进入修复与收尾阶段<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ol>
 <li><strong>Phase 4：最小 Diff 修复与“5 文件爆炸半径门禁”</strong>：<ul>
-<li>严格遵循第 6 环的 <strong>Fail-Before-Repair</strong> 铁律：先写一条模拟该根因条件（如显式传入 <code>TZ=UTC</code> 与跨日边界时间戳）的回归测试并确认其变红失败，然后用**最小的代码改动（Minimal Diff）**修复根因；</li>
+<li>严格遵循第 6 环的 <strong>Fail-Before-Repair</strong> 铁律：先写一条模拟该根因条件（如显式传入 <code>TZ=UTC</code> 与跨日边界时间戳）的回归测试并确认其变红失败，然后用<strong>最小的代码改动（Minimal Diff）</strong>修复根因；</li>
 <li><strong>5 文件爆炸半径硬门禁（Blast Radius Gate — Touches &gt; 5 Files）</strong>：一个精准的根因修复通常只需要改动 1～3 个文件。如果智能体发现修复方案需要同时修改 <strong>超过 5 个文件（<code>&gt; 5 files</code>）</strong>，系统会立即认为该修复可能演变成了高风险的大规模重构，<strong>强制弹出爆炸半径告警并暂停执行</strong>，必须经人类工程师显式确认影响范围后才允许落地<sup class="cite"><a href="#ref-1">[1]</a></sup>！</li>
 </ul>
 </li>
@@ -256,14 +256,14 @@
 <h3 id="h-迁移研讨建立你项目的《高频环境配置漂移configuration-drift核查表》">迁移研讨：建立你项目的《高频环境配置漂移（Configuration Drift）核查表》</h3>
 <p>结合你当前项目的技术栈与部署架构：</p>
 <ol>
-<li>列出至少 4 项在“本地开发机（Windows/macOS）”与“远端部署环境（Linux Docker 容器/云平台）”之间最容易发生**配置漂移（Configuration Drift）**的具体维度（如系统时区 <code>TZ</code>、文件路径大小写敏感度、行尾换行符 <code>CRLF/LF</code>、环境变量注入、系统级原生依赖库等）；</li>
+<li>列出至少 4 项在“本地开发机（Windows/macOS）”与“远端部署环境（Linux Docker 容器/云平台）”之间最容易发生<strong>配置漂移（Configuration Drift）</strong>的具体维度（如系统时区 <code>TZ</code>、文件路径大小写敏感度、行尾换行符 <code>CRLF/LF</code>、环境变量注入、系统级原生依赖库等）；</li>
 <li>将这 4 项检查固化为你项目 <code>AGENTS.md</code> 或排障 Skill 中的标准预检清单。</li>
 </ol>
 <hr>
 <h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
 <p>至此，我们已经掌握了在系统上线运行后如何运用 <code>/investigate</code> 科学排障、稳准狠地消除线上隐患。</p>
 <p>当一个完整的迭代周期（从第 1 环 <code>/office-hours</code> 到第 7 环 <code>/ship</code> 部署及线上排障）走完全程，前七环收官后，我们进入八环闭环的最后一环——<strong>如何用真实的 Git 数据量化复盘整个周期的工程质量（第 8 环 <code>/retro</code>）？如何将这两天踩过的所有坑转化为团队越用越聪明的机构记忆复利（<code>/learn</code> 与 GBrain）？以及如何将这套 GStack 八环方法论扩展到 10 路并行的多智能体软件工厂，并迁移应用到企业最常见的五大真实研发场景中？</strong></p>
-<p>请翻开下一节**【单元 4.3】《第 8 环 /retro + /learn：量化复盘、多智能体并行工厂与五大场景迁移》**！</p>
+<p>请翻开下一节<strong>【单元 4.3】《第 8 环 /retro + /learn：量化复盘、多智能体并行工厂与五大场景迁移》</strong>！</p>
 <hr>
 <h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
 <ol>

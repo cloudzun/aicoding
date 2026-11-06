@@ -76,7 +76,7 @@
 <h2 id="h-221-ai-原生-uiux-视觉工程管线从开放标准-designmd-到多视口动态布局">2.2.1 AI 原生 UI/UX 视觉工程管线：从开放标准 <code>DESIGN.md</code> 到多视口动态布局</h2>
 <p>在单元 2.1 结束时，工程团队已经拿到了经四方会审通过的 <code>spec.md</code>。许多开发者此时会直接切换到 IDE 的多文件构建代理模式（如 CodeBuddy 的 <code>Craft</code> 模式或 TRAE 的 <code>Built-in Agent</code> 模式），输入一句“请按 <code>spec.md</code> 把前后端代码全部写出来”。</p>
 <p>然而，在涉及前端与客户端界面的项目中，如果仅凭自然语言提示词直接生成 UI 代码，往往会遭遇一个普遍痛点：<strong>即使在评审阶段用文字规定了“不要蓝紫渐变”，智能体在跨多个会话编写不同页面时，生成的字体字号、圆角半径、间距阶梯、色彩冷暖与状态反馈依然前后割裂、拼凑感极强。</strong></p>
-<p>这是因为自然语言描述缺乏精确的**设计词元（Design Tokens）**约束。为了从根源上消除前端“AI 模板感（AI Slop）”，GStack 构建了一条由 <strong><code>/design-consultation</code> → <code>/design-shotgun</code> → <code>/design-html</code></strong> 组成的 AI 原生 UI/UX 视觉工程管线<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。</p>
+<p>这是因为自然语言描述缺乏精确的<strong>设计词元（Design Tokens）</strong>约束。为了从根源上消除前端“AI 模板感（AI Slop）”，GStack 构建了一条由 <strong><code>/design-consultation</code> → <code>/design-shotgun</code> → <code>/design-html</code></strong> 组成的 AI 原生 UI/UX 视觉工程管线<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-3">[3]</a></sup>。</p>
 <h3 id="h-1-design-consultation设计系统咨询顾问与开放标准-designmd">1. <code>/design-consultation</code>（设计系统咨询顾问）与开放标准 <code>DESIGN.md</code></h3>
 <p>在编写任何一行前端组件代码前，团队首先运行 <strong><code>/design-consultation</code></strong>。该技能扮演资深设计系统架构师的角色，通过结构化调研与提案，将抽象的审美偏好固化为全工具可读的工程文件<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ol>
@@ -135,9 +135,9 @@
 <p>为此，GStack 提供了 <strong><code>/design-shotgun</code>（多变体散弹枪探索）</strong> 与 <strong><code>gstack-taste-update</code>（审美品味记忆）</strong> 联动机制<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ol>
 <li><strong>并排生成多套差异化布局变体（Comparison Board）</strong>：
-调用 <code>/design-shotgun</code> 时，智能体会在严格遵守 <code>DESIGN.md</code> 色彩与字体词元的前提下，围绕同一功能需求一次性生成 3 套采用不同信息密度与交互范式的 HTML/CSS 视觉变体（例如：变体 A 采用高密度表格流、变体 B 采用分栏泳道大热区工单卡、变体 C 采用主从分屏详情视图），并在本地浏览器自动拉起**并排对比看板（Comparison Board）**供人类直观审阅。</li>
+调用 <code>/design-shotgun</code> 时，智能体会在严格遵守 <code>DESIGN.md</code> 色彩与字体词元的前提下，围绕同一功能需求一次性生成 3 套采用不同信息密度与交互范式的 HTML/CSS 视觉变体（例如：变体 A 采用高密度表格流、变体 B 采用分栏泳道大热区工单卡、变体 C 采用主从分屏详情视图），并在本地浏览器自动拉起<strong>并排对比看板（Comparison Board）</strong>供人类直观审阅。</li>
 <li><strong>批准/否决反馈触发 <code>gstack-taste-update</code> 品味沉淀</strong>：
-当人类工程师在对比看板上做出选择（例如批准变体 B，并否决变体 A 的密集行内小按钮）时，系统会自动触发 <strong><code>gstack-taste-update</code></strong> 脚本，将人类的显式审美偏好（Approved Patterns 与 Rejected Patterns）结构化写入项目的**审美品味档案（Taste Memory）**中<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
+当人类工程师在对比看板上做出选择（例如批准变体 B，并否决变体 A 的密集行内小按钮）时，系统会自动触发 <strong><code>gstack-taste-update</code></strong> 脚本，将人类的显式审美偏好（Approved Patterns 与 Rejected Patterns）结构化写入项目的<strong>审美品味档案（Taste Memory）</strong>中<sup class="cite"><a href="#ref-1">[1]</a></sup>。</li>
 <li><strong>每周 5% 的品味自然衰减机制（5% Weekly Decay）</strong>：
 值得一提的是，GStack 的品味记忆并非一成不变的死板教条——系统为已记录的审美权重设计了<strong>每周 5% 的自然时间衰减率</strong><sup class="cite"><a href="#ref-1">[1]</a></sup>。这一精妙设计的工程考量在于：既能保证在当前项目周期内，后续所有前端子代理都能自动延续团队的审美品味（无需人类每次重复叮嘱），又能防止过期的历史偏好永久锁死未来的设计演进空间。</li>
 </ol>
@@ -176,7 +176,7 @@
 </ol>
 <hr>
 <h3 id="h-2-践行四级复用阶梯the-reuse-ladder与-deslop-shared-libs-共享库去重">2. 践行“四级复用阶梯（The Reuse Ladder）”与 <code>/deslop-shared-libs</code> 共享库去重</h3>
-<p>开启 <code>/guard</code> 护栏后，智能体开始按 <code>spec.md</code> 编写后端服务、数据库事务、前端视图与 CLI 工具。此时最容易出现的第二个工程顽疾是**“重复造轮子与依赖爆炸”**——智能体不先检索仓库里已有的工具函数，每个文件都自己重写一套数据库事务包装、日期格式化或参数解析逻辑，甚至为了一两行简单功能私自运行 <code>npm install</code> / <code>pip install</code> 引入冷门第三方包。</p>
+<p>开启 <code>/guard</code> 护栏后，智能体开始按 <code>spec.md</code> 编写后端服务、数据库事务、前端视图与 CLI 工具。此时最容易出现的第二个工程顽疾是<strong>“重复造轮子与依赖爆炸”</strong>——智能体不先检索仓库里已有的工具函数，每个文件都自己重写一套数据库事务包装、日期格式化或参数解析逻辑，甚至为了一两行简单功能私自运行 <code>npm install</code> / <code>pip install</code> 引入冷门第三方包。</p>
 <p>为此，GStack 确立了强制性的 <strong>四级复用阶梯（The Reuse Ladder）</strong> 与 <strong><code>/deslop-shared-libs</code></strong> 去重技能<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
 <table>
 <thead>
@@ -215,7 +215,7 @@
 <p>此外，在跨多个特性分支或长周期迭代后，如果团队怀疑不同模块间已经滋生了重复的辅助代码（Boilerplate Duplication），可以随时调用 GStack 的 <strong><code>/deslop-shared-libs</code>（共享库提取与重复代码去重）</strong> 技能<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ul>
 <li>该技能会自动扫描仓库<strong>过去 14 天内的 Git 提交历史</strong>，识别在不同文件中被反复复制粘贴或高度相似的工具逻辑；</li>
-<li>它会综合评估最多 <strong>5 个共享模块提取候选方案</strong>，计算提取前后的耦合度变化，并按**净节省代码行数（Net LOC Saved）**由高到低向人类推荐排名前 <strong>3</strong> 的重构方案，持续保持代码库的干练与整洁。</li>
+<li>它会综合评估最多 <strong>5 个共享模块提取候选方案</strong>，计算提取前后的耦合度变化，并按<strong>净节省代码行数（Net LOC Saved）</strong>由高到低向人类推荐排名前 <strong>3</strong> 的重构方案，持续保持代码库的干练与整洁。</li>
 </ul>
 <hr>
 <h2 id="h-223-施工期动态边界治理confusion-protocol困惑叫停协议与-gstack-shortcut-妥">2.2.3 施工期动态边界治理：Confusion Protocol（困惑叫停协议）与 <code>gstack-shortcut</code> 妥协留痕</h2>
@@ -272,13 +272,13 @@
 <p>在源码中打上 <code>gstack-shortcut(dec-id)</code> 标记后，它将在 GStack 后半程的质量与复盘闭环中发挥两项关键的跨环联动作用<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ol>
 <li><strong>对第 5 环 <code>/review</code> 的免打扰豁免</strong>：当我们在第 5 环运行偏执首席工程师代码审查（<code>/review</code>）时，审查代理扫描到该处简化逻辑后，会读取旁边的 <code>gstack-shortcut(dec-id)</code> 标记并与决策账本核对。确认属于人类已批准的折中后，<code>/review</code> 会将其归类为“已登记的受控技术债”，而不会将其误报为“偷工减料（Completeness Gap）”反复阻断流水线。</li>
-<li><strong>对第 8 环 <code>/retro</code> 的自动化债务盘点</strong>：当项目进入第 8 环工程复盘（<code>/retro</code>）时，复盘代理会自动扫描全仓所有的 <code>gstack-shortcut</code> 标记，将其汇总生成一份结构化的**《技术债追踪账本（Technical Debt Ledger）》**，自动检查当前系统的负载或规模是否已逼近 <code>upgrade when</code> 阈值，从而驱动团队在下一迭代精准还债。</li>
+<li><strong>对第 8 环 <code>/retro</code> 的自动化债务盘点</strong>：当项目进入第 8 环工程复盘（<code>/retro</code>）时，复盘代理会自动扫描全仓所有的 <code>gstack-shortcut</code> 标记，将其汇总生成一份结构化的<strong>《技术债追踪账本（Technical Debt Ledger）》</strong>，自动检查当前系统的负载或规模是否已逼近 <code>upgrade when</code> 阈值，从而驱动团队在下一迭代精准还债。</li>
 </ol>
 <hr>
 <h2 id="h-224-确定性交付门禁gstack-verify-gate-验证停止钩子小步原子提交与跨会话状态恢复">2.2.4 确定性交付门禁：<code>gstack-verify-gate</code> 验证停止钩子、小步原子提交与跨会话状态恢复</h2>
 <p>当核心业务代码与前端组件陆续编写完毕时，如何从机制上保证智能体交付的是真正跑通验证的扎实工程，而不是“表面看似写完、一跑就崩”的半成品？又如何在长时间施工后安全地保存工程记忆？这依赖于第 4 环收尾阶段的三大确定性机制。</p>
 <h3 id="h-1-配置-gstack-verify-gate-验证停止钩子根治未验证即报完工">1. 配置 <code>gstack-verify-gate</code> 验证停止钩子：根治“未验证即报完工”</h3>
-<p>在使用编码智能体时，广大开发者最常遭遇的窝火现象莫过于：智能体修改完最后一个代码文件后，连测试命令都没运行（或者虽然运行了测试，但终端里有 2 条报错被它选择性忽略），就直接在对话框里输出：“所有功能已全部开发完毕，请您查收！”——这种行为直接违背了单元 1.2 确立的第四条构建者信条**“诚实工程（Honest Work：写完了但没验证绝不等于已完成）”**。</p>
+<p>在使用编码智能体时，广大开发者最常遭遇的窝火现象莫过于：智能体修改完最后一个代码文件后，连测试命令都没运行（或者虽然运行了测试，但终端里有 2 条报错被它选择性忽略），就直接在对话框里输出：“所有功能已全部开发完毕，请您查收！”——这种行为直接违背了单元 1.2 确立的第四条构建者信条<strong>“诚实工程（Honest Work：写完了但没验证绝不等于已完成）”</strong>。</p>
 <p>为了从工具运行时底层根除这种敷衍行为，GStack 提供了挂载于智能体 <strong><code>Stop</code>（回合结束）生命周期事件</strong> 上的确定性钩子——<strong><code>gstack-verify-gate</code>（验证停止门禁）</strong><sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
 <ol>
 <li><strong>声明项目级必过验证指令</strong>：
@@ -294,7 +294,7 @@
 </ol>
 <hr>
 <h3 id="h-2-todo-清单逐项实时核销与小步原子级-git-提交atomic-commits">2. Todo 清单逐项实时核销与小步原子级 Git 提交（Atomic Commits）</h3>
-<p>在持续数小时的第 4 环受控施工中，另一条严厉禁止的工程反模式是**“憋大招式提交”**——即放任智能体一口气修改 20 多个文件、堆积上千行代码，直到最后才把任务列表一次性全部打钩，并执行单次巨型提交 <code>git commit -m &quot;implement all features&quot;</code>。一旦后续发现某处引入了隐蔽的回归缺陷，这种巨型提交会让代码审查（Code Review）与故障二分排查（<code>git bisect</code>）寸步难行。</p>
+<p>在持续数小时的第 4 环受控施工中，另一条严厉禁止的工程反模式是<strong>“憋大招式提交”</strong>——即放任智能体一口气修改 20 多个文件、堆积上千行代码，直到最后才把任务列表一次性全部打钩，并执行单次巨型提交 <code>git commit -m &quot;implement all features&quot;</code>。一旦后续发现某处引入了隐蔽的回归缺陷，这种巨型提交会让代码审查（Code Review）与故障二分排查（<code>git bisect</code>）寸步难行。</p>
 <p>GStack 强制规定第 4 环施工必须遵循 <strong>“Todo 逐项实时核销 + 小步原子级 Git 提交（Atomic Commits）”</strong> 节奏<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
 <table>
 <thead>
@@ -323,7 +323,7 @@
 <hr>
 <h3 id="h-3-跨会话无损状态接力context-save-与-context-restore">3. 跨会话无损状态接力：<code>/context-save</code> 与 <code>/context-restore</code></h3>
 <p>当第 4 环受控施工完成、所有子模块均已通过 <code>gstack-verify-gate</code> 并形成清晰的原子提交序列后，当前 IDE 会话通常已经经历了数十轮工具调用，上下文窗口中堆积了大量中间编译输出、搜索结果与文件片段。</p>
-<p>如果接下来直接在这个臃肿的旧会话窗口里继续执行第 5 环 <code>/review</code>（结构排雷）与 <code>/cso</code>（安全审计），不仅每一次提问都要为庞大的历史记录重复支付词元成本，更会触发单元 1.3 所讲的**“上下文腐化（Context Rot）”**，导致审查代理注意力分散、漏报深层漏洞；但反过来，如果直接关掉旧窗口、打开一个完全空白的新会话，新智能体又对刚才施工期触发 <code>Confusion Protocol</code> 回补的规则细节以及代码中留下的 <code>gstack-shortcut(dec-id)</code> 毫无记忆。</p>
+<p>如果接下来直接在这个臃肿的旧会话窗口里继续执行第 5 环 <code>/review</code>（结构排雷）与 <code>/cso</code>（安全审计），不仅每一次提问都要为庞大的历史记录重复支付词元成本，更会触发单元 1.3 所讲的<strong>“上下文腐化（Context Rot）”</strong>，导致审查代理注意力分散、漏报深层漏洞；但反过来，如果直接关掉旧窗口、打开一个完全空白的新会话，新智能体又对刚才施工期触发 <code>Confusion Protocol</code> 回补的规则细节以及代码中留下的 <code>gstack-shortcut(dec-id)</code> 毫无记忆。</p>
 <p>为了解决“清理上下文膨胀”与“保留关键工程记忆”之间的矛盾，GStack 提供了 <strong><code>/context-save</code></strong> 与 <strong><code>/context-restore</code></strong> 跨会话无损接力工具<sup class="cite"><a href="#ref-1">[1]</a></sup>：</p>
 <ol>
 <li><strong>阶段收尾运行 <code>/context-save</code>（生成高信噪比结构化快照）</strong>：
@@ -403,7 +403,7 @@
 <h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
 <p>至此，<strong>第一天（Day 1：认知与工具篇 + 规划与施工篇）</strong> 的五个单元已全部完成！我们不仅建立起了规范驱动开发（SDD）与 GStack 八环的方法论底座，更系统掌握了第 1 环 <code>/office-hours</code>（痛点重构）、第 2 环 <code>/spec</code>（可执行规格与 7/10 门禁）、第 3 环 <code>/autoplan</code>（四方流水线会审）与第 4 环受控编码施工（<code>DESIGN.md</code> 视觉管线、<code>/guard</code> 运行时护栏、四级复用阶梯、Confusion Protocol 动态回补与 <code>gstack-verify-gate</code> 验证门禁）的完整工程骨架。</p>
 <p>但请记住 GStack 的核心警示：<strong>“通过了基础单元测试，绝不代表代码已经安全、健壮到可以直接推上生产环境！”</strong> 在第 4 环写出的特性分支代码里，是否还潜伏着能轻易混过单元测试、却会在生产高峰期打崩数据库的 N+1 查询、脏读或并发竞态？是否还藏着水平越权（IDOR）、SQL 注入、SSRF 或敏感凭据泄露等安全漏洞？</p>
-<p>第二天上午（Day 2 上午），我们将进入扣人心弦的“代码审查、安全审计与真实浏览器 QA 篇”——在下一节**【单元 3.1】《第 5 环 /review 结构排雷：偏执首席工程师与 /cso 全栈安全审计》**中，我们将深入拆解 GStack 虚拟团队里最严厉的两位守门人（偏执的首席工程师与首席安全官），看它们如何对代码库展开地毯式结构排雷与对抗性安全加固！</p>
+<p>第二天上午（Day 2 上午），我们将进入扣人心弦的“代码审查、安全审计与真实浏览器 QA 篇”——在下一节<strong>【单元 3.1】《第 5 环 /review 结构排雷：偏执首席工程师与 /cso 全栈安全审计》</strong>中，我们将深入拆解 GStack 虚拟团队里最严厉的两位守门人（偏执的首席工程师与首席安全官），看它们如何对代码库展开地毯式结构排雷与对抗性安全加固！</p>
 <hr>
 <h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
 <ol>

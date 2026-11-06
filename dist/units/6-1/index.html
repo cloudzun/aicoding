@@ -63,7 +63,7 @@
     </div>
     <h1>6.1　受控行动智能体</h1>
     <p class="lede">工具调用、干跑预演闸与轨迹评测</p>
-    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）<strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过</strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
+    <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）</strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过<strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
     <p class="xref"><span class="xref-k">配套手册</span>这一节的"怎么做"在<a href="https://www.cloudzun.com/mingzhou/handbook/03/" target="_blank" rel="noopener">3. 适配自选案例 ↗</a></p>
     <article class="prose" data-pagefind-body data-pagefind-meta="单元:6.1"><p class="goal-cap">本节学习目标</p>
 <ol>
@@ -83,7 +83,7 @@
 <li><strong>状态污染（State Pollution）</strong>：只读查询失败可以重跑，而一旦调用了建单、改价、退费或下发配置等写操作接口，外部数据库或生产设备状态即被篡改，无法通过简单的页面刷新恢复；</li>
 <li><strong>死循环重试风暴（Retry Storm）</strong>：当外部接口返回报错或权限拒绝时，缺乏步数熔断的自主智能体会反复变换参数暴力重试，在几秒内打出数十次错误写请求，触发下游系统雪崩。</li>
 </ul>
-<p>开放式Web应用安全项目（OWASP）发布的《大语言模型应用十大安全风险（2025 版）》将<strong>过度代理权限（LLM06: Excessive Agency）<strong>列为核心威胁<sup class="cite"><a href="#ref-1">[1]</a></sup>。与此同时，普林斯顿大学与 Sierra 联合发布的行动型智能体权威基准 <strong>τ-bench（TAU-bench）</strong> 实证表明<sup class="cite"><a href="#ref-2">[2]</a></sup>：在需要严格遵循企业规章制度（Policy）并调用读写工具修改数据库状态的真实业务场景中，即便是顶尖前沿大模型，单次执行成功率（<code>pass@1</code>）也普遍不足 <strong>60%</strong>；而当要求</strong>连续 8 次独立运行同一任务全部成功（<code>pass^8</code>）<strong>时，成功率更是断崖式跌至 <strong>25% 以下</strong>。绝大部分失败并非因为模型听不懂人话，而是因为</strong>漏调前置核查工具、传错工具参数或越过业务制度红线直接执行写操作</strong>。</p>
+<p>开放式Web应用安全项目（OWASP）发布的《大语言模型应用十大安全风险（2025 版）》将<strong>过度代理权限（LLM06: Excessive Agency）</strong>列为核心威胁<sup class="cite"><a href="#ref-1">[1]</a></sup>。与此同时，普林斯顿大学与 Sierra 联合发布的行动型智能体权威基准 <strong>τ-bench（TAU-bench）</strong> 实证表明<sup class="cite"><a href="#ref-2">[2]</a></sup>：在需要严格遵循企业规章制度（Policy）并调用读写工具修改数据库状态的真实业务场景中，即便是顶尖前沿大模型，单次执行成功率（<code>pass@1</code>）也普遍不足 <strong>60%</strong>；而当要求<strong>连续 8 次独立运行同一任务全部成功（<code>pass^8</code>）</strong>时，成功率更是断崖式跌至 <strong>25% 以下</strong>。绝大部分失败并非因为模型听不懂人话，而是因为<strong>漏调前置核查工具、传错工具参数或越过业务制度红线直接执行写操作</strong>。</p>
 <h3 id="h-2-四层结构">2. 四层结构</h3>
 <p>为防范上述风险，企业级受控行动智能体绝不能采用“一个提示词挂载二十个读写工具任由模型自由发挥”的粗放结构，必须拆解为职责严密隔离的四层体系：</p>
 <table>
@@ -465,7 +465,7 @@
 <li><strong>假象二（跳过安检、侥幸蒙对）</strong>：模型没有调用必调的 <code>check_time_window_conflict</code>（冲突检查探针），直接盲猜参数生成了变更单；虽然在某一道正常题目上碰巧没冲突，但在生产环境无异于盲人开车；</li>
 <li><strong>假象三（单次撞大运、三次出事故）</strong>：同一道题跑三次，第一次成功，第二次传错了部门编码，第三次漏填了回退方案。</li>
 </ul>
-<p>因此，本节借鉴 τ-bench（TAU-bench）<sup class="cite"><a href="#ref-2">[2]</a></sup> 的评测范式，确立**“最终环境状态比对 + 工具调用轨迹核验 + <code>pass^k</code> 连续一致性”**三位一体的验收标准。</p>
+<p>因此，本节借鉴 τ-bench（TAU-bench）<sup class="cite"><a href="#ref-2">[2]</a></sup> 的评测范式，确立<strong>“最终环境状态比对 + 工具调用轨迹核验 + <code>pass^k</code> 连续一致性”</strong>三位一体的验收标准。</p>
 <h3 id="h-2-五项可判定口径与-pass^k-连续一致性指标">2. 五项可判定口径与 <code>pass^k</code> 连续一致性指标</h3>
 <p>我们将客户笼统的“处理准确率 ≥90%、违规 100% 拦截”改写为以下五项可由机器自动判定的硬口径：</p>
 <table>
@@ -652,10 +652,10 @@
 <h2 id="h-本节小结" class="sec-fixed">本节小结</h2>
 <ol>
 <li>受控行动智能体由<strong>意图与状态机、只读探针、干跑预演与审批闸、受控执行与回退</strong>四层构成，核心在于将“零副作用的读取”与“有副作用的写入”物理分流。</li>
-<li>面对客户“全自动闭环”的诉求，用**工具三态分级表（Tier 1 自动探针 / Tier 2 干跑预演 + HITL / Tier 3 物理阻断）**划定安全边界，严防 OWASP LLM06 过度代理风险。</li>
-<li>处理现场照片或扫描件凭据时，坚持**“VLM 抽取结构化原子事实 JSON + 确定性规则引擎比对台账”**的两段式解耦，严禁让 VLM 直接充当合规法官。</li>
+<li>面对客户“全自动闭环”的诉求，用<strong>工具三态分级表（Tier 1 自动探针 / Tier 2 干跑预演 + HITL / Tier 3 物理阻断）</strong>划定安全边界，严防 OWASP LLM06 过度代理风险。</li>
+<li>处理现场照片或扫描件凭据时，坚持<strong>“VLM 抽取结构化原子事实 JSON + 确定性规则引擎比对台账”</strong>的两段式解耦，严禁让 VLM 直接充当合规法官。</li>
 <li>行动型智能体的验收尺子是 <strong>τ-bench 式的最终环境状态比对 + 工具调用轨迹核验 + <code>pass^3</code> 连续一致性</strong>，绝不靠模型自评对话文字。</li>
-<li>排障遵循**“状态机 → 探针 → 预演闸 → 模型”**顺序，把确定性留给代码与状态机，把模型收敛在最窄的意图解析与结构化提取环节。</li>
+<li>排障遵循<strong>“状态机 → 探针 → 预演闸 → 模型”</strong>顺序，把确定性留给代码与状态机，把模型收敛在最窄的意图解析与结构化提取环节。</li>
 </ol>
 <hr>
 <h2 id="h-自检清单" class="sec-fixed">自检清单</h2>

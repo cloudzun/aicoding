@@ -28,7 +28,7 @@
   <section class="print-unit">
       <h1 class="first">6.1　受控行动智能体</h1>
       <p class="lede">工具调用、干跑预演闸与轨迹评测</p>
-      <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）<strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过</strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
+      <div class="guide"><div class="guide-row"><span class="guide-k">本节定位</span><span class="guide-v">第五章剖析的三类场景（知识问答 <code>5.2</code>、数据问数 <code>5.3</code>、合同审查 <code>5.4</code>）全部属于<strong>只读认知型（Read-Only）</strong>应用——系统只输出文字、SQL 查询结果或审查报告，绝不改变外部业务系统的状态。本节补齐第四类核心前场交付工程（FDE）场景：<strong>受控行动与工作流智能体（Action &amp; Workflow Agent）</strong>。重点解决当智能体需要调用外部应用程序编程接口（API）、创建或修改业务单据、下发配置变更指令时，如何通过<strong>读写物理分流、干跑预演闸（Dry-Run Gate）、人在回路（Human-in-the-Loop，简称 HITL）审批与轨迹级评测（Trajectory Evaluation）</strong>，确保系统“办对事且绝不闯祸”。</span></div><div class="guide-row"><span class="guide-k">建议读者</span><span class="guide-v">负责故障工单派发、变更预审流转、跨系统自动填报及自动化运维编排的工程师与架构师。</span></div><div class="guide-row"><span class="guide-k">前置条件</span><span class="guide-v">已掌握第五章的场景判型卡（<code>5.1</code>）与确定性安全闸设计（<code>5.3</code>）；理解基础的 JSON Schema 结构化输出与工具调用（Function Calling）概念。</span></div></div>
       <article class="prose"><p class="goal-cap">本节学习目标</p>
 <ol>
 <li>能画出受控行动智能体的四层结构与读写分流链路，说清每层的输入、输出与特有失效点。</li>
@@ -47,7 +47,7 @@
 <li><strong>状态污染（State Pollution）</strong>：只读查询失败可以重跑，而一旦调用了建单、改价、退费或下发配置等写操作接口，外部数据库或生产设备状态即被篡改，无法通过简单的页面刷新恢复；</li>
 <li><strong>死循环重试风暴（Retry Storm）</strong>：当外部接口返回报错或权限拒绝时，缺乏步数熔断的自主智能体会反复变换参数暴力重试，在几秒内打出数十次错误写请求，触发下游系统雪崩。</li>
 </ul>
-<p>开放式Web应用安全项目（OWASP）发布的《大语言模型应用十大安全风险（2025 版）》将<strong>过度代理权限（LLM06: Excessive Agency）<strong>列为核心威胁<sup class="cite"><a href="#6-1--ref-1">[1]</a></sup>。与此同时，普林斯顿大学与 Sierra 联合发布的行动型智能体权威基准 <strong>τ-bench（TAU-bench）</strong> 实证表明<sup class="cite"><a href="#6-1--ref-2">[2]</a></sup>：在需要严格遵循企业规章制度（Policy）并调用读写工具修改数据库状态的真实业务场景中，即便是顶尖前沿大模型，单次执行成功率（<code>pass@1</code>）也普遍不足 <strong>60%</strong>；而当要求</strong>连续 8 次独立运行同一任务全部成功（<code>pass^8</code>）<strong>时，成功率更是断崖式跌至 <strong>25% 以下</strong>。绝大部分失败并非因为模型听不懂人话，而是因为</strong>漏调前置核查工具、传错工具参数或越过业务制度红线直接执行写操作</strong>。</p>
+<p>开放式Web应用安全项目（OWASP）发布的《大语言模型应用十大安全风险（2025 版）》将<strong>过度代理权限（LLM06: Excessive Agency）</strong>列为核心威胁<sup class="cite"><a href="#6-1--ref-1">[1]</a></sup>。与此同时，普林斯顿大学与 Sierra 联合发布的行动型智能体权威基准 <strong>τ-bench（TAU-bench）</strong> 实证表明<sup class="cite"><a href="#6-1--ref-2">[2]</a></sup>：在需要严格遵循企业规章制度（Policy）并调用读写工具修改数据库状态的真实业务场景中，即便是顶尖前沿大模型，单次执行成功率（<code>pass@1</code>）也普遍不足 <strong>60%</strong>；而当要求<strong>连续 8 次独立运行同一任务全部成功（<code>pass^8</code>）</strong>时，成功率更是断崖式跌至 <strong>25% 以下</strong>。绝大部分失败并非因为模型听不懂人话，而是因为<strong>漏调前置核查工具、传错工具参数或越过业务制度红线直接执行写操作</strong>。</p>
 <h3 id="6-1--h-2-四层结构">2. 四层结构</h3>
 <p>为防范上述风险，企业级受控行动智能体绝不能采用“一个提示词挂载二十个读写工具任由模型自由发挥”的粗放结构，必须拆解为职责严密隔离的四层体系：</p>
 <table>
@@ -429,7 +429,7 @@
 <li><strong>假象二（跳过安检、侥幸蒙对）</strong>：模型没有调用必调的 <code>check_time_window_conflict</code>（冲突检查探针），直接盲猜参数生成了变更单；虽然在某一道正常题目上碰巧没冲突，但在生产环境无异于盲人开车；</li>
 <li><strong>假象三（单次撞大运、三次出事故）</strong>：同一道题跑三次，第一次成功，第二次传错了部门编码，第三次漏填了回退方案。</li>
 </ul>
-<p>因此，本节借鉴 τ-bench（TAU-bench）<sup class="cite"><a href="#6-1--ref-2">[2]</a></sup> 的评测范式，确立**“最终环境状态比对 + 工具调用轨迹核验 + <code>pass^k</code> 连续一致性”**三位一体的验收标准。</p>
+<p>因此，本节借鉴 τ-bench（TAU-bench）<sup class="cite"><a href="#6-1--ref-2">[2]</a></sup> 的评测范式，确立<strong>“最终环境状态比对 + 工具调用轨迹核验 + <code>pass^k</code> 连续一致性”</strong>三位一体的验收标准。</p>
 <h3 id="6-1--h-2-五项可判定口径与-pass^k-连续一致性指标">2. 五项可判定口径与 <code>pass^k</code> 连续一致性指标</h3>
 <p>我们将客户笼统的“处理准确率 ≥90%、违规 100% 拦截”改写为以下五项可由机器自动判定的硬口径：</p>
 <table>
@@ -616,10 +616,10 @@
 <h2 id="6-1--h-本节小结" class="sec-fixed">本节小结</h2>
 <ol>
 <li>受控行动智能体由<strong>意图与状态机、只读探针、干跑预演与审批闸、受控执行与回退</strong>四层构成，核心在于将“零副作用的读取”与“有副作用的写入”物理分流。</li>
-<li>面对客户“全自动闭环”的诉求，用**工具三态分级表（Tier 1 自动探针 / Tier 2 干跑预演 + HITL / Tier 3 物理阻断）**划定安全边界，严防 OWASP LLM06 过度代理风险。</li>
-<li>处理现场照片或扫描件凭据时，坚持**“VLM 抽取结构化原子事实 JSON + 确定性规则引擎比对台账”**的两段式解耦，严禁让 VLM 直接充当合规法官。</li>
+<li>面对客户“全自动闭环”的诉求，用<strong>工具三态分级表（Tier 1 自动探针 / Tier 2 干跑预演 + HITL / Tier 3 物理阻断）</strong>划定安全边界，严防 OWASP LLM06 过度代理风险。</li>
+<li>处理现场照片或扫描件凭据时，坚持<strong>“VLM 抽取结构化原子事实 JSON + 确定性规则引擎比对台账”</strong>的两段式解耦，严禁让 VLM 直接充当合规法官。</li>
 <li>行动型智能体的验收尺子是 <strong>τ-bench 式的最终环境状态比对 + 工具调用轨迹核验 + <code>pass^3</code> 连续一致性</strong>，绝不靠模型自评对话文字。</li>
-<li>排障遵循**“状态机 → 探针 → 预演闸 → 模型”**顺序，把确定性留给代码与状态机，把模型收敛在最窄的意图解析与结构化提取环节。</li>
+<li>排障遵循<strong>“状态机 → 探针 → 预演闸 → 模型”</strong>顺序，把确定性留给代码与状态机，把模型收敛在最窄的意图解析与结构化提取环节。</li>
 </ol>
 <hr>
 <h2 id="6-1--h-自检清单" class="sec-fixed">自检清单</h2>
@@ -774,7 +774,7 @@
 <p>在项目原型期（PoC），为了快速验证效果，把所有请求一股脑发给参数量最大、推理能力最强的旗舰大模型是合理的。但一旦进入 Day-2 生产规模化运行（日均数万次工单流转、问数查询或日志核查），“全量请求一刀切调旗舰模型”会立刻撞上两堵墙：<strong>第一是推理算力账单（Token 成本）失控；第二是首字与端到端延迟（P95 动辄十余秒）拖垮一线人员的操作体验</strong>。</p>
 <p>加州大学伯克利分校与 LMSYS 联合提出的 <strong>RouteLLM</strong> 框架<sup class="cite"><a href="#6-2--ref-3">[3]</a></sup> 以及斯坦福大学的 <strong>FrugalGPT</strong> 级联架构实证表明：在真实企业流量中，真正需要旗舰推理模型深度思考的疑难长尾请求通常只占 <strong>20%～30%</strong>；通过构建分层路由与级联回退（Model Cascading），<strong>在保持 95% 以上旗舰模型最终质量水平的前提下，可将端到端推理成本与平均延迟大幅压缩 50%～85%</strong>。</p>
 <h3 id="6-2--h-2-三层精益路由漏斗架构">2. 三层精益路由漏斗架构</h3>
-<p>在企业级 AI 工程中，我们不搞黑盒路由，而是构建一套透明、可审计的**“三层精益路由漏斗”**，让每一分算力都花在刀刃上：</p>
+<p>在企业级 AI 工程中，我们不搞黑盒路由，而是构建一套透明、可审计的<strong>“三层精益路由漏斗”</strong>，让每一分算力都花在刀刃上：</p>
 <table>
 <thead>
 <tr>
@@ -811,10 +811,10 @@
 <td>若第 3 层重试后仍未通过确定性校验闸，立即停止烧词元，体面降级为 <code>needs_human</code> 转人工</td>
 </tr>
 </tbody></table>
-<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong>工程上最管用的路由信号不是“再训一个分类器”，而是“确定性校验器的报错反馈”。</strong> 例如在 NL2SQL（<code>5.3</code>）或行动预演（<code>6.1</code>）中，先让便宜飞快的第 2 层轻量模型生成候选 SQL 或工具参数；90% 的常规题一次就能过白名单与 Schema 校验；只有那 10% 被确定性校验器抓出语法错、表名错或字段缺失的难题，才携带具体报错信息路由给第 3 层高阶模型做精准修复。这叫**“以确定性验证驱动级联路由”**。</p>
+<div class="alert alert-tip"><span class="alert-tag">提示</span><p><strong>工程上最管用的路由信号不是“再训一个分类器”，而是“确定性校验器的报错反馈”。</strong> 例如在 NL2SQL（<code>5.3</code>）或行动预演（<code>6.1</code>）中，先让便宜飞快的第 2 层轻量模型生成候选 SQL 或工具参数；90% 的常规题一次就能过白名单与 Schema 校验；只有那 10% 被确定性校验器抓出语法错、表名错或字段缺失的难题，才携带具体报错信息路由给第 3 层高阶模型做精准修复。这叫<strong>“以确定性验证驱动级联路由”</strong>。</p>
 </div>
 <h3 id="6-2--h-3-帕累托前沿验证口径防止路由降级沦为静默质量退化">3. 帕累托前沿验证口径：防止路由降级沦为静默质量退化</h3>
-<p>引入高低配模型路由时，最大的管理风险是为了省钱而偷偷牺牲了业务准确率。因此，任何路由策略上线前，必须在黄金评估集上出具如下**《高低配模型路由校准与准出门禁表》**，唯有证明“核心指标零退化”方可放行：</p>
+<p>引入高低配模型路由时，最大的管理风险是为了省钱而偷偷牺牲了业务准确率。因此，任何路由策略上线前，必须在黄金评估集上出具如下<strong>《高低配模型路由校准与准出门禁表》</strong>，唯有证明“核心指标零退化”方可放行：</p>
 <table>
 <thead>
 <tr>
@@ -902,7 +902,7 @@
 <p><strong>说明：</strong> 上表 <code>org-harness/</code> 为部门级资产库的<strong>建议命名与规划位置</strong>，属组织自建范畴，本课程不附带该仓库。本节练的是“哪些资产应当抽出去共享”，不是“去哪里取现成模板”。</p>
 </blockquote>
 <h3 id="6-2--h-2-公网专有云网关与纯内网三域数据分级准入矩阵">2. 公网、专有云网关与纯内网三域数据分级准入矩阵</h3>
-<p>在企业环境中推进 AI Coding 与智能体应用，数据安全是不可触碰的高压线。研发组织必须按**“环境三域分级”**建立物理与逻辑准入矩阵，明确规定什么数据能进什么模型：</p>
+<p>在企业环境中推进 AI Coding 与智能体应用，数据安全是不可触碰的高压线。研发组织必须按<strong>“环境三域分级”</strong>建立物理与逻辑准入矩阵，明确规定什么数据能进什么模型：</p>
 <table>
 <thead>
 <tr>
@@ -946,12 +946,12 @@
 <p>这是一条已被工业界实证证明极其危险的弯路：</p>
 <ul>
 <li><strong>GitClear 代码质量实证（分析超 1.5 亿行代码变更）</strong><sup class="cite"><a href="#6-2--ref-4">[4]</a></sup>：在缺乏规范驱动与独立审查约束、单纯追求“AI 生成代码量”的团队中，<strong>“代码写入后两周内即被推翻重写或删除的代码翻新率（Code Churn）”激增了 100%（翻倍）</strong>，而跨文件复制粘贴的重复代码块（Copy-Pasted Clones）激增了 <strong>4 倍</strong>！工程师为了凑采纳率，把大量未经思考的冗余代码合入仓库，随后又不得不花双倍时间去修补和删改。</li>
-<li><strong>Google Cloud DORA《Accelerate 研发效能报告（AI 增刊）》实证</strong><sup class="cite"><a href="#6-2--ref-5">[5]</a></sup>：AI 并非凭空创造质量的魔术棒，而是典型的**“工程放大器（Amplifier）”<strong>。在具备扎实自动化测试与小步快跑规范的团队中，AI 能显著加速交付；但在缺乏测试门禁的团队中，AI 制造的代码洪流直接导致单次合并请求（PR）体积膨胀、资深工程师代码审查（Code Review）严重积压，最终导致</strong>变更失败率（Change Failure Rate）上升、线上交付稳定性反而恶化**。</li>
+<li><strong>Google Cloud DORA《Accelerate 研发效能报告（AI 增刊）》实证</strong><sup class="cite"><a href="#6-2--ref-5">[5]</a></sup>：AI 并非凭空创造质量的魔术棒，而是典型的<strong>“工程放大器（Amplifier）”</strong>。在具备扎实自动化测试与小步快跑规范的团队中，AI 能显著加速交付；但在缺乏测试门禁的团队中，AI 制造的代码洪流直接导致单次合并请求（PR）体积膨胀、资深工程师代码审查（Code Review）严重积压，最终导致<strong>变更失败率（Change Failure Rate）上升、线上交付稳定性反而恶化</strong>。</li>
 </ul>
 <p>按照古德哈特定律（Goodhart&#39;s Law）：“当一个过程指标变成考核目标时，它就不再是一个好指标。”考核“AI 代码行数”，得到的必然是注水的代码与翻倍的技术债。</p>
 <h3 id="6-2--h-2-企业-ai-研发效能真伪指标对照与三层度量看板">2. 企业 AI 研发效能真伪指标对照与三层度量看板</h3>
-<p>研发管理者必须果断废除表层的“工具活跃度虚荣指标”，将考核锚定在**“工程交付结果、代码库健康度与 AI 业务门禁”**上。</p>
-<p>首先，明确**《AI 研发效能伪指标（必须废止）vs 真指标（科学锚点）对照表》**：</p>
+<p>研发管理者必须果断废除表层的“工具活跃度虚荣指标”，将考核锚定在<strong>“工程交付结果、代码库健康度与 AI 业务门禁”</strong>上。</p>
+<p>首先，明确<strong>《AI 研发效能伪指标（必须废止）vs 真指标（科学锚点）对照表》</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -981,7 +981,7 @@
 <td><strong>分桶全量回归通过率</strong>、<strong>安全闸 100% 拦截率</strong> 与 <strong><code>pass^3</code> 连续一致性</strong></td>
 </tr>
 </tbody></table>
-<p>在此基础上，给出一张研发主管与交付负责人可直接落地的**《企业 AI 研发三层度量看板》**：</p>
+<p>在此基础上，给出一张研发主管与交付负责人可直接落地的<strong>《企业 AI 研发三层度量看板》</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -1079,7 +1079,7 @@
 <ol>
 <li>生产环境必然面临<strong>提问漂移、标准漂移与模型漂移</strong>；唯有打通“线上 <code>trace.jsonl</code> 采集 → 难例分诊 → 本地脱敏 → 合入黄金评估集”的 <strong>Day-2 数据飞轮</strong>，才能闭合第 8 环 <code>/retro</code> 到环 0 <code>/eval-plan</code> 的进化环路。</li>
 <li>一线人员在 Dry-Run 预演单上的<strong>手工修改差异 <code>Diff(draft, committed)</code></strong> 是最金贵的免费真值——改前是天然的负样本，改后是确权的黄金答案。</li>
-<li>通过**“第 1 层确定性规则与缓存（0 成本） → 第 2 层轻量主力模型（低成本） → 第 3 层高阶推理模型（疑难兜底）”**的三级漏斗，可在守住核心分桶质量的前提下大幅降低推理成本与 P95 延迟。</li>
+<li>通过<strong>“第 1 层确定性规则与缓存（0 成本） → 第 2 层轻量主力模型（低成本） → 第 3 层高阶推理模型（疑难兜底）”</strong>的三级漏斗，可在守住核心分桶质量的前提下大幅降低推理成本与 P95 延迟。</li>
 <li>百人研发组织必须将个人经验收拢为<strong>部门级共享 Harness 资产库</strong>（统一语义层、统一安全护栏、统一标准评测器），并严格落实公网（L1）、专有云网关（L2）、纯内网（L3）三域数据分级准入。</li>
 <li>彻底废除“AI 代码采纳率”等虚荣指标，用 <strong>DORA 交付四指标 + GStack 工程健康度（<code>Test Ratio &gt;= 20%</code>、低翻新率）+ AI 业务评测门禁</strong> 衡量真实的工程效能。</li>
 </ol>
@@ -1117,7 +1117,7 @@
 <li><strong>向上看场景广度</strong>：覆盖了知识问答（<code>5.2</code>）、数据问数（<code>5.3</code>）、文档合规审查（<code>5.4</code>）三大只读认知场景，以及带写操作风险的受控行动智能体（<code>6.1</code>）；</li>
 <li><strong>向下看工程深度</strong>：从进场判型、定死口径、搭确定性安全闸、造沙盒验尺子，一直延伸到上线后的 Day-2 生产数据飞轮、高低配模型精益路由与组织级真实效能治理（<code>6.2</code>）。</li>
 </ul>
-<p>那么，当我们将这套硬核工程方法论带入<strong>通信运营商（数智运维 NetOps 与政企市场支撑 BSS）<strong>这一具有极高安全红线、极多异构半结构化数据（多厂商网元 CLI 回显、复杂阶梯结算表、工程现场竣工照片）的垂直行业，并要在</strong>短短 3 天（6 个半天）的实战演练</strong>中从零交付一个可量化验收的高分作品时，该如何快速破局？</p>
+<p>那么，当我们将这套硬核工程方法论带入<strong>通信运营商（数智运维 NetOps 与政企市场支撑 BSS）</strong>这一具有极高安全红线、极多异构半结构化数据（多厂商网元 CLI 回显、复杂阶梯结算表、工程现场竣工照片）的垂直行业，并要在<strong>短短 3 天（6 个半天）的实战演练</strong>中从零交付一个可量化验收的高分作品时，该如何快速破局？</p>
 <p>下一章（<strong>第 7 章：通信运营商数智运维与政企支撑实战方法论</strong>），我们将专门针对运营商内网安全红线、“1 小时造数建桩”绝技、自智网络 L4 四大平行影子样板以及三日训战拆骨瘦身法展开最后的总攻。</p>
 <hr>
 <h2 id="6-2--h-延伸阅读" class="sec-fixed">延伸阅读</h2>

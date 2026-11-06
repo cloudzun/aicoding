@@ -105,7 +105,7 @@
 <td><strong>第三代：虚拟工程团队</strong>（Virtual Engineering Team，2026–）</td>
 <td>以 GStack 与现代 AI IDE 为代表，将智能体拆分为职责分离的专家角色，按思考、规划、构建、审查、测试、发布、复盘阶段运行。</td>
 <td><strong>工程指挥官与主权决策者</strong>：定义真实痛点、审批技术规格说明、把关安全边界并作出发版裁决。</td>
-<td>需配套建立<strong>规范驱动开发（Spec-Driven Development，简称 SDD）<strong>流程与</strong>运行支撑机制（Harness）</strong>。</td>
+<td>需配套建立<strong>规范驱动开发（Spec-Driven Development，简称 SDD）</strong>流程与<strong>运行支撑机制（Harness）</strong>。</td>
 </tr>
 </tbody></table>
 <p>第二代“氛围编程（Vibe Coding，俗称凭感觉编程）”只适合制作一次性演示原型。一旦进入多人协作、长期维护的企业级系统，无约束的多轮聊天会迅速制造大量技术债。第三代范式的核心，是用工程纪律将单打独斗的聊天机器人改造为职责分明的虚拟工程团队<sup class="cite"><a href="#ref-1">[1]</a></sup>。</p>
@@ -179,13 +179,13 @@
 <li><strong>稠密向量嵌入（Vector Embedding）与图知识库</strong>：将代码片段与文档转化为语义向量，或构建为图结构知识库（如 GStack GBrain）。开发者用自然语言询问某个业务规则或拦截器在何处实现，系统即可毫秒级召回对应源码，避免重复造轮子。</li>
 </ul>
 <h3 id="h-2-跨模型分层推理与上下文主动压缩">2. 跨模型分层推理与上下文主动压缩</h3>
-<p>随着长链推理大模型（Reasoning Models）普及，单一模型包打天下的模式已被**跨模型分层路由（Model Tiering）<strong>与</strong>上下文工程（Context Engineering）**取代<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
+<p>随着长链推理大模型（Reasoning Models）普及，单一模型包打天下的模式已被<strong>跨模型分层路由（Model Tiering）</strong>与<strong>上下文工程（Context Engineering）</strong>取代<sup class="cite"><a href="#ref-1">[1]</a></sup><sup class="cite"><a href="#ref-2">[2]</a></sup>：</p>
 <ul>
 <li><strong>规划审查层与执行施工层分离</strong>：在架构规划、规格评分与安全挑刺阶段，调用高推理强度模型进行深度推演；在规格已锁死、需快速生成代码与单测的施工阶段，路由至高吞吐、高性价比的主力编码模型。</li>
 <li><strong>上下文主动压缩（Context Compaction）</strong>：长对话中堆积的陈旧报错日志会稀释模型注意力，引发模型失忆与幻觉（即<strong>上下文腐化 Context Rot</strong>）。现代工具支持在阶段切换时主动触发压缩，保留核心架构决策、已修改文件索引与未决任务，剔除冗余的中间终端输出。</li>
 </ul>
 <h3 id="h-3-运行支撑协议标准化mcp按需技能与独立子代理">3. 运行支撑协议标准化：MCP、按需技能与独立子代理</h3>
-<p>如果大模型是“大脑”，编辑器读写能力是“手脚”，那么 2026 年最重要的工程进展就是将约束智能体行为的**运行支撑机制（Harness）**全面标准化<sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
+<p>如果大模型是“大脑”，编辑器读写能力是“手脚”，那么 2026 年最重要的工程进展就是将约束智能体行为的<strong>运行支撑机制（Harness）</strong>全面标准化<sup class="cite"><a href="#ref-3">[3]</a></sup>：</p>
 <ul>
 <li><strong>模型上下文协议（Model Context Protocol，简称 MCP）</strong>：连接外部研发系统的开放标准接口。智能体可通过 MCP 直接读取 Figma 设计稿节点、查询关系型数据库真实表结构、拉取工单需求，或驱动 Playwright 浏览器执行端到端测试。</li>
 <li><strong>模块化技能（Skills）动态按需加载</strong>：将不同环节的标准作业程序封装为独立的 <code>SKILL.md</code> 文件。智能体启动时只读取简短的技能名称与描述，仅在进入特定环节（如架构评审或安全扫描）时才按需加载完整指令，大幅节省词元（Token）开销。</li>
@@ -225,7 +225,7 @@
 <li><strong>产生机理</strong>：开源训练语料中包含大量过度设计的企业级样板工程。缺乏简洁性约束时，大模型极易将“堆砌多层抽象接口、策略工厂模式、深层继承体系或引入冗余第三方库”误判为高质量代码，沦为 Simon Willison 所称的“复杂性贩子（Merchants of Complexity）”。</li>
 <li><strong>典型工程表现</strong>：为一个简单的条件分支或数据转换函数创建五六个包装类与接口文件；或者放着语言标准库与仓库现成工具函数不用，重复造出一套臃肿的辅助框架，导致代码阅读与维护成本成倍增加。</li>
 <li><strong>GStack 与工具层防御机制</strong>：<ul>
-<li>在第 3 环 <code>/autoplan</code> 中内置<strong>第 5 决策原则（Explicit over clever——显式直观胜过炫技抽象）<strong>与</strong>第 4 决策原则（DRY——拒绝重复）</strong>，在方案评审阶段直接否决过度包装；</li>
+<li>在第 3 环 <code>/autoplan</code> 中内置<strong>第 5 决策原则（Explicit over clever——显式直观胜过炫技抽象）</strong>与<strong>第 4 决策原则（DRY——拒绝重复）</strong>，在方案评审阶段直接否决过度包装；</li>
 <li>在第 4 环施工中强制执行<strong>四级复用阶梯（The Reuse Ladder）</strong>，要求严格按“仓库既有资产 → 语言标准库 → 平台/数据库原生能力 → 已安装依赖”顺序复用，并使用 <code>/deslop-shared-libs</code> 定期清理冗余抽象。</li>
 </ul>
 </li>
@@ -245,8 +245,8 @@
 <li><strong>产生机理</strong>：当智能体面对终端测试报错时，其短期优化目标是“尽快让终端报错消失以结束回合”。若缺乏诚实工程纪律约束，模型会采取最短视的捷径——要么在业务代码里针对报错的输入值硬塞 <code>if-else</code> 特判补丁，要么直接注释掉报错的测试断言、放宽校验条件或调大超时阈值。</li>
 <li><strong>典型工程表现</strong>：修复缺陷时不排查底层根因，而是在表层叠加防御性补丁；甚至将严格的相等断言（如 <code>toBe(expected)</code>）偷偷篡改为永远为真的宽泛断言，制造“测试全绿”的假象。</li>
 <li><strong>GStack 与工具层防御机制</strong>：<ul>
-<li>确立 GStack 第四信条**“诚实工程（Honest Work——禁止自证清白）”**，配合 **<code>gstack-verify-gate</code>（验证停止钩子）**强制运行真实测试套件；</li>
-<li>在第 6 环 <code>/qa</code> 与 <code>/investigate</code> 中严格执行**“先写一条证实失败的原生回归测试，再查清根因修复代码”**铁律；</li>
+<li>确立 GStack 第四信条<strong>“诚实工程（Honest Work——禁止自证清白）”</strong>，配合 <strong><code>gstack-verify-gate</code>（验证停止钩子）</strong>强制运行真实测试套件；</li>
+<li>在第 6 环 <code>/qa</code> 与 <code>/investigate</code> 中严格执行<strong>“先写一条证实失败的原生回归测试，再查清根因修复代码”</strong>铁律；</li>
 <li>在第 5 环 <code>/review</code> 中启用<strong>门禁完整性审计（Gate Integrity）</strong>，专门核查代码变更中是否存在删减测试用例、注释断言或弱化校验的行为。</li>
 </ul>
 </li>
@@ -339,7 +339,7 @@
 </ol>
 <hr>
 <h2 id="h-节末过渡" class="sec-fixed">节末过渡</h2>
-<p>本节揭示了 AI 编程三代范式演进、研发瓶颈转移规律，以及无约束生成代码背后的 45% 漏洞率与四大失败模式。下一节**【单元 1.2】《从 Vibe Coding 到规范驱动开发：方法论主线与 GStack 八环全景》**将具体展开人机分工模型、任务边界三问与 GStack 八环工作流。</p>
+<p>本节揭示了 AI 编程三代范式演进、研发瓶颈转移规律，以及无约束生成代码背后的 45% 漏洞率与四大失败模式。下一节<strong>【单元 1.2】《从 Vibe Coding 到规范驱动开发：方法论主线与 GStack 八环全景》</strong>将具体展开人机分工模型、任务边界三问与 GStack 八环工作流。</p>
 <hr>
 <h2 id="h-延伸阅读" class="sec-fixed">延伸阅读</h2>
 <ol>
